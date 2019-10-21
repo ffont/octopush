@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5"
-              headerPath="/Users/ffont/Developer/octopush/OctopushOS/3rdParty">
+              headerPath="../../Source&#10;../../Source/libusb&#10;../../3rdParty/libusb/libusb&#10;">
   <MAINGROUP id="SqRWVy" name="OctopushOS">
     <GROUP id="{3A6EFDD0-9705-3CE7-1080-1AA11F5E9D8B}" name="Source">
+      <GROUP id="{26FB48C1-8FBB-238F-36F6-35C3C5267C43}" name="push2">
+        <FILE id="OkYlVr" name="Push2-Usb-Communicator.cpp" compile="1" resource="0"
+              file="Source/push2/Push2-Usb-Communicator.cpp"/>
+        <FILE id="mci25S" name="Push2-UsbCommunicator.h" compile="0" resource="0"
+              file="Source/push2/Push2-UsbCommunicator.h"/>
+        <FILE id="ZzV4cd" name="JuceToPush2DisplayBridge.h" compile="0" resource="0"
+              file="Source/push2/JuceToPush2DisplayBridge.h"/>
+        <FILE id="GNGXTI" name="JuceToPush2DisplayBridge.cpp" compile="1" resource="0"
+              file="Source/push2/JuceToPush2DisplayBridge.cpp"/>
+        <FILE id="YTOHme" name="Push2-Bitmap.h" compile="0" resource="0" file="Source/push2/Push2-Bitmap.h"/>
+        <FILE id="JVUJ5q" name="Push2-Display.h" compile="0" resource="0" file="Source/push2/Push2-Display.h"/>
+      </GROUP>
+      <GROUP id="{08E955BE-9269-0B19-A1E8-05CC7C6FEC56}" name="libusb">
+        <FILE id="Ltqzcu" name="libusb_platform_wrapper.c" compile="1" resource="0"
+              file="Source/libusb/libusb_platform_wrapper.c"/>
+      </GROUP>
+      <FILE id="QsmfT8" name="Push2Demo.cpp" compile="1" resource="0" file="Source/Push2Demo.cpp"/>
+      <FILE id="ux2TqP" name="Push2Demo.h" compile="0" resource="0" file="Source/Push2Demo.h"/>
+      <FILE id="Ixp7Qu" name="Macros.h" compile="0" resource="0" file="Source/Macros.h"/>
       <FILE id="hnfYJH" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="MbqLYb" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="LValSM" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="yOyGFt" name="Result.h" compile="0" resource="0" file="Source/Result.h"/>
+      <FILE id="Zo5Qkm" name="Result.cpp" compile="1" resource="0" file="Source/Result.cpp"/>
+    </GROUP>
+    <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
+      <FILE id="AudmDd" name="PushStartup.png" compile="0" resource="1" file="Resources/PushStartup.png"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
