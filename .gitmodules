@@ -1,0 +1,3 @@
+[submodule "OctopushOS/3rdParty/libusb"]
+	path = OctopushOS/3rdParty/libusb
+	url = https://github.com/libusb/libusb/
