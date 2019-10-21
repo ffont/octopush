@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5">
+<JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5"
+              headerPath="/Users/ffont/Developer/octopush/OctopushOS/3rdParty">
   <MAINGROUP id="SqRWVy" name="OctopushOS">
     <GROUP id="{3A6EFDD0-9705-3CE7-1080-1AA11F5E9D8B}" name="Source">
       <FILE id="hnfYJH" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>

@@ -590,6 +590,7 @@
 				HEADER_SEARCH_PATHS = (
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/JUCE/modules",
+					"/Users/ffont/Developer/octopush/OctopushOS/3rdParty",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Info-App.plist;
@@ -634,6 +635,7 @@
 				HEADER_SEARCH_PATHS = (
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/JUCE/modules",
+					"/Users/ffont/Developer/octopush/OctopushOS/3rdParty",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Info-App.plist;
