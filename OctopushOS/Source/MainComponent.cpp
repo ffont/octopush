@@ -13,7 +13,7 @@ MainComponent::MainComponent()
 {
     // Make sure you set the size of the component after
     // you add any child components.
-    setSize (800, 600);
+    setSize (910, 160);
 
     // Some platforms require permissions to open input channels so request that here
     if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
@@ -26,6 +26,23 @@ MainComponent::MainComponent()
     {
         // Specify the number of input and output channels that we want to open
         setAudioChannels (2, 2);
+    }
+    
+    // Initialize Push2 connection demo code
+    NBase::Result result = push.Init();
+    if (result.Succeeded())
+    {
+        std::cout << "Push 2 connected" << std::endl;
+        push.SetMidiInputCallback(
+                                   [this](const MidiMessage& message)
+                                   {
+                                       std::cout << message.getDescription() << std::endl;
+                                   });
+    }
+    else
+    {
+        // Something went wrong while connecting to Push2
+        std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
     }
 }
 
@@ -70,9 +87,10 @@ void MainComponent::releaseResources()
 void MainComponent::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-
-    // You can add your drawing code here!
+    g.fillAll (Colours::black);
+    
+    auto logo = ImageCache::getFromMemory(BinaryData::PushStartup_png, BinaryData::PushStartup_pngSize);
+    g.drawImageAt(logo, (getWidth() - logo.getWidth()) / 2 , (getHeight() - logo.getHeight()) / 2);
 }
 
 void MainComponent::resized()
