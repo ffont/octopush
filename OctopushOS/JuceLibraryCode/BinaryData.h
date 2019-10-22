@@ -8,11 +8,14 @@
 
 namespace BinaryData
 {
+    extern const char*   demo_audio_ogg;
+    const int            demo_audio_oggSize = 230277;
+
     extern const char*   PushStartup_png;
     const int            PushStartup_pngSize = 16112;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 1;
+    const int namedResourceListSize = 2;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -1,3 +1,6 @@
 [submodule "OctopushOS/3rdParty/libusb"]
 	path = OctopushOS/3rdParty/libusb
 	url = https://github.com/libusb/libusb/
+[submodule "OctopushOS/3rdParty/tracktion_engine"]
+	path = OctopushOS/3rdParty/tracktion_engine
+	url = https://github.com/Tracktion/tracktion_engine

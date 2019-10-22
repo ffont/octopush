@@ -20,6 +20,9 @@
         <FILE id="Ltqzcu" name="libusb_platform_wrapper.c" compile="1" resource="0"
               file="Source/libusb/libusb_platform_wrapper.c"/>
       </GROUP>
+      <GROUP id="{B2303239-7FDB-F31A-763A-C418EAA80430}" name="tracktion_utils">
+        <FILE id="ZfD94l" name="Utilities.h" compile="1" resource="0" file="Source/tracktion_utils/Utilities.h"/>
+      </GROUP>
       <FILE id="QsmfT8" name="Push2Demo.cpp" compile="1" resource="0" file="Source/Push2Demo.cpp"/>
       <FILE id="ux2TqP" name="Push2Demo.h" compile="0" resource="0" file="Source/Push2Demo.h"/>
       <FILE id="rNzYQM" name="Macros.h" compile="0" resource="0" file="Source/Macros.h"/>
@@ -31,6 +34,7 @@
       <FILE id="Zo5Qkm" name="Result.cpp" compile="1" resource="0" file="Source/Result.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
+      <FILE id="OM7k0Y" name="demo_audio.ogg" compile="0" resource="1" file="Resources/demo_audio.ogg"/>
       <FILE id="AudmDd" name="PushStartup.png" compile="0" resource="1" file="Resources/PushStartup.png"/>
     </GROUP>
   </MAINGROUP>
@@ -54,6 +58,9 @@
         <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_opengl" path="../../JUCE/modules"/>
+        <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_osc" path="../../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
@@ -75,6 +82,9 @@
         <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_opengl" path="../../JUCE/modules"/>
+        <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_osc" path="../../JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
@@ -87,11 +97,14 @@
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
   <LIVE_SETTINGS>
     <OSX/>

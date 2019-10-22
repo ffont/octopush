@@ -58,11 +58,14 @@
 #define JUCE_MODULE_AVAILABLE_juce_core                  1
 #define JUCE_MODULE_AVAILABLE_juce_cryptography          1
 #define JUCE_MODULE_AVAILABLE_juce_data_structures       1
+#define JUCE_MODULE_AVAILABLE_juce_dsp                   1
 #define JUCE_MODULE_AVAILABLE_juce_events                1
 #define JUCE_MODULE_AVAILABLE_juce_graphics              1
 #define JUCE_MODULE_AVAILABLE_juce_gui_basics            1
 #define JUCE_MODULE_AVAILABLE_juce_gui_extra             1
 #define JUCE_MODULE_AVAILABLE_juce_opengl                1
+#define JUCE_MODULE_AVAILABLE_juce_osc                   1
+#define JUCE_MODULE_AVAILABLE_tracktion_engine           1
 
 #define JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED 1
 
@@ -210,6 +213,29 @@
 #endif
 
 //==============================================================================
+// juce_dsp flags:
+
+#ifndef    JUCE_ASSERTION_FIRFILTER
+ //#define JUCE_ASSERTION_FIRFILTER 1
+#endif
+
+#ifndef    JUCE_DSP_USE_INTEL_MKL
+ //#define JUCE_DSP_USE_INTEL_MKL 0
+#endif
+
+#ifndef    JUCE_DSP_USE_SHARED_FFTW
+ //#define JUCE_DSP_USE_SHARED_FFTW 0
+#endif
+
+#ifndef    JUCE_DSP_USE_STATIC_FFTW
+ //#define JUCE_DSP_USE_STATIC_FFTW 0
+#endif
+
+#ifndef    JUCE_DSP_ENABLE_SNAP_TO_ZERO
+ //#define JUCE_DSP_ENABLE_SNAP_TO_ZERO 1
+#endif
+
+//==============================================================================
 // juce_events flags:
 
 #ifndef    JUCE_EXECUTE_APP_SUSPEND_ON_IOS_BACKGROUND_TASK
@@ -271,6 +297,61 @@
 
 #ifndef    JUCE_ENABLE_LIVE_CONSTANT_EDITOR
  //#define JUCE_ENABLE_LIVE_CONSTANT_EDITOR 0
+#endif
+
+//==============================================================================
+// tracktion_engine flags:
+
+#ifndef    TRACKTION_ENABLE_ARA
+ //#define TRACKTION_ENABLE_ARA 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_REWIRE
+ //#define TRACKTION_ENABLE_REWIRE 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_AUTOMAP
+ //#define TRACKTION_ENABLE_AUTOMAP 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_VIDEO
+ //#define TRACKTION_ENABLE_VIDEO 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_REX
+ //#define TRACKTION_ENABLE_REX 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_CONTROL_SURFACES
+ //#define TRACKTION_ENABLE_CONTROL_SURFACES 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_CONTROL_SURFACE_MACKIEC4
+ //#define TRACKTION_ENABLE_CONTROL_SURFACE_MACKIEC4 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_TIMESTRETCH_ELASTIQUE
+ //#define TRACKTION_ENABLE_TIMESTRETCH_ELASTIQUE 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_TIMESTRETCH_SOUNDTOUCH
+ //#define TRACKTION_ENABLE_TIMESTRETCH_SOUNDTOUCH 0
+#endif
+
+#ifndef    TRACKTION_ENABLE_ABLETON_LINK
+ //#define TRACKTION_ENABLE_ABLETON_LINK 0
+#endif
+
+#ifndef    TRACKTION_UNIT_TESTS
+ //#define TRACKTION_UNIT_TESTS 0
+#endif
+
+#ifndef    TRACKTION_CHECK_FOR_SLOW_RENDERING
+ //#define TRACKTION_CHECK_FOR_SLOW_RENDERING 0
+#endif
+
+#ifndef    TRACKTION_AIR_WINDOWS
+ //#define TRACKTION_AIR_WINDOWS 0
 #endif
 
 //==============================================================================

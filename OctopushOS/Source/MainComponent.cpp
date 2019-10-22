@@ -7,6 +7,8 @@
 */
 
 #include "MainComponent.h"
+#include "tracktion_utils/Utilities.h"
+
 
 //==============================================================================
 MainComponent::MainComponent()
@@ -44,12 +46,26 @@ MainComponent::MainComponent()
         // Something went wrong while connecting to Push2
         std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
     }
-    
     push.addActionListener(this);
+    
+    // Initialize Tracktion engine demo and start playing audio
+    auto f = File::createTempFile (".ogg");
+    f.replaceWithData (BinaryData::demo_audio_ogg, BinaryData::demo_audio_oggSize);
+    edit = std::make_unique<te::Edit> (engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0);
+    auto clip = EngineHelpers::loadAudioFileAsClip (*edit, f);
+    auto& transport = edit->getTransport();
+    transport.setLoopRange (clip->getEditTimeRange());
+    transport.looping = true;
+    transport.position = 0.0;
+    transport.play (false);
 }
 
 MainComponent::~MainComponent()
 {
+    // Shot down tracktion engine stuff
+    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();
+    
+    // Shut down Push stuff
     push.removeActionListener(this);
     
     // This shuts down the audio device and clears the audio source.

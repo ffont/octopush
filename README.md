@@ -18,5 +18,6 @@ Octopush is released under the **GPLv3** open source software license (see [LICE
 
 
 * [juce](https://juce.com), available under GPLv3 license 
+* [tracktion_engine](https://github.com/Tracktion/tracktion_engine), available under GPLv3 license 
 * [libusb](https://github.com/libusb/libusb), availavle under LGPLv2.1
 * [push2-display-with-juce](https://github.com/Ableton/push2-display-with-juce), available under MIT 
