@@ -45,6 +45,8 @@ NBase::Result Demo::Init()
 {
   pushInitializedSuccessfully = false;
     
+  frameWaveHeightMultiplier = 1.0;
+    
   // Reset elapsed time
   elapsed_ = 0;
 
@@ -125,6 +127,18 @@ void Demo::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &
   {
     midiCallback_(message);
   }
+   
+    // Change demo waveform height basedon controller values
+    if (message.isController())
+    {
+        int ccValue = message.getControllerValue();
+        if (ccValue == 127){
+            frameWaveHeightMultiplier -= 0.02;
+        } else {
+            frameWaveHeightMultiplier += 0.02;
+        }
+        frameWaveHeightMultiplier = jlimit(0.0, 1.0, (double)frameWaveHeightMultiplier);
+    }
 }
 
 
@@ -159,8 +173,8 @@ Image Demo::computeFrame()
     
     for (float x = waveStep * 0.5f; x < width; x += waveStep)
     {
-        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsed_);
-        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsed_ * 2.0f);
+        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsed_) * frameWaveHeightMultiplier;
+        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsed_ * 2.0f) * frameWaveHeightMultiplier;
         
         wavePath.addLineSegment(Line<float>(x, y1, x, y2), 2.0f);
         wavePath.addEllipse(x - waveStep * 0.3f, y1 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);

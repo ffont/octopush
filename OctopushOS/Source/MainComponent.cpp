@@ -38,7 +38,7 @@ MainComponent::MainComponent()
         push.SetMidiInputCallback(
                                    [this](const MidiMessage& message)
                                    {
-                                       std::cout << message.getDescription() << std::endl;
+                                       //std::cout << message.getDescription() << std::endl;
                                    });
     }
     else

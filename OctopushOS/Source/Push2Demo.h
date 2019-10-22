@@ -94,6 +94,8 @@ private:
   midicb_t midiCallback_;                 /*!> The midi callback to call when incoming messages are recieved */
   float elapsed_;                         /*!> Fake elapsed time used for the animation */
     
+  float frameWaveHeightMultiplier;
+    
   bool pushInitializedSuccessfully;
 
 };
