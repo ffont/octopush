@@ -16,7 +16,8 @@
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public AudioAppComponent
+class MainComponent   : public AudioAppComponent,
+                        public ActionListener
 {
 public:
     //==============================================================================
@@ -31,6 +32,9 @@ public:
     //==============================================================================
     void paint (Graphics& g) override;
     void resized() override;
+    
+    //==============================================================================
+    void actionListenerCallback (const String &message) override;
 
 private:
     Demo push;

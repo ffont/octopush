@@ -44,10 +44,14 @@ MainComponent::MainComponent()
         // Something went wrong while connecting to Push2
         std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
     }
+    
+    push.addActionListener(this);
 }
 
 MainComponent::~MainComponent()
 {
+    push.removeActionListener(this);
+    
     // This shuts down the audio device and clears the audio source.
     shutdownAudio();
 }
@@ -86,11 +90,7 @@ void MainComponent::releaseResources()
 //==============================================================================
 void MainComponent::paint (Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (Colours::black);
-    
-    auto logo = ImageCache::getFromMemory(BinaryData::PushStartup_png, BinaryData::PushStartup_pngSize);
-    g.drawImageAt(logo, (getWidth() - logo.getWidth()) / 2 , (getHeight() - logo.getHeight()) / 2);
+    g.drawImageAt(push.lastFrame, 0, 0);
 }
 
 void MainComponent::resized()
@@ -98,4 +98,14 @@ void MainComponent::resized()
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
+}
+
+
+//==============================================================================
+void MainComponent::actionListenerCallback (const String &message)
+{
+    if (message == "NEW_FRAME_AVAILABLE")
+    {
+        repaint();
+    }
 }

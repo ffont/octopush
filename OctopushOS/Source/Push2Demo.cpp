@@ -43,6 +43,14 @@ namespace
 
 NBase::Result Demo::Init()
 {
+  pushInitializedSuccessfully = false;
+    
+  // Reset elapsed time
+  elapsed_ = 0;
+
+  // Start the timer to draw the animation
+  startTimerHz(60);
+
   // First we initialise the low level push2 object
   NBase::Result result = push2Display_.Init();
   RETURN_IF_FAILED_MESSAGE(result, "Failed to init push2");
@@ -54,12 +62,8 @@ NBase::Result Demo::Init()
   // Initialises the midi input
   result = openMidiDevice();
   RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi device");
-
-  // Reset elapsed time
-  elapsed_ = 0;
-
-  // Start the timer to draw the animation
-  startTimerHz(60);
+    
+  pushInitializedSuccessfully = true;
 
   return NBase::Result::NoError;
 }
@@ -112,7 +116,6 @@ void Demo::SetMidiInputCallback(const midicb_t& callback)
   midiCallback_ = callback;
 }
 
-
 //------------------------------------------------------------------------------
 
 void Demo::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &message)
@@ -136,44 +139,64 @@ void Demo::timerCallback()
 
 //------------------------------------------------------------------------------
 
+Image Demo::computeFrame()
+{
+    // Create a path for the animated wave
+    const auto height = ableton::Push2DisplayBitmap::kHeight;
+    const auto width = ableton::Push2DisplayBitmap::kWidth;
+    
+    Image frame = Image(Image::RGB, width, height, true);
+    Graphics g(frame);
+    
+    // Clear previous frame
+    g.fillAll(juce::Colour(0xff000000));
+    
+    Path wavePath;
+    
+    const float waveStep = 10.0f;
+    const float waveY = height * 0.44f;
+    int i = 0;
+    
+    for (float x = waveStep * 0.5f; x < width; x += waveStep)
+    {
+        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsed_);
+        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsed_ * 2.0f);
+        
+        wavePath.addLineSegment(Line<float>(x, y1, x, y2), 2.0f);
+        wavePath.addEllipse(x - waveStep * 0.3f, y1 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
+        wavePath.addEllipse(x - waveStep * 0.3f, y2 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
+        
+        ++i;
+    }
+    
+    // Draw the path
+    g.setColour(juce::Colour::greyLevel(0.5f));
+    g.fillPath(wavePath);
+    
+    // Blit the logo on top
+    auto logo = ImageCache::getFromMemory(BinaryData::PushStartup_png, BinaryData::PushStartup_pngSize);
+    g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
+    
+    
+    return frame;
+}
+
+
+
 void Demo::drawFrame()
 {
-  // Request a juce::Graphics from the bridge
-  auto& g = bridge_.GetGraphic();
-
-  // Clear previous frame
-  g.fillAll(juce::Colour(0xff000000));
-
-  // Create a path for the animated wave
-  const auto height = ableton::Push2DisplayBitmap::kHeight;
-  const auto width = ableton::Push2DisplayBitmap::kWidth;
-
-  Path wavePath;
-
-  const float waveStep = 10.0f;
-  const float waveY = height * 0.44f;
-  int i = 0;
-
-  for (float x = waveStep * 0.5f; x < width; x += waveStep)
+  lastFrame = computeFrame();
+   
+  if (pushInitializedSuccessfully)
   {
-    const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsed_);
-    const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsed_ * 2.0f);
+      // Request a juce::Graphics from the bridge
+      auto& g = bridge_.GetGraphic();
+      g.drawImageAt(lastFrame, 0, 0, false);
 
-    wavePath.addLineSegment(Line<float>(x, y1, x, y2), 2.0f);
-    wavePath.addEllipse(x - waveStep * 0.3f, y1 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
-    wavePath.addEllipse(x - waveStep * 0.3f, y2 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
-
-    ++i;
+      // Tells the bridge we're done with drawing and the frame can be sent to the display
+      bridge_.Flip();
   }
-
-  // Draw the path
-  g.setColour(juce::Colour::greyLevel(0.5f));
-  g.fillPath(wavePath);
-
-  // Blit the logo on top
-  auto logo = ImageCache::getFromMemory(BinaryData::PushStartup_png, BinaryData::PushStartup_pngSize);
-  g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
-
-  // Tells the bridge we're done with drawing and the frame can be sent to the display
-  bridge_.Flip();
+  
+  // Update main component as well so it shows on screen the same thing that in Push screen
+  sendActionMessage("NEW_FRAME_AVAILABLE");
 }

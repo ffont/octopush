@@ -20,6 +20,7 @@
 
 #pragma once
 
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "push2/JuceToPush2DisplayBridge.h"
 #include <assert.h>
 
@@ -31,6 +32,7 @@
 class Demo
   : public Timer
   , public MidiInputCallback
+  , public ActionBroadcaster
 {
 public:
 
@@ -50,6 +52,9 @@ public:
    */
 
   void SetMidiInputCallback(const midicb_t& func);
+    
+  Image computeFrame();
+  Image lastFrame;
 
 private:
 
@@ -88,4 +93,7 @@ private:
   std::unique_ptr<MidiInput> midiInput_;  /*!< Push2's midi input */
   midicb_t midiCallback_;                 /*!> The midi callback to call when incoming messages are recieved */
   float elapsed_;                         /*!> Fake elapsed time used for the animation */
+    
+  bool pushInitializedSuccessfully;
+
 };
