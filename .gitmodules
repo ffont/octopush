@@ -7,3 +7,6 @@
 [submodule "OctopushOS/3rdParty/push2-display-with-juce"]
 	path = OctopushOS/3rdParty/push2-display-with-juce
 	url = https://github.com/Ableton/push2-display-with-juce
+[submodule "OctopushOS/3rdParty/juce"]
+	path = OctopushOS/3rdParty/juce
+	url = https://github.com/WeAreROLI/JUCE
