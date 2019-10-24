@@ -1,15 +1,48 @@
 # Octopush
 
 
-## Build
+## Buildin Octopush
 
-### Repository checkout
 
-You need to checkout the code including submodules
+### OctopushOS
+
+#### Repository checkout
+
+You need to checkout the code including submodules. This will download source code for all required 3rd party libraries (juce, etc.)
 
 ```
 git clone --recurse-submodules git@github.com:ffont/octopush.git
 ```
+
+#### Building Projucer
+
+OcotpushOS is a standard JUCE app and can be edited and built using standard JUCE workflows.
+
+A utility script is provided to build Projucer in GPL mode which will allow you to edit the `OctopushOS.jucer` file. After cloning the repository (with submodules), run the following:
+
+```
+cd OctospushOS/Scripts
+./build_projucer_gpl
+```
+
+The executable for projucer will be placed in `OctospushOS/3rdParty/juce/extras/Projucer/Builds/MacOSX/build/Release/Projucer` for MacOSX, and in `OctospushOS/3rdParty/juce/extras/Projucer/Builds/LinuxMakefile/build/Release/Projucer` for Linux.
+
+
+#### Development build
+
+To build OctopushOS during development use the Xcode file/Makefile available for MacOSX and Linux respectively. See the `OctopushOS/Builds` folder.
+
+
+#### Release build
+
+A utility script is provided to build OctopushOS in release mode:
+
+```
+cd OctospushOS/Scripts
+./build_OctopushOS
+```
+
+Alternatively, in MacOSX it can also be built from XCode setting the scheme to Release mode.
 
 
 ## Licenses
