@@ -4,3 +4,6 @@
 [submodule "OctopushOS/3rdParty/tracktion_engine"]
 	path = OctopushOS/3rdParty/tracktion_engine
 	url = https://github.com/Tracktion/tracktion_engine
+[submodule "OctopushOS/3rdParty/push2-display-with-juce"]
+	path = OctopushOS/3rdParty/push2-display-with-juce
+	url = https://github.com/Ableton/push2-display-with-juce

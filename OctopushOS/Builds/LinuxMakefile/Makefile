@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := -march=native
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=1.0.0 -DJUCE_APP_VERSION_HEX=0x10000 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source -I../../Source/libusb -I../../3rdParty/libusb/libusb $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/libusb/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
   JUCE_CPPFLAGS_APP := -DJucePlugin_Build_VST=0 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_TARGET_APP := OctopushOS
 
@@ -56,7 +56,7 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := -march=native
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=1.0.0 -DJUCE_APP_VERSION_HEX=0x10000 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source -I../../Source/libusb -I../../3rdParty/libusb/libusb $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/libusb/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
   JUCE_CPPFLAGS_APP := -DJucePlugin_Build_VST=0 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_TARGET_APP := OctopushOS
 
@@ -68,13 +68,13 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS_APP := \
-  $(JUCE_OBJDIR)/Push2-Usb-Communicator_c7d88633.o \
-  $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_50b55e3b.o \
-  $(JUCE_OBJDIR)/libusb_platform_wrapper_fdf8d8e0.o \
   $(JUCE_OBJDIR)/Push2Demo_b450aa3c.o \
   $(JUCE_OBJDIR)/MainComponent_a6ffb4a5.o \
   $(JUCE_OBJDIR)/Main_90ebc5c2.o \
-  $(JUCE_OBJDIR)/Result_7479126.o \
+  $(JUCE_OBJDIR)/libusb_platform_wrapper_f0db8557.o \
+  $(JUCE_OBJDIR)/Result_1e16f0dd.o \
+  $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_159ec8f2.o \
+  $(JUCE_OBJDIR)/Push2-Usb-Communicator_babb32aa.o \
   $(JUCE_OBJDIR)/BinaryData_ce4232d4.o \
   $(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o \
   $(JUCE_OBJDIR)/include_juce_audio_devices_63111d02.o \
@@ -113,21 +113,6 @@ $(JUCE_OUTDIR)/$(JUCE_TARGET_APP) : $(OBJECTS_APP) $(RESOURCES)
 	-$(V_AT)mkdir -p $(JUCE_OUTDIR)
 	$(V_AT)$(CXX) -o $(JUCE_OUTDIR)/$(JUCE_TARGET_APP) $(OBJECTS_APP) $(JUCE_LDFLAGS) $(JUCE_LDFLAGS_APP) $(RESOURCES) $(TARGET_ARCH)
 
-$(JUCE_OBJDIR)/Push2-Usb-Communicator_c7d88633.o: ../../Source/push2/Push2-Usb-Communicator.cpp
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling Push2-Usb-Communicator.cpp"
-	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
-
-$(JUCE_OBJDIR)/JuceToPush2DisplayBridge_50b55e3b.o: ../../Source/push2/JuceToPush2DisplayBridge.cpp
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling JuceToPush2DisplayBridge.cpp"
-	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
-
-$(JUCE_OBJDIR)/libusb_platform_wrapper_fdf8d8e0.o: ../../Source/libusb/libusb_platform_wrapper.c
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling libusb_platform_wrapper.c"
-	$(V_AT)$(CC) $(JUCE_CFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
-
 $(JUCE_OBJDIR)/Push2Demo_b450aa3c.o: ../../Source/Push2Demo.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Push2Demo.cpp"
@@ -143,9 +128,24 @@ $(JUCE_OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
 	@echo "Compiling Main.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
 
-$(JUCE_OBJDIR)/Result_7479126.o: ../../Source/Result.cpp
+$(JUCE_OBJDIR)/libusb_platform_wrapper_f0db8557.o: ../../3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling libusb_platform_wrapper.c"
+	$(V_AT)$(CC) $(JUCE_CFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/Result_1e16f0dd.o: ../../3rdParty/push2-display-with-juce/Source/Result.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Result.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/JuceToPush2DisplayBridge_159ec8f2.o: ../../3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling JuceToPush2DisplayBridge.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/Push2-Usb-Communicator_babb32aa.o: ../../3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling Push2-Usb-Communicator.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/BinaryData_ce4232d4.o: ../../JuceLibraryCode/BinaryData.cpp

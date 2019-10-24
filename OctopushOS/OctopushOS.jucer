@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5"
-              headerPath="../../Source&#10;../../Source/libusb&#10;../../3rdParty/libusb/libusb&#10;">
+              headerPath="../../Source/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/push2/"
+              version="0.0.1" companyName="Rita &amp; Aurora" projectLineFeed="&#10;"
+              companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com">
   <MAINGROUP id="SqRWVy" name="OctopushOS">
     <GROUP id="{3A6EFDD0-9705-3CE7-1080-1AA11F5E9D8B}" name="Source">
-      <GROUP id="{26FB48C1-8FBB-238F-36F6-35C3C5267C43}" name="push2">
-        <FILE id="OkYlVr" name="Push2-Usb-Communicator.cpp" compile="1" resource="0"
-              file="Source/push2/Push2-Usb-Communicator.cpp"/>
-        <FILE id="mci25S" name="Push2-UsbCommunicator.h" compile="0" resource="0"
-              file="Source/push2/Push2-UsbCommunicator.h"/>
-        <FILE id="ZzV4cd" name="JuceToPush2DisplayBridge.h" compile="0" resource="0"
-              file="Source/push2/JuceToPush2DisplayBridge.h"/>
-        <FILE id="GNGXTI" name="JuceToPush2DisplayBridge.cpp" compile="1" resource="0"
-              file="Source/push2/JuceToPush2DisplayBridge.cpp"/>
-        <FILE id="YTOHme" name="Push2-Bitmap.h" compile="0" resource="0" file="Source/push2/Push2-Bitmap.h"/>
-        <FILE id="JVUJ5q" name="Push2-Display.h" compile="0" resource="0" file="Source/push2/Push2-Display.h"/>
-      </GROUP>
-      <GROUP id="{08E955BE-9269-0B19-A1E8-05CC7C6FEC56}" name="libusb">
-        <FILE id="Ltqzcu" name="libusb_platform_wrapper.c" compile="1" resource="0"
-              file="Source/libusb/libusb_platform_wrapper.c"/>
-      </GROUP>
       <GROUP id="{B2303239-7FDB-F31A-763A-C418EAA80430}" name="tracktion_utils">
         <FILE id="ZfD94l" name="Utilities.h" compile="1" resource="0" file="Source/tracktion_utils/Utilities.h"/>
       </GROUP>
       <FILE id="QsmfT8" name="Push2Demo.cpp" compile="1" resource="0" file="Source/Push2Demo.cpp"/>
       <FILE id="ux2TqP" name="Push2Demo.h" compile="0" resource="0" file="Source/Push2Demo.h"/>
-      <FILE id="rNzYQM" name="Macros.h" compile="0" resource="0" file="Source/Macros.h"/>
       <FILE id="hnfYJH" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="MbqLYb" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="LValSM" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-      <FILE id="yOyGFt" name="Result.h" compile="0" resource="0" file="Source/Result.h"/>
-      <FILE id="Zo5Qkm" name="Result.cpp" compile="1" resource="0" file="Source/Result.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
       <FILE id="OM7k0Y" name="demo_audio.ogg" compile="0" resource="1" file="Resources/demo_audio.ogg"/>
       <FILE id="AudmDd" name="PushStartup.png" compile="0" resource="1" file="Resources/PushStartup.png"/>
+    </GROUP>
+    <GROUP id="{A296B546-124C-3A26-64F6-4AA92E2A209B}" name="3rdParty">
+      <GROUP id="{163ABAD6-A045-28D5-0760-DB5089BBCF5C}" name="libusb">
+        <FILE id="G8WSRh" name="libusb_platform_wrapper.c" compile="1" resource="0"
+              file="3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c"/>
+      </GROUP>
+      <GROUP id="{EC2ABC55-FF17-78CB-B2D5-A68544F7D1DC}" name="push2">
+        <FILE id="iLPdG0" name="Macros.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/Macros.h"/>
+        <FILE id="KnTJkN" name="Result.cpp" compile="1" resource="0" file="3rdParty/push2-display-with-juce/Source/Result.cpp"/>
+        <FILE id="Ne5oBG" name="Result.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/Result.h"/>
+        <FILE id="DvDTCX" name="JuceToPush2DisplayBridge.cpp" compile="1" resource="0"
+              file="3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.cpp"/>
+        <FILE id="fmOzDt" name="JuceToPush2DisplayBridge.h" compile="0" resource="0"
+              file="3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.h"/>
+        <FILE id="fDKUoP" name="Push2-Bitmap.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/push2/Push2-Bitmap.h"/>
+        <FILE id="peEQJs" name="Push2-Display.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/push2/Push2-Display.h"/>
+        <FILE id="lZhAM1" name="Push2-Usb-Communicator.cpp" compile="1" resource="0"
+              file="3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp"/>
+        <FILE id="BBkUm5" name="Push2-UsbCommunicator.h" compile="0" resource="0"
+              file="3rdParty/push2-display-with-juce/Source/push2/Push2-UsbCommunicator.h"/>
+      </GROUP>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
