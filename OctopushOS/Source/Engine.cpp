@@ -24,18 +24,17 @@ Engine::Engine()
     transport.position = 0.0;
     transport.play (false);
 }
-    
+   
 Engine::~Engine()
 {
-    // Shot down tracktion engine stuff
-    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();
-    
+    // Shot down tracktion engine stuf
+    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();    
     // Remove action listeners of Engine
     removeAllActionListeners();
+
 }
 
 void Engine::changeListenerCallback (ChangeBroadcaster*)
 {
     // Do nothing, this is here to comply with ChangeListener protocol
 }
-    

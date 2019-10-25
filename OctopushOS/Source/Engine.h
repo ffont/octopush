@@ -26,8 +26,8 @@ public:
 private:
     // Methods
     void changeListenerCallback (ChangeBroadcaster*) override;
-    
-    // Properties
+   
+    // Propertie
     te::Engine engine { ProjectInfo::projectName };
     std::unique_ptr<te::Edit> edit;  
     
