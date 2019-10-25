@@ -69,6 +69,14 @@
 			isa = PBXBuildFile;
 			fileRef = 068526EF5EC2DDB35A7B4EF3;
 		};
+		92C2BD03B0444D150EFB6F58 = {
+			isa = PBXBuildFile;
+			fileRef = C9D399C0F603706E1C98CC37;
+		};
+		DBD728F5D0DF943FEFC98255 = {
+			isa = PBXBuildFile;
+			fileRef = B1FD84386C2086AB9A3BDA00;
+		};
 		A6F7FAF2D67E97347F127B30 = {
 			isa = PBXBuildFile;
 			fileRef = D82EA6257B591ADA4F40A46B;
@@ -274,6 +282,13 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = MainComponent.h;
 			path = ../../Source/MainComponent.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		174C2D67296450E6D298D1ED = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Engine.h;
+			path = ../../Source/Engine.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		19E1D3B2EDE04C84F808DBC6 = {
@@ -493,11 +508,25 @@
 			path = "../../3rdParty/push2-display-with-juce/Source/Macros.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		9AEA3E688E5F6C45E1A0366B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = State.h;
+			path = ../../Source/State.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		9D68CA2CDA2F42C73CD6DD6A = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_core";
 			path = "../../3rdParty/juce/modules/juce_core";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B1FD84386C2086AB9A3BDA00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = State.cpp;
+			path = ../../Source/State.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		B21358F8374A07CD09851BD2 = {
@@ -554,6 +583,13 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = "Push2-Display.h";
 			path = "../../3rdParty/push2-display-with-juce/Source/push2/Push2-Display.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		C9D399C0F603706E1C98CC37 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Engine.cpp;
+			path = ../../Source/Engine.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		CB68008FD522F5D90302F469 = {
@@ -739,6 +775,10 @@
 				7735654903B7758D2A952026,
 				160237CB246C9D3DE2903F29,
 				068526EF5EC2DDB35A7B4EF3,
+				174C2D67296450E6D298D1ED,
+				C9D399C0F603706E1C98CC37,
+				9AEA3E688E5F6C45E1A0366B,
+				B1FD84386C2086AB9A3BDA00,
 				4663DA667641EC34E792D96A,
 				D82EA6257B591ADA4F40A46B,
 			);
@@ -1131,6 +1171,8 @@
 			files = (
 				FEA009274BB5FA934D7641F9,
 				22EE9C863AC276FF65ADE8BD,
+				92C2BD03B0444D150EFB6F58,
+				DBD728F5D0DF943FEFC98255,
 				A6F7FAF2D67E97347F127B30,
 				14A4976F3AF54A17C082A26B,
 				C2BC02B9FF7D8B1CA9A6F7C1,

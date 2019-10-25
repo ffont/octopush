@@ -7,7 +7,6 @@
 */
 
 #include "MainComponent.h"
-#include "helpers/tracktion_engine.h"
 
 
 //==============================================================================
@@ -30,36 +29,13 @@ MainComponent::MainComponent()
         setAudioChannels (2, 2);
     }
     
-    // Initialize Push2 connection demo code
-    NBase::Result result = push.Init();
-    if (result.Succeeded())
-    {
-        std::cout << "Push 2 connected" << std::endl;
-    }
-    else
-    {
-        // Something went wrong while connecting to Push2
-        std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
-    }
-    push.addActionListener(this);
-    
-    // Initialize Tracktion engine demo and start playing audio
-    auto f = File::createTempFile (".ogg");
-    f.replaceWithData (BinaryData::demo_audio_ogg, BinaryData::demo_audio_oggSize);
-    edit = std::make_unique<te::Edit> (engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0);
-    auto clip = EngineHelpers::loadAudioFileAsClip (*edit, f);
-    auto& transport = edit->getTransport();
-    transport.setLoopRange (clip->getEditTimeRange());
-    transport.looping = true;
-    transport.position = 0.0;
-    transport.play (false);
+    // Initialize Push
+    push.initialize(&engine);
+    push.addActionListener(this);  // Make MainComponent receive notifications from Push2 so it can update replicated display (for debug only)
 }
 
 MainComponent::~MainComponent()
 {
-    // Shot down tracktion engine stuff
-    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();
-    
     // Shut down Push stuff
     push.removeActionListener(this);
     

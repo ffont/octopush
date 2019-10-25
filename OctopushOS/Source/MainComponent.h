@@ -10,8 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Push2Interface.h"
-
-namespace te = tracktion_engine;
+#include "Engine.h"
 
 
 //==============================================================================
@@ -20,8 +19,7 @@ namespace te = tracktion_engine;
     your controls and content.
 */
 class MainComponent: public AudioAppComponent,
-                     public ActionListener,
-                     private ChangeListener
+                     public ActionListener
 {
 public:
     //==============================================================================
@@ -41,17 +39,11 @@ public:
     void actionListenerCallback (const String &message) override;
 
 private:
+    // App engine
+    Engine engine;
+    
     // Push interface
     Push2Interface push;
     
-    // Tracktion engine
-    te::Engine engine { ProjectInfo::projectName };
-    std::unique_ptr<te::Edit> edit;
-    void changeListenerCallback (ChangeBroadcaster*) override
-    {
-        // Do nothing so far, this is to comply with ChangeListener inheritance
-    }
-    
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

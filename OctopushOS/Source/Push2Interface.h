@@ -12,15 +12,24 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "push2/JuceToPush2DisplayBridge.h"
+#include "Engine.h"
 
 
 class Push2Interface: public Timer,
                       public MidiInputCallback,
+                      public ActionListener,
                       public ActionBroadcaster
 {
 public:
     
-    NBase::Result Init();
+    Push2Interface();
+    ~Push2Interface();
+
+    void initialize(Engine* engine_);
+    NBase::Result connectToPush();
+    
+    void actionListenerCallback (const String &message) override;
+    
     Image computeFrame();
     Image lastFrame;
     
@@ -39,6 +48,7 @@ private:
     ableton::Push2DisplayBridge bridge;
     ableton::Push2Display push2Display;
     std::unique_ptr<MidiInput> midiInput;
+    Engine* engine;
     
     float elapsedTimeAnimation;
     float frameWaveHeightMultiplier;

@@ -28,21 +28,51 @@ namespace
     }
 }
 
+//------------------------------------------------------------------------------
+
+Push2Interface::Push2Interface()
+{
+}
+
+Push2Interface::~Push2Interface()
+{
+}
 
 //------------------------------------------------------------------------------
 
-NBase::Result Push2Interface::Init()
+void Push2Interface::initialize(Engine* engine_)
 {
-    pushInitializedSuccessfully = false;
+    // Assign reference to application engine
+    engine = engine_;
+    engine->addActionListener(this);
     
+    // Initialize Push2 connection
+    NBase::Result result = connectToPush();
+    if (result.Succeeded())
+    {
+        std::cout << "Push 2 connected" << std::endl;
+        pushInitializedSuccessfully = true;
+    }
+    else
+    {
+        // Something went wrong while connecting to Push2
+        std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
+        pushInitializedSuccessfully = false;
+    }
+    
+    // Init properties
     frameWaveHeightMultiplier = 1.0;
-    
-    // Reset elapsed time
     elapsedTimeAnimation = 0;
     
     // Start the timer to draw the animation
     startTimerHz(60);
-    
+}
+
+
+//------------------------------------------------------------------------------
+
+NBase::Result Push2Interface::connectToPush()
+{
     // First we initialise the low level push2 object
     NBase::Result result = push2Display.Init();
     RETURN_IF_FAILED_MESSAGE(result, "Failed to init push2");
@@ -54,8 +84,6 @@ NBase::Result Push2Interface::Init()
     // Initialises the midi input
     result = openMidiDevice();
     RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi device");
-    
-    pushInitializedSuccessfully = true;
     
     return NBase::Result::NoError;
 }
@@ -191,4 +219,12 @@ void Push2Interface::drawFrame()
     
     // Update main component as well so it shows on screen the same thing that in Push screen
     sendActionMessage("NEW_FRAME_AVAILABLE");
+}
+
+
+//------------------------------------------------------------------------------
+
+void Push2Interface::actionListenerCallback (const String &message)
+{
+    
 }
