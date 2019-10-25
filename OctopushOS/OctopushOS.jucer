@@ -6,15 +6,18 @@
               companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com">
   <MAINGROUP id="SqRWVy" name="OctopushOS">
     <GROUP id="{3A6EFDD0-9705-3CE7-1080-1AA11F5E9D8B}" name="Source">
-      <GROUP id="{B2303239-7FDB-F31A-763A-C418EAA80430}" name="tracktion_utils">
-        <FILE id="ZfD94l" name="Utilities.h" compile="1" resource="0" file="Source/tracktion_utils/Utilities.h"/>
+      <GROUP id="{67E0CF4F-1ED1-FB7E-1AB8-4D2AA26845B7}" name="helpers">
+        <FILE id="kWeL4Q" name="tracktion_engine.h" compile="0" resource="0"
+              file="Source/helpers/tracktion_engine.h"/>
       </GROUP>
-      <FILE id="QsmfT8" name="Push2Demo.cpp" compile="1" resource="0" file="Source/Push2Demo.cpp"/>
-      <FILE id="ux2TqP" name="Push2Demo.h" compile="0" resource="0" file="Source/Push2Demo.h"/>
+      <FILE id="LValSM" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="hnfYJH" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="MbqLYb" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
-      <FILE id="LValSM" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="n5ucqZ" name="Push2Interface.h" compile="0" resource="0"
+            file="Source/Push2Interface.h"/>
+      <FILE id="fqV828" name="Push2Interface.cpp" compile="1" resource="0"
+            file="Source/Push2Interface.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
       <FILE id="OM7k0Y" name="demo_audio.ogg" compile="0" resource="1" file="Resources/demo_audio.ogg"/>

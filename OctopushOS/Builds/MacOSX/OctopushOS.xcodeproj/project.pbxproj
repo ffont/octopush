@@ -61,21 +61,17 @@
 			isa = PBXBuildFile;
 			fileRef = E996716A3BFC318271AB68EA;
 		};
-		C55F50DE5512F416FA5C0DDF = {
+		FEA009274BB5FA934D7641F9 = {
 			isa = PBXBuildFile;
-			fileRef = AF6739764FF0A69F084F29B1;
-		};
-		F945C1DBFD0324397B6491F5 = {
-			isa = PBXBuildFile;
-			fileRef = 2FB4C8B78A4FDF6B01B414E9;
+			fileRef = 7735654903B7758D2A952026;
 		};
 		22EE9C863AC276FF65ADE8BD = {
 			isa = PBXBuildFile;
 			fileRef = 068526EF5EC2DDB35A7B4EF3;
 		};
-		FEA009274BB5FA934D7641F9 = {
+		A6F7FAF2D67E97347F127B30 = {
 			isa = PBXBuildFile;
-			fileRef = 7735654903B7758D2A952026;
+			fileRef = D82EA6257B591ADA4F40A46B;
 		};
 		14A4976F3AF54A17C082A26B = {
 			isa = PBXBuildFile;
@@ -315,13 +311,6 @@
 			path = "../../3rdParty/push2-display-with-juce/Source/Result.h";
 			sourceTree = "SOURCE_ROOT";
 		};
-		2FB4C8B78A4FDF6B01B414E9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Push2Demo.cpp;
-			path = ../../Source/Push2Demo.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		318EAC22321357FAF5CEED4D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -362,6 +351,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = "include_tracktion_engine_model_1.cpp";
 			path = "../../JuceLibraryCode/include_tracktion_engine_model_1.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4663DA667641EC34E792D96A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Push2Interface.h;
+			path = ../../Source/Push2Interface.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		486C6309755D05900ADC57B6 = {
@@ -504,18 +500,18 @@
 			path = "../../3rdParty/juce/modules/juce_core";
 			sourceTree = "SOURCE_ROOT";
 		};
-		AF6739764FF0A69F084F29B1 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Utilities.h;
-			path = "../../Source/tracktion_utils/Utilities.h";
-			sourceTree = "SOURCE_ROOT";
-		};
 		B21358F8374A07CD09851BD2 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = JuceToPush2DisplayBridge.h;
 			path = "../../3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		B3125850BF7C225E94BE493E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "tracktion_engine.h";
+			path = "../../Source/helpers/tracktion_engine.h";
 			sourceTree = "SOURCE_ROOT";
 		};
 		B5F77D7D992E4A5502D6A202 = {
@@ -560,13 +556,6 @@
 			path = "../../3rdParty/push2-display-with-juce/Source/push2/Push2-Display.h";
 			sourceTree = "SOURCE_ROOT";
 		};
-		C82BBFB56E51C444A24D2C10 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Push2Demo.h;
-			path = ../../Source/Push2Demo.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		CB68008FD522F5D90302F469 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -600,6 +589,13 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = "Push2-Bitmap.h";
 			path = "../../3rdParty/push2-display-with-juce/Source/push2/Push2-Bitmap.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D82EA6257B591ADA4F40A46B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Push2Interface.cpp;
+			path = ../../Source/Push2Interface.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		D96BED13CA1CD67EB3233878 = {
@@ -728,23 +724,23 @@
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
-		85939D95E075125AAB2F1EDA = {
+		9E2FC1B819EEEEA8E64BA99B = {
 			isa = PBXGroup;
 			children = (
-				AF6739764FF0A69F084F29B1,
+				B3125850BF7C225E94BE493E,
 			);
-			name = "tracktion_utils";
+			name = helpers;
 			sourceTree = "<group>";
 		};
 		D68521D54BC36355AB90240E = {
 			isa = PBXGroup;
 			children = (
-				85939D95E075125AAB2F1EDA,
-				2FB4C8B78A4FDF6B01B414E9,
-				C82BBFB56E51C444A24D2C10,
+				9E2FC1B819EEEEA8E64BA99B,
+				7735654903B7758D2A952026,
 				160237CB246C9D3DE2903F29,
 				068526EF5EC2DDB35A7B4EF3,
-				7735654903B7758D2A952026,
+				4663DA667641EC34E792D96A,
+				D82EA6257B591ADA4F40A46B,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -1133,10 +1129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C55F50DE5512F416FA5C0DDF,
-				F945C1DBFD0324397B6491F5,
-				22EE9C863AC276FF65ADE8BD,
 				FEA009274BB5FA934D7641F9,
+				22EE9C863AC276FF65ADE8BD,
+				A6F7FAF2D67E97347F127B30,
 				14A4976F3AF54A17C082A26B,
 				C2BC02B9FF7D8B1CA9A6F7C1,
 				98180EFBCD1611119CEF0935,

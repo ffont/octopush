@@ -9,7 +9,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "Push2Demo.h"
+#include "Push2Interface.h"
 
 namespace te = tracktion_engine;
 
@@ -19,9 +19,9 @@ namespace te = tracktion_engine;
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public AudioAppComponent,
-                        public ActionListener,
-                        private ChangeListener
+class MainComponent: public AudioAppComponent,
+                     public ActionListener,
+                     private ChangeListener
 {
 public:
     //==============================================================================
@@ -42,14 +42,14 @@ public:
 
 private:
     // Push interface
-    Demo push;
+    Push2Interface push;
     
     // Tracktion engine
     te::Engine engine { ProjectInfo::projectName };
     std::unique_ptr<te::Edit> edit;
     void changeListenerCallback (ChangeBroadcaster*) override
     {
-        // Do nothing, this is to comply with ChangeListener inheritance
+        // Do nothing so far, this is to comply with ChangeListener inheritance
     }
     
 

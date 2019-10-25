@@ -7,12 +7,12 @@
 */
 
 #include "MainComponent.h"
-#include "tracktion_utils/Utilities.h"
+#include "helpers/tracktion_engine.h"
 
 
 //==============================================================================
 MainComponent::MainComponent()
-{
+{    
     // Make sure you set the size of the component after
     // you add any child components.
     setSize (910, 160);
@@ -35,11 +35,6 @@ MainComponent::MainComponent()
     if (result.Succeeded())
     {
         std::cout << "Push 2 connected" << std::endl;
-        push.SetMidiInputCallback(
-                                   [this](const MidiMessage& message)
-                                   {
-                                       //std::cout << message.getDescription() << std::endl;
-                                   });
     }
     else
     {
