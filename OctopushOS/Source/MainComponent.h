@@ -10,7 +10,6 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Push2Interface.h"
-#include "Engine.h"
 
 
 //==============================================================================
@@ -25,6 +24,8 @@ public:
     //==============================================================================
     MainComponent();
     ~MainComponent();
+    
+    void setPush2Interface(Push2Interface* push_);
 
     //==============================================================================
     void paint (Graphics& g) override;
@@ -34,11 +35,8 @@ public:
     void actionListenerCallback (const String &message) override;
 
 private:
-    // App engine
-    Engine engine;
     
-    // Push interface
-    Push2Interface push;
+    Push2Interface* push;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

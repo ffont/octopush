@@ -13,6 +13,20 @@
 
 Engine::Engine()
 {
+}
+   
+Engine::~Engine()
+{
+    // Shot down tracktion engine stuf
+    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();    
+    
+    // Remove action listeners of Engine
+    removeAllActionListeners();
+
+}
+
+void Engine::initialize()
+{
     // Initialize Tracktion engine demo and start playing audio
     auto f = File::createTempFile (".ogg");
     f.replaceWithData (BinaryData::demo_audio_ogg, BinaryData::demo_audio_oggSize);
@@ -23,15 +37,6 @@ Engine::Engine()
     transport.looping = true;
     transport.position = 0.0;
     transport.play (false);
-}
-   
-Engine::~Engine()
-{
-    // Shot down tracktion engine stuf
-    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();    
-    // Remove action listeners of Engine
-    removeAllActionListeners();
-
 }
 
 void Engine::changeListenerCallback (ChangeBroadcaster*)

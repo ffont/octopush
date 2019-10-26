@@ -10,6 +10,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "MainComponent.h"
+#include "Push2Interface.h"
+#include "Engine.h"
 
 //==============================================================================
 class OctopushOSApplication  : public JUCEApplication
@@ -25,9 +27,14 @@ public:
     //==============================================================================
     void initialise (const String& commandLine) override
     {
-        // This method is where you should put your application's initialisation code..
-
+        // Initialize application engine and Push2 interface
+        engine.initialize();
+        push.initialize(&engine);
+        
+        // Initialize main window (will only be used to replicate Push2 display in development)
+        // These two lines can be commented and no main window will appear
         mainWindow.reset (new MainWindow (getApplicationName()));
+        static_cast<MainComponent*>(mainWindow.get()->getContentComponent())->setPush2Interface(&push);
     }
 
     void shutdown() override
@@ -98,6 +105,13 @@ public:
     };
 
 private:
+    // App engine
+    Engine engine;
+    
+    // Push interface
+    Push2Interface push;
+    
+    // Main window (not really used when deployed to hardware, just used to replicate Push2 display contents)
     std::unique_ptr<MainWindow> mainWindow;
 };
 

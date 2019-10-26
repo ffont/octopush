@@ -22,6 +22,8 @@ class Engine: private ChangeListener,
 public:
     Engine();
     ~Engine();
+    
+    void initialize();
 
 private:
     // Methods

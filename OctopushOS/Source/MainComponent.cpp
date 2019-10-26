@@ -15,23 +15,24 @@ MainComponent::MainComponent()
     // Make sure you set the size of the component after
     // you add any child components.
     setSize (910, 160);
-
-    // Initialize Push
-    push.initialize(&engine);
-    push.addActionListener(this);  // Make MainComponent receive notifications from Push2 so it can update replicated display (for debug only)
 }
 
 MainComponent::~MainComponent()
 {
-    // Shut down Push stuff
-    push.removeActionListener(this);
+    push->removeActionListener(this);
+}
+
+void MainComponent::setPush2Interface(Push2Interface* push_)
+{
+    push = push_;
+    push->addActionListener(this);  // Make MainComponent receive notifications from Push2 so it can update replicated display (for debug only)
 }
 
 
 //==============================================================================
 void MainComponent::paint (Graphics& g)
 {
-    g.drawImageAt(push.lastFrame, 0, 0);
+    g.drawImageAt(push->lastFrame, 0, 0);
 }
 
 void MainComponent::resized()
