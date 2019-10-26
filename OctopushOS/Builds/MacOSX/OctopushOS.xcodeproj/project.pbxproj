@@ -65,10 +65,6 @@
 			isa = PBXBuildFile;
 			fileRef = 7735654903B7758D2A952026;
 		};
-		22EE9C863AC276FF65ADE8BD = {
-			isa = PBXBuildFile;
-			fileRef = 068526EF5EC2DDB35A7B4EF3;
-		};
 		92C2BD03B0444D150EFB6F58 = {
 			isa = PBXBuildFile;
 			fileRef = C9D399C0F603706E1C98CC37;
@@ -80,6 +76,10 @@
 		A6F7FAF2D67E97347F127B30 = {
 			isa = PBXBuildFile;
 			fileRef = D82EA6257B591ADA4F40A46B;
+		};
+		16E179E9ACF993741589AA5F = {
+			isa = PBXBuildFile;
+			fileRef = 4FF636A3E095CE62419CA5BA;
 		};
 		14A4976F3AF54A17C082A26B = {
 			isa = PBXBuildFile;
@@ -221,13 +221,6 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_timestretch.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
-		068526EF5EC2DDB35A7B4EF3 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = MainComponent.cpp;
-			path = ../../Source/MainComponent.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		0C971E506A38331CED860C0D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -277,13 +270,6 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_playback.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
-		160237CB246C9D3DE2903F29 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = MainComponent.h;
-			path = ../../Source/MainComponent.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		174C2D67296450E6D298D1ED = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -303,6 +289,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = "include_tracktion_engine_airwindows.cpp";
 			path = "../../JuceLibraryCode/include_tracktion_engine_airwindows.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
+		23999EE82840A7AE7D0EBE55 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Push2Simulator.h;
+			path = ../../Source/Push2Simulator.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		2875C7A1EB8C7991BBA0D94C = {
@@ -380,6 +373,13 @@
 			lastKnownFileType = file;
 			name = "juce_audio_utils";
 			path = "../../3rdParty/juce/modules/juce_audio_utils";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4FF636A3E095CE62419CA5BA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Push2Simulator.cpp;
+			path = ../../Source/Push2Simulator.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		54C803762A3CC7B74E1FA81F = {
@@ -773,14 +773,14 @@
 			children = (
 				9E2FC1B819EEEEA8E64BA99B,
 				7735654903B7758D2A952026,
-				160237CB246C9D3DE2903F29,
-				068526EF5EC2DDB35A7B4EF3,
 				174C2D67296450E6D298D1ED,
 				C9D399C0F603706E1C98CC37,
 				9AEA3E688E5F6C45E1A0366B,
 				B1FD84386C2086AB9A3BDA00,
 				4663DA667641EC34E792D96A,
 				D82EA6257B591ADA4F40A46B,
+				23999EE82840A7AE7D0EBE55,
+				4FF636A3E095CE62419CA5BA,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -1170,10 +1170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEA009274BB5FA934D7641F9,
-				22EE9C863AC276FF65ADE8BD,
 				92C2BD03B0444D150EFB6F58,
 				DBD728F5D0DF943FEFC98255,
 				A6F7FAF2D67E97347F127B30,
+				16E179E9ACF993741589AA5F,
 				14A4976F3AF54A17C082A26B,
 				C2BC02B9FF7D8B1CA9A6F7C1,
 				98180EFBCD1611119CEF0935,

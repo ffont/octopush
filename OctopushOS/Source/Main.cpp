@@ -9,8 +9,8 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "MainComponent.h"
 #include "Push2Interface.h"
+#include "Push2Simulator.h"
 #include "Engine.h"
 
 //==============================================================================
@@ -34,7 +34,7 @@ public:
         // Initialize main window (will only be used to replicate Push2 display in development)
         // These two lines can be commented and no main window will appear
         mainWindow.reset (new MainWindow (getApplicationName()));
-        static_cast<MainComponent*>(mainWindow.get()->getContentComponent())->setPush2Interface(&push);
+        static_cast<Push2Simulator*>(mainWindow.get()->getContentComponent())->setPush2Interface(&push);
     }
 
     void shutdown() override
@@ -62,7 +62,7 @@ public:
     //==============================================================================
     /*
         This class implements the desktop window that contains an instance of
-        our MainComponent class.
+        our Push2Simulator class.
     */
     class MainWindow    : public DocumentWindow
     {
@@ -73,7 +73,7 @@ public:
                                                     DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (new MainComponent(), true);
+            setContentOwned (new Push2Simulator(), true);
 
            #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);

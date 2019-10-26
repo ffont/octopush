@@ -11,9 +11,6 @@
               file="Source/helpers/tracktion_engine.h"/>
       </GROUP>
       <FILE id="LValSM" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-      <FILE id="hnfYJH" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
-      <FILE id="MbqLYb" name="MainComponent.cpp" compile="1" resource="0"
-            file="Source/MainComponent.cpp"/>
       <FILE id="o0XklV" name="Engine.h" compile="0" resource="0" file="Source/Engine.h"/>
       <FILE id="aMMNSB" name="Engine.cpp" compile="1" resource="0" file="Source/Engine.cpp"/>
       <FILE id="ZlbWmf" name="State.h" compile="0" resource="0" file="Source/State.h"/>
@@ -22,6 +19,10 @@
             file="Source/Push2Interface.h"/>
       <FILE id="fqV828" name="Push2Interface.cpp" compile="1" resource="0"
             file="Source/Push2Interface.cpp"/>
+      <FILE id="VZp0WF" name="Push2Simulator.h" compile="0" resource="0"
+            file="Source/Push2Simulator.h"/>
+      <FILE id="X2ACdV" name="Push2Simulator.cpp" compile="1" resource="0"
+            file="Source/Push2Simulator.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
       <FILE id="OM7k0Y" name="demo_audio.ogg" compile="0" resource="1" file="Resources/demo_audio.ogg"/>
