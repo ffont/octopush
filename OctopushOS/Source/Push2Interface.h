@@ -37,6 +37,9 @@ public:
     // Encoder action handlers (definitions should be moved to some other class)
     void e1Rotated(int increment);
     
+    // Button action handlers
+    void ba1Pressed();
+    
     
 private:
     
@@ -57,4 +60,5 @@ private:
     
     float elapsedTimeAnimation;
     float frameWaveHeightMultiplier;
+    Colour waveformColor;
 };

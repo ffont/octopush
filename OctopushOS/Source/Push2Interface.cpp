@@ -62,6 +62,7 @@ void Push2Interface::initialize(Engine* engine_)
     
     // Init properties
     frameWaveHeightMultiplier = 1.0;
+    waveformColor = Colours::white;
     elapsedTimeAnimation = 0;
     
     // Start the timer to draw the animation
@@ -141,9 +142,15 @@ void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const Mid
         int ccNumber = message.getControllerNumber();
         if (ccNumber == ENCODER_E1_CC_NUMBER){
             if (ccValue == 127){
-                e1Rotated(1);
+                e1Rotated(1);  // Rotated right
             } else {
-                e1Rotated(-1);
+                e1Rotated(-1);  // Rotated left
+            }
+        } else if (ccNumber == BUTTON_A1_CC_NUMBER){
+            if (ccValue == 127){
+                ba1Pressed();  // Button pressed
+            } else {
+                // Button released
             }
         }
     }
@@ -192,7 +199,7 @@ Image Push2Interface::computeFrame()
     }
     
     // Draw the path
-    g.setColour(juce::Colour::greyLevel(0.5f));
+    g.setColour(waveformColor);
     g.fillPath(wavePath);
     
     // Blit the logo on top
@@ -238,4 +245,14 @@ void Push2Interface::e1Rotated(int increment){
     
     frameWaveHeightMultiplier += 0.04 * increment;
     frameWaveHeightMultiplier = jlimit(0.0, 1.0, (double)frameWaveHeightMultiplier);
+}
+
+//------------------------------------------------------------------------------
+
+void Push2Interface::ba1Pressed(){
+    auto& random = Random::getSystemRandom();
+    Colour randomColour (random.nextInt (256),
+                         random.nextInt (256),
+                         random.nextInt (256));
+    waveformColor = randomColour;
 }

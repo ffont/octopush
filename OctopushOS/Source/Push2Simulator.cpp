@@ -1203,6 +1203,7 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == ba1Button.get())
     {
         //[UserButtonCode_ba1Button] -- add your button handler code here..
+        push->ba1Pressed();
         //[/UserButtonCode_ba1Button]
     }
     else if (buttonThatWasClicked == ba2Button.get())
