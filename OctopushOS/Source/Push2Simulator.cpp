@@ -46,95 +46,117 @@ Push2Simulator::Push2Simulator ()
 
     metronomeButton->setBounds (72, 64, 64, 24);
 
-    cc102Button.reset (new TextButton ("cc102"));
-    addAndMakeVisible (cc102Button.get());
-    cc102Button->addListener (this);
+    ba1Button.reset (new TextButton ("ba1"));
+    addAndMakeVisible (ba1Button.get());
+    ba1Button->setButtonText (TRANS("BA1"));
+    ba1Button->addListener (this);
 
-    cc102Button->setBounds (160, 64, 64, 24);
+    ba1Button->setBounds (160, 64, 64, 24);
 
-    cc103Button.reset (new TextButton ("cc103"));
-    addAndMakeVisible (cc103Button.get());
-    cc103Button->addListener (this);
+    ba2Button.reset (new TextButton ("ba2"));
+    addAndMakeVisible (ba2Button.get());
+    ba2Button->setButtonText (TRANS("BA2"));
+    ba2Button->addListener (this);
 
-    cc103Button->setBounds (229, 64, 64, 24);
+    ba2Button->setBounds (229, 64, 64, 24);
 
-    cc104Button.reset (new TextButton ("cc104"));
-    addAndMakeVisible (cc104Button.get());
-    cc104Button->addListener (this);
+    ba3Button.reset (new TextButton ("ba3"));
+    addAndMakeVisible (ba3Button.get());
+    ba3Button->setButtonText (TRANS("BA3"));
+    ba3Button->addListener (this);
 
-    cc104Button->setBounds (300, 64, 64, 24);
+    ba3Button->setBounds (300, 64, 64, 24);
 
-    cc105Button.reset (new TextButton ("cc105"));
-    addAndMakeVisible (cc105Button.get());
-    cc105Button->addListener (this);
+    ba4Button.reset (new TextButton ("ba4"));
+    addAndMakeVisible (ba4Button.get());
+    ba4Button->setButtonText (TRANS("BA4"));
+    ba4Button->addListener (this);
 
-    cc105Button->setBounds (368, 64, 64, 24);
+    ba4Button->setBounds (368, 64, 64, 24);
 
-    cc107Button.reset (new TextButton ("cc107"));
-    addAndMakeVisible (cc107Button.get());
-    cc107Button->addListener (this);
+    ba5Button.reset (new TextButton ("ba5"));
+    addAndMakeVisible (ba5Button.get());
+    ba5Button->setButtonText (TRANS("BA5"));
+    ba5Button->addListener (this);
 
-    cc107Button->setBounds (508, 64, 64, 24);
+    ba5Button->setBounds (438, 64, 64, 24);
 
-    cc108Button.reset (new TextButton ("cc108"));
-    addAndMakeVisible (cc108Button.get());
-    cc108Button->addListener (this);
+    ba6Button.reset (new TextButton ("ba6"));
+    addAndMakeVisible (ba6Button.get());
+    ba6Button->setButtonText (TRANS("BA6"));
+    ba6Button->addListener (this);
 
-    cc108Button->setBounds (578, 64, 64, 24);
+    ba6Button->setBounds (508, 64, 64, 24);
 
-    cc109Button.reset (new TextButton ("cc109"));
-    addAndMakeVisible (cc109Button.get());
-    cc109Button->addListener (this);
+    ba7Button.reset (new TextButton ("ba7"));
+    addAndMakeVisible (ba7Button.get());
+    ba7Button->setButtonText (TRANS("BA7"));
+    ba7Button->addListener (this);
 
-    cc109Button->setBounds (646, 64, 64, 24);
+    ba7Button->setBounds (578, 64, 64, 24);
 
-    cc20Button.reset (new TextButton ("cc20"));
-    addAndMakeVisible (cc20Button.get());
-    cc20Button->addListener (this);
+    ba8Button.reset (new TextButton ("ba8"));
+    addAndMakeVisible (ba8Button.get());
+    ba8Button->setButtonText (TRANS("BA8"));
+    ba8Button->addListener (this);
 
-    cc20Button->setBounds (160, 240, 64, 24);
+    ba8Button->setBounds (646, 64, 64, 24);
 
-    cc21Button.reset (new TextButton ("cc21"));
-    addAndMakeVisible (cc21Button.get());
-    cc21Button->addListener (this);
+    bb1Button.reset (new TextButton ("bb1"));
+    addAndMakeVisible (bb1Button.get());
+    bb1Button->setButtonText (TRANS("BB1"));
+    bb1Button->addListener (this);
 
-    cc21Button->setBounds (229, 240, 64, 24);
+    bb1Button->setBounds (160, 240, 64, 24);
 
-    cc22Button.reset (new TextButton ("cc22"));
-    addAndMakeVisible (cc22Button.get());
-    cc22Button->addListener (this);
+    bb2Button.reset (new TextButton ("bb2"));
+    addAndMakeVisible (bb2Button.get());
+    bb2Button->setButtonText (TRANS("BB2"));
+    bb2Button->addListener (this);
 
-    cc22Button->setBounds (300, 240, 64, 24);
+    bb2Button->setBounds (229, 240, 64, 24);
 
-    cc23Button.reset (new TextButton ("cc23"));
-    addAndMakeVisible (cc23Button.get());
-    cc23Button->addListener (this);
+    bb3Button.reset (new TextButton ("bb3"));
+    addAndMakeVisible (bb3Button.get());
+    bb3Button->setButtonText (TRANS("BB3"));
+    bb3Button->addListener (this);
 
-    cc23Button->setBounds (368, 240, 64, 24);
+    bb3Button->setBounds (300, 240, 64, 24);
 
-    cc24Button.reset (new TextButton ("cc24"));
-    addAndMakeVisible (cc24Button.get());
-    cc24Button->addListener (this);
+    bb4Button.reset (new TextButton ("bb4"));
+    addAndMakeVisible (bb4Button.get());
+    bb4Button->setButtonText (TRANS("BB4"));
+    bb4Button->addListener (this);
 
-    cc24Button->setBounds (438, 240, 64, 24);
+    bb4Button->setBounds (368, 240, 64, 24);
 
-    cc25Button.reset (new TextButton ("cc25"));
-    addAndMakeVisible (cc25Button.get());
-    cc25Button->addListener (this);
+    bb5Button.reset (new TextButton ("bb5"));
+    addAndMakeVisible (bb5Button.get());
+    bb5Button->setButtonText (TRANS("BB5"));
+    bb5Button->addListener (this);
 
-    cc25Button->setBounds (508, 240, 64, 24);
+    bb5Button->setBounds (438, 240, 64, 24);
 
-    cc26Button.reset (new TextButton ("cc26"));
-    addAndMakeVisible (cc26Button.get());
-    cc26Button->addListener (this);
+    bb6Button.reset (new TextButton ("bb6"));
+    addAndMakeVisible (bb6Button.get());
+    bb6Button->setButtonText (TRANS("BB6"));
+    bb6Button->addListener (this);
 
-    cc26Button->setBounds (578, 240, 64, 24);
+    bb6Button->setBounds (508, 240, 64, 24);
 
-    cc27Button.reset (new TextButton ("cc27"));
-    addAndMakeVisible (cc27Button.get());
-    cc27Button->addListener (this);
+    bb7Button.reset (new TextButton ("bb7"));
+    addAndMakeVisible (bb7Button.get());
+    bb7Button->setButtonText (TRANS("BB7"));
+    bb7Button->addListener (this);
 
-    cc27Button->setBounds (646, 240, 64, 24);
+    bb7Button->setBounds (578, 240, 64, 24);
+
+    bb8Button.reset (new TextButton ("bb8"));
+    addAndMakeVisible (bb8Button.get());
+    bb8Button->setButtonText (TRANS("BB8"));
+    bb8Button->addListener (this);
+
+    bb8Button->setBounds (646, 240, 64, 24);
 
     touchstripSider.reset (new Slider ("touchstrip"));
     addAndMakeVisible (touchstripSider.get());
@@ -145,116 +167,110 @@ Push2Simulator::Push2Simulator ()
 
     touchstripSider->setBounds (80, 288, 48, 416);
 
-    cc14Slider.reset (new Slider ("cc14"));
-    addAndMakeVisible (cc14Slider.get());
-    cc14Slider->setRange (0, 10, 0);
-    cc14Slider->setSliderStyle (Slider::Rotary);
-    cc14Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc14Slider->addListener (this);
+    tempoSlider.reset (new Slider ("tempo"));
+    addAndMakeVisible (tempoSlider.get());
+    tempoSlider->setRange (0, 10, 0);
+    tempoSlider->setSliderStyle (Slider::Rotary);
+    tempoSlider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    tempoSlider->addListener (this);
 
-    cc14Slider->setBounds (0, 0, 72, 56);
+    tempoSlider->setBounds (0, 0, 72, 56);
 
-    cc15Slider.reset (new Slider ("cc15"));
-    addAndMakeVisible (cc15Slider.get());
-    cc15Slider->setRange (0, 10, 0);
-    cc15Slider->setSliderStyle (Slider::Rotary);
-    cc15Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc15Slider->addListener (this);
+    swingSlider.reset (new Slider ("swing"));
+    addAndMakeVisible (swingSlider.get());
+    swingSlider->setRange (0, 10, 0);
+    swingSlider->setSliderStyle (Slider::Rotary);
+    swingSlider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    swingSlider->addListener (this);
 
-    cc15Slider->setBounds (72, 0, 72, 56);
+    swingSlider->setBounds (72, 0, 72, 56);
 
-    cc71Slider.reset (new Slider ("cc71"));
-    addAndMakeVisible (cc71Slider.get());
-    cc71Slider->setRange (0, 10, 0);
-    cc71Slider->setSliderStyle (Slider::Rotary);
-    cc71Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc71Slider->addListener (this);
+    e1Slider.reset (new Slider ("e1"));
+    addAndMakeVisible (e1Slider.get());
+    e1Slider->setRange (0, 10, 0);
+    e1Slider->setSliderStyle (Slider::Rotary);
+    e1Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e1Slider->addListener (this);
 
-    cc71Slider->setBounds (154, 0, 72, 56);
+    e1Slider->setBounds (154, 0, 72, 56);
 
-    cc72Slider.reset (new Slider ("cc72"));
-    addAndMakeVisible (cc72Slider.get());
-    cc72Slider->setRange (0, 10, 0);
-    cc72Slider->setSliderStyle (Slider::Rotary);
-    cc72Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc72Slider->addListener (this);
+    e2Slider.reset (new Slider ("e2"));
+    addAndMakeVisible (e2Slider.get());
+    e2Slider->setRange (0, 10, 0);
+    e2Slider->setSliderStyle (Slider::Rotary);
+    e2Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e2Slider->addListener (this);
 
-    cc72Slider->setBounds (224, 0, 72, 56);
+    e2Slider->setBounds (224, 0, 72, 56);
 
-    cc73Slider.reset (new Slider ("cc73"));
-    addAndMakeVisible (cc73Slider.get());
-    cc73Slider->setRange (0, 10, 0);
-    cc73Slider->setSliderStyle (Slider::Rotary);
-    cc73Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc73Slider->addListener (this);
+    e3Slider.reset (new Slider ("e3"));
+    addAndMakeVisible (e3Slider.get());
+    e3Slider->setRange (0, 10, 0);
+    e3Slider->setSliderStyle (Slider::Rotary);
+    e3Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e3Slider->addListener (this);
 
-    cc73Slider->setBounds (294, 0, 72, 56);
+    e3Slider->setBounds (294, 0, 72, 56);
 
-    cc74Slider.reset (new Slider ("cc74"));
-    addAndMakeVisible (cc74Slider.get());
-    cc74Slider->setRange (0, 10, 0);
-    cc74Slider->setSliderStyle (Slider::Rotary);
-    cc74Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc74Slider->addListener (this);
+    e4Slider.reset (new Slider ("e4"));
+    addAndMakeVisible (e4Slider.get());
+    e4Slider->setRange (0, 10, 0);
+    e4Slider->setSliderStyle (Slider::Rotary);
+    e4Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e4Slider->addListener (this);
 
-    cc74Slider->setBounds (364, 0, 72, 56);
+    e4Slider->setBounds (364, 0, 72, 56);
 
-    cc75Slider.reset (new Slider ("cc75"));
-    addAndMakeVisible (cc75Slider.get());
-    cc75Slider->setRange (0, 10, 0);
-    cc75Slider->setSliderStyle (Slider::Rotary);
-    cc75Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc75Slider->addListener (this);
+    e5Slider.reset (new Slider ("e5"));
+    addAndMakeVisible (e5Slider.get());
+    e5Slider->setRange (0, 10, 0);
+    e5Slider->setSliderStyle (Slider::Rotary);
+    e5Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e5Slider->addListener (this);
 
-    cc75Slider->setBounds (434, 0, 72, 56);
+    e5Slider->setBounds (434, 0, 72, 56);
 
-    cc76Slider.reset (new Slider ("cc76"));
-    addAndMakeVisible (cc76Slider.get());
-    cc76Slider->setRange (0, 10, 0);
-    cc76Slider->setSliderStyle (Slider::Rotary);
-    cc76Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc76Slider->addListener (this);
+    e6Slider.reset (new Slider ("e6"));
+    addAndMakeVisible (e6Slider.get());
+    e6Slider->setRange (0, 10, 0);
+    e6Slider->setSliderStyle (Slider::Rotary);
+    e6Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e6Slider->addListener (this);
 
-    cc76Slider->setBounds (504, 0, 72, 56);
+    e6Slider->setBounds (504, 0, 72, 56);
 
-    cc77Slider.reset (new Slider ("cc77"));
-    addAndMakeVisible (cc77Slider.get());
-    cc77Slider->setRange (0, 10, 0);
-    cc77Slider->setSliderStyle (Slider::Rotary);
-    cc77Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc77Slider->addListener (this);
+    e7Slider.reset (new Slider ("e7"));
+    addAndMakeVisible (e7Slider.get());
+    e7Slider->setRange (0, 10, 0);
+    e7Slider->setSliderStyle (Slider::Rotary);
+    e7Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e7Slider->addListener (this);
 
-    cc77Slider->setBounds (574, 0, 72, 56);
+    e7Slider->setBounds (574, 0, 72, 56);
 
-    cc78Slider.reset (new Slider ("cc78"));
-    addAndMakeVisible (cc78Slider.get());
-    cc78Slider->setRange (0, 10, 0);
-    cc78Slider->setSliderStyle (Slider::Rotary);
-    cc78Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc78Slider->addListener (this);
+    e8Slider.reset (new Slider ("e8"));
+    addAndMakeVisible (e8Slider.get());
+    e8Slider->setRange (0, 10, 0);
+    e8Slider->setSliderStyle (Slider::Rotary);
+    e8Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    e8Slider->addListener (this);
 
-    cc78Slider->setBounds (644, 0, 72, 56);
+    e8Slider->setBounds (644, 0, 72, 56);
 
-    cc79Slider.reset (new Slider ("cc79"));
-    addAndMakeVisible (cc79Slider.get());
-    cc79Slider->setRange (0, 10, 0);
-    cc79Slider->setSliderStyle (Slider::Rotary);
-    cc79Slider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    cc79Slider->addListener (this);
+    masterSlider.reset (new Slider ("master"));
+    addAndMakeVisible (masterSlider.get());
+    masterSlider->setRange (0, 10, 0);
+    masterSlider->setSliderStyle (Slider::Rotary);
+    masterSlider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    masterSlider->addListener (this);
 
-    cc79Slider->setBounds (804, 0, 72, 56);
+    masterSlider->setBounds (804, 0, 72, 56);
 
     displayPlaceholder.reset (new Component());
     addAndMakeVisible (displayPlaceholder.get());
     displayPlaceholder->setName ("display");
 
     displayPlaceholder->setBounds (156, 114, 555, 98);
-
-    cc106Button.reset (new TextButton ("cc106"));
-    addAndMakeVisible (cc106Button.get());
-    cc106Button->addListener (this);
-
-    cc106Button->setBounds (438, 64, 64, 24);
 
     setupButton.reset (new TextButton ("setup"));
     addAndMakeVisible (setupButton.get());
@@ -326,61 +342,61 @@ Push2Simulator::Push2Simulator ()
 
     undoButton->setBounds (8, 164, 45, 45);
 
-    deviceButton2.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton2.get());
-    deviceButton2->setButtonText (TRANS("Device"));
-    deviceButton2->addListener (this);
+    repeatButton.reset (new TextButton ("repeat"));
+    addAndMakeVisible (repeatButton.get());
+    repeatButton->setButtonText (TRANS("Repeat"));
+    repeatButton->addListener (this);
 
-    deviceButton2->setBounds (796, 446, 45, 45);
+    repeatButton->setBounds (796, 446, 45, 45);
 
-    mixButton2.reset (new TextButton ("mix"));
-    addAndMakeVisible (mixButton2.get());
-    mixButton2->setButtonText (TRANS("Mix"));
-    mixButton2->addListener (this);
+    accentButton.reset (new TextButton ("accent"));
+    addAndMakeVisible (accentButton.get());
+    accentButton->setButtonText (TRANS("Accent"));
+    accentButton->addListener (this);
 
-    mixButton2->setBounds (843, 446, 45, 45);
+    accentButton->setBounds (843, 446, 45, 45);
 
-    deviceButton3.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton3.get());
-    deviceButton3->setButtonText (TRANS("Device"));
-    deviceButton3->addListener (this);
+    noteButton.reset (new TextButton ("note"));
+    addAndMakeVisible (noteButton.get());
+    noteButton->setButtonText (TRANS("Note"));
+    noteButton->addListener (this);
 
-    deviceButton3->setBounds (796, 525, 45, 45);
+    noteButton->setBounds (796, 525, 45, 45);
 
-    mixButton3.reset (new TextButton ("mix"));
-    addAndMakeVisible (mixButton3.get());
-    mixButton3->setButtonText (TRANS("Mix"));
-    mixButton3->addListener (this);
+    sesstionButton.reset (new TextButton ("session"));
+    addAndMakeVisible (sesstionButton.get());
+    sesstionButton->setButtonText (TRANS("Session"));
+    sesstionButton->addListener (this);
 
-    mixButton3->setBounds (843, 525, 45, 45);
+    sesstionButton->setBounds (843, 525, 45, 45);
 
-    deviceButton4.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton4.get());
-    deviceButton4->setButtonText (TRANS("Device"));
-    deviceButton4->addListener (this);
+    scaleButton.reset (new TextButton ("scale"));
+    addAndMakeVisible (scaleButton.get());
+    scaleButton->setButtonText (TRANS("Scale"));
+    scaleButton->addListener (this);
 
-    deviceButton4->setBounds (796, 496, 45, 27);
+    scaleButton->setBounds (796, 496, 45, 27);
 
-    mixButton4.reset (new TextButton ("mix"));
-    addAndMakeVisible (mixButton4.get());
-    mixButton4->setButtonText (TRANS("Mix"));
-    mixButton4->addListener (this);
+    layoutButton.reset (new TextButton ("layout"));
+    addAndMakeVisible (layoutButton.get());
+    layoutButton->setButtonText (TRANS("Layout"));
+    layoutButton->addListener (this);
 
-    mixButton4->setBounds (843, 496, 45, 27);
+    layoutButton->setBounds (843, 496, 45, 27);
 
-    deviceButton5.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton5.get());
-    deviceButton5->setButtonText (TRANS("Device"));
-    deviceButton5->addListener (this);
+    shiftButton.reset (new TextButton ("shift"));
+    addAndMakeVisible (shiftButton.get());
+    shiftButton->setButtonText (TRANS("Shift"));
+    shiftButton->addListener (this);
 
-    deviceButton5->setBounds (796, 677, 45, 27);
+    shiftButton->setBounds (796, 677, 45, 27);
 
-    mixButton5.reset (new TextButton ("mix"));
-    addAndMakeVisible (mixButton5.get());
-    mixButton5->setButtonText (TRANS("Mix"));
-    mixButton5->addListener (this);
+    selectButton.reset (new TextButton ("select"));
+    addAndMakeVisible (selectButton.get());
+    selectButton->setButtonText (TRANS("Select"));
+    selectButton->addListener (this);
 
-    mixButton5->setBounds (843, 677, 45, 27);
+    selectButton->setBounds (843, 677, 45, 27);
 
     muteButton.reset (new TextButton ("mute"));
     addAndMakeVisible (muteButton.get());
@@ -473,61 +489,61 @@ Push2Simulator::Push2Simulator ()
 
     masterButton->setBounds (736, 240, 45, 27);
 
-    browseButton2.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton2.get());
-    browseButton2->setButtonText (TRANS("Browse"));
-    browseButton2->addListener (this);
+    _1_32tButton.reset (new TextButton ("1_32t"));
+    addAndMakeVisible (_1_32tButton.get());
+    _1_32tButton->setButtonText (TRANS("1/32t"));
+    _1_32tButton->addListener (this);
 
-    browseButton2->setBounds (736, 286, 45, 45);
+    _1_32tButton->setBounds (736, 286, 45, 45);
 
-    browseButton3.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton3.get());
-    browseButton3->setButtonText (TRANS("Browse"));
-    browseButton3->addListener (this);
+    _1_32Button.reset (new TextButton ("1_32"));
+    addAndMakeVisible (_1_32Button.get());
+    _1_32Button->setButtonText (TRANS("1/32"));
+    _1_32Button->addListener (this);
 
-    browseButton3->setBounds (736, 338, 45, 45);
+    _1_32Button->setBounds (736, 338, 45, 45);
 
-    browseButton4.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton4.get());
-    browseButton4->setButtonText (TRANS("Browse"));
-    browseButton4->addListener (this);
+    _1_16tButton.reset (new TextButton ("1_16t"));
+    addAndMakeVisible (_1_16tButton.get());
+    _1_16tButton->setButtonText (TRANS("1/16t"));
+    _1_16tButton->addListener (this);
 
-    browseButton4->setBounds (736, 393, 45, 45);
+    _1_16tButton->setBounds (736, 393, 45, 45);
 
-    browseButton5.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton5.get());
-    browseButton5->setButtonText (TRANS("Browse"));
-    browseButton5->addListener (this);
+    _1_16Button.reset (new TextButton ("1_16"));
+    addAndMakeVisible (_1_16Button.get());
+    _1_16Button->setButtonText (TRANS("1/16"));
+    _1_16Button->addListener (this);
 
-    browseButton5->setBounds (736, 445, 45, 45);
+    _1_16Button->setBounds (736, 445, 45, 45);
 
-    browseButton6.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton6.get());
-    browseButton6->setButtonText (TRANS("Browse"));
-    browseButton6->addListener (this);
+    _1_8tButton.reset (new TextButton ("1_8t"));
+    addAndMakeVisible (_1_8tButton.get());
+    _1_8tButton->setButtonText (TRANS("1/8t"));
+    _1_8tButton->addListener (this);
 
-    browseButton6->setBounds (736, 498, 45, 45);
+    _1_8tButton->setBounds (736, 498, 45, 45);
 
-    browseButton7.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton7.get());
-    browseButton7->setButtonText (TRANS("Browse"));
-    browseButton7->addListener (this);
+    _1_8Button.reset (new TextButton ("1_8"));
+    addAndMakeVisible (_1_8Button.get());
+    _1_8Button->setButtonText (TRANS("1/8"));
+    _1_8Button->addListener (this);
 
-    browseButton7->setBounds (736, 551, 45, 45);
+    _1_8Button->setBounds (736, 551, 45, 45);
 
-    browseButton8.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton8.get());
-    browseButton8->setButtonText (TRANS("Browse"));
-    browseButton8->addListener (this);
+    _1_4tButton.reset (new TextButton ("1_4t"));
+    addAndMakeVisible (_1_4tButton.get());
+    _1_4tButton->setButtonText (TRANS("1/4t"));
+    _1_4tButton->addListener (this);
 
-    browseButton8->setBounds (736, 605, 45, 45);
+    _1_4tButton->setBounds (736, 605, 45, 45);
 
-    browseButton9.reset (new TextButton ("browse"));
-    addAndMakeVisible (browseButton9.get());
-    browseButton9->setButtonText (TRANS("Browse"));
-    browseButton9->addListener (this);
+    _1_4Button.reset (new TextButton ("1_4"));
+    addAndMakeVisible (_1_4Button.get());
+    _1_4Button->setButtonText (TRANS("1/4"));
+    _1_4Button->addListener (this);
 
-    browseButton9->setBounds (736, 657, 45, 45);
+    _1_4Button->setBounds (736, 657, 45, 45);
 
     arrowUpButton.reset (new TextButton ("arrowUp"));
     addAndMakeVisible (arrowUpButton.get());
@@ -557,33 +573,33 @@ Push2Simulator::Push2Simulator ()
 
     downArrowButton->setBounds (828, 303, 28, 28);
 
-    deviceButton14.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton14.get());
-    deviceButton14->setButtonText (TRANS("Device"));
-    deviceButton14->addListener (this);
+    octaveUpButton.reset (new TextButton ("octaveUp"));
+    addAndMakeVisible (octaveUpButton.get());
+    octaveUpButton->setButtonText (CharPointer_UTF8 ("o \xe2\x86\x91"));
+    octaveUpButton->addListener (this);
 
-    deviceButton14->setBounds (828, 577, 28, 28);
+    octaveUpButton->setBounds (828, 577, 28, 28);
 
-    deviceButton15.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton15.get());
-    deviceButton15->setButtonText (TRANS("Device"));
-    deviceButton15->addListener (this);
+    pageRightButton.reset (new TextButton ("pageRight"));
+    addAndMakeVisible (pageRightButton.get());
+    pageRightButton->setButtonText (CharPointer_UTF8 ("p \xe2\x86\x92"));
+    pageRightButton->addListener (this);
 
-    deviceButton15->setBounds (860, 609, 28, 28);
+    pageRightButton->setBounds (860, 609, 28, 28);
 
-    deviceButton16.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton16.get());
-    deviceButton16->setButtonText (TRANS("Device"));
-    deviceButton16->addListener (this);
+    pageLeftButton.reset (new TextButton ("pageLeft"));
+    addAndMakeVisible (pageLeftButton.get());
+    pageLeftButton->setButtonText (CharPointer_UTF8 ("p \xe2\x86\x90"));
+    pageLeftButton->addListener (this);
 
-    deviceButton16->setBounds (796, 609, 28, 28);
+    pageLeftButton->setBounds (796, 609, 28, 28);
 
-    deviceButton17.reset (new TextButton ("device"));
-    addAndMakeVisible (deviceButton17.get());
-    deviceButton17->setButtonText (TRANS("Device"));
-    deviceButton17->addListener (this);
+    octaveDownButton.reset (new TextButton ("octaveDown"));
+    addAndMakeVisible (octaveDownButton.get());
+    octaveDownButton->setButtonText (CharPointer_UTF8 ("o \xe2\x86\x93"));
+    octaveDownButton->addListener (this);
 
-    deviceButton17->setBounds (828, 641, 28, 28);
+    octaveDownButton->setBounds (828, 641, 28, 28);
 
     nn92Pad.reset (new TextButton ("nn92"));
     addAndMakeVisible (nn92Pad.get());
@@ -988,35 +1004,35 @@ Push2Simulator::~Push2Simulator()
 
     tapTempoButton = nullptr;
     metronomeButton = nullptr;
-    cc102Button = nullptr;
-    cc103Button = nullptr;
-    cc104Button = nullptr;
-    cc105Button = nullptr;
-    cc107Button = nullptr;
-    cc108Button = nullptr;
-    cc109Button = nullptr;
-    cc20Button = nullptr;
-    cc21Button = nullptr;
-    cc22Button = nullptr;
-    cc23Button = nullptr;
-    cc24Button = nullptr;
-    cc25Button = nullptr;
-    cc26Button = nullptr;
-    cc27Button = nullptr;
+    ba1Button = nullptr;
+    ba2Button = nullptr;
+    ba3Button = nullptr;
+    ba4Button = nullptr;
+    ba5Button = nullptr;
+    ba6Button = nullptr;
+    ba7Button = nullptr;
+    ba8Button = nullptr;
+    bb1Button = nullptr;
+    bb2Button = nullptr;
+    bb3Button = nullptr;
+    bb4Button = nullptr;
+    bb5Button = nullptr;
+    bb6Button = nullptr;
+    bb7Button = nullptr;
+    bb8Button = nullptr;
     touchstripSider = nullptr;
-    cc14Slider = nullptr;
-    cc15Slider = nullptr;
-    cc71Slider = nullptr;
-    cc72Slider = nullptr;
-    cc73Slider = nullptr;
-    cc74Slider = nullptr;
-    cc75Slider = nullptr;
-    cc76Slider = nullptr;
-    cc77Slider = nullptr;
-    cc78Slider = nullptr;
-    cc79Slider = nullptr;
+    tempoSlider = nullptr;
+    swingSlider = nullptr;
+    e1Slider = nullptr;
+    e2Slider = nullptr;
+    e3Slider = nullptr;
+    e4Slider = nullptr;
+    e5Slider = nullptr;
+    e6Slider = nullptr;
+    e7Slider = nullptr;
+    e8Slider = nullptr;
+    masterSlider = nullptr;
     displayPlaceholder = nullptr;
-    cc106Button = nullptr;
     setupButton = nullptr;
     userButton = nullptr;
     addDeviceButton = nullptr;
@@ -1027,14 +1043,14 @@ Push2Simulator::~Push2Simulator()
     clipButton = nullptr;
     deleteButton = nullptr;
     undoButton = nullptr;
-    deviceButton2 = nullptr;
-    mixButton2 = nullptr;
-    deviceButton3 = nullptr;
-    mixButton3 = nullptr;
-    deviceButton4 = nullptr;
-    mixButton4 = nullptr;
-    deviceButton5 = nullptr;
-    mixButton5 = nullptr;
+    repeatButton = nullptr;
+    accentButton = nullptr;
+    noteButton = nullptr;
+    sesstionButton = nullptr;
+    scaleButton = nullptr;
+    layoutButton = nullptr;
+    shiftButton = nullptr;
+    selectButton = nullptr;
     muteButton = nullptr;
     soloButton = nullptr;
     stopClipButton = nullptr;
@@ -1048,22 +1064,22 @@ Push2Simulator::~Push2Simulator()
     recordButton = nullptr;
     playButton = nullptr;
     masterButton = nullptr;
-    browseButton2 = nullptr;
-    browseButton3 = nullptr;
-    browseButton4 = nullptr;
-    browseButton5 = nullptr;
-    browseButton6 = nullptr;
-    browseButton7 = nullptr;
-    browseButton8 = nullptr;
-    browseButton9 = nullptr;
+    _1_32tButton = nullptr;
+    _1_32Button = nullptr;
+    _1_16tButton = nullptr;
+    _1_16Button = nullptr;
+    _1_8tButton = nullptr;
+    _1_8Button = nullptr;
+    _1_4tButton = nullptr;
+    _1_4Button = nullptr;
     arrowUpButton = nullptr;
     rightArrowButton = nullptr;
     leftArrowButton = nullptr;
     downArrowButton = nullptr;
-    deviceButton14 = nullptr;
-    deviceButton15 = nullptr;
-    deviceButton16 = nullptr;
-    deviceButton17 = nullptr;
+    octaveUpButton = nullptr;
+    pageRightButton = nullptr;
+    pageLeftButton = nullptr;
+    octaveDownButton = nullptr;
     nn92Pad = nullptr;
     nn93Pad = nullptr;
     nn94Pad = nullptr;
@@ -1140,7 +1156,7 @@ void Push2Simulator::paint (Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colour (0xff323e44));
+    g.fillAll (Colour (0xff151515));
 
     //[UserPaint] Add your own custom painting code here..
     g.drawImage(push->lastFrame, displayPlaceholder.get()->getBounds().toFloat());
@@ -1171,85 +1187,85 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_metronomeButton] -- add your button handler code here..
         //[/UserButtonCode_metronomeButton]
     }
-    else if (buttonThatWasClicked == cc102Button.get())
+    else if (buttonThatWasClicked == ba1Button.get())
     {
-        //[UserButtonCode_cc102Button] -- add your button handler code here..
-        //[/UserButtonCode_cc102Button]
+        //[UserButtonCode_ba1Button] -- add your button handler code here..
+        //[/UserButtonCode_ba1Button]
     }
-    else if (buttonThatWasClicked == cc103Button.get())
+    else if (buttonThatWasClicked == ba2Button.get())
     {
-        //[UserButtonCode_cc103Button] -- add your button handler code here..
-        //[/UserButtonCode_cc103Button]
+        //[UserButtonCode_ba2Button] -- add your button handler code here..
+        //[/UserButtonCode_ba2Button]
     }
-    else if (buttonThatWasClicked == cc104Button.get())
+    else if (buttonThatWasClicked == ba3Button.get())
     {
-        //[UserButtonCode_cc104Button] -- add your button handler code here..
-        //[/UserButtonCode_cc104Button]
+        //[UserButtonCode_ba3Button] -- add your button handler code here..
+        //[/UserButtonCode_ba3Button]
     }
-    else if (buttonThatWasClicked == cc105Button.get())
+    else if (buttonThatWasClicked == ba4Button.get())
     {
-        //[UserButtonCode_cc105Button] -- add your button handler code here..
-        //[/UserButtonCode_cc105Button]
+        //[UserButtonCode_ba4Button] -- add your button handler code here..
+        //[/UserButtonCode_ba4Button]
     }
-    else if (buttonThatWasClicked == cc107Button.get())
+    else if (buttonThatWasClicked == ba5Button.get())
     {
-        //[UserButtonCode_cc107Button] -- add your button handler code here..
-        //[/UserButtonCode_cc107Button]
+        //[UserButtonCode_ba5Button] -- add your button handler code here..
+        //[/UserButtonCode_ba5Button]
     }
-    else if (buttonThatWasClicked == cc108Button.get())
+    else if (buttonThatWasClicked == ba6Button.get())
     {
-        //[UserButtonCode_cc108Button] -- add your button handler code here..
-        //[/UserButtonCode_cc108Button]
+        //[UserButtonCode_ba6Button] -- add your button handler code here..
+        //[/UserButtonCode_ba6Button]
     }
-    else if (buttonThatWasClicked == cc109Button.get())
+    else if (buttonThatWasClicked == ba7Button.get())
     {
-        //[UserButtonCode_cc109Button] -- add your button handler code here..
-        //[/UserButtonCode_cc109Button]
+        //[UserButtonCode_ba7Button] -- add your button handler code here..
+        //[/UserButtonCode_ba7Button]
     }
-    else if (buttonThatWasClicked == cc20Button.get())
+    else if (buttonThatWasClicked == ba8Button.get())
     {
-        //[UserButtonCode_cc20Button] -- add your button handler code here..
-        //[/UserButtonCode_cc20Button]
+        //[UserButtonCode_ba8Button] -- add your button handler code here..
+        //[/UserButtonCode_ba8Button]
     }
-    else if (buttonThatWasClicked == cc21Button.get())
+    else if (buttonThatWasClicked == bb1Button.get())
     {
-        //[UserButtonCode_cc21Button] -- add your button handler code here..
-        //[/UserButtonCode_cc21Button]
+        //[UserButtonCode_bb1Button] -- add your button handler code here..
+        //[/UserButtonCode_bb1Button]
     }
-    else if (buttonThatWasClicked == cc22Button.get())
+    else if (buttonThatWasClicked == bb2Button.get())
     {
-        //[UserButtonCode_cc22Button] -- add your button handler code here..
-        //[/UserButtonCode_cc22Button]
+        //[UserButtonCode_bb2Button] -- add your button handler code here..
+        //[/UserButtonCode_bb2Button]
     }
-    else if (buttonThatWasClicked == cc23Button.get())
+    else if (buttonThatWasClicked == bb3Button.get())
     {
-        //[UserButtonCode_cc23Button] -- add your button handler code here..
-        //[/UserButtonCode_cc23Button]
+        //[UserButtonCode_bb3Button] -- add your button handler code here..
+        //[/UserButtonCode_bb3Button]
     }
-    else if (buttonThatWasClicked == cc24Button.get())
+    else if (buttonThatWasClicked == bb4Button.get())
     {
-        //[UserButtonCode_cc24Button] -- add your button handler code here..
-        //[/UserButtonCode_cc24Button]
+        //[UserButtonCode_bb4Button] -- add your button handler code here..
+        //[/UserButtonCode_bb4Button]
     }
-    else if (buttonThatWasClicked == cc25Button.get())
+    else if (buttonThatWasClicked == bb5Button.get())
     {
-        //[UserButtonCode_cc25Button] -- add your button handler code here..
-        //[/UserButtonCode_cc25Button]
+        //[UserButtonCode_bb5Button] -- add your button handler code here..
+        //[/UserButtonCode_bb5Button]
     }
-    else if (buttonThatWasClicked == cc26Button.get())
+    else if (buttonThatWasClicked == bb6Button.get())
     {
-        //[UserButtonCode_cc26Button] -- add your button handler code here..
-        //[/UserButtonCode_cc26Button]
+        //[UserButtonCode_bb6Button] -- add your button handler code here..
+        //[/UserButtonCode_bb6Button]
     }
-    else if (buttonThatWasClicked == cc27Button.get())
+    else if (buttonThatWasClicked == bb7Button.get())
     {
-        //[UserButtonCode_cc27Button] -- add your button handler code here..
-        //[/UserButtonCode_cc27Button]
+        //[UserButtonCode_bb7Button] -- add your button handler code here..
+        //[/UserButtonCode_bb7Button]
     }
-    else if (buttonThatWasClicked == cc106Button.get())
+    else if (buttonThatWasClicked == bb8Button.get())
     {
-        //[UserButtonCode_cc106Button] -- add your button handler code here..
-        //[/UserButtonCode_cc106Button]
+        //[UserButtonCode_bb8Button] -- add your button handler code here..
+        //[/UserButtonCode_bb8Button]
     }
     else if (buttonThatWasClicked == setupButton.get())
     {
@@ -1301,45 +1317,45 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_undoButton] -- add your button handler code here..
         //[/UserButtonCode_undoButton]
     }
-    else if (buttonThatWasClicked == deviceButton2.get())
+    else if (buttonThatWasClicked == repeatButton.get())
     {
-        //[UserButtonCode_deviceButton2] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton2]
+        //[UserButtonCode_repeatButton] -- add your button handler code here..
+        //[/UserButtonCode_repeatButton]
     }
-    else if (buttonThatWasClicked == mixButton2.get())
+    else if (buttonThatWasClicked == accentButton.get())
     {
-        //[UserButtonCode_mixButton2] -- add your button handler code here..
-        //[/UserButtonCode_mixButton2]
+        //[UserButtonCode_accentButton] -- add your button handler code here..
+        //[/UserButtonCode_accentButton]
     }
-    else if (buttonThatWasClicked == deviceButton3.get())
+    else if (buttonThatWasClicked == noteButton.get())
     {
-        //[UserButtonCode_deviceButton3] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton3]
+        //[UserButtonCode_noteButton] -- add your button handler code here..
+        //[/UserButtonCode_noteButton]
     }
-    else if (buttonThatWasClicked == mixButton3.get())
+    else if (buttonThatWasClicked == sesstionButton.get())
     {
-        //[UserButtonCode_mixButton3] -- add your button handler code here..
-        //[/UserButtonCode_mixButton3]
+        //[UserButtonCode_sesstionButton] -- add your button handler code here..
+        //[/UserButtonCode_sesstionButton]
     }
-    else if (buttonThatWasClicked == deviceButton4.get())
+    else if (buttonThatWasClicked == scaleButton.get())
     {
-        //[UserButtonCode_deviceButton4] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton4]
+        //[UserButtonCode_scaleButton] -- add your button handler code here..
+        //[/UserButtonCode_scaleButton]
     }
-    else if (buttonThatWasClicked == mixButton4.get())
+    else if (buttonThatWasClicked == layoutButton.get())
     {
-        //[UserButtonCode_mixButton4] -- add your button handler code here..
-        //[/UserButtonCode_mixButton4]
+        //[UserButtonCode_layoutButton] -- add your button handler code here..
+        //[/UserButtonCode_layoutButton]
     }
-    else if (buttonThatWasClicked == deviceButton5.get())
+    else if (buttonThatWasClicked == shiftButton.get())
     {
-        //[UserButtonCode_deviceButton5] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton5]
+        //[UserButtonCode_shiftButton] -- add your button handler code here..
+        //[/UserButtonCode_shiftButton]
     }
-    else if (buttonThatWasClicked == mixButton5.get())
+    else if (buttonThatWasClicked == selectButton.get())
     {
-        //[UserButtonCode_mixButton5] -- add your button handler code here..
-        //[/UserButtonCode_mixButton5]
+        //[UserButtonCode_selectButton] -- add your button handler code here..
+        //[/UserButtonCode_selectButton]
     }
     else if (buttonThatWasClicked == muteButton.get())
     {
@@ -1406,45 +1422,45 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_masterButton] -- add your button handler code here..
         //[/UserButtonCode_masterButton]
     }
-    else if (buttonThatWasClicked == browseButton2.get())
+    else if (buttonThatWasClicked == _1_32tButton.get())
     {
-        //[UserButtonCode_browseButton2] -- add your button handler code here..
-        //[/UserButtonCode_browseButton2]
+        //[UserButtonCode__1_32tButton] -- add your button handler code here..
+        //[/UserButtonCode__1_32tButton]
     }
-    else if (buttonThatWasClicked == browseButton3.get())
+    else if (buttonThatWasClicked == _1_32Button.get())
     {
-        //[UserButtonCode_browseButton3] -- add your button handler code here..
-        //[/UserButtonCode_browseButton3]
+        //[UserButtonCode__1_32Button] -- add your button handler code here..
+        //[/UserButtonCode__1_32Button]
     }
-    else if (buttonThatWasClicked == browseButton4.get())
+    else if (buttonThatWasClicked == _1_16tButton.get())
     {
-        //[UserButtonCode_browseButton4] -- add your button handler code here..
-        //[/UserButtonCode_browseButton4]
+        //[UserButtonCode__1_16tButton] -- add your button handler code here..
+        //[/UserButtonCode__1_16tButton]
     }
-    else if (buttonThatWasClicked == browseButton5.get())
+    else if (buttonThatWasClicked == _1_16Button.get())
     {
-        //[UserButtonCode_browseButton5] -- add your button handler code here..
-        //[/UserButtonCode_browseButton5]
+        //[UserButtonCode__1_16Button] -- add your button handler code here..
+        //[/UserButtonCode__1_16Button]
     }
-    else if (buttonThatWasClicked == browseButton6.get())
+    else if (buttonThatWasClicked == _1_8tButton.get())
     {
-        //[UserButtonCode_browseButton6] -- add your button handler code here..
-        //[/UserButtonCode_browseButton6]
+        //[UserButtonCode__1_8tButton] -- add your button handler code here..
+        //[/UserButtonCode__1_8tButton]
     }
-    else if (buttonThatWasClicked == browseButton7.get())
+    else if (buttonThatWasClicked == _1_8Button.get())
     {
-        //[UserButtonCode_browseButton7] -- add your button handler code here..
-        //[/UserButtonCode_browseButton7]
+        //[UserButtonCode__1_8Button] -- add your button handler code here..
+        //[/UserButtonCode__1_8Button]
     }
-    else if (buttonThatWasClicked == browseButton8.get())
+    else if (buttonThatWasClicked == _1_4tButton.get())
     {
-        //[UserButtonCode_browseButton8] -- add your button handler code here..
-        //[/UserButtonCode_browseButton8]
+        //[UserButtonCode__1_4tButton] -- add your button handler code here..
+        //[/UserButtonCode__1_4tButton]
     }
-    else if (buttonThatWasClicked == browseButton9.get())
+    else if (buttonThatWasClicked == _1_4Button.get())
     {
-        //[UserButtonCode_browseButton9] -- add your button handler code here..
-        //[/UserButtonCode_browseButton9]
+        //[UserButtonCode__1_4Button] -- add your button handler code here..
+        //[/UserButtonCode__1_4Button]
     }
     else if (buttonThatWasClicked == arrowUpButton.get())
     {
@@ -1466,25 +1482,25 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_downArrowButton] -- add your button handler code here..
         //[/UserButtonCode_downArrowButton]
     }
-    else if (buttonThatWasClicked == deviceButton14.get())
+    else if (buttonThatWasClicked == octaveUpButton.get())
     {
-        //[UserButtonCode_deviceButton14] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton14]
+        //[UserButtonCode_octaveUpButton] -- add your button handler code here..
+        //[/UserButtonCode_octaveUpButton]
     }
-    else if (buttonThatWasClicked == deviceButton15.get())
+    else if (buttonThatWasClicked == pageRightButton.get())
     {
-        //[UserButtonCode_deviceButton15] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton15]
+        //[UserButtonCode_pageRightButton] -- add your button handler code here..
+        //[/UserButtonCode_pageRightButton]
     }
-    else if (buttonThatWasClicked == deviceButton16.get())
+    else if (buttonThatWasClicked == pageLeftButton.get())
     {
-        //[UserButtonCode_deviceButton16] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton16]
+        //[UserButtonCode_pageLeftButton] -- add your button handler code here..
+        //[/UserButtonCode_pageLeftButton]
     }
-    else if (buttonThatWasClicked == deviceButton17.get())
+    else if (buttonThatWasClicked == octaveDownButton.get())
     {
-        //[UserButtonCode_deviceButton17] -- add your button handler code here..
-        //[/UserButtonCode_deviceButton17]
+        //[UserButtonCode_octaveDownButton] -- add your button handler code here..
+        //[/UserButtonCode_octaveDownButton]
     }
     else if (buttonThatWasClicked == nn92Pad.get())
     {
@@ -1821,60 +1837,60 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_touchstripSider] -- add your slider handling code here..
         //[/UserSliderCode_touchstripSider]
     }
-    else if (sliderThatWasMoved == cc14Slider.get())
+    else if (sliderThatWasMoved == tempoSlider.get())
     {
-        //[UserSliderCode_cc14Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc14Slider]
+        //[UserSliderCode_tempoSlider] -- add your slider handling code here..
+        //[/UserSliderCode_tempoSlider]
     }
-    else if (sliderThatWasMoved == cc15Slider.get())
+    else if (sliderThatWasMoved == swingSlider.get())
     {
-        //[UserSliderCode_cc15Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc15Slider]
+        //[UserSliderCode_swingSlider] -- add your slider handling code here..
+        //[/UserSliderCode_swingSlider]
     }
-    else if (sliderThatWasMoved == cc71Slider.get())
+    else if (sliderThatWasMoved == e1Slider.get())
     {
-        //[UserSliderCode_cc71Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc71Slider]
+        //[UserSliderCode_e1Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e1Slider]
     }
-    else if (sliderThatWasMoved == cc72Slider.get())
+    else if (sliderThatWasMoved == e2Slider.get())
     {
-        //[UserSliderCode_cc72Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc72Slider]
+        //[UserSliderCode_e2Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e2Slider]
     }
-    else if (sliderThatWasMoved == cc73Slider.get())
+    else if (sliderThatWasMoved == e3Slider.get())
     {
-        //[UserSliderCode_cc73Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc73Slider]
+        //[UserSliderCode_e3Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e3Slider]
     }
-    else if (sliderThatWasMoved == cc74Slider.get())
+    else if (sliderThatWasMoved == e4Slider.get())
     {
-        //[UserSliderCode_cc74Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc74Slider]
+        //[UserSliderCode_e4Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e4Slider]
     }
-    else if (sliderThatWasMoved == cc75Slider.get())
+    else if (sliderThatWasMoved == e5Slider.get())
     {
-        //[UserSliderCode_cc75Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc75Slider]
+        //[UserSliderCode_e5Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e5Slider]
     }
-    else if (sliderThatWasMoved == cc76Slider.get())
+    else if (sliderThatWasMoved == e6Slider.get())
     {
-        //[UserSliderCode_cc76Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc76Slider]
+        //[UserSliderCode_e6Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e6Slider]
     }
-    else if (sliderThatWasMoved == cc77Slider.get())
+    else if (sliderThatWasMoved == e7Slider.get())
     {
-        //[UserSliderCode_cc77Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc77Slider]
+        //[UserSliderCode_e7Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e7Slider]
     }
-    else if (sliderThatWasMoved == cc78Slider.get())
+    else if (sliderThatWasMoved == e8Slider.get())
     {
-        //[UserSliderCode_cc78Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc78Slider]
+        //[UserSliderCode_e8Slider] -- add your slider handling code here..
+        //[/UserSliderCode_e8Slider]
     }
-    else if (sliderThatWasMoved == cc79Slider.get())
+    else if (sliderThatWasMoved == masterSlider.get())
     {
-        //[UserSliderCode_cc79Slider] -- add your slider handling code here..
-        //[/UserSliderCode_cc79Slider]
+        //[UserSliderCode_masterSlider] -- add your slider handling code here..
+        //[/UserSliderCode_masterSlider]
     }
 
     //[UsersliderValueChanged_Post]
@@ -1913,113 +1929,113 @@ BEGIN_JUCER_METADATA
                  parentClasses="public Component, public ActionListener" constructorParams=""
                  variableInitialisers="" snapPixels="8" snapActive="0" snapShown="0"
                  overlayOpacity="0.330" fixedSize="1" initialWidth="900" initialHeight="726">
-  <BACKGROUND backgroundColour="ff323e44"/>
+  <BACKGROUND backgroundColour="ff151515"/>
   <TEXTBUTTON name="tapTempo" id="8d928e8228cdad4f" memberName="tapTempoButton"
               virtualName="" explicitFocusOrder="0" pos="8 64 64 24" buttonText="Tap Tempo"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="metronome" id="cb393501935f29c2" memberName="metronomeButton"
               virtualName="" explicitFocusOrder="0" pos="72 64 64 24" buttonText="Metro"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc102" id="99b981958a6ca6a6" memberName="cc102Button" virtualName=""
-              explicitFocusOrder="0" pos="160 64 64 24" buttonText="cc102"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc103" id="1ae0bf5b95445584" memberName="cc103Button" virtualName=""
-              explicitFocusOrder="0" pos="229 64 64 24" buttonText="cc103"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc104" id="e7d67014d507f88e" memberName="cc104Button" virtualName=""
-              explicitFocusOrder="0" pos="300 64 64 24" buttonText="cc104"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc105" id="7890b6bc317a9b92" memberName="cc105Button" virtualName=""
-              explicitFocusOrder="0" pos="368 64 64 24" buttonText="cc105"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc107" id="c7aee98929cf099c" memberName="cc107Button" virtualName=""
-              explicitFocusOrder="0" pos="508 64 64 24" buttonText="cc107"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc108" id="6931c9631a8e2092" memberName="cc108Button" virtualName=""
-              explicitFocusOrder="0" pos="578 64 64 24" buttonText="cc108"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc109" id="bdf5618c765a9b46" memberName="cc109Button" virtualName=""
-              explicitFocusOrder="0" pos="646 64 64 24" buttonText="cc109"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc20" id="d9ae1e29d035eb37" memberName="cc20Button" virtualName=""
-              explicitFocusOrder="0" pos="160 240 64 24" buttonText="cc20"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc21" id="fe69bebdeed763ee" memberName="cc21Button" virtualName=""
-              explicitFocusOrder="0" pos="229 240 64 24" buttonText="cc21"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc22" id="5b2ab4ae1bec3b37" memberName="cc22Button" virtualName=""
-              explicitFocusOrder="0" pos="300 240 64 24" buttonText="cc22"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc23" id="7cfffa58fe18a6b1" memberName="cc23Button" virtualName=""
-              explicitFocusOrder="0" pos="368 240 64 24" buttonText="cc23"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc24" id="699886abd9d3c76c" memberName="cc24Button" virtualName=""
-              explicitFocusOrder="0" pos="438 240 64 24" buttonText="cc24"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc25" id="ea173c8687ab3f2f" memberName="cc25Button" virtualName=""
-              explicitFocusOrder="0" pos="508 240 64 24" buttonText="cc25"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc26" id="3ae5871a086c2247" memberName="cc26Button" virtualName=""
-              explicitFocusOrder="0" pos="578 240 64 24" buttonText="cc26"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="cc27" id="239d72a3d95c3787" memberName="cc27Button" virtualName=""
-              explicitFocusOrder="0" pos="646 240 64 24" buttonText="cc27"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba1" id="99b981958a6ca6a6" memberName="ba1Button" virtualName=""
+              explicitFocusOrder="0" pos="160 64 64 24" buttonText="BA1" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba2" id="1ae0bf5b95445584" memberName="ba2Button" virtualName=""
+              explicitFocusOrder="0" pos="229 64 64 24" buttonText="BA2" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba3" id="e7d67014d507f88e" memberName="ba3Button" virtualName=""
+              explicitFocusOrder="0" pos="300 64 64 24" buttonText="BA3" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba4" id="7890b6bc317a9b92" memberName="ba4Button" virtualName=""
+              explicitFocusOrder="0" pos="368 64 64 24" buttonText="BA4" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba5" id="c90fcbe5aaa74c2d" memberName="ba5Button" virtualName=""
+              explicitFocusOrder="0" pos="438 64 64 24" buttonText="BA5" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba6" id="c7aee98929cf099c" memberName="ba6Button" virtualName=""
+              explicitFocusOrder="0" pos="508 64 64 24" buttonText="BA6" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba7" id="6931c9631a8e2092" memberName="ba7Button" virtualName=""
+              explicitFocusOrder="0" pos="578 64 64 24" buttonText="BA7" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="ba8" id="bdf5618c765a9b46" memberName="ba8Button" virtualName=""
+              explicitFocusOrder="0" pos="646 64 64 24" buttonText="BA8" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb1" id="d9ae1e29d035eb37" memberName="bb1Button" virtualName=""
+              explicitFocusOrder="0" pos="160 240 64 24" buttonText="BB1" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb2" id="fe69bebdeed763ee" memberName="bb2Button" virtualName=""
+              explicitFocusOrder="0" pos="229 240 64 24" buttonText="BB2" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb3" id="5b2ab4ae1bec3b37" memberName="bb3Button" virtualName=""
+              explicitFocusOrder="0" pos="300 240 64 24" buttonText="BB3" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb4" id="7cfffa58fe18a6b1" memberName="bb4Button" virtualName=""
+              explicitFocusOrder="0" pos="368 240 64 24" buttonText="BB4" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb5" id="699886abd9d3c76c" memberName="bb5Button" virtualName=""
+              explicitFocusOrder="0" pos="438 240 64 24" buttonText="BB5" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb6" id="ea173c8687ab3f2f" memberName="bb6Button" virtualName=""
+              explicitFocusOrder="0" pos="508 240 64 24" buttonText="BB6" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb7" id="3ae5871a086c2247" memberName="bb7Button" virtualName=""
+              explicitFocusOrder="0" pos="578 240 64 24" buttonText="BB7" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="bb8" id="239d72a3d95c3787" memberName="bb8Button" virtualName=""
+              explicitFocusOrder="0" pos="646 240 64 24" buttonText="BB8" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
   <SLIDER name="touchstrip" id="7e43d7dbbcef260d" memberName="touchstripSider"
           virtualName="" explicitFocusOrder="0" pos="80 288 48 416" min="0.0"
           max="10.0" int="0.0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
-  <SLIDER name="cc14" id="886a64d93c0987ac" memberName="cc14Slider" virtualName=""
+  <SLIDER name="tempo" id="886a64d93c0987ac" memberName="tempoSlider" virtualName=""
           explicitFocusOrder="0" pos="0 0 72 56" min="0.0" max="10.0" int="0.0"
           style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc15" id="79540299f4b2987f" memberName="cc15Slider" virtualName=""
+  <SLIDER name="swing" id="79540299f4b2987f" memberName="swingSlider" virtualName=""
           explicitFocusOrder="0" pos="72 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc71" id="89b2350bdf808a9" memberName="cc71Slider" virtualName=""
+  <SLIDER name="e1" id="89b2350bdf808a9" memberName="e1Slider" virtualName=""
           explicitFocusOrder="0" pos="154 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc72" id="7cacf6d8b1f57e42" memberName="cc72Slider" virtualName=""
+  <SLIDER name="e2" id="7cacf6d8b1f57e42" memberName="e2Slider" virtualName=""
           explicitFocusOrder="0" pos="224 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc73" id="4585070a8a7cd9d7" memberName="cc73Slider" virtualName=""
+  <SLIDER name="e3" id="4585070a8a7cd9d7" memberName="e3Slider" virtualName=""
           explicitFocusOrder="0" pos="294 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc74" id="f23033f7978a5f13" memberName="cc74Slider" virtualName=""
+  <SLIDER name="e4" id="f23033f7978a5f13" memberName="e4Slider" virtualName=""
           explicitFocusOrder="0" pos="364 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc75" id="beb0c374adbf8190" memberName="cc75Slider" virtualName=""
+  <SLIDER name="e5" id="beb0c374adbf8190" memberName="e5Slider" virtualName=""
           explicitFocusOrder="0" pos="434 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc76" id="fa0ee44534ba4337" memberName="cc76Slider" virtualName=""
+  <SLIDER name="e6" id="fa0ee44534ba4337" memberName="e6Slider" virtualName=""
           explicitFocusOrder="0" pos="504 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc77" id="234d7913d6c2ec90" memberName="cc77Slider" virtualName=""
+  <SLIDER name="e7" id="234d7913d6c2ec90" memberName="e7Slider" virtualName=""
           explicitFocusOrder="0" pos="574 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc78" id="eca66cd1e01fe58b" memberName="cc78Slider" virtualName=""
+  <SLIDER name="e8" id="eca66cd1e01fe58b" memberName="e8Slider" virtualName=""
           explicitFocusOrder="0" pos="644 0 72 56" min="0.0" max="10.0"
           int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <SLIDER name="cc79" id="235dfab35660f24e" memberName="cc79Slider" virtualName=""
-          explicitFocusOrder="0" pos="804 0 72 56" min="0.0" max="10.0"
-          int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
+  <SLIDER name="master" id="235dfab35660f24e" memberName="masterSlider"
+          virtualName="" explicitFocusOrder="0" pos="804 0 72 56" min="0.0"
+          max="10.0" int="0.0" style="Rotary" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <GENERICCOMPONENT name="display" id="40edd835fcbd5156" memberName="displayPlaceholder"
                     virtualName="" explicitFocusOrder="0" pos="156 114 555 98" class="Component"
                     params=""/>
-  <TEXTBUTTON name="cc106" id="c90fcbe5aaa74c2d" memberName="cc106Button" virtualName=""
-              explicitFocusOrder="0" pos="438 64 64 24" buttonText="cc106"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="setup" id="529a328d8fa439ec" memberName="setupButton" virtualName=""
               explicitFocusOrder="0" pos="792 64 48 24" buttonText="Setup"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
@@ -2050,30 +2066,30 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="undo" id="779cba6da0a2f4f5" memberName="undoButton" virtualName=""
               explicitFocusOrder="0" pos="8 164 45 45" buttonText="Undo" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="931b07232ade58b4" memberName="deviceButton2"
-              virtualName="" explicitFocusOrder="0" pos="796 446 45 45" buttonText="Device"
+  <TEXTBUTTON name="repeat" id="931b07232ade58b4" memberName="repeatButton"
+              virtualName="" explicitFocusOrder="0" pos="796 446 45 45" buttonText="Repeat"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="mix" id="8f30ff7172bc9620" memberName="mixButton2" virtualName=""
-              explicitFocusOrder="0" pos="843 446 45 45" buttonText="Mix" connectedEdges="0"
-              needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="d0aee787df1872b2" memberName="deviceButton3"
-              virtualName="" explicitFocusOrder="0" pos="796 525 45 45" buttonText="Device"
+  <TEXTBUTTON name="accent" id="8f30ff7172bc9620" memberName="accentButton"
+              virtualName="" explicitFocusOrder="0" pos="843 446 45 45" buttonText="Accent"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="mix" id="b29b3c8b909083b6" memberName="mixButton3" virtualName=""
-              explicitFocusOrder="0" pos="843 525 45 45" buttonText="Mix" connectedEdges="0"
-              needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="e0c4167095bd34f4" memberName="deviceButton4"
-              virtualName="" explicitFocusOrder="0" pos="796 496 45 27" buttonText="Device"
+  <TEXTBUTTON name="note" id="d0aee787df1872b2" memberName="noteButton" virtualName=""
+              explicitFocusOrder="0" pos="796 525 45 45" buttonText="Note"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="mix" id="85b54043c509ac07" memberName="mixButton4" virtualName=""
-              explicitFocusOrder="0" pos="843 496 45 27" buttonText="Mix" connectedEdges="0"
-              needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="d2996cb07acef212" memberName="deviceButton5"
-              virtualName="" explicitFocusOrder="0" pos="796 677 45 27" buttonText="Device"
+  <TEXTBUTTON name="session" id="b29b3c8b909083b6" memberName="sesstionButton"
+              virtualName="" explicitFocusOrder="0" pos="843 525 45 45" buttonText="Session"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="mix" id="511be2f2d5cd0a5e" memberName="mixButton5" virtualName=""
-              explicitFocusOrder="0" pos="843 677 45 27" buttonText="Mix" connectedEdges="0"
-              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="scale" id="e0c4167095bd34f4" memberName="scaleButton" virtualName=""
+              explicitFocusOrder="0" pos="796 496 45 27" buttonText="Scale"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="layout" id="85b54043c509ac07" memberName="layoutButton"
+              virtualName="" explicitFocusOrder="0" pos="843 496 45 27" buttonText="Layout"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="shift" id="d2996cb07acef212" memberName="shiftButton" virtualName=""
+              explicitFocusOrder="0" pos="796 677 45 27" buttonText="Shift"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="select" id="511be2f2d5cd0a5e" memberName="selectButton"
+              virtualName="" explicitFocusOrder="0" pos="843 677 45 27" buttonText="Select"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="mute" id="cb54c758432ec715" memberName="muteButton" virtualName=""
               explicitFocusOrder="0" pos="8 240 42 27" buttonText="Mute" connectedEdges="0"
               needsCallback="1" radioGroupId="0"/>
@@ -2113,30 +2129,30 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="master" id="10e3054efb51d3a" memberName="masterButton"
               virtualName="" explicitFocusOrder="0" pos="736 240 45 27" buttonText="Master"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="631420ccc9ebc5dc" memberName="browseButton2"
-              virtualName="" explicitFocusOrder="0" pos="736 286 45 45" buttonText="Browse"
+  <TEXTBUTTON name="1_32t" id="631420ccc9ebc5dc" memberName="_1_32tButton"
+              virtualName="" explicitFocusOrder="0" pos="736 286 45 45" buttonText="1/32t"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="a609abb426209092" memberName="browseButton3"
-              virtualName="" explicitFocusOrder="0" pos="736 338 45 45" buttonText="Browse"
+  <TEXTBUTTON name="1_32" id="a609abb426209092" memberName="_1_32Button" virtualName=""
+              explicitFocusOrder="0" pos="736 338 45 45" buttonText="1/32"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="1d8c71941a15e2a4" memberName="browseButton4"
-              virtualName="" explicitFocusOrder="0" pos="736 393 45 45" buttonText="Browse"
+  <TEXTBUTTON name="1_16t" id="1d8c71941a15e2a4" memberName="_1_16tButton"
+              virtualName="" explicitFocusOrder="0" pos="736 393 45 45" buttonText="1/16t"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="ad8551a61beac128" memberName="browseButton5"
-              virtualName="" explicitFocusOrder="0" pos="736 445 45 45" buttonText="Browse"
+  <TEXTBUTTON name="1_16" id="ad8551a61beac128" memberName="_1_16Button" virtualName=""
+              explicitFocusOrder="0" pos="736 445 45 45" buttonText="1/16"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="c03d60c5ce29e9e9" memberName="browseButton6"
-              virtualName="" explicitFocusOrder="0" pos="736 498 45 45" buttonText="Browse"
+  <TEXTBUTTON name="1_8t" id="c03d60c5ce29e9e9" memberName="_1_8tButton" virtualName=""
+              explicitFocusOrder="0" pos="736 498 45 45" buttonText="1/8t"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="d20ae4d5fa8d1625" memberName="browseButton7"
-              virtualName="" explicitFocusOrder="0" pos="736 551 45 45" buttonText="Browse"
+  <TEXTBUTTON name="1_8" id="d20ae4d5fa8d1625" memberName="_1_8Button" virtualName=""
+              explicitFocusOrder="0" pos="736 551 45 45" buttonText="1/8" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="1_4t" id="65551547090ead8a" memberName="_1_4tButton" virtualName=""
+              explicitFocusOrder="0" pos="736 605 45 45" buttonText="1/4t"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="65551547090ead8a" memberName="browseButton8"
-              virtualName="" explicitFocusOrder="0" pos="736 605 45 45" buttonText="Browse"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="browse" id="8266fc8a2e09dc70" memberName="browseButton9"
-              virtualName="" explicitFocusOrder="0" pos="736 657 45 45" buttonText="Browse"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <TEXTBUTTON name="1_4" id="8266fc8a2e09dc70" memberName="_1_4Button" virtualName=""
+              explicitFocusOrder="0" pos="736 657 45 45" buttonText="1/4" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="arrowUp" id="824cd281cec4669b" memberName="arrowUpButton"
               virtualName="" explicitFocusOrder="0" pos="828 239 28 28" buttonText="&#8593;"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
@@ -2149,17 +2165,17 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="downArrow" id="b7386b4a4523e5df" memberName="downArrowButton"
               virtualName="" explicitFocusOrder="0" pos="828 303 28 28" buttonText="&#8595;"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="b1fd2108d3a25e62" memberName="deviceButton14"
-              virtualName="" explicitFocusOrder="0" pos="828 577 28 28" buttonText="Device"
+  <TEXTBUTTON name="octaveUp" id="b1fd2108d3a25e62" memberName="octaveUpButton"
+              virtualName="" explicitFocusOrder="0" pos="828 577 28 28" buttonText="o &#8593;"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="70f06277372dbee8" memberName="deviceButton15"
-              virtualName="" explicitFocusOrder="0" pos="860 609 28 28" buttonText="Device"
+  <TEXTBUTTON name="pageRight" id="70f06277372dbee8" memberName="pageRightButton"
+              virtualName="" explicitFocusOrder="0" pos="860 609 28 28" buttonText="p &#8594;"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="98ce20aa5ea31bf1" memberName="deviceButton16"
-              virtualName="" explicitFocusOrder="0" pos="796 609 28 28" buttonText="Device"
+  <TEXTBUTTON name="pageLeft" id="98ce20aa5ea31bf1" memberName="pageLeftButton"
+              virtualName="" explicitFocusOrder="0" pos="796 609 28 28" buttonText="p &#8592;"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="device" id="b94d6bcd62c3b141" memberName="deviceButton17"
-              virtualName="" explicitFocusOrder="0" pos="828 641 28 28" buttonText="Device"
+  <TEXTBUTTON name="octaveDown" id="b94d6bcd62c3b141" memberName="octaveDownButton"
+              virtualName="" explicitFocusOrder="0" pos="828 641 28 28" buttonText="o &#8595;"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TEXTBUTTON name="nn92" id="e66ab4b251afbf2c" memberName="nn92Pad" virtualName=""
               explicitFocusOrder="0" pos="160 286 62 44" buttonText="nn92"
