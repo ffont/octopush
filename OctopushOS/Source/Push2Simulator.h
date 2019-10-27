@@ -60,6 +60,17 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     Push2Interface* push;
+    double tempoSliderLastValue = 0.0;
+    double swingSliderLastValue = 0.0;
+    double e1SliderLastValue = 0.0;
+    double e2SliderLastValue = 0.0;
+    double e3SliderLastValue = 0.0;
+    double e4SliderLastValue = 0.0;
+    double e5SliderLastValue = 0.0;
+    double e6SliderLastValue = 0.0;
+    double e7SliderLastValue = 0.0;
+    double e8SliderLastValue = 0.0;
+    double masterSliderLastValue = 0.0;
     //[/UserVariables]
 
     //==============================================================================

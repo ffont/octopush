@@ -65,7 +65,7 @@ void Push2Interface::initialize(Engine* engine_)
     elapsedTimeAnimation = 0;
     
     // Start the timer to draw the animation
-    startTimerHz(60);
+    startTimerHz(PUSH_DISPLAY_FRAME_RATE);
 }
 
 
@@ -138,12 +138,14 @@ void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const Mid
     if (message.isController())
     {
         int ccValue = message.getControllerValue();
-        if (ccValue == 127){
-            frameWaveHeightMultiplier -= 0.02;
-        } else {
-            frameWaveHeightMultiplier += 0.02;
+        int ccNumber = message.getControllerNumber();
+        if (ccNumber == ENCODER_E1_CC_NUMBER){
+            if (ccValue == 127){
+                e1Rotated(1);
+            } else {
+                e1Rotated(-1);
+            }
         }
-        frameWaveHeightMultiplier = jlimit(0.0, 1.0, (double)frameWaveHeightMultiplier);
     }
 }
 
@@ -227,4 +229,13 @@ void Push2Interface::drawFrame()
 void Push2Interface::actionListenerCallback (const String &message)
 {
     
+}
+
+
+//------------------------------------------------------------------------------
+
+void Push2Interface::e1Rotated(int increment){
+    
+    frameWaveHeightMultiplier += 0.02 * increment;
+    frameWaveHeightMultiplier = jlimit(0.0, 1.0, (double)frameWaveHeightMultiplier);
 }

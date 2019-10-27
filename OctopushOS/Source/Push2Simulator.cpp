@@ -992,8 +992,20 @@ Push2Simulator::Push2Simulator ()
 
     setSize (900, 726);
 
-
+    
     //[Constructor] You can add your own custom stuff here..
+    // Make rotary sliders endles
+    tempoSlider->setRotaryParameters(0, float_Pi * 2, false);
+    swingSlider->setRotaryParameters(0, float_Pi * 2, false);
+    e1Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e2Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e3Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e4Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e5Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e6Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e7Slider->setRotaryParameters(0, float_Pi * 2, false);
+    e8Slider->setRotaryParameters(0, float_Pi * 2, false);
+    masterSlider->setRotaryParameters(0, float_Pi * 2, false);
     //[/Constructor]
 }
 
@@ -1840,56 +1852,134 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == tempoSlider.get())
     {
         //[UserSliderCode_tempoSlider] -- add your slider handling code here..
+        double currentValue = tempoSlider.get()->getValue();
+        if (currentValue > tempoSliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        tempoSliderLastValue = currentValue;
         //[/UserSliderCode_tempoSlider]
     }
     else if (sliderThatWasMoved == swingSlider.get())
     {
         //[UserSliderCode_swingSlider] -- add your slider handling code here..
+        double currentValue = swingSlider.get()->getValue();
+        if (currentValue > swingSliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        swingSliderLastValue = currentValue;
         //[/UserSliderCode_swingSlider]
     }
     else if (sliderThatWasMoved == e1Slider.get())
     {
         //[UserSliderCode_e1Slider] -- add your slider handling code here..
+        
+        double currentValue = e1Slider.get()->getValue();
+        if (currentValue > e1SliderLastValue){
+            push->e1Rotated(1);
+        } else {
+            push->e1Rotated(-1);
+        }
+        e1SliderLastValue = currentValue;
         //[/UserSliderCode_e1Slider]
     }
     else if (sliderThatWasMoved == e2Slider.get())
     {
         //[UserSliderCode_e2Slider] -- add your slider handling code here..
+        double currentValue = e2Slider.get()->getValue();
+        if (currentValue > e2SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e2SliderLastValue = currentValue;
         //[/UserSliderCode_e2Slider]
     }
     else if (sliderThatWasMoved == e3Slider.get())
     {
         //[UserSliderCode_e3Slider] -- add your slider handling code here..
+        double currentValue = e3Slider.get()->getValue();
+        if (currentValue > e3SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e3SliderLastValue = currentValue;
         //[/UserSliderCode_e3Slider]
     }
     else if (sliderThatWasMoved == e4Slider.get())
     {
         //[UserSliderCode_e4Slider] -- add your slider handling code here..
+        double currentValue = e4Slider.get()->getValue();
+        if (currentValue > e4SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e4SliderLastValue = currentValue;
         //[/UserSliderCode_e4Slider]
     }
     else if (sliderThatWasMoved == e5Slider.get())
     {
         //[UserSliderCode_e5Slider] -- add your slider handling code here..
+        double currentValue = e5Slider.get()->getValue();
+        if (currentValue > e5SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e5SliderLastValue = currentValue;
         //[/UserSliderCode_e5Slider]
     }
     else if (sliderThatWasMoved == e6Slider.get())
     {
         //[UserSliderCode_e6Slider] -- add your slider handling code here..
+        double currentValue = e6Slider.get()->getValue();
+        if (currentValue > e6SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e6SliderLastValue = currentValue;
         //[/UserSliderCode_e6Slider]
     }
     else if (sliderThatWasMoved == e7Slider.get())
     {
         //[UserSliderCode_e7Slider] -- add your slider handling code here..
+        double currentValue = e7Slider.get()->getValue();
+        if (currentValue > e7SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e7SliderLastValue = currentValue;
         //[/UserSliderCode_e7Slider]
     }
     else if (sliderThatWasMoved == e8Slider.get())
     {
         //[UserSliderCode_e8Slider] -- add your slider handling code here..
+        double currentValue = e8Slider.get()->getValue();
+        if (currentValue > e8SliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        e8SliderLastValue = currentValue;
         //[/UserSliderCode_e8Slider]
     }
     else if (sliderThatWasMoved == masterSlider.get())
     {
         //[UserSliderCode_masterSlider] -- add your slider handling code here..
+        double currentValue = masterSlider.get()->getValue();
+        if (currentValue > masterSliderLastValue){
+            // Send +1 increment
+        } else {
+            // Send -1 decrement
+        }
+        masterSliderLastValue = currentValue;
         //[/UserSliderCode_masterSlider]
     }
 

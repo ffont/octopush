@@ -13,6 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "push2/JuceToPush2DisplayBridge.h"
 #include "Engine.h"
+#include "definitions.h"
 
 
 class Push2Interface: public Timer,
@@ -32,6 +33,10 @@ public:
     
     Image computeFrame();
     Image lastFrame;
+    
+    // Encoder action handlers (definitions should be moved to some other class)
+    void e1Rotated(int increment);
+    
     
 private:
     

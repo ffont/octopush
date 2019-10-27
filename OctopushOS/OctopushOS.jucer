@@ -10,6 +10,7 @@
         <FILE id="kWeL4Q" name="tracktion_engine.h" compile="0" resource="0"
               file="Source/helpers/tracktion_engine.h"/>
       </GROUP>
+      <FILE id="IrR2Ws" name="definitions.h" compile="0" resource="0" file="Source/definitions.h"/>
       <FILE id="LValSM" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="o0XklV" name="Engine.h" compile="0" resource="0" file="Source/Engine.h"/>
       <FILE id="aMMNSB" name="Engine.cpp" compile="1" resource="0" file="Source/Engine.cpp"/>
