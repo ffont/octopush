@@ -1209,76 +1209,91 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == ba2Button.get())
     {
         //[UserButtonCode_ba2Button] -- add your button handler code here..
+        push->ba2Pressed();
         //[/UserButtonCode_ba2Button]
     }
     else if (buttonThatWasClicked == ba3Button.get())
     {
         //[UserButtonCode_ba3Button] -- add your button handler code here..
+        push->ba3Pressed();
         //[/UserButtonCode_ba3Button]
     }
     else if (buttonThatWasClicked == ba4Button.get())
     {
         //[UserButtonCode_ba4Button] -- add your button handler code here..
+        push->ba4Pressed();
         //[/UserButtonCode_ba4Button]
     }
     else if (buttonThatWasClicked == ba5Button.get())
     {
         //[UserButtonCode_ba5Button] -- add your button handler code here..
+        push->ba5Pressed();
         //[/UserButtonCode_ba5Button]
     }
     else if (buttonThatWasClicked == ba6Button.get())
     {
         //[UserButtonCode_ba6Button] -- add your button handler code here..
+        push->ba6Pressed();
         //[/UserButtonCode_ba6Button]
     }
     else if (buttonThatWasClicked == ba7Button.get())
     {
         //[UserButtonCode_ba7Button] -- add your button handler code here..
+        push->ba7Pressed();
         //[/UserButtonCode_ba7Button]
     }
     else if (buttonThatWasClicked == ba8Button.get())
     {
         //[UserButtonCode_ba8Button] -- add your button handler code here..
+        push->ba8Pressed();
         //[/UserButtonCode_ba8Button]
     }
     else if (buttonThatWasClicked == bb1Button.get())
     {
         //[UserButtonCode_bb1Button] -- add your button handler code here..
+        push->bb1Pressed();
         //[/UserButtonCode_bb1Button]
     }
     else if (buttonThatWasClicked == bb2Button.get())
     {
         //[UserButtonCode_bb2Button] -- add your button handler code here..
+        push->bb2Pressed();
         //[/UserButtonCode_bb2Button]
     }
     else if (buttonThatWasClicked == bb3Button.get())
     {
         //[UserButtonCode_bb3Button] -- add your button handler code here..
+        push->bb3Pressed();
         //[/UserButtonCode_bb3Button]
     }
     else if (buttonThatWasClicked == bb4Button.get())
     {
         //[UserButtonCode_bb4Button] -- add your button handler code here..
+        push->bb4Pressed();
         //[/UserButtonCode_bb4Button]
     }
     else if (buttonThatWasClicked == bb5Button.get())
     {
         //[UserButtonCode_bb5Button] -- add your button handler code here..
+        push->bb5Pressed();
         //[/UserButtonCode_bb5Button]
     }
     else if (buttonThatWasClicked == bb6Button.get())
     {
         //[UserButtonCode_bb6Button] -- add your button handler code here..
+        push->bb6Pressed();
         //[/UserButtonCode_bb6Button]
     }
     else if (buttonThatWasClicked == bb7Button.get())
     {
         //[UserButtonCode_bb7Button] -- add your button handler code here..
+        push->bb7Pressed();
         //[/UserButtonCode_bb7Button]
     }
     else if (buttonThatWasClicked == bb8Button.get())
     {
         //[UserButtonCode_bb8Button] -- add your button handler code here..
+        push->bb8Pressed();
         //[/UserButtonCode_bb8Button]
     }
     else if (buttonThatWasClicked == setupButton.get())
@@ -1856,9 +1871,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_tempoSlider] -- add your slider handling code here..
         double currentValue = tempoSlider.get()->getValue();
         if (currentValue > tempoSliderLastValue){
-            // Send +1 increment
+            push->tempoEncoderRotated(1);  // Send +1 increment
         } else {
-            // Send -1 decrement
+            push->tempoEncoderRotated(-1);  // Send -1 decrement
         }
         tempoSliderLastValue = currentValue;
         //[/UserSliderCode_tempoSlider]
@@ -1868,9 +1883,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_swingSlider] -- add your slider handling code here..
         double currentValue = swingSlider.get()->getValue();
         if (currentValue > swingSliderLastValue){
-            // Send +1 increment
+            push->swingEncoderRotated(1);  // Send +1 increment
         } else {
-            // Send -1 decrement
+            push->swingEncoderRotated(-1);  // Send -1 decrement
         }
         swingSliderLastValue = currentValue;
         //[/UserSliderCode_swingSlider]
@@ -1893,9 +1908,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e2Slider] -- add your slider handling code here..
         double currentValue = e2Slider.get()->getValue();
         if (currentValue > e2SliderLastValue){
-            // Send +1 increment
+            push->e2Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e2Rotated(-1);
         }
         e2SliderLastValue = currentValue;
         //[/UserSliderCode_e2Slider]
@@ -1905,9 +1920,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e3Slider] -- add your slider handling code here..
         double currentValue = e3Slider.get()->getValue();
         if (currentValue > e3SliderLastValue){
-            // Send +1 increment
+            push->e3Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e3Rotated(-1);
         }
         e3SliderLastValue = currentValue;
         //[/UserSliderCode_e3Slider]
@@ -1917,9 +1932,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e4Slider] -- add your slider handling code here..
         double currentValue = e4Slider.get()->getValue();
         if (currentValue > e4SliderLastValue){
-            // Send +1 increment
+            push->e4Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e4Rotated(-1);
         }
         e4SliderLastValue = currentValue;
         //[/UserSliderCode_e4Slider]
@@ -1929,9 +1944,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e5Slider] -- add your slider handling code here..
         double currentValue = e5Slider.get()->getValue();
         if (currentValue > e5SliderLastValue){
-            // Send +1 increment
+            push->e5Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e5Rotated(-1);
         }
         e5SliderLastValue = currentValue;
         //[/UserSliderCode_e5Slider]
@@ -1941,9 +1956,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e6Slider] -- add your slider handling code here..
         double currentValue = e6Slider.get()->getValue();
         if (currentValue > e6SliderLastValue){
-            // Send +1 increment
+            push->e6Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e6Rotated(-1);
         }
         e6SliderLastValue = currentValue;
         //[/UserSliderCode_e6Slider]
@@ -1953,9 +1968,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e7Slider] -- add your slider handling code here..
         double currentValue = e7Slider.get()->getValue();
         if (currentValue > e7SliderLastValue){
-            // Send +1 increment
+            push->e7Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e7Rotated(-1);
         }
         e7SliderLastValue = currentValue;
         //[/UserSliderCode_e7Slider]
@@ -1965,9 +1980,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_e8Slider] -- add your slider handling code here..
         double currentValue = e8Slider.get()->getValue();
         if (currentValue > e8SliderLastValue){
-            // Send +1 increment
+            push->e8Rotated(1);
         } else {
-            // Send -1 decrement
+            push->e8Rotated(-1);
         }
         e8SliderLastValue = currentValue;
         //[/UserSliderCode_e8Slider]
@@ -1977,9 +1992,9 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
         //[UserSliderCode_masterSlider] -- add your slider handling code here..
         double currentValue = masterSlider.get()->getValue();
         if (currentValue > masterSliderLastValue){
-            // Send +1 increment
+            push->masterEncoderRotated(1);
         } else {
-            // Send -1 decrement
+            push->masterEncoderRotated(-1);
         }
         masterSliderLastValue = currentValue;
         //[/UserSliderCode_masterSlider]

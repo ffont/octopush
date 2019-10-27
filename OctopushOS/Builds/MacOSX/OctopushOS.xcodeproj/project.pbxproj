@@ -431,6 +431,13 @@
 			path = "../../3rdParty/juce/modules/juce_audio_processors";
 			sourceTree = "SOURCE_ROOT";
 		};
+		667809F18E56F8F9F624BBCD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = push2.h;
+			path = ../../Source/helpers/push2.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		6BE66FB53EDEE474A7032AAB = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -770,6 +777,7 @@
 		9E2FC1B819EEEEA8E64BA99B = {
 			isa = PBXGroup;
 			children = (
+				667809F18E56F8F9F624BBCD,
 				B3125850BF7C225E94BE493E,
 			);
 			name = helpers;

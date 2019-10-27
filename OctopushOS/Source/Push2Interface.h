@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "push2/JuceToPush2DisplayBridge.h"
+#include "helpers/push2.h"
 #include "Engine.h"
 #include "definitions.h"
 
@@ -19,7 +20,9 @@
 class Push2Interface: public Timer,
                       public MidiInputCallback,
                       public ActionListener,
-                      public ActionBroadcaster
+                      public ActionBroadcaster,
+                      public Push2ButtonsListener,
+                      public Push2EncodersListener
 {
 public:
     
@@ -34,7 +37,7 @@ public:
     Image computeFrame();
     Image lastFrame;
     
-    // Encoder action handlers (definitions should be moved to some other class)
+    // Encoder action handlers
     void e1Rotated(int increment);
     
     // Button action handlers

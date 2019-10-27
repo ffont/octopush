@@ -7,6 +7,7 @@
   <MAINGROUP id="SqRWVy" name="OctopushOS">
     <GROUP id="{3A6EFDD0-9705-3CE7-1080-1AA11F5E9D8B}" name="Source">
       <GROUP id="{67E0CF4F-1ED1-FB7E-1AB8-4D2AA26845B7}" name="helpers">
+        <FILE id="rYIPse" name="push2.h" compile="0" resource="0" file="Source/helpers/push2.h"/>
         <FILE id="kWeL4Q" name="tracktion_engine.h" compile="0" resource="0"
               file="Source/helpers/tracktion_engine.h"/>
       </GROUP>

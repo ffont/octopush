@@ -11,6 +11,3 @@
 #pragma once
 
 #define PUSH_DISPLAY_FRAME_RATE 60
-
-#define ENCODER_E1_CC_NUMBER 71
-#define BUTTON_A1_CC_NUMBER 102
