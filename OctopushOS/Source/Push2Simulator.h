@@ -71,6 +71,41 @@ private:
     double e7SliderLastValue = 0.0;
     double e8SliderLastValue = 0.0;
     double masterSliderLastValue = 0.0;
+    
+    class CustomLookAndFeel: public LookAndFeel_V4
+    {
+    public:
+        CustomLookAndFeel()
+        {
+            buttonFont = Typeface::createSystemTypefaceFor(Font());
+            
+            // Specify custom colors
+            // Background window color specified in paint method to be 0xff151515
+            Colour bgColour = Colour (0xff151515);
+            setColour (TextButton::buttonColourId, bgColour.darker());
+            setColour (Slider::thumbColourId, Colours::white);
+            setColour (Slider::trackColourId , bgColour.brighter());
+            setColour (Slider::backgroundColourId , bgColour.brighter());
+            setColour (Slider::rotarySliderOutlineColourId , bgColour.brighter());
+            setColour (Slider::rotarySliderFillColourId , bgColour.brighter());
+        }
+        
+        ~CustomLookAndFeel()
+        {
+        }
+        
+        Font getTextButtonFont (TextButton&, int buttonHeight) override
+        {
+            Font font = Font(buttonFont);
+            font.setHeight(12.0);
+            return font;
+        }
+        
+        Typeface::Ptr buttonFont;
+    };
+    
+    CustomLookAndFeel customLookAndFeel;
+
     //[/UserVariables]
 
     //==============================================================================

@@ -236,6 +236,6 @@ void Push2Interface::actionListenerCallback (const String &message)
 
 void Push2Interface::e1Rotated(int increment){
     
-    frameWaveHeightMultiplier += 0.02 * increment;
+    frameWaveHeightMultiplier += 0.04 * increment;
     frameWaveHeightMultiplier = jlimit(0.0, 1.0, (double)frameWaveHeightMultiplier);
 }

@@ -30,6 +30,7 @@
 Push2Simulator::Push2Simulator ()
 {
     //[Constructor_pre] You can add your own custom stuff here..
+    setLookAndFeel(&customLookAndFeel);
     //[/Constructor_pre]
 
     tapTempoButton.reset (new TextButton ("tapTempo"));
