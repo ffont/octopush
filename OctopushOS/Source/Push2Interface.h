@@ -42,7 +42,7 @@ public:
     
     // Button action handlers
     void ba1Pressed();
-    void bb1Pressed();
+    void playPressed();
     
 private:
     

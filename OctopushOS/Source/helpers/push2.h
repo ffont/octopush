@@ -34,6 +34,7 @@ public:
     int BUTTON_B6_CC_NUMBER = 25;
     int BUTTON_B7_CC_NUMBER = 26;
     int BUTTON_B8_CC_NUMBER = 27;
+    int BUTTON_PLAY_CC_NUMBER = 85;
     
     bool triggerButtonActionsFromIncommingMidi(const MidiMessage &message){
         // Check if MIDI message is of type CC and matches one of the CC
@@ -93,6 +94,9 @@ public:
             } else if (ccNumber == BUTTON_B8_CC_NUMBER){
                 if (ccValue == 127){ bb8Pressed(); } else { bb8Released(); }
                 return true;
+            } else if (ccNumber == BUTTON_PLAY_CC_NUMBER){
+                if (ccValue == 127){ playPressed(); } else { playReleased(); }
+                return true;
             }
         }
         return false;
@@ -133,6 +137,10 @@ public:
     void bb6Released(){}
     void bb7Released(){}
     void bb8Released(){}
+    
+    // Transport buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
+    void playPressed(){}
+    void playReleased(){}
 };
 
 class Push2EncodersListener

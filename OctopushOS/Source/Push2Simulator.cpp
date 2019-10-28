@@ -1445,6 +1445,7 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == playButton.get())
     {
         //[UserButtonCode_playButton] -- add your button handler code here..
+        push->playPressed();
         //[/UserButtonCode_playButton]
     }
     else if (buttonThatWasClicked == masterButton.get())

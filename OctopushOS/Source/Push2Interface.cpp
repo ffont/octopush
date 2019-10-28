@@ -239,6 +239,6 @@ void Push2Interface::ba1Pressed(){
     waveformColor = randomColour;
 }
 
-void Push2Interface::bb1Pressed(){
+void Push2Interface::playPressed(){
     engine->transportTogglePlayStop();
 }
