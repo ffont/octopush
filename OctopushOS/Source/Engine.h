@@ -31,8 +31,8 @@ private:
    
     // Properties
     te::Engine engine { ProjectInfo::projectName };
-    std::unique_ptr<te::Edit> demoPlaybackFileEdit;
-    std::unique_ptr<te::Edit> routingInputsEdit;
+    te::Edit edit { engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0 };
+    te::TransportControl& transport { edit.getTransport() };
     
     State state;
 };
