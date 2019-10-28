@@ -8,14 +8,26 @@
 
 namespace BinaryData
 {
-    extern const char*   demo_audio_ogg;
-    const int            demo_audio_oggSize = 230277;
-
     extern const char*   PushStartup_png;
     const int            PushStartup_pngSize = 16112;
 
+    extern const char*   clap_wav;
+    const int            clap_wavSize = 57452;
+
+    extern const char*   hihat_wav;
+    const int            hihat_wavSize = 194252;
+
+    extern const char*   kick_wav;
+    const int            kick_wavSize = 132136;
+
+    extern const char*   snare_aiff;
+    const int            snare_aiffSize = 30888;
+
+    extern const char*   tambourine_wav;
+    const int            tambourine_wavSize = 1058444;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 2;
+    const int namedResourceListSize = 6;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

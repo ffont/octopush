@@ -24,6 +24,10 @@ public:
     ~Engine();
     
     void initialize();
+    
+    void transportPlay();
+    void transportStop();
+    void transportTogglePlayStop();
 
 private:
     // Methods

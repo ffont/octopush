@@ -347,6 +347,13 @@
 			path = "../../3rdParty/juce/modules/juce_cryptography";
 			sourceTree = "SOURCE_ROOT";
 		};
+		3E6105DA66C34D02BE809DA7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = tambourine.wav;
+			path = ../../Resources/tambourine.wav;
+			sourceTree = "SOURCE_ROOT";
+		};
 		441CC6CF7D12AAFDD205B557 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -436,6 +443,13 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = push2.h;
 			path = ../../Source/helpers/push2.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		673CE415C18F52FBCC759F6C = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = hihat.wav;
+			path = ../../Resources/hihat.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
 		6BE66FB53EDEE474A7032AAB = {
@@ -536,6 +550,13 @@
 			path = "../../3rdParty/juce/modules/juce_core";
 			sourceTree = "SOURCE_ROOT";
 		};
+		AD5B2642EDE40DF2E5F50E69 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = clap.wav;
+			path = ../../Resources/clap.wav;
+			sourceTree = "SOURCE_ROOT";
+		};
 		B1FD84386C2086AB9A3BDA00 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -571,18 +592,18 @@
 			path = "../../JuceLibraryCode/include_juce_opengl.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		BBA3BF2BD0E65253B3DFC068 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = kick.wav;
+			path = ../../Resources/kick.wav;
+			sourceTree = "SOURCE_ROOT";
+		};
 		C0B38755731E13F0323E3C2D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = "include_juce_osc.cpp";
 			path = "../../JuceLibraryCode/include_juce_osc.cpp";
-			sourceTree = "SOURCE_ROOT";
-		};
-		C1017EE186C683E5F75935B1 = {
-			isa = PBXFileReference;
-			lastKnownFileType = file.ogg;
-			name = "demo_audio.ogg";
-			path = "../../Resources/demo_audio.ogg";
 			sourceTree = "SOURCE_ROOT";
 		};
 		C20BE3B9C51A7D088471E217 = {
@@ -654,6 +675,13 @@
 			name = Carbon.framework;
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
+		};
+		DCE34AFF348E98973FA76D57 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.aiff;
+			name = snare.aiff;
+			path = ../../Resources/snare.aiff;
+			sourceTree = "SOURCE_ROOT";
 		};
 		DF1B3F41D312732F9DDD008C = {
 			isa = PBXFileReference;
@@ -804,8 +832,12 @@
 		2F817773C97B990B5154ADFD = {
 			isa = PBXGroup;
 			children = (
-				C1017EE186C683E5F75935B1,
 				FB58BA2D5D4D163323CC330D,
+				AD5B2642EDE40DF2E5F50E69,
+				673CE415C18F52FBCC759F6C,
+				BBA3BF2BD0E65253B3DFC068,
+				DCE34AFF348E98973FA76D57,
+				3E6105DA66C34D02BE809DA7,
 			);
 			name = Resources;
 			sourceTree = "<group>";

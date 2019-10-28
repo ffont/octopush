@@ -27,8 +27,12 @@
             file="Source/Push2Simulator.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
-      <FILE id="OM7k0Y" name="demo_audio.ogg" compile="0" resource="1" file="Resources/demo_audio.ogg"/>
       <FILE id="AudmDd" name="PushStartup.png" compile="0" resource="1" file="Resources/PushStartup.png"/>
+      <FILE id="cZMCXb" name="clap.wav" compile="0" resource="1" file="Resources/clap.wav"/>
+      <FILE id="cCfAvg" name="hihat.wav" compile="0" resource="1" file="Resources/hihat.wav"/>
+      <FILE id="MdIBDY" name="kick.wav" compile="0" resource="1" file="Resources/kick.wav"/>
+      <FILE id="WZv8ef" name="snare.aiff" compile="0" resource="1" file="Resources/snare.aiff"/>
+      <FILE id="PPNJBl" name="tambourine.wav" compile="0" resource="1" file="Resources/tambourine.wav"/>
     </GROUP>
     <GROUP id="{A296B546-124C-3A26-64F6-4AA92E2A209B}" name="3rdParty">
       <GROUP id="{163ABAD6-A045-28D5-0760-DB5089BBCF5C}" name="libusb">
