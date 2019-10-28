@@ -14,6 +14,7 @@
 #include "push2/JuceToPush2DisplayBridge.h"
 #include "helpers/push2.h"
 #include "Engine.h"
+#include "State.h"
 #include "definitions.h"
 
 
@@ -60,8 +61,6 @@ private:
     ableton::Push2Display push2Display;
     std::unique_ptr<MidiInput> midiInput;
     Engine* engine;
-    
-    float elapsedTimeAnimation;
-    float frameWaveHeightMultiplier;
-    Colour waveformColor;
+    State* state;
+
 };

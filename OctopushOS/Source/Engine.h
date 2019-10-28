@@ -12,11 +12,13 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "State.h"
+#include "definitions.h"
 
 namespace te = tracktion_engine;
 
 
 class Engine: private ChangeListener,
+              public Timer,
               public ActionBroadcaster
 {
 public:
@@ -28,15 +30,18 @@ public:
     void transportPlay();
     void transportStop();
     void transportTogglePlayStop();
+    
+    State state;  // Make state public so it can be accessed and modified by others
 
 private:
     // Methods
     void changeListenerCallback (ChangeBroadcaster*) override;
+    void timerCallback() override;
    
     // Properties
     te::Engine engine { ProjectInfo::projectName };
     te::Edit edit { engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0 };
     te::TransportControl& transport { edit.getTransport() };
     
-    State state;
+    int stepSequencerTrackNum;
 };

@@ -45,6 +45,7 @@ void Push2Interface::initialize(Engine* engine_)
     // Assign reference to application engine
     engine = engine_;
     engine->addActionListener(this);
+    state = &engine->state; // Shorcut to access application state
     
     // Initialize Push2 connection
     NBase::Result result = connectToPush();
@@ -59,11 +60,6 @@ void Push2Interface::initialize(Engine* engine_)
         std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
         pushInitializedSuccessfully = false;
     }
-    
-    // Init properties
-    frameWaveHeightMultiplier = 1.0;
-    waveformColor = Colours::white;
-    elapsedTimeAnimation = 0;
     
     // Start the timer to draw the animation
     startTimerHz(PUSH_DISPLAY_FRAME_RATE);
@@ -143,7 +139,7 @@ void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const Mid
 
 void Push2Interface::timerCallback()
 {
-    elapsedTimeAnimation += 0.02f;
+    state->animationElapsedTime += 0.02f;
     drawFrame();
 }
 
@@ -162,6 +158,8 @@ Image Push2Interface::computeFrame()
     // Clear previous frame
     g.fillAll(juce::Colour(0xff000000));
     
+    
+    // Draw demo waveform
     Path wavePath;
     
     const float waveStep = 10.0f;
@@ -170,8 +168,8 @@ Image Push2Interface::computeFrame()
     
     for (float x = waveStep * 0.5f; x < width; x += waveStep)
     {
-        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsedTimeAnimation) * frameWaveHeightMultiplier;
-        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsedTimeAnimation * 2.0f) * frameWaveHeightMultiplier;
+        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + state->animationElapsedTime) * state->demoWaveAmplitude;
+        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + state->animationElapsedTime * 2.0f) * state->demoWaveAmplitude;
         
         wavePath.addLineSegment(Line<float>(x, y1, x, y2), 2.0f);
         wavePath.addEllipse(x - waveStep * 0.3f, y1 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
@@ -180,14 +178,13 @@ Image Push2Interface::computeFrame()
         ++i;
     }
     
-    // Draw the path
-    g.setColour(waveformColor);
+    g.setColour(state->demoWaveColor);
     g.fillPath(wavePath);
     
-    // Blit the logo on top
-    // auto logo = ImageCache::getFromMemory(BinaryData::PushStartup_png, BinaryData::PushStartup_pngSize);
-    // g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
-    
+    // Draw playhead position
+    g.setColour(state->demoWaveColor);
+    double playheadX = state->currentStepProportion * width;
+    g.fillRect(playheadX, 0, 5, height);
     
     return frame;
 }
@@ -225,8 +222,8 @@ void Push2Interface::actionListenerCallback (const String &message)
 
 void Push2Interface::e1Rotated(int increment){
     
-    frameWaveHeightMultiplier += 0.04 * increment;
-    frameWaveHeightMultiplier = jlimit(0.0, 1.0, (double)frameWaveHeightMultiplier);
+    state->demoWaveAmplitude += 0.04 * increment;
+    state->demoWaveAmplitude = jlimit(0.0, 1.0, (double)state->demoWaveAmplitude);
 }
 
 //------------------------------------------------------------------------------
@@ -236,7 +233,7 @@ void Push2Interface::ba1Pressed(){
     Colour randomColour (random.nextInt (256),
                          random.nextInt (256),
                          random.nextInt (256));
-    waveformColor = randomColour;
+    state->demoWaveColor = randomColour;
 }
 
 void Push2Interface::playPressed(){

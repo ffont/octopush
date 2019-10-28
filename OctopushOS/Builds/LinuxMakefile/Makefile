@@ -70,7 +70,6 @@ endif
 OBJECTS_APP := \
   $(JUCE_OBJDIR)/Main_90ebc5c2.o \
   $(JUCE_OBJDIR)/Engine_7f3228cb.o \
-  $(JUCE_OBJDIR)/State_21d7df72.o \
   $(JUCE_OBJDIR)/Push2Interface_e0e6feca.o \
   $(JUCE_OBJDIR)/Push2Simulator_bf2a7815.o \
   $(JUCE_OBJDIR)/libusb_platform_wrapper_f0db8557.o \
@@ -123,11 +122,6 @@ $(JUCE_OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
 $(JUCE_OBJDIR)/Engine_7f3228cb.o: ../../Source/Engine.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Engine.cpp"
-	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
-
-$(JUCE_OBJDIR)/State_21d7df72.o: ../../Source/State.cpp
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling State.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/Push2Interface_e0e6feca.o: ../../Source/Push2Interface.cpp

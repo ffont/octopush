@@ -16,7 +16,6 @@
       <FILE id="o0XklV" name="Engine.h" compile="0" resource="0" file="Source/Engine.h"/>
       <FILE id="aMMNSB" name="Engine.cpp" compile="1" resource="0" file="Source/Engine.cpp"/>
       <FILE id="ZlbWmf" name="State.h" compile="0" resource="0" file="Source/State.h"/>
-      <FILE id="aIuZms" name="State.cpp" compile="1" resource="0" file="Source/State.cpp"/>
       <FILE id="n5ucqZ" name="Push2Interface.h" compile="0" resource="0"
             file="Source/Push2Interface.h"/>
       <FILE id="fqV828" name="Push2Interface.cpp" compile="1" resource="0"

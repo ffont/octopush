@@ -51,12 +51,12 @@ void Engine::initialize()
     //------------- Setup the step sequencer
     
     // Create track for step sequencer and make it loop
-    edit.tempoSequence.getTempos()[0]->setBpm (60.0);
-    int stepSequencerTrackNum = trackNum + 1;
+    edit.tempoSequence.getTempos()[0]->setBpm (state.tempo);
+    stepSequencerTrackNum = trackNum + 1;
     if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, stepSequencerTrackNum))
     {
         // Find length of 1 bar
-        const te::EditTimeRange editTimeRange (0, edit.tempoSequence.barsBeatsToTime ({ 1, 0.0 }));
+        const te::EditTimeRange editTimeRange (0, edit.tempoSequence.barsBeatsToTime ({ 0, 4.0 }));
         track->insertNewClip (te::TrackItem::Type::step, "Step Clip", editTimeRange, nullptr);
         auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
         // Remove channels from step sequencer to reduce it to 4 instead of the default 8
@@ -101,33 +101,10 @@ void Engine::initialize()
             jassert (error.isEmpty());
             
             for (auto& pattern : stepClip->getPatterns()){
-                if (channelCount == 0){ // Kick
-                    pattern.setNote (channelCount, 0, true);
-                    pattern.setNote (channelCount, 4, true);
-                    pattern.setNote (channelCount, 8, true);
-                    pattern.setNote (channelCount, 12, true);
-                } else if (channelCount == 1){ // Hihat
-                    pattern.setNote (channelCount, 1, true);
-                    pattern.setNote (channelCount, 3, true);
-                    pattern.setNote (channelCount, 5, true);
-                    pattern.setNote (channelCount, 7, true);
-                    pattern.setNote (channelCount, 9, true);
-                    pattern.setNote (channelCount, 11, true);
-                    pattern.setNote (channelCount, 13, true);
-                    pattern.setNote (channelCount, 15, true);
-                } else if (channelCount == 2){ // Snare
-                    pattern.setNote (channelCount, 2, true);
-                    pattern.setNote (channelCount, 6, true);
-                    pattern.setNote (channelCount, 10, true);
-                    pattern.setNote (channelCount, 14, true);
-                } else if (channelCount == 3){ // Clap
-                    pattern.setNote (channelCount, 2, true);
-                    pattern.setNote (channelCount, 6, true);
-                    pattern.setNote (channelCount, 10, true);
-                    pattern.setNote (channelCount, 14, true);
+                for (int step=0; step<pattern.getNumNotes(); step++){
+                    pattern.setNote (channelCount, step, state.stepSequencerPattern[channelCount][step]);
                 }
             }
-            
             channelCount++;
         }
     }
@@ -135,6 +112,9 @@ void Engine::initialize()
     // NOTE: this will not play anything. To start play the transport needs to be started
     // transport.play(false);
     // transport.stop(true, true);
+    
+    // Start the timer to update state
+    startTimerHz(STATE_UPDATE_RATE);
 }
 
 void Engine::changeListenerCallback (ChangeBroadcaster*)
@@ -144,10 +124,12 @@ void Engine::changeListenerCallback (ChangeBroadcaster*)
 
 void Engine::transportPlay(){
     transport.play(false);
+    state.isPlaying = true;
 }
 
 void Engine::transportStop(){
     transport.stop(false, true);
+    state.isPlaying = false;
 }
 
 void Engine::transportTogglePlayStop(){
@@ -155,5 +137,24 @@ void Engine::transportTogglePlayStop(){
         transportStop();
     } else {
         transportPlay();
+    }
+}
+
+void Engine::timerCallback()
+{
+    // Update state variables that change over time like transport position
+    
+    // Set current step position and proportion
+    auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, stepSequencerTrackNum);
+    auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
+    auto clipRange = stepClip->getEditTimeRange();
+    if (clipRange.isEmpty()) {
+        state.currentStepPosition = 0.0;
+        state.currentStepProportion = 0.0;
+    } else {
+        const double position = transport.position;
+        const auto proportion = position / clipRange.getEnd();
+        state.currentStepPosition = position;
+        state.currentStepProportion = proportion;
     }
 }

@@ -11,3 +11,4 @@
 #pragma once
 
 #define PUSH_DISPLAY_FRAME_RATE 60
+#define STATE_UPDATE_RATE 15
