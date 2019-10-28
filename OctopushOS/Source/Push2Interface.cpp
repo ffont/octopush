@@ -134,26 +134,8 @@ NBase::Result Push2Interface::openMidiDevice()
 
 void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &message)
 {
-    
-    // Change demo waveform height basedon controller values
-    if (message.isController())
-    {
-        int ccValue = message.getControllerValue();
-        int ccNumber = message.getControllerNumber();
-        if (ccNumber == ENCODER_E1_CC_NUMBER){
-            if (ccValue == 127){
-                e1Rotated(1);  // Rotated right
-            } else {
-                e1Rotated(-1);  // Rotated left
-            }
-        } else if (ccNumber == BUTTON_A1_CC_NUMBER){
-            if (ccValue == 127){
-                ba1Pressed();  // Button pressed
-            } else {
-                // Button released
-            }
-        }
-    }
+    if (triggerButtonActionsFromIncommingMidi(message)) { return; };
+    if (triggerEncoderActionsFromIncommingMidi(message)) { return; };
 }
 
 
