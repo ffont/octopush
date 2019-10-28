@@ -1013,6 +1013,7 @@ Push2Simulator::Push2Simulator ()
 Push2Simulator::~Push2Simulator()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
+    setLookAndFeel (nullptr);
     //[/Destructor_pre]
 
     tapTempoButton = nullptr;
