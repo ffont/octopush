@@ -27,16 +27,33 @@ Engine::~Engine()
 
 void Engine::initialize()
 {
-    // Initialize Tracktion engine demo and start playing audio
+    // Load audio file and start playing it in loop
     auto f = File::createTempFile (".ogg");
     f.replaceWithData (BinaryData::demo_audio_ogg, BinaryData::demo_audio_oggSize);
-    edit = std::make_unique<te::Edit> (engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0);
-    auto clip = EngineHelpers::loadAudioFileAsClip (*edit, f);
-    auto& transport = edit->getTransport();
+    demoPlaybackFileEdit = std::make_unique<te::Edit> (engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0);
+    auto clip = EngineHelpers::loadAudioFileAsClip (*demoPlaybackFileEdit, f);
+    auto& transport = demoPlaybackFileEdit->getTransport();
     transport.setLoopRange (clip->getEditTimeRange());
     transport.looping = true;
     transport.position = 0.0;
     transport.play (false);
+    
+    // Get audio input channels and create tracks routed to output
+    routingInputsEdit = std::make_unique<te::Edit> (engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0);
+    int trackNum = 0;
+    for (auto instance : routingInputsEdit->getAllInputDevices())
+    {
+        if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
+        {
+            if (auto t = EngineHelpers::getOrInsertAudioTrackAt (*routingInputsEdit, trackNum))
+            {
+                instance->setTargetTrack (t, 0);
+                instance->setRecordingEnabled (true);
+                trackNum++;
+            }
+        }
+    }
+    routingInputsEdit->restartPlayback();
 }
 
 void Engine::changeListenerCallback (ChangeBroadcaster*)

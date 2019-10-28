@@ -29,9 +29,10 @@ private:
     // Methods
     void changeListenerCallback (ChangeBroadcaster*) override;
    
-    // Propertie
+    // Properties
     te::Engine engine { ProjectInfo::projectName };
-    std::unique_ptr<te::Edit> edit;  
+    std::unique_ptr<te::Edit> demoPlaybackFileEdit;
+    std::unique_ptr<te::Edit> routingInputsEdit;
     
     State state;
 };
