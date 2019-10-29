@@ -27,10 +27,14 @@ Engine::~Engine()
 
 void Engine::initialize()
 {
-    //------------- Load audio file and start playing it in loop
+    //------------- Load audio file and start playing it in loop. configure level meter.
     auto f = File::createTempFile ("tambourine.wav");
     f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
     auto clip = EngineHelpers::loadAudioFileAsClip (edit, f); // Will add the audio file as a clip in track #0 of edit
+    
+    auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 0);
+    track->getLevelMeterPlugin()->measurer.addClient(track0LevelClient);  // TODO: should this be removed?
+    
     
     //------------- Get audio input channels and create tracks routed to output
     int trackNum = 1;  // Start at channel 1 as channel 0 is used by the loaded demo audio file
@@ -109,9 +113,8 @@ void Engine::initialize()
         }
     }
     
-    // NOTE: this will not play anything. To start play the transport needs to be started
-    // transport.play(false);
-    // transport.stop(true, true);
+    // Start paying arrangement
+    // transportPlay();
     
     // Start the timer to update state
     startTimerHz(STATE_UPDATE_RATE);
@@ -157,4 +160,7 @@ void Engine::timerCallback()
         state.currentStepPosition = position;
         state.currentStepProportion = proportion;
     }
+    
+    // Get track 1 level
+    state.track0Level = track0LevelClient.getAndClearAudioLevel(0).dB;
 }

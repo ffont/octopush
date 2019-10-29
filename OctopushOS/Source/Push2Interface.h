@@ -32,6 +32,7 @@ public:
 
     void initialize(Engine* engine_);
     NBase::Result connectToPush();
+    bool pushInitializedSuccessfully;
     
     void actionListenerCallback (const String &message) override;
     
@@ -39,11 +40,11 @@ public:
     Image lastFrame;
     
     // Encoder action handlers
-    void e1Rotated(int increment);
+    void e1Rotated(int increment) override;
     
     // Button action handlers
-    void ba1Pressed();
-    void playPressed();
+    void ba1Pressed() override;
+    void playPressed() override;
     
 private:
     
@@ -56,7 +57,6 @@ private:
     void timerCallback() override;
     
     // Properties
-    bool pushInitializedSuccessfully;
     ableton::Push2DisplayBridge bridge;
     ableton::Push2Display push2Display;
     std::unique_ptr<MidiInput> midiInput;

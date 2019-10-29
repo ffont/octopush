@@ -63,6 +63,8 @@ public:
     double currentStepPosition = 0.0;
     double currentStepProportion = 0.0;
     
+    float track0Level = -100.0;
+    
 
 private:
     

@@ -31,17 +31,23 @@ public:
         engine.initialize();
         push.initialize(&engine);
         
-        // Initialize main window (will only be used to replicate Push2 display in development)
-        // These two lines can be commented and no main window will appear
-        mainWindow.reset (new MainWindow (getApplicationName()));
-        static_cast<Push2Simulator*>(mainWindow.get()->getContentComponent())->setPush2Interface(&push);
+        // Initialize main window (will only be used to replicate Push2 display and controls when Push2
+        // is not connected and we are in DEBUG mode)
+        #if JUCE_DEBUG
+        if (!push.pushInitializedSuccessfully) {
+            mainWindow.reset (new MainWindow (getApplicationName()));
+            static_cast<Push2Simulator*>(mainWindow.get()->getContentComponent())->setPush2Interface(&push);
+            mainWindowRunning = true;
+        }
+        #endif
     }
 
     void shutdown() override
     {
         // Add your application's shutdown code here..
-
-        mainWindow = nullptr; // (deletes our window)
+        if (mainWindowRunning){
+            mainWindow = nullptr; // (deletes our window)
+        }
     }
 
     //==============================================================================
@@ -112,6 +118,7 @@ private:
     Push2Interface push;
     
     // Main window (not really used when deployed to hardware, just used to replicate Push2 display contents)
+    bool mainWindowRunning = false;
     std::unique_ptr<MainWindow> mainWindow;
 };
 

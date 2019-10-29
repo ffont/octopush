@@ -41,6 +41,7 @@ public:
         // numbers of the buttons. If there's a match call corresponding
         // button action and return True. If there's no match False.
         
+        
         if (message.isController())
         {
             int ccValue = message.getControllerValue();
@@ -103,44 +104,44 @@ public:
     }
     
     // Upper row buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
-    void ba1Pressed(){}
-    void ba2Pressed(){}
-    void ba3Pressed(){}
-    void ba4Pressed(){}
-    void ba5Pressed(){}
-    void ba6Pressed(){}
-    void ba7Pressed(){}
-    void ba8Pressed(){}
-    void ba1Released(){}
-    void ba2Released(){}
-    void ba3Released(){}
-    void ba4Released(){}
-    void ba5Released(){}
-    void ba6Released(){}
-    void ba7Released(){}
-    void ba8Released(){}
+    virtual void ba1Pressed(){}
+    virtual void ba2Pressed(){}
+    virtual void ba3Pressed(){}
+    virtual void ba4Pressed(){}
+    virtual void ba5Pressed(){}
+    virtual void ba6Pressed(){}
+    virtual void ba7Pressed(){}
+    virtual void ba8Pressed(){}
+    virtual void ba1Released(){}
+    virtual void ba2Released(){}
+    virtual void ba3Released(){}
+    virtual void ba4Released(){}
+    virtual void ba5Released(){}
+    virtual void ba6Released(){}
+    virtual void ba7Released(){}
+    virtual void ba8Released(){}
     
     // Lower row buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
-    void bb1Pressed(){}
-    void bb2Pressed(){}
-    void bb3Pressed(){}
-    void bb4Pressed(){}
-    void bb5Pressed(){}
-    void bb6Pressed(){}
-    void bb7Pressed(){}
-    void bb8Pressed(){}
-    void bb1Released(){}
-    void bb2Released(){}
-    void bb3Released(){}
-    void bb4Released(){}
-    void bb5Released(){}
-    void bb6Released(){}
-    void bb7Released(){}
-    void bb8Released(){}
+    virtual void bb1Pressed(){}
+    virtual void bb2Pressed(){}
+    virtual void bb3Pressed(){}
+    virtual void bb4Pressed(){}
+    virtual void bb5Pressed(){}
+    virtual void bb6Pressed(){}
+    virtual void bb7Pressed(){}
+    virtual void bb8Pressed(){}
+    virtual void bb1Released(){}
+    virtual void bb2Released(){}
+    virtual void bb3Released(){}
+    virtual void bb4Released(){}
+    virtual void bb5Released(){}
+    virtual void bb6Released(){}
+    virtual void bb7Released(){}
+    virtual void bb8Released(){}
     
     // Transport buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
-    void playPressed(){}
-    void playReleased(){}
+    virtual void playPressed(){}
+    virtual void playReleased(){}
 };
 
 class Push2EncodersListener
@@ -209,15 +210,15 @@ public:
     }
     
     // Encoder methods (to be implemented in classes inheriting form Push2EncodersListener)
-    void tempoEncoderRotated(int increment){}
-    void swingEncoderRotated(int increment){}
-    void e1Rotated(int increment){}
-    void e2Rotated(int increment){}
-    void e3Rotated(int increment){}
-    void e4Rotated(int increment){}
-    void e5Rotated(int increment){}
-    void e6Rotated(int increment){}
-    void e7Rotated(int increment){}
-    void e8Rotated(int increment){}
-    void masterEncoderRotated(int increment){}
+    virtual void tempoEncoderRotated(int increment){}
+    virtual void swingEncoderRotated(int increment){}
+    virtual void e1Rotated(int increment){}
+    virtual void e2Rotated(int increment){}
+    virtual void e3Rotated(int increment){}
+    virtual void e4Rotated(int increment){}
+    virtual void e5Rotated(int increment){}
+    virtual void e6Rotated(int increment){}
+    virtual void e7Rotated(int increment){}
+    virtual void e8Rotated(int increment){}
+    virtual void masterEncoderRotated(int increment){}
 };

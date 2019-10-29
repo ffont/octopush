@@ -186,6 +186,11 @@ Image Push2Interface::computeFrame()
     double playheadX = state->currentStepProportion * width;
     g.fillRect(playheadX, 0, 5, height);
     
+    // Draw track1  level meter
+    g.setColour(Colours::green);
+    double barHeight = jmap((double)state->track0Level, -100.0, 0.0, 0.0, 1.0) * height;
+    g.fillRect(width - 20, height - barHeight, 20, barHeight);
+    
     return frame;
 }
 

@@ -44,4 +44,5 @@ private:
     te::TransportControl& transport { edit.getTransport() };
     
     int stepSequencerTrackNum;
+    te::LevelMeasurer::Client track0LevelClient;
 };
