@@ -17,6 +17,8 @@ class Push2ButtonsListener
 {
 public:
     
+    virtual ~Push2ButtonsListener(){}
+    
     // Button CC number definitions
     int BUTTON_A1_CC_NUMBER = 102;
     int BUTTON_A2_CC_NUMBER = 103;
@@ -147,6 +149,8 @@ public:
 class Push2EncodersListener
 {
 public:
+    
+    virtual ~Push2EncodersListener(){}
     
     // Encoder cc number definitions
     int ENCODER_TEMPO_CC_NUMBER = 14;
