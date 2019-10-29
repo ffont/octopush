@@ -11,6 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "definitions.h"
 
 
 class State
@@ -63,7 +64,7 @@ public:
     double currentStepPosition = 0.0;
     double currentStepProportion = 0.0;
     
-    float track0Level = -100.0;
+    std::array<float, N_AUDIO_TRACKS> measuredTrackLevels = {-100.0};
     
 
 private:

@@ -43,6 +43,5 @@ private:
     te::Edit edit { engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0 };
     te::TransportControl& transport { edit.getTransport() };
     
-    int stepSequencerTrackNum;
-    te::LevelMeasurer::Client track0LevelClient;
+    std::array<te::LevelMeasurer::Client, N_AUDIO_TRACKS> trackLevelClients;
 };

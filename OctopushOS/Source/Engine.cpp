@@ -27,37 +27,27 @@ Engine::~Engine()
 
 void Engine::initialize()
 {
-    //------------- Load audio file and start playing it in loop. configure level meter.
-    auto f = File::createTempFile ("tambourine.wav");
-    f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
-    auto clip = EngineHelpers::loadAudioFileAsClip (edit, f); // Will add the audio file as a clip in track #0 of edit
-    
-    auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 0);
-    track->getLevelMeterPlugin()->measurer.addClient(track0LevelClient);  // TODO: should this be removed?
-    
-    
-    //------------- Get audio input channels and create tracks routed to output
-    int trackNum = 1;  // Start at channel 1 as channel 0 is used by the loaded demo audio file
-    for (auto instance : edit.getAllInputDevices())
-    {
-        if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
-        {
-            if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, trackNum))
-            {
-                instance->setTargetTrack (t, 0);
-                instance->setRecordingEnabled (true);
-                trackNum++;
-            }
-        }
+    //------------- Create all audio tracks
+    int currentTrackNum = 0;
+    for (int index=0; index<N_AUDIO_TRACKS; index++){
+        EngineHelpers::getOrInsertAudioTrackAt (edit, index);
     }
-    edit.restartPlayback();
     
-    //------------- Setup the step sequencer
+    //------------- Now add content to every track
     
-    // Create track for step sequencer and make it loop
-    edit.tempoSequence.getTempos()[0]->setBpm (state.tempo);
-    stepSequencerTrackNum = trackNum + 1;
-    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, stepSequencerTrackNum))
+    //------------- Track 0 (add file)
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum)){
+        auto f = File::createTempFile ("tambourine.wav");
+        f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
+        te::AudioFile audioFile (f);
+        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+        currentTrackNum++;
+    }
+    
+    //------------- Track 1 (step sequencer)
+    
+    // Create track for step sequencer
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum))
     {
         // Find length of 1 bar
         const te::EditTimeRange editTimeRange (0, edit.tempoSequence.barsBeatsToTime ({ 0, 4.0 }));
@@ -68,11 +58,6 @@ void Engine::initialize()
         stepClip->removeChannel(4);
         stepClip->removeChannel(4);
         stepClip->removeChannel(4);
-        
-        // Prepare transport to loop around step sequencer clip area
-        transport.setLoopRange (stepClip->getEditTimeRange());
-        transport.looping = true;
-        transport.position = 0.0;
     }
     
     // Load audio files that will be used by a sampler plugin receiving notes from the step sequencer
@@ -93,7 +78,7 @@ void Engine::initialize()
     // Create sampler plugin with the above clips and create patterns for sampler channels
     if (auto sampler = dynamic_cast<te::SamplerPlugin*> (edit.getPluginCache().createNewPlugin (te::SamplerPlugin::xmlTypeName, {}).get()))
     {
-        auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, stepSequencerTrackNum);
+        auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum);
         auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
         stepClip->getTrack()->pluginList.insertPlugin (*sampler, 0, nullptr);
         
@@ -111,10 +96,52 @@ void Engine::initialize()
             }
             channelCount++;
         }
+        currentTrackNum++;
     }
     
-    // Start paying arrangement
-    // transportPlay();
+    //------------- Tracks 2-3 (route audio input)
+    int nInputTracks = 0;
+    int maxInputTracks = 2;
+    for (auto instance : edit.getAllInputDevices())
+    {
+        if (nInputTracks == maxInputTracks){
+            break;
+        }
+        
+        if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
+        {
+            if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum))
+            {
+                instance->setTargetTrack (t, 0);
+                instance->setRecordingEnabled (true);
+                currentTrackNum++;
+                nInputTracks++;
+            }
+        }
+    }
+    edit.restartPlayback();
+    
+    //------------- Print info about created tracks
+    std::cout << te::getAudioTracks(edit).size() << " Tracks created" << std::endl;
+    for (auto track : te::getAudioTracks(edit)){
+        std::cout << "- " << track->getName() << std::endl;
+    }
+    
+    //------------- Other init stuff
+    
+    // Initialize other transport and related properties
+    edit.tempoSequence.getTempos()[0]->setBpm (state.tempo);
+    transport.setLoopRange (te::EditTimeRange(0.0, 1.0)); // Will this be 1 bar (?)
+    transport.looping = true;
+    transport.position = 0.0;
+    
+    // Initialize track level meters
+    int index = 0;
+    for (auto track : te::getAudioTracks(edit)){
+        trackLevelClients[index] = te::LevelMeasurer::Client();
+        track->getLevelMeterPlugin()->measurer.addClient(trackLevelClients[index]);
+        index ++;
+    }
     
     // Start the timer to update state
     startTimerHz(STATE_UPDATE_RATE);
@@ -148,19 +175,20 @@ void Engine::timerCallback()
     // Update state variables that change over time like transport position
     
     // Set current step position and proportion
-    auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, stepSequencerTrackNum);
-    auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
-    auto clipRange = stepClip->getEditTimeRange();
-    if (clipRange.isEmpty()) {
+    auto loopRange = transport.getLoopRange();
+    if (loopRange.isEmpty()) {
         state.currentStepPosition = 0.0;
         state.currentStepProportion = 0.0;
     } else {
         const double position = transport.position;
-        const auto proportion = position / clipRange.getEnd();
+        const auto proportion = position / loopRange.getEnd();
         state.currentStepPosition = position;
         state.currentStepProportion = proportion;
     }
     
-    // Get track 1 level
-    state.track0Level = track0LevelClient.getAndClearAudioLevel(0).dB;
+    // Save measured track levels to state
+    for (int index = 0; index<te::getAudioTracks(edit).size(); index++){
+        state.measuredTrackLevels[index] = trackLevelClients[index].getAndClearAudioLevel(0).dB;
+    }
+    
 }
