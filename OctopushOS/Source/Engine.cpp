@@ -27,6 +27,24 @@ Engine::~Engine()
 
 void Engine::initialize()
 {
+    //------------- Configure input devices
+    auto& dm = engine.getDeviceManager();
+    
+    for (int i = 0; i < dm.getNumWaveInDevices(); i++)
+        if (auto wip = dm.getWaveInDevice (i))
+            wip->setStereoPair (false);  // Don't make input devices stereo
+    
+    for (int i = 0; i < dm.getNumWaveInDevices(); i++)
+    {
+        if (auto wip = dm.getWaveInDevice (i))  // Enable all iputs
+        {
+            wip->setEndToEnd (true);  // Enable input monitoring ON
+            wip->setEnabled (true);
+        }
+    }
+    edit.restartPlayback();
+    
+    
     //------------- Create all audio tracks
     int currentTrackNum = 0;
     for (int index=0; index<N_AUDIO_TRACKS; index++){
@@ -104,6 +122,8 @@ void Engine::initialize()
     int maxInputTracks = 2;
     for (auto instance : edit.getAllInputDevices())
     {
+        // For some reason code does not get to here??
+        
         if (nInputTracks == maxInputTracks){
             break;
         }
@@ -131,7 +151,7 @@ void Engine::initialize()
     
     // Initialize other transport and related properties
     edit.tempoSequence.getTempos()[0]->setBpm (state.tempo);
-    transport.setLoopRange (te::EditTimeRange(0.0, 1.0)); // Will this be 1 bar (?)
+    transport.setLoopRange (te::EditTimeRange(0.0, 4.0)); // Will this be 1 bar (?)
     transport.looping = true;
     transport.position = 0.0;
     
