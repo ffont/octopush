@@ -38,7 +38,7 @@ void Engine::initialize()
     {
         if (auto wip = dm.getWaveInDevice (i))  // Enable all iputs
         {
-            wip->setEndToEnd (true);  // Enable input monitoring ON
+            wip->setEndToEnd (true);  // Enable input monitoring
             wip->setEnabled (true);
         }
     }
@@ -49,6 +49,14 @@ void Engine::initialize()
     int currentTrackNum = 0;
     for (int index=0; index<N_AUDIO_TRACKS; index++){
         EngineHelpers::getOrInsertAudioTrackAt (edit, index);
+    }
+    
+    // Initialize track level meters
+    int index = 0;
+    for (auto track : te::getAudioTracks(edit)){
+        trackLevelClients[index] = te::LevelMeasurer::Client();
+        track->getLevelMeterPlugin()->measurer.addClient(trackLevelClients[index]);
+        index ++;
     }
     
     //------------- Now add content to every track
@@ -117,12 +125,25 @@ void Engine::initialize()
         currentTrackNum++;
     }
     
+    // NOTE: need to do the play/stop here so edit.getCurrentPlaybackContext() return a valid context and
+    // later edit.getAllInputDevices() returns some devices that I can route to my audio out channels.
+    // I should improve this...
+    transportPlay();
+    transportStop();
+    
     //------------- Tracks 2-3 (route audio input)
+    std::cout << "Routing input channels" << std::endl;
+    if (auto context = edit.getCurrentPlaybackContext()){
+        std::cout << "Got context" << std::endl;
+    } else {
+        std::cout << "Did not get context" << std::endl;
+    }
+    
     int nInputTracks = 0;
     int maxInputTracks = 2;
     for (auto instance : edit.getAllInputDevices())
     {
-        // For some reason code does not get to here??
+        std::cout << instance->getInputDevice().getName() << std::endl;
         
         if (nInputTracks == maxInputTracks){
             break;
@@ -154,15 +175,8 @@ void Engine::initialize()
     transport.setLoopRange (te::EditTimeRange(0.0, 4.0)); // Will this be 1 bar (?)
     transport.looping = true;
     transport.position = 0.0;
-    
-    // Initialize track level meters
-    int index = 0;
-    for (auto track : te::getAudioTracks(edit)){
-        trackLevelClients[index] = te::LevelMeasurer::Client();
-        track->getLevelMeterPlugin()->measurer.addClient(trackLevelClients[index]);
-        index ++;
-    }
-    
+    transport.addChangeListener (this);
+
     // Start the timer to update state
     startTimerHz(STATE_UPDATE_RATE);
 }
@@ -178,7 +192,7 @@ void Engine::transportPlay(){
 }
 
 void Engine::transportStop(){
-    transport.stop(false, true);
+    transport.stop(false, false);
     state.isPlaying = false;
 }
 
