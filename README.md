@@ -39,7 +39,7 @@ A utility script is provided to build OctopushOS in release mode. `cd` into the 
 
 ```
 cd OctospushOS/Scripts
-./build_OctopushOS
+./build_octopushOS
 ```
 
 The generated executable will be placed in `OctopushOS/Builds/MacOSX/build/Release/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Release/OctopushOS ` (Linux) depending on the platform you're running it from.
