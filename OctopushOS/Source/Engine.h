@@ -31,6 +31,9 @@ public:
     void transportStop();
     void transportTogglePlayStop();
     
+    void setTrackVolume(int tracknum, float gain);
+    void toggleMuteTrack(int tracknum);
+    
     State state;  // Make state public so it can be accessed and modified by others
 
 private:

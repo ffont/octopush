@@ -190,7 +190,12 @@ Image Push2Interface::computeFrame()
     g.setColour(Colours::green);
     int trackNum = 0;
     for (auto settings : state->audioTrackSettings) {
-        double barHeight = jmap((double)settings.measuredLevel, -100.0, 0.0, 0.0, 1.0) * height;
+        double minDbValueShown = -30.0;
+        double clippedLevel = settings.measuredLevel;
+        if (clippedLevel < minDbValueShown){
+            clippedLevel = minDbValueShown;
+        }
+        double barHeight = jmap(clippedLevel, minDbValueShown, 0.0, 0.0, 1.0) * height;
         g.fillRect(width - (12 * (N_AUDIO_TRACKS - trackNum)), height - barHeight, 10, barHeight);
         trackNum++;
     }
@@ -235,6 +240,35 @@ void Push2Interface::e1Rotated(int increment){
     state->demoWaveAmplitude = jlimit(0.0, 1.0, (double)state->demoWaveAmplitude);
 }
 
+void Push2Interface::e5Rotated(int increment){
+    
+    int trackNum = 0;  // Track #0
+    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+}
+
+void Push2Interface::e6Rotated(int increment){
+    int trackNum = 1;  // Track #1
+    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+}
+
+void Push2Interface::e7Rotated(int increment){
+    int trackNum = 2;  // Track #2
+    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+}
+
+void Push2Interface::e8Rotated(int increment){
+    int trackNum = 3;  // Track #3
+    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+}
+
 //------------------------------------------------------------------------------
 
 void Push2Interface::ba1Pressed(){
@@ -243,6 +277,22 @@ void Push2Interface::ba1Pressed(){
                          random.nextInt (256),
                          random.nextInt (256));
     state->demoWaveColor = randomColour;
+}
+
+void Push2Interface::ba5Pressed(){
+    engine->toggleMuteTrack(0);
+}
+
+void Push2Interface::ba6Pressed(){
+    engine->toggleMuteTrack(1);
+}
+
+void Push2Interface::ba7Pressed(){
+    engine->toggleMuteTrack(2);
+}
+
+void Push2Interface::ba8Pressed(){
+    engine->toggleMuteTrack(3);
 }
 
 void Push2Interface::playPressed(){

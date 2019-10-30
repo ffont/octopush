@@ -190,6 +190,23 @@ void Engine::transportTogglePlayStop(){
     }
 }
 
+void Engine::setTrackVolume(int trackNum, float volume){
+    state.audioTrackSettings[trackNum].volume = volume;
+    auto track = te::getAudioTracks(edit)[trackNum];
+    track->getVolumePlugin()->setVolumeDb(volume);
+
+}
+
+void Engine::toggleMuteTrack(int trackNum){
+    auto track = te::getAudioTracks(edit)[trackNum];
+    if (track->isMuted(false)){
+        track->setMute(false);
+    } else {
+        track->setMute(true);
+    }
+    state.audioTrackSettings[trackNum].mute = track->isMuted(false);
+}
+
 void Engine::timerCallback()
 {
     // Update state variables that change over time like transport position

@@ -14,8 +14,9 @@
 #include "definitions.h"
 
 struct AudioTrackSettings {
-    float measuredLevel = -100.0;
-    float gain = 0.0;
+    float measuredLevel = -100.0;  // in dB
+    float volume = 0.0;  // in dB
+    bool mute = false;
 };
 
 class State

@@ -41,9 +41,17 @@ public:
     
     // Encoder action handlers
     void e1Rotated(int increment) override;
+    void e5Rotated(int increment) override;
+    void e6Rotated(int increment) override;
+    void e7Rotated(int increment) override;
+    void e8Rotated(int increment) override;
     
     // Button action handlers
     void ba1Pressed() override;
+    void ba5Pressed() override;
+    void ba6Pressed() override;
+    void ba7Pressed() override;
+    void ba8Pressed() override;
     void playPressed() override;
     
 private:
