@@ -13,6 +13,10 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "definitions.h"
 
+struct AudioTrackSettings {
+    float measuredLevel = -100.0;
+    float gain = 0.0;
+};
 
 class State
 {
@@ -64,9 +68,8 @@ public:
     double currentStepPosition = 0.0;
     double currentStepProportion = 0.0;
     
-    std::array<float, N_AUDIO_TRACKS> measuredTrackLevels = {-100.0};
+    std::array<AudioTrackSettings, N_AUDIO_TRACKS> audioTrackSettings;
     
-
 private:
     
   

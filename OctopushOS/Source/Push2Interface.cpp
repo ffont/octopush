@@ -189,8 +189,8 @@ Image Push2Interface::computeFrame()
     // Draw audio tracks level meter
     g.setColour(Colours::green);
     int trackNum = 0;
-    for (auto level : state->measuredTrackLevels) {
-        double barHeight = jmap((double)level, -100.0, 0.0, 0.0, 1.0) * height;
+    for (auto settings : state->audioTrackSettings) {
+        double barHeight = jmap((double)settings.measuredLevel, -100.0, 0.0, 0.0, 1.0) * height;
         g.fillRect(width - (12 * (N_AUDIO_TRACKS - trackNum)), height - barHeight, 10, barHeight);
         trackNum++;
     }

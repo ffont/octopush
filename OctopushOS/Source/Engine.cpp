@@ -208,7 +208,7 @@ void Engine::timerCallback()
     
     // Save measured track levels to state
     for (int index = 0; index<te::getAudioTracks(edit).size(); index++){
-        state.measuredTrackLevels[index] = trackLevelClients[index].getAndClearAudioLevel(0).dB;
+        state.audioTrackSettings[index].measuredLevel = trackLevelClients[index].getAndClearAudioLevel(0).dB;
     }
     
 }
