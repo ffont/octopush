@@ -42,21 +42,15 @@ void Engine::initialize()
             wip->setEnabled (true);
         }
     }
+    edit.playInStopEnabled = true; // Needed to make input devices reachable even if not playing
     edit.restartPlayback();
     
-    
-    //------------- Create all audio tracks
+    //------------- Create all audio tracks and link level meters
     int currentTrackNum = 0;
     for (int index=0; index<N_AUDIO_TRACKS; index++){
-        EngineHelpers::getOrInsertAudioTrackAt (edit, index);
-    }
-    
-    // Initialize track level meters
-    int index = 0;
-    for (auto track : te::getAudioTracks(edit)){
+        auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, index);
         trackLevelClients[index] = te::LevelMeasurer::Client();
         track->getLevelMeterPlugin()->measurer.addClient(trackLevelClients[index]);
-        index ++;
     }
     
     //------------- Now add content to every track
@@ -125,20 +119,7 @@ void Engine::initialize()
         currentTrackNum++;
     }
     
-    // NOTE: need to do the play/stop here so edit.getCurrentPlaybackContext() return a valid context and
-    // later edit.getAllInputDevices() returns some devices that I can route to my audio out channels.
-    // I should improve this...
-    transportPlay();
-    transportStop();
-    
     //------------- Tracks 2-3 (route audio input)
-    std::cout << "Routing input channels" << std::endl;
-    if (auto context = edit.getCurrentPlaybackContext()){
-        std::cout << "Got context" << std::endl;
-    } else {
-        std::cout << "Did not get context" << std::endl;
-    }
-    
     int nInputTracks = 0;
     int maxInputTracks = 2;
     for (auto instance : edit.getAllInputDevices())
