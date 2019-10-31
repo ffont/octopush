@@ -61,6 +61,9 @@ void Push2Interface::initialize(Engine* engine_)
         pushInitializedSuccessfully = false;
     }
     
+    // Set initial UI
+    setInitialUI();
+    
     // Start the timer to draw the animation
     startTimerHz(PUSH_DISPLAY_FRAME_RATE);
 }
@@ -168,12 +171,15 @@ NBase::Result Push2Interface::openMidiOutDevice()
 
 void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &message)
 {
+    if (triggerPadActionsFromIncommingMidi(message)) { return; };
     if (triggerButtonActionsFromIncommingMidi(message)) { return; };
     if (triggerEncoderActionsFromIncommingMidi(message)) { return; };
 }
 
 void Push2Interface::sendMidiMessage(MidiMessage msg){
-    midiOutput.get()->sendMessageNow(msg);
+    if ((midiOutput.get() != nullptr)) {
+        midiOutput.get()->sendMessageNow(msg);
+    }
 }
 
 
@@ -295,7 +301,6 @@ void Push2Interface::updatePush2ButtonsFromState(){
         } else {
             setButtonRGBColour(buttonNumber, RGB_COLOUR_BLUE);
         }
-
         trackNum++;
     }
 }
@@ -307,6 +312,20 @@ void Push2Interface::updateUI()
     updatePush2ButtonsFromState();
 }
 
+void Push2Interface::setInitialUI()
+{
+    // Light pads with random colours
+    for (int i=0; i<8; i++){
+        for (int j=0; j<8; j++){
+            Random r = Random();
+            int radomColorCode = (int) round(r.nextFloat() * 126);
+            PadIJ padIJ;
+            padIJ.i = i;
+            padIJ.j = j;
+            setPadRGBColour(padIJ, radomColorCode);
+        }
+    }
+}
 
 
 //------------------------------------------------------------------------------

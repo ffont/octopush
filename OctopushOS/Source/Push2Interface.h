@@ -23,7 +23,8 @@ class Push2Interface: public Timer,
                       public ActionListener,
                       public ActionBroadcaster,
                       public Push2ButtonsController,
-                      public Push2EncodersController
+                      public Push2EncodersController,
+                      public Push2PadsController
 {
 public:
     
@@ -60,6 +61,7 @@ private:
     void updateDisplayFromState();
     void updatePush2ButtonsFromState();
     void updateUI();
+    void setInitialUI();
 
     NBase::Result openMidiInDevice();
     void handleIncomingMidiMessage (MidiInput *source, const MidiMessage &message) override;

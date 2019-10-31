@@ -135,13 +135,13 @@ public:
     }
     
     void setButtonRGBColour(int buttonNumber, int rgbColorCode){
-        int outputChannel = 0;  // output channel detemrines animation type. This si currently not implemented.
+        int outputChannel = 1;  // output channel detemrines animation type. This si currently not implemented.
         MidiMessage msg = MidiMessage::controllerEvent(outputChannel, buttonNumber, rgbColorCode);
         sendMidiMessage(msg);
     }
     
     void setButtonBWColour(int buttonNumber, int bwColorCode){
-        int outputChannel = 0;  // output channel detemrines animation type. This si currently not implemented.
+        int outputChannel = 1;  // output channel detemrines animation type. This si currently not implemented.
         MidiMessage msg = MidiMessage::controllerEvent(outputChannel, buttonNumber, bwColorCode);
         sendMidiMessage(msg);
     }
@@ -264,4 +264,64 @@ public:
     virtual void e7Rotated(int increment){}
     virtual void e8Rotated(int increment){}
     virtual void masterEncoderRotated(int increment){}
+};
+
+struct PadIJ {
+    int i;
+    int j;
+};
+
+
+class Push2PadsController: public Push2Common
+{
+public:
+    
+    virtual ~Push2PadsController(){}
+    
+    PadIJ PadN2PadIJ(int padN){
+        PadIJ padIJ;
+        padIJ.i = (99 - padN) / 8;
+        padIJ.j = 7 - (99 - padN) % 8;
+        return padIJ;
+    }
+    
+    int PadIJ2PadN(PadIJ padIJ){
+        return 92 - (padIJ.i * 8) + padIJ.j;
+    }
+    
+    bool triggerPadActionsFromIncommingMidi(const MidiMessage &message){
+        // Check if MIDI message is of type CC and matches one of the CC
+        // numbers of the encoders. If there's a match call corresponding
+        // encoder action and return True. If there's no match False.
+        
+        if (message.isNoteOn() || message.isNoteOff() || message.isAftertouch()){
+            int noteNumber = message.getNoteNumber();
+            if ((noteNumber >= 36) || (noteNumber <= 99)) {
+                PadIJ padIJ = PadN2PadIJ(noteNumber);
+                if (message.isNoteOn()){
+                    padPressed(padIJ, message.getVelocity());
+                    return true;
+                } else if (message.isNoteOff()){
+                    padReleased(padIJ, message.getVelocity());
+                    return true;
+                } else if (message.isAftertouch()){
+                    padAftertouch(padIJ, message.getAfterTouchValue());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    void setPadRGBColour(PadIJ padIJ, int rgbColorCode){
+        int outputChannel = 1;  // output channel detemrines animation type. This si currently not implemented.
+        int padN = PadIJ2PadN(padIJ);
+        MidiMessage msg = MidiMessage::noteOn(outputChannel, padN, (uint8)rgbColorCode);
+        sendMidiMessage(msg);
+    }
+    
+    // The following methods will be called if pads are pressed
+    virtual void padPressed(PadIJ padIJ, int velocity){}
+    virtual void padReleased(PadIJ padIJ, int velocity){}
+    virtual void padAftertouch(PadIJ padIJ, int value){}
 };
