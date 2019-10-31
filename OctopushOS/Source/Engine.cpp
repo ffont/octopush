@@ -222,5 +222,4 @@ void Engine::timerCallback()
     for (int index = 0; index<te::getAudioTracks(edit).size(); index++){
         state.audioTrackSettings[index].measuredLevel = trackLevelClients[index].getAndClearAudioLevel(0).dB;
     }
-    
 }

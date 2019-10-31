@@ -79,7 +79,7 @@ NBase::Result Push2Interface::connectToPush()
     RETURN_IF_FAILED_MESSAGE(result, "Failed to init bridge");
     
     // Initialises the midi input
-    result = openMidiDevice();
+    result = openMidiInDevice();
     RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi device");
     
     return NBase::Result::NoError;
@@ -88,7 +88,7 @@ NBase::Result Push2Interface::connectToPush()
 
 //------------------------------------------------------------------------------
 
-NBase::Result Push2Interface::openMidiDevice()
+NBase::Result Push2Interface::openMidiInDevice()
 {
     // Look for an input device matching push 2
     
@@ -114,13 +114,47 @@ NBase::Result Push2Interface::openMidiDevice()
     auto input = MidiInput::openDevice(deviceIndex, this);
     if (!input)
     {
-        return NBase::Result("Failed to open input device");
+        return NBase::Result("Failed to open push2 input device");
     }
     
     // Store and starts listening to the device
     midiInput = MidiInput::openDevice(deviceIndex, this);
-    
     midiInput.get()->start();
+    
+    return NBase::Result::NoError;
+}
+
+NBase::Result Push2Interface::openMidiOutDevice()
+{
+    // Look for an input device matching push 2
+    
+    auto devices = MidiOutput::getDevices();
+    int deviceIndex = -1;
+    int index = 0;
+    for (auto& device: devices)
+    {
+        if (SMatchSubStringNoCase(device.toStdString(), "ableton push 2"))
+        {
+            deviceIndex = index;
+            break;
+        }
+        index++;
+    }
+    
+    if (deviceIndex == -1)
+    {
+        return NBase::Result("Failed to find input output device for push2");
+    }
+    
+    // Try opening the device
+    auto output = MidiOutput::openDevice(deviceIndex);
+    if (!output)
+    {
+        return NBase::Result("Failed to open push2 output device");
+    }
+    
+    // Open the device
+    midiOutput = MidiOutput::openDevice(deviceIndex);
     
     return NBase::Result::NoError;
 }
@@ -132,6 +166,10 @@ void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const Mid
 {
     if (triggerButtonActionsFromIncommingMidi(message)) { return; };
     if (triggerEncoderActionsFromIncommingMidi(message)) { return; };
+}
+
+void Push2Interface::sendMidiMessage(MidiMessage msg){
+    midiOutput.get()->sendMessageNow(msg);
 }
 
 

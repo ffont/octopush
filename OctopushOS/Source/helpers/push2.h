@@ -12,12 +12,42 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-
-class Push2ButtonsListener
+class Push2Common
 {
 public:
     
-    virtual ~Push2ButtonsListener(){}
+    virtual ~Push2Common(){}
+    
+    
+    int RGB_COLOUR_BLACK = 0;
+    int RGB_COLOUR_WHITE = 122;
+    int RGB_COLOUR_LIGHT_GRAY = 123;
+    int RGB_COLOUR_DARK_GRAY = 124;
+    int RGB_COLOUR_BLUE = 125;
+    int RGB_COLOUR_GREEN = 126;
+    int RGB_COLOUR_RED = 127;
+    int RGB_COLOUR_ORANGE = 3;
+    int RGB_COLOUR_YELLOW = 8;
+    int RGB_COLOUR_TURQUOISE = 15;
+    int RGB_COLOUR_PURPLE = 22;
+    int RGB_COLOUR_PINK = 25;
+    
+    int BW_COLOUR_BLACK = 0;
+    int BW_COLOUR_DARK_GRAY = 16;
+    int BW_COLOUR_LIGHT_GRAY = 48;
+    int BW_COLOUR_WHITE = 127;
+    
+    virtual void sendMidiMessage(MidiMessage msg){
+        // To be implemented in a subclass which has access to the MidiOutput connected to Push2
+    }
+};
+
+
+class Push2ButtonsController: public Push2Common
+{
+public:
+    
+    virtual ~Push2ButtonsController(){}
     
     // Button CC number definitions
     int BUTTON_A1_CC_NUMBER = 102;
@@ -42,7 +72,6 @@ public:
         // Check if MIDI message is of type CC and matches one of the CC
         // numbers of the buttons. If there's a match call corresponding
         // button action and return True. If there's no match False.
-        
         
         if (message.isController())
         {
@@ -105,7 +134,19 @@ public:
         return false;
     }
     
-    // Upper row buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
+    void setButtonRGBColour(int buttonNumber, int rgbColorCode){
+        int outputChannel = 0;  // output channel detemrines animation type. This si currently not implemented.
+        MidiMessage msg = MidiMessage::controllerEvent(outputChannel, buttonNumber, rgbColorCode);
+        sendMidiMessage(msg);
+    }
+    
+    void setButtonBWColour(int buttonNumber, int bwColorCode){
+        int outputChannel = 0;  // output channel detemrines animation type. This si currently not implemented.
+        MidiMessage msg = MidiMessage::controllerEvent(outputChannel, buttonNumber, bwColorCode);
+        sendMidiMessage(msg);
+    }
+    
+    // The following methods will be called if a button is pressed/released
     virtual void ba1Pressed(){}
     virtual void ba2Pressed(){}
     virtual void ba3Pressed(){}
@@ -123,7 +164,6 @@ public:
     virtual void ba7Released(){}
     virtual void ba8Released(){}
     
-    // Lower row buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
     virtual void bb1Pressed(){}
     virtual void bb2Pressed(){}
     virtual void bb3Pressed(){}
@@ -141,16 +181,15 @@ public:
     virtual void bb7Released(){}
     virtual void bb8Released(){}
     
-    // Transport buttons methods (to be implemented in classes inheriting form Push2EncodersListener)
     virtual void playPressed(){}
     virtual void playReleased(){}
 };
 
-class Push2EncodersListener
+class Push2EncodersController: public Push2Common
 {
 public:
     
-    virtual ~Push2EncodersListener(){}
+    virtual ~Push2EncodersController(){}
     
     // Encoder cc number definitions
     int ENCODER_TEMPO_CC_NUMBER = 14;
@@ -213,7 +252,7 @@ public:
         return false;
     }
     
-    // Encoder methods (to be implemented in classes inheriting form Push2EncodersListener)
+    // The following methods will be called if encoders are rotated
     virtual void tempoEncoderRotated(int increment){}
     virtual void swingEncoderRotated(int increment){}
     virtual void e1Rotated(int increment){}

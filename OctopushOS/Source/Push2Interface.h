@@ -22,8 +22,8 @@ class Push2Interface: public Timer,
                       public MidiInputCallback,
                       public ActionListener,
                       public ActionBroadcaster,
-                      public Push2ButtonsListener,
-                      public Push2EncodersListener
+                      public Push2ButtonsController,
+                      public Push2EncodersController
 {
 public:
     
@@ -59,8 +59,11 @@ private:
     // Methods
     void drawFrame();
 
-    NBase::Result openMidiDevice();
+    NBase::Result openMidiInDevice();
     void handleIncomingMidiMessage (MidiInput *source, const MidiMessage &message) override;
+    
+    NBase::Result openMidiOutDevice();
+    void sendMidiMessage(MidiMessage msg) override;
 
     void timerCallback() override;
     
@@ -68,6 +71,7 @@ private:
     ableton::Push2DisplayBridge bridge;
     ableton::Push2Display push2Display;
     std::unique_ptr<MidiInput> midiInput;
+    std::unique_ptr<MidiOutput> midiOutput;
     Engine* engine;
     State* state;
 
