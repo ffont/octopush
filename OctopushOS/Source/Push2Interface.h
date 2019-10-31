@@ -36,7 +36,6 @@ public:
     
     void actionListenerCallback (const String &message) override;
     
-    Image computeFrame();
     Image lastFrame;
     
     // Encoder action handlers
@@ -57,7 +56,10 @@ public:
 private:
     
     // Methods
-    void drawFrame();
+    Image computeDisplayFrameFromState();
+    void updateDisplayFromState();
+    void updatePush2ButtonsFromState();
+    void updateUI();
 
     NBase::Result openMidiInDevice();
     void handleIncomingMidiMessage (MidiInput *source, const MidiMessage &message) override;

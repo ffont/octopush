@@ -19,23 +19,23 @@ public:
     virtual ~Push2Common(){}
     
     
-    int RGB_COLOUR_BLACK = 0;
-    int RGB_COLOUR_WHITE = 122;
-    int RGB_COLOUR_LIGHT_GRAY = 123;
-    int RGB_COLOUR_DARK_GRAY = 124;
-    int RGB_COLOUR_BLUE = 125;
-    int RGB_COLOUR_GREEN = 126;
-    int RGB_COLOUR_RED = 127;
-    int RGB_COLOUR_ORANGE = 3;
-    int RGB_COLOUR_YELLOW = 8;
-    int RGB_COLOUR_TURQUOISE = 15;
-    int RGB_COLOUR_PURPLE = 22;
-    int RGB_COLOUR_PINK = 25;
+    static const int RGB_COLOUR_BLACK = 0;
+    static const int RGB_COLOUR_WHITE = 122;
+    static const int RGB_COLOUR_LIGHT_GRAY = 123;
+    static const int RGB_COLOUR_DARK_GRAY = 124;
+    static const int RGB_COLOUR_BLUE = 125;
+    static const int RGB_COLOUR_GREEN = 126;
+    static const int RGB_COLOUR_RED = 127;
+    static const int RGB_COLOUR_ORANGE = 3;
+    static const int RGB_COLOUR_YELLOW = 8;
+    static const int RGB_COLOUR_TURQUOISE = 15;
+    static const int RGB_COLOUR_PURPLE = 22;
+    static const int RGB_COLOUR_PINK = 25;
     
-    int BW_COLOUR_BLACK = 0;
-    int BW_COLOUR_DARK_GRAY = 16;
-    int BW_COLOUR_LIGHT_GRAY = 48;
-    int BW_COLOUR_WHITE = 127;
+    static const int BW_COLOUR_BLACK = 0;
+    static const int BW_COLOUR_DARK_GRAY = 16;
+    static const int BW_COLOUR_LIGHT_GRAY = 48;
+    static const int BW_COLOUR_WHITE = 127;
     
     virtual void sendMidiMessage(MidiMessage msg){
         // To be implemented in a subclass which has access to the MidiOutput connected to Push2
@@ -50,23 +50,23 @@ public:
     virtual ~Push2ButtonsController(){}
     
     // Button CC number definitions
-    int BUTTON_A1_CC_NUMBER = 102;
-    int BUTTON_A2_CC_NUMBER = 103;
-    int BUTTON_A3_CC_NUMBER = 104;
-    int BUTTON_A4_CC_NUMBER = 105;
-    int BUTTON_A5_CC_NUMBER = 106;
-    int BUTTON_A6_CC_NUMBER = 107;
-    int BUTTON_A7_CC_NUMBER = 108;
-    int BUTTON_A8_CC_NUMBER = 109;
-    int BUTTON_B1_CC_NUMBER = 20;
-    int BUTTON_B2_CC_NUMBER = 21;
-    int BUTTON_B3_CC_NUMBER = 22;
-    int BUTTON_B4_CC_NUMBER = 23;
-    int BUTTON_B5_CC_NUMBER = 24;
-    int BUTTON_B6_CC_NUMBER = 25;
-    int BUTTON_B7_CC_NUMBER = 26;
-    int BUTTON_B8_CC_NUMBER = 27;
-    int BUTTON_PLAY_CC_NUMBER = 85;
+    static const int BUTTON_A1_CC_NUMBER = 102;
+    static const int BUTTON_A2_CC_NUMBER = 103;
+    static const int BUTTON_A3_CC_NUMBER = 104;
+    static const int BUTTON_A4_CC_NUMBER = 105;
+    static const int BUTTON_A5_CC_NUMBER = 106;
+    static const int BUTTON_A6_CC_NUMBER = 107;
+    static const int BUTTON_A7_CC_NUMBER = 108;
+    static const int BUTTON_A8_CC_NUMBER = 109;
+    static const int BUTTON_B1_CC_NUMBER = 20;
+    static const int BUTTON_B2_CC_NUMBER = 21;
+    static const int BUTTON_B3_CC_NUMBER = 22;
+    static const int BUTTON_B4_CC_NUMBER = 23;
+    static const int BUTTON_B5_CC_NUMBER = 24;
+    static const int BUTTON_B6_CC_NUMBER = 25;
+    static const int BUTTON_B7_CC_NUMBER = 26;
+    static const int BUTTON_B8_CC_NUMBER = 27;
+    static const int BUTTON_PLAY_CC_NUMBER = 85;
     
     bool triggerButtonActionsFromIncommingMidi(const MidiMessage &message){
         // Check if MIDI message is of type CC and matches one of the CC
@@ -192,17 +192,17 @@ public:
     virtual ~Push2EncodersController(){}
     
     // Encoder cc number definitions
-    int ENCODER_TEMPO_CC_NUMBER = 14;
-    int ENCODER_SWING_CC_NUMBER = 15;
-    int ENCODER_E1_CC_NUMBER = 71;
-    int ENCODER_E2_CC_NUMBER = 72;
-    int ENCODER_E3_CC_NUMBER = 73;
-    int ENCODER_E4_CC_NUMBER = 74;
-    int ENCODER_E5_CC_NUMBER = 75;
-    int ENCODER_E6_CC_NUMBER = 76;
-    int ENCODER_E7_CC_NUMBER = 77;
-    int ENCODER_E8_CC_NUMBER = 78;
-    int ENCODER_MASTER_CC_NUMBER = 79;
+    static const int ENCODER_TEMPO_CC_NUMBER = 14;
+    static const int ENCODER_SWING_CC_NUMBER = 15;
+    static const int ENCODER_E1_CC_NUMBER = 71;
+    static const int ENCODER_E2_CC_NUMBER = 72;
+    static const int ENCODER_E3_CC_NUMBER = 73;
+    static const int ENCODER_E4_CC_NUMBER = 74;
+    static const int ENCODER_E5_CC_NUMBER = 75;
+    static const int ENCODER_E6_CC_NUMBER = 76;
+    static const int ENCODER_E7_CC_NUMBER = 77;
+    static const int ENCODER_E8_CC_NUMBER = 78;
+    static const int ENCODER_MASTER_CC_NUMBER = 79;
     
     bool triggerEncoderActionsFromIncommingMidi(const MidiMessage &message){
         // Check if MIDI message is of type CC and matches one of the CC

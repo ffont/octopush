@@ -178,13 +178,13 @@ void Push2Interface::sendMidiMessage(MidiMessage msg){
 void Push2Interface::timerCallback()
 {
     state->animationElapsedTime += 0.02f;
-    drawFrame();
+    updateUI();
 }
 
 
 //------------------------------------------------------------------------------
 
-Image Push2Interface::computeFrame()
+Image Push2Interface::computeDisplayFrameFromState()
 {
     // Create a path for the animated wave
     const auto height = ableton::Push2DisplayBitmap::kHeight;
@@ -241,25 +241,68 @@ Image Push2Interface::computeFrame()
     return frame;
 }
 
-
-
-void Push2Interface::drawFrame()
+void Push2Interface::updateDisplayFromState()
 {
-    lastFrame = computeFrame();
+    // Update display (compute the frame outside the pushInitializedSuccessfully if because it can be used by the simulator)
+    lastFrame = computeDisplayFrameFromState();
     
     if (pushInitializedSuccessfully)
     {
-        // Request a juce::Graphics from the bridge
+        // Send last computed frame to dipslay
         auto& g = bridge.GetGraphic();
         g.drawImageAt(lastFrame, 0, 0, false);
-        
-        // Tells the bridge we're done with drawing and the frame can be sent to the display
         bridge.Flip();
     }
-    
-    // Update main component as well so it shows on screen the same thing that in Push screen
-    sendActionMessage("NEW_FRAME_AVAILABLE");
+
+    #if JUCE_DEBUG
+        // Update main component as well so it shows on screen the same thing that in Push screen
+        sendActionMessage("NEW_FRAME_AVAILABLE");
+    #endif
 }
+
+void Push2Interface::updatePush2ButtonsFromState(){
+    if (!pushInitializedSuccessfully) { return; }
+    
+    setButtonRGBColour(BUTTON_A1_CC_NUMBER, RGB_COLOUR_WHITE);  // Light button A1
+    
+    // Light Play button, green if playing, white otherwise
+    if (state->isPlaying){
+        setButtonRGBColour(BUTTON_PLAY_CC_NUMBER, RGB_COLOUR_WHITE);
+    } else {
+        setButtonRGBColour(BUTTON_PLAY_CC_NUMBER, RGB_COLOUR_GREEN);
+    }
+    
+    // Light track mute buttons (blue if active, red if muted)
+    int trackNum = 0;
+    for (auto settings : state->audioTrackSettings) {
+        int buttonNumber = 0;
+        if (trackNum == 0){
+            buttonNumber = BUTTON_A5_CC_NUMBER;
+        } else if (trackNum == 1){
+            buttonNumber = BUTTON_A6_CC_NUMBER;
+        } else if (trackNum == 2){
+            buttonNumber = BUTTON_A7_CC_NUMBER;
+        } else if (trackNum == 3){
+            buttonNumber = BUTTON_A8_CC_NUMBER;
+        }
+        
+        if (settings.mute){
+            setButtonRGBColour(buttonNumber, RGB_COLOUR_RED);
+        } else {
+            setButtonRGBColour(buttonNumber, RGB_COLOUR_BLUE);
+        }
+
+        trackNum++;
+    }
+}
+
+
+void Push2Interface::updateUI()
+{
+    updateDisplayFromState();
+    updatePush2ButtonsFromState();
+}
+
 
 
 //------------------------------------------------------------------------------

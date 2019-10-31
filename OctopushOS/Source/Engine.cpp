@@ -143,6 +143,10 @@ void Engine::initialize()
     }
     edit.restartPlayback();
     
+    // Mute tracks 2-3 to avoid feedback loop if input is microphone and output are speakers
+    toggleMuteTrack(2);
+    toggleMuteTrack(3);
+    
     //------------- Print info about created tracks
     std::cout << te::getAudioTracks(edit).size() << " Tracks created" << std::endl;
     for (auto track : te::getAudioTracks(edit)){
