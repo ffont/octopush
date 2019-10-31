@@ -80,7 +80,11 @@ NBase::Result Push2Interface::connectToPush()
     
     // Initialises the midi input
     result = openMidiInDevice();
-    RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi device");
+    RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi in device");
+    
+    // Initialises the midi output
+    result = openMidiOutDevice();
+    RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi out device");
     
     return NBase::Result::NoError;
 }
