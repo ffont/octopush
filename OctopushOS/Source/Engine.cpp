@@ -50,6 +50,7 @@ void Engine::initialize()
     for (int index=0; index<N_AUDIO_TRACKS; index++){
         auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, index);
         trackLevelClients[index] = te::LevelMeasurer::Client();
+        track->getLevelMeterPlugin()->measurer.setMode(te::LevelMeasurer::Mode::RMSMode);
         track->getLevelMeterPlugin()->measurer.addClient(trackLevelClients[index]);
     }
     
