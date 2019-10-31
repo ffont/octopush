@@ -191,10 +191,10 @@ void Engine::transportTogglePlayStop(){
 }
 
 void Engine::setTrackVolume(int trackNum, float volume){
+    const MessageManagerLock mmLock;  // Not sure why this is needed here but otherwise it would throw exceptions when called from rating an encoder from real Push (not from simulator)
     state.audioTrackSettings[trackNum].volume = volume;
     auto track = te::getAudioTracks(edit)[trackNum];
     track->getVolumePlugin()->setVolumeDb(volume);
-
 }
 
 void Engine::toggleMuteTrack(int trackNum){

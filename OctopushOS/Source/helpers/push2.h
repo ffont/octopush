@@ -215,37 +215,37 @@ public:
             int ccNumber = message.getControllerNumber();
             
             if (ccNumber == ENCODER_TEMPO_CC_NUMBER){
-                if (ccValue == 127){ tempoEncoderRotated(1); } else { tempoEncoderRotated(-1); }
+                if (ccValue == 1){ tempoEncoderRotated(1); } else { tempoEncoderRotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_SWING_CC_NUMBER){
-                if (ccValue == 127){ swingEncoderRotated(1); } else { swingEncoderRotated(-1); }
+                if (ccValue == 1){ swingEncoderRotated(1); } else { swingEncoderRotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E1_CC_NUMBER){
-                if (ccValue == 127){ e1Rotated(1); } else { e1Rotated(-1); }
+                if (ccValue == 1){ e1Rotated(1); } else { e1Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E2_CC_NUMBER){
-                if (ccValue == 127){ e2Rotated(1); } else { e2Rotated(-1); }
+                if (ccValue == 1){ e2Rotated(1); } else { e2Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E3_CC_NUMBER){
-                if (ccValue == 127){ e3Rotated(1); } else { e3Rotated(-1); }
+                if (ccValue == 1){ e3Rotated(1); } else { e3Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E4_CC_NUMBER){
-                if (ccValue == 127){ e4Rotated(1); } else { e4Rotated(-1); }
+                if (ccValue == 1){ e4Rotated(1); } else { e4Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E5_CC_NUMBER){
-                if (ccValue == 127){ e5Rotated(1); } else { e5Rotated(-1); }
+                if (ccValue == 1){ e5Rotated(1); } else { e5Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E6_CC_NUMBER){
-                if (ccValue == 127){ e6Rotated(1); } else { e6Rotated(-1); }
+                if (ccValue == 1){ e6Rotated(1); } else { e6Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E7_CC_NUMBER){
-                if (ccValue == 127){ e7Rotated(1); } else { e7Rotated(-1); }
+                if (ccValue == 1){ e7Rotated(1); } else { e7Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_E8_CC_NUMBER){
-                if (ccValue == 127){ e8Rotated(1); } else { e8Rotated(-1); }
+                if (ccValue == 1){ e8Rotated(1); } else { e8Rotated(-1); }
                 return true;
             } else if (ccNumber == ENCODER_MASTER_CC_NUMBER){
-                if (ccValue == 127){ masterEncoderRotated(1); } else { masterEncoderRotated(-1); }
+                if (ccValue == 1){ masterEncoderRotated(1); } else { masterEncoderRotated(-1); }
                 return true;
             }
         }

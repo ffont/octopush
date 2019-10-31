@@ -277,9 +277,9 @@ void Push2Interface::updatePush2ButtonsFromState(){
     
     // Light Play button, green if playing, white otherwise
     if (state->isPlaying){
-        setButtonRGBColour(BUTTON_PLAY_CC_NUMBER, RGB_COLOUR_WHITE);
-    } else {
         setButtonRGBColour(BUTTON_PLAY_CC_NUMBER, RGB_COLOUR_GREEN);
+    } else {
+        setButtonRGBColour(BUTTON_PLAY_CC_NUMBER, RGB_COLOUR_WHITE);
     }
     
     // Light track mute buttons (blue if active, red if muted)
@@ -347,28 +347,28 @@ void Push2Interface::e1Rotated(int increment){
 void Push2Interface::e5Rotated(int increment){
     
     int trackNum = 0;  // Track #0
-    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e6Rotated(int increment){
     int trackNum = 1;  // Track #1
-    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e7Rotated(int increment){
     int trackNum = 2;  // Track #2
-    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e8Rotated(int increment){
     int trackNum = 3;  // Track #3
-    float newVolume = state->audioTrackSettings[trackNum].volume += 1.0 * increment;
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
