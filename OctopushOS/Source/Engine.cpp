@@ -207,6 +207,26 @@ void Engine::toggleMuteTrack(int trackNum){
     state.audioTrackSettings[trackNum].mute = track->isMuted(false);
 }
 
+void Engine::updateStepSequencerPattern(int samplerChannel, int stepN){
+    // Toggle on/off for the selected channel/step
+    state.stepSequencerPattern[samplerChannel][stepN] = !state.stepSequencerPattern[samplerChannel][stepN];
+    
+    // Reload pattern to step sequencer clip
+    auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 1);  // 1 = step sequencer track
+    
+    auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
+    int channelCount = 0;
+    for (auto channel : stepClip->getChannels())
+    {
+        for (auto& pattern : stepClip->getPatterns()){
+            for (int step=0; step<pattern.getNumNotes(); step++){
+                pattern.setNote (channelCount, step, state.stepSequencerPattern[channelCount][step]);
+            }
+        }
+        channelCount++;
+    }
+}
+
 void Engine::timerCallback()
 {
     // Update state variables that change over time like transport position

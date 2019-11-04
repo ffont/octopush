@@ -34,6 +34,8 @@ public:
     void setTrackVolume(int tracknum, float gain);
     void toggleMuteTrack(int tracknum);
     
+    void updateStepSequencerPattern(int samplerChannel, int stepN);
+    
     State state;  // Make state public so it can be accessed and modified by others
 
 private:

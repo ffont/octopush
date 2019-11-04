@@ -54,12 +54,16 @@ public:
     void ba8Pressed() override;
     void playPressed() override;
     
+    // Pad action handlers
+    void padPressed(PadIJ padIJ, int velocity) override;
+    
 private:
     
     // Methods
     Image computeDisplayFrameFromState();
     void updateDisplayFromState();
     void updatePush2ButtonsFromState();
+    void updatePush2PadsFromState();
     void updateUI();
     void setInitialUI();
 

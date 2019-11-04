@@ -229,13 +229,7 @@ Image Push2Interface::computeDisplayFrameFromState()
     g.setColour(state->demoWaveColor);
     g.fillPath(wavePath);
     
-    // Draw playhead position
-    g.setColour(state->demoWaveColor);
-    double playheadX = state->currentStepProportion * width;
-    g.fillRect(playheadX, 0, 5, height);
-    
     // Draw audio tracks level meter and volume
-    
     int trackNum = 0;
     for (auto settings : state->audioTrackSettings) {
         float trackWidth = width / 8;
@@ -315,26 +309,66 @@ void Push2Interface::updatePush2ButtonsFromState(){
     }
 }
 
+void Push2Interface::updatePush2PadsFromState()
+{
+    // Display step sequencer pattern in pads
+    
+    // Init padGridColourValues to black
+    std::array<std::array<int, 8>, 8> padGridColourValues = {RGB_COLOUR_BLACK};
+    
+    // Iterate sequence and set corresponding position colours
+    for (int i=0; i<state->stepSequencerPattern.size(); i++){
+        for (int j=0; j<state->stepSequencerPattern[0].size(); j++){
+            // i = instrument type (0-3)
+            // j = step number (0-15)
+            if (state->stepSequencerPattern[i][j]) {  // If event present for that instrument/step
+                if (j <= 7 ){
+                    // First 4-pads row
+                    padGridColourValues[i][j] = RGB_COLOUR_ORANGE;
+                } else {
+                    // Second 4-pads row
+                    padGridColourValues[4 + i][j - 8] = RGB_COLOUR_PINK;
+                }
+            }
+        }
+    }
+    
+    // Add playhead position
+    int currentStepN =  (int)floor(state->currentStepProportion * 16);
+    if (currentStepN <= 7 ){
+        // First 4-pads row
+        for (int i=0; i<4; i++){
+            padGridColourValues[i][currentStepN] = RGB_COLOUR_WHITE;
+        }
+    } else {
+        // Second 4-pads row
+        for (int i=4; i<8; i++){
+            padGridColourValues[i][currentStepN - 8] = RGB_COLOUR_WHITE;
+        }
+    }
+    
+    // Set prepared padGridColourValues to Push's pads
+    for (int i=0; i<8; i++){
+        for (int j=0; j<8; j++){
+            PadIJ padIJ;
+            padIJ.i = i;
+            padIJ.j = j;
+            setPadRGBColour(padIJ, padGridColourValues[i][j]);
+        }
+    }
+}
+
 
 void Push2Interface::updateUI()
 {
     updateDisplayFromState();
     updatePush2ButtonsFromState();
+    updatePush2PadsFromState();
 }
 
 void Push2Interface::setInitialUI()
 {
-    // Light pads with random colours
-    for (int i=0; i<8; i++){
-        for (int j=0; j<8; j++){
-            Random r = Random();
-            int radomColorCode = (int) round(r.nextFloat() * 126);
-            PadIJ padIJ;
-            padIJ.i = i;
-            padIJ.j = j;
-            setPadRGBColour(padIJ, radomColorCode);
-        }
-    }
+    // UI stuff to do once at initialization time
 }
 
 
@@ -411,4 +445,13 @@ void Push2Interface::ba8Pressed(){
 
 void Push2Interface::playPressed(){
     engine->transportTogglePlayStop();
+}
+
+//------------------------------------------------------------------------------
+
+void Push2Interface::padPressed(PadIJ padIJ, int velocity){
+    // Update step sequencer pattern
+    int samplerChannel = padIJ.i % 4;
+    int step = padIJ.i < 4 ? padIJ.j : padIJ.j + 8;
+    engine->updateStepSequencerPattern(samplerChannel, step);
 }

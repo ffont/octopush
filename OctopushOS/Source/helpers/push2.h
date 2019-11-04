@@ -331,7 +331,7 @@ public:
         
         if (message.isNoteOn() || message.isNoteOff() || message.isAftertouch()){
             int noteNumber = message.getNoteNumber();
-            if ((noteNumber >= 36) || (noteNumber <= 99)) {
+            if ((noteNumber >= 36) && (noteNumber <= 99)) {
                 PadIJ padIJ = PadN2PadIJ(noteNumber);
                 if (message.isNoteOn()){
                     padPressed(padIJ, message.getVelocity());
