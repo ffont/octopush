@@ -11,6 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "../definitions.h"
 
 class Push2Common
 {
@@ -213,44 +214,78 @@ public:
         {
             int ccValue = message.getControllerValue();
             int ccNumber = message.getControllerNumber();
+            int64 currentTime = Time::getCurrentTime().toMilliseconds();
+            
+            // Calculate corresponding increment accoridng to https://github.com/Ableton/push-interface/blob/master/doc/AbletonPush2MIDIDisplayInterface.asc#Encoders
+            int increment = 0;
+            if (ccValue < 64){
+                increment = ccValue;  // Turning right
+            } else {
+                increment = (128 - ccValue) * -1;
+            }
             
             if (ccNumber == ENCODER_TEMPO_CC_NUMBER){
-                if (ccValue == 1){ tempoEncoderRotated(1); } else { tempoEncoderRotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[0]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 0 of  lastTimeEncoderMethodTriggered = tempo encoder
+                tempoEncoderRotated(increment);
+                lastTimeEncoderMethodTriggered[0] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_SWING_CC_NUMBER){
-                if (ccValue == 1){ swingEncoderRotated(1); } else { swingEncoderRotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[1]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 1 of  lastTimeEncoderMethodTriggered = swing encoder
+                swingEncoderRotated(increment);
+                lastTimeEncoderMethodTriggered[1] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E1_CC_NUMBER){
-                if (ccValue == 1){ e1Rotated(1); } else { e1Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[2]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 2 of  lastTimeEncoderMethodTriggered = ecoder e1
+                e1Rotated(increment);
+                lastTimeEncoderMethodTriggered[2] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E2_CC_NUMBER){
-                if (ccValue == 1){ e2Rotated(1); } else { e2Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[3]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 3 of  lastTimeEncoderMethodTriggered = ecoder e2
+                e2Rotated(increment);
+                lastTimeEncoderMethodTriggered[3] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E3_CC_NUMBER){
-                if (ccValue == 1){ e3Rotated(1); } else { e3Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[4]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 4 of  lastTimeEncoderMethodTriggered = ecoder e3
+                e3Rotated(increment);
+                lastTimeEncoderMethodTriggered[4] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E4_CC_NUMBER){
-                if (ccValue == 1){ e4Rotated(1); } else { e4Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[5]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 5 of  lastTimeEncoderMethodTriggered = ecoder e4
+                e4Rotated(increment);
+                lastTimeEncoderMethodTriggered[5] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E5_CC_NUMBER){
-                if (ccValue == 1){ e5Rotated(1); } else { e5Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[6]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 6 of  lastTimeEncoderMethodTriggered = ecoder e5
+                e5Rotated(increment);
+                lastTimeEncoderMethodTriggered[6] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E6_CC_NUMBER){
-                if (ccValue == 1){ e6Rotated(1); } else { e6Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[7]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 7 of  lastTimeEncoderMethodTriggered = ecoder e6
+                e6Rotated(increment);
+                lastTimeEncoderMethodTriggered[7] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E7_CC_NUMBER){
-                if (ccValue == 1){ e7Rotated(1); } else { e7Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[8]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 8 of  lastTimeEncoderMethodTriggered = ecoder e7
+                e7Rotated(increment);
+                lastTimeEncoderMethodTriggered[8] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E8_CC_NUMBER){
-                if (ccValue == 1){ e8Rotated(1); } else { e8Rotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[9]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 9 of  lastTimeEncoderMethodTriggered = ecoder e8
+                e8Rotated(increment);
+                lastTimeEncoderMethodTriggered[9] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_MASTER_CC_NUMBER){
-                if (ccValue == 1){ masterEncoderRotated(1); } else { masterEncoderRotated(-1); }
+                if ((currentTime - lastTimeEncoderMethodTriggered[10]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 10 of  lastTimeEncoderMethodTriggered = master encoder
+                masterEncoderRotated(increment);
+                lastTimeEncoderMethodTriggered[10] = currentTime;
                 return true;
             }
         }
         return false;
     }
+    
+    // Store last time an encoder was rotated to be able to limit message rate
+    std::array<int64, 11> lastTimeEncoderMethodTriggered = {0};
     
     // The following methods will be called if encoders are rotated
     virtual void tempoEncoderRotated(int increment){}

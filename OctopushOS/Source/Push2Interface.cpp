@@ -234,17 +234,27 @@ Image Push2Interface::computeDisplayFrameFromState()
     double playheadX = state->currentStepProportion * width;
     g.fillRect(playheadX, 0, 5, height);
     
-    // Draw audio tracks level meter
-    g.setColour(Colours::green);
+    // Draw audio tracks level meter and volume
+    
     int trackNum = 0;
     for (auto settings : state->audioTrackSettings) {
-        double minDbValueShown = -30.0;
+        float trackWidth = width / 8;
+        float trackX = (trackNum * trackWidth) + (width - (N_AUDIO_TRACKS * trackWidth)); // Align right of display
+        
+        // Draw meter
+        g.setColour(Colours::green);
+        double minDbValueShown = -60.0;
         double clippedLevel = settings.measuredLevel;
         if (clippedLevel < minDbValueShown){
             clippedLevel = minDbValueShown;
         }
         double barHeight = jmap(clippedLevel, minDbValueShown, 0.0, 0.0, 1.0) * height;
-        g.fillRect(width - (12 * (N_AUDIO_TRACKS - trackNum)), height - barHeight, 10, barHeight);
+        g.fillRect((int)trackX, height - barHeight, 20, barHeight);
+        
+        // Draw volume indicator
+        g.setColour(Colours::white);
+        g.drawText(String::formatted("%.2f dB", settings.volume), (int)trackX, 5, trackWidth, 12, Justification::centred);
+        
         trackNum++;
     }
     
