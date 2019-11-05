@@ -67,6 +67,7 @@ void Engine::initialize()
         if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit.getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
         {
             track->pluginList.insertPlugin (*reverb, 0, nullptr);
+            reverb->setRoomSize(state.reverberationRoomSize);
         }
         
         currentTrackNum++;
@@ -232,6 +233,17 @@ void Engine::updateStepSequencerPattern(int samplerChannel, int stepN){
         }
         channelCount++;
     }
+}
+
+void Engine::setReverberationRoomSize(float roomSize)
+{
+    // Get track 0 which has a reverberation plugin and update it's room size parameter
+    // NOTE: in the future there should be a more generic way to set plugin parameters,
+    // specify tracks and also save their values in the state
+    auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 0);  // 0 = sample + plugin
+    auto reverb = dynamic_cast<te::ReverbPlugin*> (track->pluginList.getPluginsOfType<te::ReverbPlugin>().getLast());
+    std::cout << roomSize << std::endl;
+    reverb->setRoomSize(roomSize);
 }
 
 void Engine::timerCallback()

@@ -71,6 +71,8 @@ public:
     
     std::array<AudioTrackSettings, N_AUDIO_TRACKS> audioTrackSettings;
     
+    float reverberationRoomSize = 0.5;
+    
 private:
     
   

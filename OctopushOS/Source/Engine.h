@@ -36,6 +36,8 @@ public:
     
     void updateStepSequencerPattern(int samplerChannel, int stepN);
     
+    void setReverberationRoomSize(float roomSize);
+    
     State state;  // Make state public so it can be accessed and modified by others
 
 private:

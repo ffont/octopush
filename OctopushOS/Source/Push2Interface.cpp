@@ -389,13 +389,17 @@ void Push2Interface::actionListenerCallback (const String &message)
 //------------------------------------------------------------------------------
 
 void Push2Interface::e1Rotated(int increment){
-    
     state->demoWaveAmplitude += 0.04 * increment;
     state->demoWaveAmplitude = jlimit(0.0, 1.0, (double)state->demoWaveAmplitude);
 }
 
+void Push2Interface::e4Rotated(int increment){
+    state->reverberationRoomSize += 0.04 * increment;
+    state->reverberationRoomSize = jlimit(0.0, 1.0, (double)state->reverberationRoomSize);
+    engine->setReverberationRoomSize(state->reverberationRoomSize);
+}
+
 void Push2Interface::e5Rotated(int increment){
-    
     int trackNum = 0;  // Track #0
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);

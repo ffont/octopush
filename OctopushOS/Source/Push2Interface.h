@@ -41,6 +41,7 @@ public:
     
     // Encoder action handlers
     void e1Rotated(int increment) override;
+    void e4Rotated(int increment) override;
     void e5Rotated(int increment) override;
     void e6Rotated(int increment) override;
     void e7Rotated(int increment) override;
