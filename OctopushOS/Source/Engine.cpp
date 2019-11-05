@@ -62,6 +62,13 @@ void Engine::initialize()
         f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
         te::AudioFile audioFile (f);
         auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+        
+        // Add reverb plugin to track
+        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit.getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+        {
+            track->pluginList.insertPlugin (*reverb, 0, nullptr);
+        }
+        
         currentTrackNum++;
     }
     
