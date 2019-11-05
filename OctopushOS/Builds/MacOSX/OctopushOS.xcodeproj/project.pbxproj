@@ -476,6 +476,13 @@
 			path = "../../3rdParty/juce/modules/juce_graphics";
 			sourceTree = "SOURCE_ROOT";
 		};
+		833F0ABB5E61BD2D04A2FEE8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "startup_img.png";
+			path = "../../Resources/startup_img.png";
+			sourceTree = "SOURCE_ROOT";
+		};
 		87C35CD9892B93DC68BAFA75 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -749,13 +756,6 @@
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
 		};
-		FB58BA2D5D4D163323CC330D = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = PushStartup.png;
-			path = ../../Resources/PushStartup.png;
-			sourceTree = "SOURCE_ROOT";
-		};
 		FC1F7516533DA965BF5D85D2 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -820,7 +820,7 @@
 		2F817773C97B990B5154ADFD = {
 			isa = PBXGroup;
 			children = (
-				FB58BA2D5D4D163323CC330D,
+				833F0ABB5E61BD2D04A2FEE8,
 				AD5B2642EDE40DF2E5F50E69,
 				673CE415C18F52FBCC759F6C,
 				BBA3BF2BD0E65253B3DFC068,

@@ -8,8 +8,8 @@
 
 namespace BinaryData
 {
-    extern const char*   PushStartup_png;
-    const int            PushStartup_pngSize = 16112;
+    extern const char*   startup_img_png;
+    const int            startup_img_pngSize = 11969;
 
     extern const char*   clap_wav;
     const int            clap_wavSize = 57452;

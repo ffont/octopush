@@ -26,7 +26,7 @@
             file="Source/Push2Simulator.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
-      <FILE id="AudmDd" name="PushStartup.png" compile="0" resource="1" file="Resources/PushStartup.png"/>
+      <FILE id="F5k4m7" name="startup_img.png" compile="0" resource="1" file="Resources/startup_img.png"/>
       <FILE id="cZMCXb" name="clap.wav" compile="0" resource="1" file="Resources/clap.wav"/>
       <FILE id="cCfAvg" name="hihat.wav" compile="0" resource="1" file="Resources/hihat.wav"/>
       <FILE id="MdIBDY" name="kick.wav" compile="0" resource="1" file="Resources/kick.wav"/>

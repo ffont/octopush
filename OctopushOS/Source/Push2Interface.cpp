@@ -206,6 +206,12 @@ Image Push2Interface::computeDisplayFrameFromState()
     // Clear previous frame
     g.fillAll(juce::Colour(0xff000000));
     
+    // Draw logo (only during first second(s) at startup)
+    if (state->animationElapsedTime < 1.2){
+        auto logo = ImageCache::getFromMemory(BinaryData::startup_img_png, BinaryData::startup_img_pngSize);
+        g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
+        return frame;
+    }
     
     // Draw demo waveform
     Path wavePath;
