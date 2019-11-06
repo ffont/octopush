@@ -74,7 +74,6 @@
         <MODULEPATH id="juce_graphics" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="juce_opengl" path="3rdParty/juce/modules"/>
         <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
         <MODULEPATH id="juce_dsp" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_osc" path="3rdParty/juce/modules"/>
@@ -98,7 +97,6 @@
         <MODULEPATH id="juce_graphics" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="juce_opengl" path="3rdParty/juce/modules"/>
         <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
         <MODULEPATH id="juce_dsp" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_osc" path="3rdParty/juce/modules"/>
@@ -119,7 +117,6 @@
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
-    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
