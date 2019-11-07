@@ -1,10 +1,10 @@
 <p align="center">
-<img src="logo_main_colour.png" width="250" title="Octopush logo" />
+<img src="docs/logo_main_colour.png" width="250" title="Octopush logo" />
 </p>
 
 ## What is Octopush?
 
-Well, this is just work in progress, don't make too many quesitons ;) I'm currently working on a technical solution to bring lo life some ideas I have in mind. Once I get to a solution I'm confirtable with, I'll update this file and provide more details.
+Well, this is just work in progress, don't ask too many quesitons ;) I'm currently just working on a technical solution to bring lo life some ideas I have in mind. Once I get to an initial solution I'm confirtable with, I'll update this file and share more details.
 
 
 ## Building Octopush
