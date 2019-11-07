@@ -1,5 +1,9 @@
 # Octopush
 
+## What is Octopush?
+
+Well, this is just work in progress, don't make too many quesitons ;) I'm currently working on a technical solution to bring lo life osme ideas. Once I get to a solution I'm confirtable with I'll update this and provide more details.
+
 
 ## Building Octopush
 
