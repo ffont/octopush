@@ -19,7 +19,7 @@ OcotpushOS is a standard JUCE app and can be edited and built using standard JUC
 You need to checkout the code including submodules. This will download source code for all required 3rd party libraries (JUCE, etc.)
 
 ```
-git clone --recurse-submodules git@github.com:ffont/octopush.git
+git clone --recurse-submodules https://github.com/ffont/octopush.git
 ```
 
 #### Building Projucer
@@ -32,6 +32,16 @@ cd OctospushOS/Scripts
 ```
 
 The generated executable will be placed in `OctopushOS/3rdParty/juce/extras/Projucer/Builds/MacOSX/build/Release/Projucer` (MacOSX) or `OctopushOS/3rdParty/juce/extras/Projucer/Builds/LinuxMakefile/build/Release/Projucer` (Linux) depending on the platform you're running it from.
+
+If building from Linux, the following dependencies need to be installed:
+```
+# JUCE dependencies
+apt-get install clang git ladspa-sdk freeglut3-dev g++ libasound2-dev libcurl4-openssl-dev libfreetype6-dev libjack-jackd2-dev libx11-dev libxcomposite-dev libxcursor-dev libxinerama-dev libxrandr-dev mesa-common-dev webkit2gtk-4.0 juce-tools
+
+# push2-display-with-juce dependencies
+apt-get install libusb-1.0-0-dev
+```
+This list of dependencies was taken from [this forum thread](https://forum.juce.com/t/list-of-juce-dependencies-under-linux/15121/31). It could be the case that some of these are actually not needed, I have not tested them individually.
 
 
 #### Development build
