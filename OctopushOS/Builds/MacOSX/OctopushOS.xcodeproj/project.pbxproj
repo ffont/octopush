@@ -45,10 +45,6 @@
 			isa = PBXBuildFile;
 			fileRef = CCE7118A2A76A55BA14B5E2D;
 		};
-		9954B3191B13CBE393AF0E96 = {
-			isa = PBXBuildFile;
-			fileRef = EFEF7301A295C7C370E7E175;
-		};
 		935AA4EEEE8B006EC080278C = {
 			isa = PBXBuildFile;
 			fileRef = 0EB65F58B395936F6486AF8C;
@@ -149,10 +145,6 @@
 			isa = PBXBuildFile;
 			fileRef = 0C971E506A38331CED860C0D;
 		};
-		858546A0782C49D40CEC4137 = {
-			isa = PBXBuildFile;
-			fileRef = B6C5966E61013B2C650A78B9;
-		};
 		77C3690A58FBD6937EC6EB8C = {
 			isa = PBXBuildFile;
 			fileRef = C0B38755731E13F0323E3C2D;
@@ -222,13 +214,6 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_gui_extra.mm";
 			path = "../../JuceLibraryCode/include_juce_gui_extra.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
-		0DB4D746F8127C4873FBFB9F = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "juce_opengl";
-			path = "../../3rdParty/juce/modules/juce_opengl";
 			sourceTree = "SOURCE_ROOT";
 		};
 		0DC15A53AB2EAF6B5A830B54 = {
@@ -581,13 +566,6 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_audio_files.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
-		B6C5966E61013B2C650A78B9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = "include_juce_opengl.mm";
-			path = "../../JuceLibraryCode/include_juce_opengl.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
 		BBA3BF2BD0E65253B3DFC068 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.wav;
@@ -726,13 +704,6 @@
 			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = System/Library/Frameworks/Cocoa.framework;
-			sourceTree = SDKROOT;
-		};
-		EFEF7301A295C7C370E7E175 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = OpenGL.framework;
-			path = System/Library/Frameworks/OpenGL.framework;
 			sourceTree = SDKROOT;
 		};
 		F0DFF339B0B268FA8FBF92D3 = {
@@ -889,7 +860,6 @@
 				7BF56E44D931D97A8302F5ED,
 				2C8CFED9F5922792AFE5EE6C,
 				2875C7A1EB8C7991BBA0D94C,
-				0DB4D746F8127C4873FBFB9F,
 				C20BE3B9C51A7D088471E217,
 				19E1D3B2EDE04C84F808DBC6,
 			);
@@ -915,7 +885,6 @@
 				FF2C54DEAF4F2555F3BE4B1B,
 				F0DFF339B0B268FA8FBF92D3,
 				0C971E506A38331CED860C0D,
-				B6C5966E61013B2C650A78B9,
 				C0B38755731E13F0323E3C2D,
 				22A6621BAEA8DAD822E9E811,
 				B5F77D7D992E4A5502D6A202,
@@ -951,7 +920,6 @@
 				CC01CB472F7B61A0CE3F069E,
 				E56C4CE433C5EFE03C3DF702,
 				CCE7118A2A76A55BA14B5E2D,
-				EFEF7301A295C7C370E7E175,
 				0EB65F58B395936F6486AF8C,
 				EBAB70EB6F3F6AD3078CCEA1,
 			);
@@ -1227,7 +1195,6 @@
 				2349BA2C2379C03ADB23EC45,
 				4CBD15DBE98676EDF17ED08F,
 				C00E54A1C0A0D8AC024B7003,
-				858546A0782C49D40CEC4137,
 				77C3690A58FBD6937EC6EB8C,
 				0353E179B2282D08E574978F,
 				E3B9352BDC4624EAE72D8670,
@@ -1253,7 +1220,6 @@
 				60C67B928858429B6F1C9230,
 				88B402F503D50C2D931432E8,
 				0B7200B0C56123B63EECC1ED,
-				9954B3191B13CBE393AF0E96,
 				935AA4EEEE8B006EC080278C,
 				71F4A9B7591EEA56AB89AE3C,
 			);
