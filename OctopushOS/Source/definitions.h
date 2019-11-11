@@ -10,8 +10,8 @@
 
 #pragma once
 
-#define PUSH_DISPLAY_FRAME_RATE 60
-#define STATE_UPDATE_RATE 15
+#define PUSH_DISPLAY_FRAME_RATE 15
+#define STATE_UPDATE_RATE 10
 
 #define N_AUDIO_TRACKS 4
 
