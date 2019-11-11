@@ -39,6 +39,8 @@ public:
     void setReverberationRoomSize(float roomSize);
     
     State state;  // Make state public so it can be accessed and modified by others
+    
+    te::Engine engine { ProjectInfo::projectName };
 
 private:
     // Methods
@@ -46,7 +48,6 @@ private:
     void timerCallback() override;
    
     // Properties
-    te::Engine engine { ProjectInfo::projectName };
     te::Edit edit { engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0 };
     te::TransportControl& transport { edit.getTransport() };
     
