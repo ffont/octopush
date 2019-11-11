@@ -3,7 +3,8 @@
 <JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5"
               headerPath="../../Source/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/push2/"
               version="0.0.1" companyName="Rita &amp; Aurora" projectLineFeed="&#10;"
-              companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com">
+              companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com"
+              reportAppUsage="0">
   <MAINGROUP id="SqRWVy" name="OctopushOS">
     <GROUP id="{3A6EFDD0-9705-3CE7-1080-1AA11F5E9D8B}" name="Source">
       <GROUP id="{67E0CF4F-1ED1-FB7E-1AB8-4D2AA26845B7}" name="helpers">
