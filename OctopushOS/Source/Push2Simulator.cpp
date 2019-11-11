@@ -993,7 +993,7 @@ Push2Simulator::Push2Simulator ()
 
     setSize (900, 726);
 
-    
+
     //[Constructor] You can add your own custom stuff here..
     // Make rotary sliders endles
     tempoSlider->setRotaryParameters(0, float_Pi * 2, false);
@@ -1895,7 +1895,7 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == e1Slider.get())
     {
         //[UserSliderCode_e1Slider] -- add your slider handling code here..
-        
+
         double currentValue = e1Slider.get()->getValue();
         if (currentValue > e1SliderLastValue){
             push->e1Rotated(1);
