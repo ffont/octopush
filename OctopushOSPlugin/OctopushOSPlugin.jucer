@@ -4,33 +4,37 @@
               pluginFormats="buildStandalone" version="0.0.1" projectLineFeed="&#10;"
               companyName="Rita &amp; Aurora" companyWebsite="https://ritaandaurora.github.io"
               companyEmail="frederic.font@gmail.com" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn"
-              headerPath="../../Source/&#10;../../../OctopushOS/3rdParty/libusb/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/">
+              headerPath="../../../OctopushOS/Source/&#10;../../../OctopushOS/3rdParty/libusb/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/">
   <MAINGROUP id="XZiSpI" name="OctopushOSPlugin">
-    <GROUP id="{F249E080-9BE7-CAD9-CAFB-6B6D8BC75EA2}" name="Source">
-      <FILE id="CAfZJY" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="Source/PluginProcessor.cpp"/>
-      <FILE id="BIajA0" name="PluginProcessor.h" compile="0" resource="0"
-            file="Source/PluginProcessor.h"/>
-      <FILE id="OEApyl" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="CkJLaK" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="vqqI45" name="definitions.h" compile="0" resource="0" file="Source/definitions.h"/>
-      <FILE id="bVQwZs" name="Engine.cpp" compile="1" resource="0" file="Source/Engine.cpp"/>
-      <FILE id="fhDs08" name="Engine.h" compile="0" resource="0" file="Source/Engine.h"/>
-      <GROUP id="{33201178-ED65-AA2D-48E9-71C3FCB6840D}" name="helpers">
-        <FILE id="l2Gnzj" name="push2.h" compile="0" resource="0" file="Source/helpers/push2.h"/>
-        <FILE id="mJ8Mog" name="tracktion_engine.h" compile="0" resource="0"
-              file="Source/helpers/tracktion_engine.h"/>
+    <GROUP id="{A54AB4E9-2E49-751F-7EB5-4A0244B7AD08}" name="Source">
+      <GROUP id="{F249E080-9BE7-CAD9-CAFB-6B6D8BC75EA2}" name="PluginWrapper">
+        <FILE id="CAfZJY" name="PluginProcessor.cpp" compile="1" resource="0"
+              file="Source/PluginProcessor.cpp"/>
+        <FILE id="BIajA0" name="PluginProcessor.h" compile="0" resource="0"
+              file="Source/PluginProcessor.h"/>
+        <FILE id="OEApyl" name="PluginEditor.cpp" compile="1" resource="0"
+              file="Source/PluginEditor.cpp"/>
+        <FILE id="CkJLaK" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       </GROUP>
-      <FILE id="daMcAV" name="Push2Interface.cpp" compile="1" resource="0"
-            file="Source/Push2Interface.cpp"/>
-      <FILE id="Fvx1c2" name="Push2Interface.h" compile="0" resource="0"
-            file="Source/Push2Interface.h"/>
-      <FILE id="zXCMbj" name="Push2Simulator.cpp" compile="1" resource="0"
-            file="Source/Push2Simulator.cpp"/>
-      <FILE id="mCclFg" name="Push2Simulator.h" compile="0" resource="0"
-            file="Source/Push2Simulator.h"/>
-      <FILE id="VcFg3E" name="State.h" compile="0" resource="0" file="Source/State.h"/>
+      <GROUP id="{538433CD-9391-23C8-191A-3570817DE00A}" name="OctopushOS">
+        <GROUP id="{61F2548E-01B2-3BF5-E373-EC27CB63BC4A}" name="helpers">
+          <FILE id="V69PYa" name="push2.h" compile="0" resource="0" file="../OctopushOS/Source/helpers/push2.h"/>
+          <FILE id="crQ3MK" name="tracktion_engine.h" compile="0" resource="0"
+                file="../OctopushOS/Source/helpers/tracktion_engine.h"/>
+        </GROUP>
+        <FILE id="DUHecS" name="definitions.h" compile="0" resource="0" file="../OctopushOS/Source/definitions.h"/>
+        <FILE id="OkNouh" name="Engine.cpp" compile="1" resource="0" file="../OctopushOS/Source/Engine.cpp"/>
+        <FILE id="LJ5XHk" name="Engine.h" compile="0" resource="0" file="../OctopushOS/Source/Engine.h"/>
+        <FILE id="iyR5HO" name="Push2Interface.cpp" compile="1" resource="0"
+              file="../OctopushOS/Source/Push2Interface.cpp"/>
+        <FILE id="EtOQ26" name="Push2Interface.h" compile="0" resource="0"
+              file="../OctopushOS/Source/Push2Interface.h"/>
+        <FILE id="bxP7w5" name="Push2Simulator.cpp" compile="1" resource="0"
+              file="../OctopushOS/Source/Push2Simulator.cpp"/>
+        <FILE id="AOQZ0v" name="Push2Simulator.h" compile="0" resource="0"
+              file="../OctopushOS/Source/Push2Simulator.h"/>
+        <FILE id="UfRGnW" name="State.h" compile="0" resource="0" file="../OctopushOS/Source/State.h"/>
+      </GROUP>
     </GROUP>
     <GROUP id="{75FA94F8-95AD-5F96-CDB2-B286BBEB4DA3}" name="Resources">
       <FILE id="lnmavZ" name="clap.wav" compile="0" resource="1" file="../OctopushOS/Resources/clap.wav"/>

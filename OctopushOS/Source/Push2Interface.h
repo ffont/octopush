@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include "JuceHeader.h"
 #include "push2/JuceToPush2DisplayBridge.h"
 #include "helpers/push2.h"
 #include "Engine.h"

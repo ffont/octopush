@@ -73,17 +73,17 @@
 			isa = PBXBuildFile;
 			fileRef = F94AD0C4B3E1D5403B36CC9F;
 		};
-		341F015F21194A854D5AC023 = {
+		FD735886501E9544D9B942BA = {
 			isa = PBXBuildFile;
-			fileRef = 822E5399E8AC47145B1CBCF7;
+			fileRef = 00420FBC93FBC52D714345BA;
 		};
-		72DB6F81E69B0ED89F3CD9DA = {
+		E7DBEDE935141EC4EBD89756 = {
 			isa = PBXBuildFile;
-			fileRef = F5E8713778C155E239E286D9;
+			fileRef = 37BC36F7C7CD36F13A4475EA;
 		};
-		E13909311956474FB7DF8556 = {
+		E79D22DB33B9E5D7578B1D5B = {
 			isa = PBXBuildFile;
-			fileRef = AE8B20A41E6076198A38E937;
+			fileRef = 97EE16DDAC88A93648905D49;
 		};
 		91C63B57FDD46D2113959B2F = {
 			isa = PBXBuildFile;
@@ -209,6 +209,13 @@
 			isa = PBXBuildFile;
 			fileRef = 4A0768580B2AA811163ABCF6;
 		};
+		00420FBC93FBC52D714345BA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Engine.cpp;
+			path = ../../../OctopushOS/Source/Engine.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		019F8078CB06EE3A5A380FF2 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -286,13 +293,6 @@
 			path = System/Library/Frameworks/WebKit.framework;
 			sourceTree = SDKROOT;
 		};
-		1F964FBC4C7BD07F02383925 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = "tracktion_engine.h";
-			path = "../../Source/helpers/tracktion_engine.h";
-			sourceTree = "SOURCE_ROOT";
-		};
 		243891C2338DB9637715E800 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -342,6 +342,13 @@
 			path = System/Library/Frameworks/Accelerate.framework;
 			sourceTree = SDKROOT;
 		};
+		37BC36F7C7CD36F13A4475EA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Push2Interface.cpp;
+			path = ../../../OctopushOS/Source/Push2Interface.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		38126C29602F5187D3FC1A6C = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -389,13 +396,6 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = "include_tracktion_engine_utils.cpp";
 			path = "../../JuceLibraryCode/include_tracktion_engine_utils.cpp";
-			sourceTree = "SOURCE_ROOT";
-		};
-		4DEC9E19659C0D6C854678F1 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = State.h;
-			path = ../../Source/State.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		5181E9980A5128A61B6522CA = {
@@ -454,6 +454,13 @@
 			path = ../../JuceLibraryCode/BinaryData.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		6470DBB7BDE0FE9E5EEB3796 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = definitions.h;
+			path = ../../../OctopushOS/Source/definitions.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		64E3402DCA42285B0159B743 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -468,18 +475,18 @@
 			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		6B3750B1220DCBBA0D06171E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Push2Simulator.h;
+			path = ../../../OctopushOS/Source/Push2Simulator.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		6FDC3B8CCE8D250EF6A0E0E0 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
 			name = "startup_img.png";
 			path = "../../../OctopushOS/Resources/startup_img.png";
-			sourceTree = "SOURCE_ROOT";
-		};
-		7117DF2BF9729649F65E8CB9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Push2Interface.h;
-			path = ../../Source/Push2Interface.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		72D82F3CD1FDF89140A9A7CB = {
@@ -517,13 +524,6 @@
 			path = ../../Source/PluginProcessor.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
-		822E5399E8AC47145B1CBCF7 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Engine.cpp;
-			path = ../../Source/Engine.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		84FD04BAF490DADBB7896EBF = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.wav;
@@ -545,11 +545,11 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_model_1.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
-		8CBB8AF75A70B18625D6036F = {
+		8E22EF76F99369315E3F80EE = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = Push2Simulator.h;
-			path = ../../Source/Push2Simulator.h;
+			name = Engine.h;
+			path = ../../../OctopushOS/Source/Engine.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		9213CE794819D580E57B5CE0 = {
@@ -572,6 +572,20 @@
 			name = Cocoa.framework;
 			path = System/Library/Frameworks/Cocoa.framework;
 			sourceTree = SDKROOT;
+		};
+		97EE16DDAC88A93648905D49 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Push2Simulator.cpp;
+			path = ../../../OctopushOS/Source/Push2Simulator.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		98C5ADE16DEB3FC476B48DF5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "tracktion_engine.h";
+			path = "../../../OctopushOS/Source/helpers/tracktion_engine.h";
+			sourceTree = "SOURCE_ROOT";
 		};
 		9B162AB83C184015EBCDEA30 = {
 			isa = PBXFileReference;
@@ -641,13 +655,6 @@
 			lastKnownFileType = file;
 			name = "juce_audio_devices";
 			path = "../../../OctopushOS/3rdParty/juce/modules/juce_audio_devices";
-			sourceTree = "SOURCE_ROOT";
-		};
-		AE8B20A41E6076198A38E937 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Push2Simulator.cpp;
-			path = ../../Source/Push2Simulator.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		AF2D9959B35FCBCC85F6181E = {
@@ -741,6 +748,13 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_plugins.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		CEC092C64A01B3F2C5E1586E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = State.h;
+			path = ../../../OctopushOS/Source/State.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		D455FCC4A4A10F395E984380 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -748,25 +762,11 @@
 			path = "../../JuceLibraryCode/include_juce_gui_extra.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
-		D718AE2802A38A80B4D4F893 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Engine.h;
-			path = ../../Source/Engine.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		DCF9E4D04465EA6DE1A49F73 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = AppConfig.h;
 			path = ../../JuceLibraryCode/AppConfig.h;
-			sourceTree = "SOURCE_ROOT";
-		};
-		DE16E572392AFD01DE20700C = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = definitions.h;
-			path = ../../Source/definitions.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		E1A1A3015DF224B3DAFAFE68 = {
@@ -783,11 +783,11 @@
 			path = "../../../OctopushOS/3rdParty/juce/modules/juce_opengl";
 			sourceTree = "SOURCE_ROOT";
 		};
-		E7963882174A7499B990BAF7 = {
+		EB2C764277EC58B3BE79CF8D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = push2.h;
-			path = ../../Source/helpers/push2.h;
+			name = Push2Interface.h;
+			path = ../../../OctopushOS/Source/Push2Interface.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		EBD6FC0AB78811B282CB4175 = {
@@ -809,13 +809,6 @@
 			lastKnownFileType = sourcecode.c.h;
 			name = "Push2-UsbCommunicator.h";
 			path = "../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/Push2-UsbCommunicator.h";
-			sourceTree = "SOURCE_ROOT";
-		};
-		F5E8713778C155E239E286D9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Push2Interface.cpp;
-			path = ../../Source/Push2Interface.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		F8C929C34D021B4D9B973A32 = {
@@ -860,21 +853,19 @@
 			path = "../../JuceLibraryCode/include_juce_data_structures.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		FD6C0D47986AC8751E76ADBB = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = push2.h;
+			path = ../../../OctopushOS/Source/helpers/push2.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		FFF41F0F9EAFE5ED8D732AFB = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = Macros.h;
 			path = "../../../OctopushOS/3rdParty/push2-display-with-juce/Source/Macros.h";
 			sourceTree = "SOURCE_ROOT";
-		};
-		B9EDFB5DD1182B842C856523 = {
-			isa = PBXGroup;
-			children = (
-				E7963882174A7499B990BAF7,
-				1F964FBC4C7BD07F02383925,
-			);
-			name = helpers;
-			sourceTree = "<group>";
 		};
 		93326E9C141FB3878B71EA8A = {
 			isa = PBXGroup;
@@ -883,15 +874,40 @@
 				18D081E6B283006B81BCEF50,
 				F94AD0C4B3E1D5403B36CC9F,
 				54C31D42EE7582E8B0B18487,
-				DE16E572392AFD01DE20700C,
-				822E5399E8AC47145B1CBCF7,
-				D718AE2802A38A80B4D4F893,
-				B9EDFB5DD1182B842C856523,
-				F5E8713778C155E239E286D9,
-				7117DF2BF9729649F65E8CB9,
-				AE8B20A41E6076198A38E937,
-				8CBB8AF75A70B18625D6036F,
-				4DEC9E19659C0D6C854678F1,
+			);
+			name = PluginWrapper;
+			sourceTree = "<group>";
+		};
+		CEB90C57CCFD9B86863E4905 = {
+			isa = PBXGroup;
+			children = (
+				FD6C0D47986AC8751E76ADBB,
+				98C5ADE16DEB3FC476B48DF5,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
+		FDBF66211889F1B8335971AE = {
+			isa = PBXGroup;
+			children = (
+				CEB90C57CCFD9B86863E4905,
+				6470DBB7BDE0FE9E5EEB3796,
+				00420FBC93FBC52D714345BA,
+				8E22EF76F99369315E3F80EE,
+				37BC36F7C7CD36F13A4475EA,
+				EB2C764277EC58B3BE79CF8D,
+				97EE16DDAC88A93648905D49,
+				6B3750B1220DCBBA0D06171E,
+				CEC092C64A01B3F2C5E1586E,
+			);
+			name = OctopushOS;
+			sourceTree = "<group>";
+		};
+		442D96D589AF479D9843B008 = {
+			isa = PBXGroup;
+			children = (
+				93326E9C141FB3878B71EA8A,
+				FDBF66211889F1B8335971AE,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -945,7 +961,7 @@
 		63A9DC6DFA7E4F95DCD3E6BA = {
 			isa = PBXGroup;
 			children = (
-				93326E9C141FB3878B71EA8A,
+				442D96D589AF479D9843B008,
 				6E6B374D0F2887C54E250CD2,
 				30F5231332BF12B9172DF2AA,
 			);
@@ -1109,7 +1125,7 @@
 					"../../JuceLibraryCode",
 					"../../../OctopushOS/3rdParty/juce/modules",
 					"../../../OctopushOS/3rdParty/tracktion_engine/modules",
-					"../../Source/",
+					"../../../OctopushOS/Source/",
 					"../../../OctopushOS/3rdParty/libusb/libusb/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/",
@@ -1160,7 +1176,7 @@
 					"../../JuceLibraryCode",
 					"../../../OctopushOS/3rdParty/juce/modules",
 					"../../../OctopushOS/3rdParty/tracktion_engine/modules",
-					"../../Source/",
+					"../../../OctopushOS/Source/",
 					"../../../OctopushOS/3rdParty/libusb/libusb/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/",
@@ -1212,7 +1228,7 @@
 					"../../JuceLibraryCode",
 					"../../../OctopushOS/3rdParty/juce/modules",
 					"../../../OctopushOS/3rdParty/tracktion_engine/modules",
-					"../../Source/",
+					"../../../OctopushOS/Source/",
 					"../../../OctopushOS/3rdParty/libusb/libusb/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/",
@@ -1263,7 +1279,7 @@
 					"../../JuceLibraryCode",
 					"../../../OctopushOS/3rdParty/juce/modules",
 					"../../../OctopushOS/3rdParty/tracktion_engine/modules",
-					"../../Source/",
+					"../../../OctopushOS/Source/",
 					"../../../OctopushOS/3rdParty/libusb/libusb/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/",
 					"../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/",
@@ -1487,9 +1503,9 @@
 			files = (
 				28EB3CDB53EDC4F05E70941F,
 				AE3006EDFD4247067C1A6D85,
-				341F015F21194A854D5AC023,
-				72DB6F81E69B0ED89F3CD9DA,
-				E13909311956474FB7DF8556,
+				FD735886501E9544D9B942BA,
+				E7DBEDE935141EC4EBD89756,
+				E79D22DB33B9E5D7578B1D5B,
 				91C63B57FDD46D2113959B2F,
 				F1BC1CF04A9BBBE33398AF36,
 				141AC722B3DC4B8F59721978,

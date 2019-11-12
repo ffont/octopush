@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := -march=native
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I../../../OctopushOS/3rdParty/juce/modules -I../../../OctopushOS/3rdParty/tracktion_engine/modules -I../../Source/ -I../../../OctopushOS/3rdParty/libusb/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I../../../OctopushOS/3rdParty/juce/modules -I../../../OctopushOS/3rdParty/tracktion_engine/modules -I../../../OctopushOS/Source/ -I../../../OctopushOS/3rdParty/libusb/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
 
   JUCE_CPPFLAGS_STANDALONE_PLUGIN := -DJucePlugin_Build_VST=0 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=1 -DJucePlugin_Build_Unity=0
   JUCE_TARGET_STANDALONE_PLUGIN := OctopushOSPlugin
@@ -60,7 +60,7 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := -march=native
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I../../../OctopushOS/3rdParty/juce/modules -I../../../OctopushOS/3rdParty/tracktion_engine/modules -I../../Source/ -I../../../OctopushOS/3rdParty/libusb/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJUCER_LINUX_MAKE_6D53C8B4=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 webkit2gtk-4.0 gtk+-x11-3.0 libcurl) -pthread -I../../JuceLibraryCode -I../../../OctopushOS/3rdParty/juce/modules -I../../../OctopushOS/3rdParty/tracktion_engine/modules -I../../../OctopushOS/Source/ -I../../../OctopushOS/3rdParty/libusb/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/ -I../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
 
   JUCE_CPPFLAGS_STANDALONE_PLUGIN := -DJucePlugin_Build_VST=0 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=1 -DJucePlugin_Build_Unity=0
   JUCE_TARGET_STANDALONE_PLUGIN := OctopushOSPlugin
@@ -83,9 +83,9 @@ OBJECTS_STANDALONE_PLUGIN := \
 OBJECTS_SHARED_CODE := \
   $(JUCE_OBJDIR)/PluginProcessor_a059e380.o \
   $(JUCE_OBJDIR)/PluginEditor_94d4fb09.o \
-  $(JUCE_OBJDIR)/Engine_7f3228cb.o \
-  $(JUCE_OBJDIR)/Push2Interface_e0e6feca.o \
-  $(JUCE_OBJDIR)/Push2Simulator_bf2a7815.o \
+  $(JUCE_OBJDIR)/Engine_f8a88fd8.o \
+  $(JUCE_OBJDIR)/Push2Interface_948008d7.o \
+  $(JUCE_OBJDIR)/Push2Simulator_72c38222.o \
   $(JUCE_OBJDIR)/libusb_platform_wrapper_75bf73aa.o \
   $(JUCE_OBJDIR)/Result_de65f70.o \
   $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_f1406e85.o \
@@ -156,17 +156,17 @@ $(JUCE_OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
 	@echo "Compiling PluginEditor.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
-$(JUCE_OBJDIR)/Engine_7f3228cb.o: ../../Source/Engine.cpp
+$(JUCE_OBJDIR)/Engine_f8a88fd8.o: ../../../OctopushOS/Source/Engine.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Engine.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
-$(JUCE_OBJDIR)/Push2Interface_e0e6feca.o: ../../Source/Push2Interface.cpp
+$(JUCE_OBJDIR)/Push2Interface_948008d7.o: ../../../OctopushOS/Source/Push2Interface.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Push2Interface.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
-$(JUCE_OBJDIR)/Push2Simulator_bf2a7815.o: ../../Source/Push2Simulator.cpp
+$(JUCE_OBJDIR)/Push2Simulator_72c38222.o: ../../../OctopushOS/Source/Push2Simulator.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Push2Simulator.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
