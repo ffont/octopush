@@ -40,7 +40,7 @@
 #endif
 
 #ifndef JUCE_REPORT_APP_USAGE
- #define JUCE_REPORT_APP_USAGE 1
+ #define JUCE_REPORT_APP_USAGE 0
 #endif
 
 // END SECTION A
@@ -385,7 +385,7 @@
  #define JucePlugin_Build_VST              0
 #endif
 #ifndef  JucePlugin_Build_VST3
- #define JucePlugin_Build_VST3             0
+ #define JucePlugin_Build_VST3             1
 #endif
 #ifndef  JucePlugin_Build_AU
  #define JucePlugin_Build_AU               0

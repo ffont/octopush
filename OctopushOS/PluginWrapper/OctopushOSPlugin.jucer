@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="blrhxW" name="OctopushOSPlugin" projectType="audioplug" jucerVersion="5.4.5"
+              pluginFormats="buildStandalone,buildVST3" version="0.0.1" projectLineFeed="&#10;"
+              companyName="Rita &amp; Aurora" companyWebsite="https://ritaandaurora.github.io"
+              companyEmail="frederic.font@gmail.com" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn"
+              headerPath="../../../Source/&#10;../../../3rdParty/libusb/libusb/&#10;../../../3rdParty/push2-display-with-juce/Source/&#10;../../../3rdParty/push2-display-with-juce/Source/libusb/&#10;../../../3rdParty/push2-display-with-juce/Source/push2/"
+              binaryDataNamespace="BinaryDataPlugin" reportAppUsage="0">
+  <MAINGROUP id="XZiSpI" name="OctopushOSPlugin">
+    <GROUP id="{A54AB4E9-2E49-751F-7EB5-4A0244B7AD08}" name="Source">
+      <GROUP id="{538433CD-9391-23C8-191A-3570817DE00A}" name="OctopushOS">
+        <FILE id="FNnzNW" name="BinaryData.cpp" compile="1" resource="0" file="../JuceLibraryCode/BinaryData.cpp"/>
+        <FILE id="QbIUss" name="BinaryData.h" compile="0" resource="0" file="../JuceLibraryCode/BinaryData.h"/>
+        <FILE id="y3CLR0" name="definitions.h" compile="0" resource="0" file="../Source/definitions.h"/>
+        <FILE id="FUvgWt" name="Engine.cpp" compile="1" resource="0" file="../Source/Engine.cpp"/>
+        <FILE id="eFhw1l" name="Engine.h" compile="0" resource="0" file="../Source/Engine.h"/>
+        <GROUP id="{68393A68-E0FE-0E17-9CEA-D400758EB3B2}" name="helpers">
+          <FILE id="pmQ0QI" name="push2.h" compile="0" resource="0" file="../Source/helpers/push2.h"/>
+          <FILE id="F9og2V" name="tracktion_engine.h" compile="0" resource="0"
+                file="../Source/helpers/tracktion_engine.h"/>
+        </GROUP>
+        <FILE id="RUPMSa" name="Push2Interface.cpp" compile="1" resource="0"
+              file="../Source/Push2Interface.cpp"/>
+        <FILE id="Ho29Xq" name="Push2Interface.h" compile="0" resource="0"
+              file="../Source/Push2Interface.h"/>
+        <FILE id="uU7kOK" name="Push2Simulator.cpp" compile="1" resource="0"
+              file="../Source/Push2Simulator.cpp"/>
+        <FILE id="tMCiAG" name="Push2Simulator.h" compile="0" resource="0"
+              file="../Source/Push2Simulator.h"/>
+        <FILE id="Epmsyd" name="State.h" compile="0" resource="0" file="../Source/State.h"/>
+      </GROUP>
+      <GROUP id="{F249E080-9BE7-CAD9-CAFB-6B6D8BC75EA2}" name="PluginWrapper">
+        <FILE id="CAfZJY" name="PluginProcessor.cpp" compile="1" resource="0"
+              file="Source/PluginProcessor.cpp"/>
+        <FILE id="BIajA0" name="PluginProcessor.h" compile="0" resource="0"
+              file="Source/PluginProcessor.h"/>
+        <FILE id="OEApyl" name="PluginEditor.cpp" compile="1" resource="0"
+              file="Source/PluginEditor.cpp"/>
+        <FILE id="CkJLaK" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{3862CCD2-2677-B6A3-D36B-8B78371CFD2E}" name="3rdParty">
+      <GROUP id="{CCD8F099-D614-8388-85F4-7E6E45B2D98A}" name="libusb">
+        <FILE id="H6QwtM" name="libusb_platform_wrapper.c" compile="1" resource="0"
+              file="../3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c"/>
+      </GROUP>
+      <GROUP id="{203CE8DF-5249-A602-9070-C22E547528F4}" name="push2">
+        <FILE id="edGf39" name="Macros.h" compile="0" resource="0" file="../3rdParty/push2-display-with-juce/Source/Macros.h"/>
+        <FILE id="brI5lv" name="Result.cpp" compile="1" resource="0" file="../3rdParty/push2-display-with-juce/Source/Result.cpp"/>
+        <FILE id="ATuu7z" name="Result.h" compile="0" resource="0" file="../3rdParty/push2-display-with-juce/Source/Result.h"/>
+        <FILE id="qgQGn2" name="JuceToPush2DisplayBridge.cpp" compile="1" resource="0"
+              file="../3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.cpp"/>
+        <FILE id="rHmDbX" name="JuceToPush2DisplayBridge.h" compile="0" resource="0"
+              file="../3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.h"/>
+        <FILE id="qrQfNS" name="Push2-Bitmap.h" compile="0" resource="0" file="../3rdParty/push2-display-with-juce/Source/push2/Push2-Bitmap.h"/>
+        <FILE id="PCTHSd" name="Push2-Display.h" compile="0" resource="0" file="../3rdParty/push2-display-with-juce/Source/push2/Push2-Display.h"/>
+        <FILE id="H9IRSt" name="Push2-Usb-Communicator.cpp" compile="1" resource="0"
+              file="../3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp"/>
+        <FILE id="CjXU5d" name="Push2-UsbCommunicator.h" compile="0" resource="0"
+              file="../3rdParty/push2-display-with-juce/Source/push2/Push2-UsbCommunicator.h"/>
+      </GROUP>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" enablePluginBinaryCopyStep="0"/>
+        <CONFIGURATION isDebug="0" name="Release" enablePluginBinaryCopyStep="0"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_core" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_events" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_graphics" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_opengl" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_dsp" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_osc" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="../3rdParty/tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraLinkerFlags="-lusb-1.0">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_core" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_events" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_graphics" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_opengl" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_dsp" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_osc" path="../3rdParty/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="../3rdParty/tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>

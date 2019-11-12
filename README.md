@@ -9,7 +9,6 @@ Well, this is just work in progress, don't ask too many quesitons ;) I'm current
 
 ## Building Octopush
 
-
 ### OctopushOS
 
 OcotpushOS is a standard JUCE app and can be edited and built using standard JUCE workflows. For development, you'll also want to build Projucer so you can edit `OctopushOS.jucer` file. Even though you can use pre-built Projucer downloaded from JUCE website, here we provide a script to build a GPL-enabled version of Projucer.
@@ -27,8 +26,8 @@ git clone --recurse-submodules https://github.com/ffont/octopush.git
 A utility script is provided to build Projucer in GPL mode. `cd` into the cloned repository and run the following:
 
 ```
-cd OctospushOS/Scripts
-./build_projucer_gpl
+cd scripts
+./build_release_projucer_gpl
 ```
 
 The generated executable will be placed in `OctopushOS/3rdParty/juce/extras/Projucer/Builds/MacOSX/build/Release/Projucer` (MacOSX) or `OctopushOS/3rdParty/juce/extras/Projucer/Builds/LinuxMakefile/build/Release/Projucer` (Linux) depending on the platform you're running it from.
@@ -46,7 +45,14 @@ This list of dependencies was taken from [this forum thread](https://forum.juce.
 
 #### Development build
 
-To build OctopushOS during development you can do it from Xcode (MacOSX) or from the Makefile (Linux). You'll find these in the `OctopushOS/Builds/` folder.
+To build OctopushOS during development you can use project files for Xcode (MacOSX) or the Makefile (Linux). You'll find these in the `OctopushOS/Builds/` folder. Alternatively you can use the provided utility script. `cd` into the cloned repository and run the following:
+
+```
+cd scripts
+./build_debug_octopushOS
+```
+
+The generated executable will be placed in `OctopushOS/Builds/MacOSX/build/Debug/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Debug/OctopushOS ` (Linux) depending on the platform you're running it from.
 
 
 #### Release build
@@ -54,8 +60,8 @@ To build OctopushOS during development you can do it from Xcode (MacOSX) or from
 A utility script is provided to build OctopushOS in release mode. `cd` into the cloned repository and run the following:
 
 ```
-cd OctospushOS/Scripts
-./build_octopushOS
+cd scripts
+./build_release_octopushOS
 ```
 
 The generated executable will be placed in `OctopushOS/Builds/MacOSX/build/Release/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Release/OctopushOS ` (Linux) depending on the platform you're running it from.
