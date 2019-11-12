@@ -4,7 +4,8 @@
               pluginFormats="buildStandalone" version="0.0.1" projectLineFeed="&#10;"
               companyName="Rita &amp; Aurora" companyWebsite="https://ritaandaurora.github.io"
               companyEmail="frederic.font@gmail.com" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn"
-              headerPath="../../../OctopushOS/Source/&#10;../../../OctopushOS/3rdParty/libusb/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/">
+              headerPath="../../../OctopushOS/Source/&#10;../../../OctopushOS/3rdParty/libusb/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/&#10;../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/"
+              binaryDataNamespace="BinaryDataPlugin">
   <MAINGROUP id="XZiSpI" name="OctopushOSPlugin">
     <GROUP id="{A54AB4E9-2E49-751F-7EB5-4A0244B7AD08}" name="Source">
       <GROUP id="{F249E080-9BE7-CAD9-CAFB-6B6D8BC75EA2}" name="PluginWrapper">
@@ -35,14 +36,8 @@
               file="../OctopushOS/Source/Push2Simulator.h"/>
         <FILE id="UfRGnW" name="State.h" compile="0" resource="0" file="../OctopushOS/Source/State.h"/>
       </GROUP>
-    </GROUP>
-    <GROUP id="{75FA94F8-95AD-5F96-CDB2-B286BBEB4DA3}" name="Resources">
-      <FILE id="lnmavZ" name="clap.wav" compile="0" resource="1" file="../OctopushOS/Resources/clap.wav"/>
-      <FILE id="l1k11o" name="hihat.wav" compile="0" resource="1" file="../OctopushOS/Resources/hihat.wav"/>
-      <FILE id="c5mdcy" name="kick.wav" compile="0" resource="1" file="../OctopushOS/Resources/kick.wav"/>
-      <FILE id="xL2RPw" name="snare.aiff" compile="0" resource="1" file="../OctopushOS/Resources/snare.aiff"/>
-      <FILE id="annJrP" name="startup_img.png" compile="0" resource="1" file="../OctopushOS/Resources/startup_img.png"/>
-      <FILE id="tS8Q58" name="tambourine.wav" compile="0" resource="1" file="../OctopushOS/Resources/tambourine.wav"/>
+      <FILE id="uCGMLX" name="BinaryData.cpp" compile="1" resource="0" file="../OctopushOS/JuceLibraryCode/BinaryData.cpp"/>
+      <FILE id="Yi0slt" name="BinaryData.h" compile="0" resource="0" file="../OctopushOS/JuceLibraryCode/BinaryData.h"/>
     </GROUP>
     <GROUP id="{55556CC5-8E12-C9E4-2F06-D00FD6ECCF55}" name="3rdParty">
       <GROUP id="{AAB13629-55D9-DD77-FEDA-1931DB90F931}" name="libusb">

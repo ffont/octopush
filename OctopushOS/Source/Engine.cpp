@@ -9,6 +9,7 @@
 */
 
 #include "Engine.h"
+#include "../JuceLibraryCode/BinaryData.h"
 #include "helpers/tracktion_engine.h"
 
 Engine::Engine()

@@ -85,6 +85,10 @@
 			isa = PBXBuildFile;
 			fileRef = 97EE16DDAC88A93648905D49;
 		};
+		3B01556EA9F5EFD26F18D8A5 = {
+			isa = PBXBuildFile;
+			fileRef = E8C66802317F8ACAA33429B2;
+		};
 		91C63B57FDD46D2113959B2F = {
 			isa = PBXBuildFile;
 			fileRef = B16EC029A74E981D34554279;
@@ -100,10 +104,6 @@
 		B37E7ED41FAA74600B777B41 = {
 			isa = PBXBuildFile;
 			fileRef = 2ADA8AA7616FC6282FDDDAB8;
-		};
-		F6B3018EE5D6700C807DCD99 = {
-			isa = PBXBuildFile;
-			fileRef = 06A06FD488471B52DF1E11BC;
 		};
 		6BC170E4522DB1A8F84A4BAC = {
 			isa = PBXBuildFile;
@@ -228,13 +228,6 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_utils.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_utils.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
-		06A06FD488471B52DF1E11BC = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = BinaryData.cpp;
-			path = ../../JuceLibraryCode/BinaryData.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		0754C06CB88D475ED5A93890 = {
@@ -412,25 +405,11 @@
 			path = ../../Source/PluginEditor.h;
 			sourceTree = "SOURCE_ROOT";
 		};
-		556A1BBDC8A8683E53B03801 = {
-			isa = PBXFileReference;
-			lastKnownFileType = file.wav;
-			name = kick.wav;
-			path = ../../../OctopushOS/Resources/kick.wav;
-			sourceTree = "SOURCE_ROOT";
-		};
 		56BFFB7E36115354664A04FD = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_data_structures";
 			path = "../../../OctopushOS/3rdParty/juce/modules/juce_data_structures";
-			sourceTree = "SOURCE_ROOT";
-		};
-		5C00E7AB21541554C2BA9958 = {
-			isa = PBXFileReference;
-			lastKnownFileType = file.aiff;
-			name = snare.aiff;
-			path = ../../../OctopushOS/Resources/snare.aiff;
 			sourceTree = "SOURCE_ROOT";
 		};
 		5F44BD068652465FBC70F80D = {
@@ -445,13 +424,6 @@
 			lastKnownFileType = file;
 			name = "juce_audio_utils";
 			path = "../../../OctopushOS/3rdParty/juce/modules/juce_audio_utils";
-			sourceTree = "SOURCE_ROOT";
-		};
-		62EEFD1BDD0C90E68E642984 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = BinaryData.h;
-			path = ../../JuceLibraryCode/BinaryData.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		6470DBB7BDE0FE9E5EEB3796 = {
@@ -475,18 +447,18 @@
 			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		6937120C864920BDE54BF6A8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BinaryData.h;
+			path = ../../../OctopushOS/JuceLibraryCode/BinaryData.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		6B3750B1220DCBBA0D06171E = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = Push2Simulator.h;
 			path = ../../../OctopushOS/Source/Push2Simulator.h;
-			sourceTree = "SOURCE_ROOT";
-		};
-		6FDC3B8CCE8D250EF6A0E0E0 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = "startup_img.png";
-			path = "../../../OctopushOS/Resources/startup_img.png";
 			sourceTree = "SOURCE_ROOT";
 		};
 		72D82F3CD1FDF89140A9A7CB = {
@@ -495,13 +467,6 @@
 			name = Carbon.framework;
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
-		};
-		773BDAC5020D95167A5BDB5A = {
-			isa = PBXFileReference;
-			lastKnownFileType = file.wav;
-			name = hihat.wav;
-			path = ../../../OctopushOS/Resources/hihat.wav;
-			sourceTree = "SOURCE_ROOT";
 		};
 		78D6D680C612F9124BEBF1F1 = {
 			isa = PBXFileReference;
@@ -522,13 +487,6 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = PluginProcessor.cpp;
 			path = ../../Source/PluginProcessor.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
-		84FD04BAF490DADBB7896EBF = {
-			isa = PBXFileReference;
-			lastKnownFileType = file.wav;
-			name = clap.wav;
-			path = ../../../OctopushOS/Resources/clap.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
 		87483A1602D11FED1C2324C0 = {
@@ -664,13 +622,6 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_model_2.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
-		B01F51EBD78501F59D3AF53C = {
-			isa = PBXFileReference;
-			lastKnownFileType = file.wav;
-			name = tambourine.wav;
-			path = ../../../OctopushOS/Resources/tambourine.wav;
-			sourceTree = "SOURCE_ROOT";
-		};
 		B05455072509AD8431027C73 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -781,6 +732,13 @@
 			lastKnownFileType = file;
 			name = "juce_opengl";
 			path = "../../../OctopushOS/3rdParty/juce/modules/juce_opengl";
+			sourceTree = "SOURCE_ROOT";
+		};
+		E8C66802317F8ACAA33429B2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BinaryData.cpp;
+			path = ../../../OctopushOS/JuceLibraryCode/BinaryData.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		EB2C764277EC58B3BE79CF8D = {
@@ -908,21 +866,10 @@
 			children = (
 				93326E9C141FB3878B71EA8A,
 				FDBF66211889F1B8335971AE,
+				E8C66802317F8ACAA33429B2,
+				6937120C864920BDE54BF6A8,
 			);
 			name = Source;
-			sourceTree = "<group>";
-		};
-		6E6B374D0F2887C54E250CD2 = {
-			isa = PBXGroup;
-			children = (
-				84FD04BAF490DADBB7896EBF,
-				773BDAC5020D95167A5BDB5A,
-				556A1BBDC8A8683E53B03801,
-				5C00E7AB21541554C2BA9958,
-				6FDC3B8CCE8D250EF6A0E0E0,
-				B01F51EBD78501F59D3AF53C,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		ACD48D102C89DC52BFDFB485 = {
@@ -962,7 +909,6 @@
 			isa = PBXGroup;
 			children = (
 				442D96D589AF479D9843B008,
-				6E6B374D0F2887C54E250CD2,
 				30F5231332BF12B9172DF2AA,
 			);
 			name = OctopushOSPlugin;
@@ -996,8 +942,6 @@
 			isa = PBXGroup;
 			children = (
 				DCF9E4D04465EA6DE1A49F73,
-				06A06FD488471B52DF1E11BC,
-				62EEFD1BDD0C90E68E642984,
 				673549B55C364A086335EFDD,
 				78D6D680C612F9124BEBF1F1,
 				5F44BD068652465FBC70F80D,
@@ -1506,11 +1450,11 @@
 				FD735886501E9544D9B942BA,
 				E7DBEDE935141EC4EBD89756,
 				E79D22DB33B9E5D7578B1D5B,
+				3B01556EA9F5EFD26F18D8A5,
 				91C63B57FDD46D2113959B2F,
 				F1BC1CF04A9BBBE33398AF36,
 				141AC722B3DC4B8F59721978,
 				B37E7ED41FAA74600B777B41,
-				F6B3018EE5D6700C807DCD99,
 				6BC170E4522DB1A8F84A4BAC,
 				A440C93FFF571B9CAE4C06F1,
 				9F5064633999AD6EE5828E03,

@@ -30,7 +30,6 @@
 #include <juce_osc/juce_osc.h>
 #include <tracktion_engine/tracktion_engine.h>
 
-#include "BinaryData.h"
 
 #if defined (JUCE_PROJUCER_VERSION) && JUCE_PROJUCER_VERSION < JUCE_VERSION
  /** If you've hit this error then the version of the Projucer that was used to generate this project is

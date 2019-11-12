@@ -86,11 +86,11 @@ OBJECTS_SHARED_CODE := \
   $(JUCE_OBJDIR)/Engine_f8a88fd8.o \
   $(JUCE_OBJDIR)/Push2Interface_948008d7.o \
   $(JUCE_OBJDIR)/Push2Simulator_72c38222.o \
+  $(JUCE_OBJDIR)/BinaryData_98ee68e7.o \
   $(JUCE_OBJDIR)/libusb_platform_wrapper_75bf73aa.o \
   $(JUCE_OBJDIR)/Result_de65f70.o \
   $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_f1406e85.o \
   $(JUCE_OBJDIR)/Push2-Usb-Communicator_3f9f20fd.o \
-  $(JUCE_OBJDIR)/BinaryData_ce4232d4.o \
   $(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o \
   $(JUCE_OBJDIR)/include_juce_audio_devices_63111d02.o \
   $(JUCE_OBJDIR)/include_juce_audio_formats_15f82001.o \
@@ -171,6 +171,11 @@ $(JUCE_OBJDIR)/Push2Simulator_72c38222.o: ../../../OctopushOS/Source/Push2Simula
 	@echo "Compiling Push2Simulator.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
+$(JUCE_OBJDIR)/BinaryData_98ee68e7.o: ../../../OctopushOS/JuceLibraryCode/BinaryData.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling BinaryData.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
+
 $(JUCE_OBJDIR)/libusb_platform_wrapper_75bf73aa.o: ../../../OctopushOS/3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling libusb_platform_wrapper.c"
@@ -189,11 +194,6 @@ $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_f1406e85.o: ../../../OctopushOS/3rdParty
 $(JUCE_OBJDIR)/Push2-Usb-Communicator_3f9f20fd.o: ../../../OctopushOS/3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Push2-Usb-Communicator.cpp"
-	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
-
-$(JUCE_OBJDIR)/BinaryData_ce4232d4.o: ../../JuceLibraryCode/BinaryData.cpp
-	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling BinaryData.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o: ../../JuceLibraryCode/include_juce_audio_basics.cpp
