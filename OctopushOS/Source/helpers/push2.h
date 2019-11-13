@@ -19,7 +19,6 @@ public:
     
     virtual ~Push2Common(){}
     
-    
     static const int RGB_COLOUR_BLACK = 0;
     static const int RGB_COLOUR_WHITE = 122;
     static const int RGB_COLOUR_LIGHT_GRAY = 123;
@@ -192,6 +191,12 @@ public:
     
     virtual ~Push2EncodersController(){}
     
+    int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
+    
+    void setMaxEncoderUpdateRate(int maxEncoderUpdateRate_){
+        maxEncoderUpdateRate = maxEncoderUpdateRate_;
+    }
+    
     // Encoder cc number definitions
     static const int ENCODER_TEMPO_CC_NUMBER = 14;
     static const int ENCODER_SWING_CC_NUMBER = 15;
@@ -225,57 +230,57 @@ public:
             }
             
             if (ccNumber == ENCODER_TEMPO_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[0]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 0 of  lastTimeEncoderMethodTriggered = tempo encoder
+                if ((currentTime - lastTimeEncoderMethodTriggered[0]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 0 of  lastTimeEncoderMethodTriggered = tempo encoder
                 tempoEncoderRotated(increment);
                 lastTimeEncoderMethodTriggered[0] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_SWING_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[1]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 1 of  lastTimeEncoderMethodTriggered = swing encoder
+                if ((currentTime - lastTimeEncoderMethodTriggered[1]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 1 of  lastTimeEncoderMethodTriggered = swing encoder
                 swingEncoderRotated(increment);
                 lastTimeEncoderMethodTriggered[1] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E1_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[2]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 2 of  lastTimeEncoderMethodTriggered = ecoder e1
+                if ((currentTime - lastTimeEncoderMethodTriggered[2]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 2 of  lastTimeEncoderMethodTriggered = ecoder e1
                 e1Rotated(increment);
                 lastTimeEncoderMethodTriggered[2] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E2_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[3]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 3 of  lastTimeEncoderMethodTriggered = ecoder e2
+                if ((currentTime - lastTimeEncoderMethodTriggered[3]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 3 of  lastTimeEncoderMethodTriggered = ecoder e2
                 e2Rotated(increment);
                 lastTimeEncoderMethodTriggered[3] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E3_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[4]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 4 of  lastTimeEncoderMethodTriggered = ecoder e3
+                if ((currentTime - lastTimeEncoderMethodTriggered[4]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 4 of  lastTimeEncoderMethodTriggered = ecoder e3
                 e3Rotated(increment);
                 lastTimeEncoderMethodTriggered[4] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E4_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[5]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 5 of  lastTimeEncoderMethodTriggered = ecoder e4
+                if ((currentTime - lastTimeEncoderMethodTriggered[5]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 5 of  lastTimeEncoderMethodTriggered = ecoder e4
                 e4Rotated(increment);
                 lastTimeEncoderMethodTriggered[5] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E5_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[6]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 6 of  lastTimeEncoderMethodTriggered = ecoder e5
+                if ((currentTime - lastTimeEncoderMethodTriggered[6]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 6 of  lastTimeEncoderMethodTriggered = ecoder e5
                 e5Rotated(increment);
                 lastTimeEncoderMethodTriggered[6] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E6_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[7]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 7 of  lastTimeEncoderMethodTriggered = ecoder e6
+                if ((currentTime - lastTimeEncoderMethodTriggered[7]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 7 of  lastTimeEncoderMethodTriggered = ecoder e6
                 e6Rotated(increment);
                 lastTimeEncoderMethodTriggered[7] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E7_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[8]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 8 of  lastTimeEncoderMethodTriggered = ecoder e7
+                if ((currentTime - lastTimeEncoderMethodTriggered[8]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 8 of  lastTimeEncoderMethodTriggered = ecoder e7
                 e7Rotated(increment);
                 lastTimeEncoderMethodTriggered[8] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_E8_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[9]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 9 of  lastTimeEncoderMethodTriggered = ecoder e8
+                if ((currentTime - lastTimeEncoderMethodTriggered[9]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 9 of  lastTimeEncoderMethodTriggered = ecoder e8
                 e8Rotated(increment);
                 lastTimeEncoderMethodTriggered[9] = currentTime;
                 return true;
             } else if (ccNumber == ENCODER_MASTER_CC_NUMBER){
-                if ((currentTime - lastTimeEncoderMethodTriggered[10]) < (1000.0/ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ)){ return true; }  // index 10 of  lastTimeEncoderMethodTriggered = master encoder
+                if ((currentTime - lastTimeEncoderMethodTriggered[10]) < (1000.0/maxEncoderUpdateRate)){ return true; }  // index 10 of  lastTimeEncoderMethodTriggered = master encoder
                 masterEncoderRotated(increment);
                 lastTimeEncoderMethodTriggered[10] = currentTime;
                 return true;

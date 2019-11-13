@@ -31,7 +31,7 @@ public:
     Push2Interface();
     ~Push2Interface();
 
-    void initialize(Engine* engine_);
+    void initialize(Engine* engine_, int displayFrameRate_, int maxEncoderUpdateRate_);
     NBase::Result connectToPush();
     bool pushInitializedSuccessfully;
     
@@ -77,6 +77,7 @@ private:
     void timerCallback() override;
     
     // Properties
+    int displayFrameRate;
     ableton::Push2DisplayBridge bridge;
     ableton::Push2Display push2Display;
     std::unique_ptr<MidiInput> midiInput;

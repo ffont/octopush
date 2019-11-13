@@ -26,7 +26,7 @@ Engine::~Engine()
 
 }
 
-void Engine::initialize()
+void Engine::initialize(bool playOnStart, int stateUpdateRate)
 {
     //------------- Configure input devices
     auto& dm = engine.getDeviceManager();
@@ -171,9 +171,14 @@ void Engine::initialize()
     transport.looping = true;
     transport.position = 0.0;
     transport.addChangeListener (this);
+    
+    // If play, start playing
+    if (playOnStart){
+        transportPlay();
+    }
 
     // Start the timer to update state
-    startTimerHz(STATE_UPDATE_RATE);
+    startTimerHz(stateUpdateRate);
 }
 
 void Engine::changeListenerCallback (ChangeBroadcaster*)

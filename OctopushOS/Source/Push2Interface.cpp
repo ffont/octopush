@@ -41,7 +41,7 @@ Push2Interface::~Push2Interface()
 
 //------------------------------------------------------------------------------
 
-void Push2Interface::initialize(Engine* engine_)
+void Push2Interface::initialize(Engine* engine_, int displayFrameRate_, int maxEncoderUpdateRate_)
 {
     // Assign reference to application engine
     engine = engine_;
@@ -62,11 +62,17 @@ void Push2Interface::initialize(Engine* engine_)
         pushInitializedSuccessfully = false;
     }
     
+    // Configure encoder update rate
+    if (pushInitializedSuccessfully){
+        setMaxEncoderUpdateRate(maxEncoderUpdateRate_);
+    }
+    
     // Set initial UI
     setInitialUI();
     
     // Start the timer to draw the animation
-    startTimerHz(PUSH_DISPLAY_FRAME_RATE);
+    displayFrameRate = displayFrameRate_;
+    startTimerHz(displayFrameRate);
 }
 
 
@@ -188,7 +194,7 @@ void Push2Interface::sendMidiMessage(MidiMessage msg){
 
 void Push2Interface::timerCallback()
 {
-    state->animationElapsedTime += 0.02f;
+    state->animationElapsedTime += 1.0 / displayFrameRate;
     updateUI();
 }
 
@@ -208,7 +214,7 @@ Image Push2Interface::computeDisplayFrameFromState()
     g.fillAll(juce::Colour(0xff000000));
     
     // Draw logo (only during first second(s) at startup)
-    if (state->animationElapsedTime < 1.2){
+    if (state->animationElapsedTime < 1.0){
         auto logo = ImageCache::getFromMemory(BinaryData::startup_img_png, BinaryData::startup_img_pngSize);
         g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
         return frame;

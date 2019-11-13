@@ -27,19 +27,64 @@ public:
     //==============================================================================
     void initialise (const String& commandLine) override
     {
-        // Initialize application engine and Push2 interface
-        engine.initialize();
-        push.initialize(&engine);
+        // Parse command line arguments
+        int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
+        int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
+        int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
+        String showSimulatorValue = "";  // Anything different than "show" or "hide" will mean "default"
+        bool playOnStart = DEFAULT_PLAY_ON_START;
         
-        // Initialize main window (will only be used to replicate Push2 display and controls when Push2
-        // is not connected and we are in DEBUG mode)
+        StringArray arguments = getCommandLineParameterArray();
+        for (int i=0; i<arguments.size(); i++){
+            String argument = arguments[i];
+            if (argument == "-dfr"){
+                String value = arguments[i+1];
+                displayFrameRate = value.getIntValue();
+            }
+            else if (argument == "-sur"){
+                String value = arguments[i+1];
+                stateUpdateFrameRate = value.getIntValue();
+            }
+            else if(argument == "-eur"){
+                String value = arguments[i+1];
+                maxEncoderUpdateRate = value.getIntValue();
+            }
+            else if (argument == "-sim"){
+                showSimulatorValue = arguments[i+1];
+            }
+            else if (argument == "-pos"){
+                playOnStart = true;
+            }
+        }
+        
+        // Initialize application engine and Push2 interface
+        engine.initialize(playOnStart, stateUpdateFrameRate);
+        push.initialize(&engine, displayFrameRate, maxEncoderUpdateRate);
+        
+        // Initialize simulator in main window (if requested)
         #if JUCE_DEBUG
-        if (!push.pushInitializedSuccessfully) {
+        bool debug = true;
+        #else
+        bool debug = false;
+        #endif
+        bool showSimulator = false;
+        
+        if (showSimulatorValue == "show"){
+            showSimulator = true;
+        } else if (showSimulatorValue == "hide"){
+            showSimulator = false;
+        } else {
+            // If not force/hide show simulator we'll only show it if push was not initialized properly and we're in debug mode
+            if (!push.pushInitializedSuccessfully && debug){
+                showSimulator = true;
+            }
+        }
+       
+        if (showSimulator) {
             mainWindow.reset (new MainWindow (getApplicationName()));
             static_cast<Push2Simulator*>(mainWindow.get()->getContentComponent())->setPush2Interface(&push);
             mainWindowRunning = true;
         }
-        #endif
     }
 
     void shutdown() override
