@@ -3,7 +3,7 @@
 ROOT=$(cd "$(dirname "$0")/../OctopushOS/"; pwd)
 echo "Building Projucer..."
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     PROJUCER_ROOT=$ROOT/3rdParty/juce/extras/Projucer/Builds/LinuxMakefile
     PROJUCER_EXE=$PROJUCER_ROOT/build/Release/Projucer

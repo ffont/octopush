@@ -3,7 +3,7 @@
 ROOT=$(cd "$(dirname "$0")/../OctopushOS/PluginWrapper/"; pwd)
 echo "Building OctopushOS as plugin..."
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     cd "$ROOT/Builds/LinuxMakefile"
     make clean

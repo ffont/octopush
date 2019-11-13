@@ -3,7 +3,7 @@
 ROOT=$(cd "$(dirname "$0")/../OctopushOS/"; pwd)
 echo "Building OctopushOS..."
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     cd "$ROOT/Builds/LinuxMakefile"
     make clean
