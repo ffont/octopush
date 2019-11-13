@@ -28,8 +28,12 @@ OctopushOspluginAudioProcessor::OctopushOspluginAudioProcessor()
     audioInterface.initialise ({});
     
     // Octopush app initialize
-    engine.initialize();
-    push.initialize(&engine);
+    bool playOnStart = DEFAULT_PLAY_ON_START;
+    int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
+    int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
+    int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
+    engine.initialize(playOnStart, stateUpdateFrameRate);
+    push.initialize(&engine, displayFrameRate, maxEncoderUpdateRate);
 }
 
 OctopushOspluginAudioProcessor::~OctopushOspluginAudioProcessor()
