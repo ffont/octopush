@@ -5,9 +5,9 @@
 	};
 	objectVersion = 46;
 	objects = {
-		E29FA529720A4F656AF1CFF3 = {
+		4CC19324178D395E5D7122B4 = {
 			isa = PBXBuildFile;
-			fileRef = 604C35CDD5BE95C319EF869E;
+			fileRef = 43486AE6174D9B20120266E0;
 		};
 		8D9DA0E63D7036B1EA029D70 = {
 			isa = PBXBuildFile;
@@ -68,10 +68,6 @@
 		A6F7FAF2D67E97347F127B30 = {
 			isa = PBXBuildFile;
 			fileRef = D82EA6257B591ADA4F40A46B;
-		};
-		16E179E9ACF993741589AA5F = {
-			isa = PBXBuildFile;
-			fileRef = 4FF636A3E095CE62419CA5BA;
 		};
 		14A4976F3AF54A17C082A26B = {
 			isa = PBXBuildFile;
@@ -272,13 +268,6 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_airwindows.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
-		23999EE82840A7AE7D0EBE55 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Push2Simulator.h;
-			path = ../../Source/Push2Simulator.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		2875C7A1EB8C7991BBA0D94C = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -335,6 +324,13 @@
 			path = ../../Resources/tambourine.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
+		43486AE6174D9B20120266E0 = {
+			isa = PBXFileReference;
+			explicitFileType = "compiled.mach-o.executable";
+			includeInIndex = 0;
+			path = OctopushOS;
+			sourceTree = "BUILT_PRODUCTS_DIR";
+		};
 		441CC6CF7D12AAFDD205B557 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -370,13 +366,6 @@
 			path = ../../Source/definitions.h;
 			sourceTree = "SOURCE_ROOT";
 		};
-		4FF636A3E095CE62419CA5BA = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Push2Simulator.cpp;
-			path = ../../Source/Push2Simulator.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		54C803762A3CC7B74E1FA81F = {
 			isa = PBXFileReference;
 			lastKnownFileType = text.plist.xml;
@@ -397,13 +386,6 @@
 			name = "include_juce_audio_processors.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_processors.mm";
 			sourceTree = "SOURCE_ROOT";
-		};
-		604C35CDD5BE95C319EF869E = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.application;
-			includeInIndex = 0;
-			path = OctopushOS.app;
-			sourceTree = "BUILT_PRODUCTS_DIR";
 		};
 		62713EEAA4F8B03F21E2D251 = {
 			isa = PBXFileReference;
@@ -622,13 +604,6 @@
 			path = System/Library/Frameworks/IOKit.framework;
 			sourceTree = SDKROOT;
 		};
-		CD4786F892B5BB7F8E76D9C2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			name = "Info-App.plist";
-			path = "Info-App.plist";
-			sourceTree = "SOURCE_ROOT";
-		};
 		D1BA5BB49B3117FC323FD283 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -782,8 +757,6 @@
 				9AEA3E688E5F6C45E1A0366B,
 				4663DA667641EC34E792D96A,
 				D82EA6257B591ADA4F40A46B,
-				23999EE82840A7AE7D0EBE55,
-				4FF636A3E095CE62419CA5BA,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -902,7 +875,6 @@
 		A71C9E9BBC9B578ECE3C734A = {
 			isa = PBXGroup;
 			children = (
-				CD4786F892B5BB7F8E76D9C2,
 				E996716A3BFC318271AB68EA,
 			);
 			name = Resources;
@@ -929,7 +901,7 @@
 		C5670B49988511A4842A0A76 = {
 			isa = PBXGroup;
 			children = (
-				604C35CDD5BE95C319EF869E,
+				43486AE6174D9B20120266E0,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -947,7 +919,7 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		1CB4590924FB34EEB0024E77 = {
+		B68A39DD1D8D84EC7C66D4DA = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
@@ -986,9 +958,7 @@
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Info-App.plist;
-				INFOPLIST_PREPROCESS = NO;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = "/usr/bin";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RitaAurora.OctopushOS;
 				PRODUCT_NAME = "OctopushOS";
@@ -996,7 +966,7 @@
 			};
 			name = Debug;
 		};
-		50586066F5740B94BDA4C3F7 = {
+		323E5695D9B84DC42742224B = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
@@ -1036,9 +1006,7 @@
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Info-App.plist;
-				INFOPLIST_PREPROCESS = NO;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = "/usr/bin";
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RitaAurora.OctopushOS;
@@ -1139,9 +1107,9 @@
 			};
 			name = Release;
 		};
-		0C64DE5185D29DAE3E5E16C0 = {
+		722780F7221EAAFC815470D8 = {
 			isa = PBXTargetDependency;
-			target = 8B78753847F3BEF3D6C5FD87;
+			target = 67EF4526B513B98F0B56FE37;
 		};
 		1D392170BA8A67F868FFC664 = {
 			isa = XCConfigurationList;
@@ -1152,16 +1120,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		DC8154BF18CACCDA542A5281 = {
+		3BACDF72E99F828F9585C00B = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CB4590924FB34EEB0024E77,
-				50586066F5740B94BDA4C3F7,
+				B68A39DD1D8D84EC7C66D4DA,
+				323E5695D9B84DC42742224B,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		7D689AA672B88AB515519FF4 = {
+		818F9D5A74B2B662E8D67F8B = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1169,14 +1137,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4582ADD2C129D7B31B0D1C7C = {
+		3494A36E8F3A0A7CA7D7AA96 = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FEA009274BB5FA934D7641F9,
 				92C2BD03B0444D150EFB6F58,
 				A6F7FAF2D67E97347F127B30,
-				16E179E9ACF993741589AA5F,
 				14A4976F3AF54A17C082A26B,
 				C2BC02B9FF7D8B1CA9A6F7C1,
 				98180EFBCD1611119CEF0935,
@@ -1207,7 +1174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6AE7E962F4B64747E84FE84E = {
+		47C735F1492652B14D962400 = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1225,31 +1192,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8B78753847F3BEF3D6C5FD87 = {
+		67EF4526B513B98F0B56FE37 = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC8154BF18CACCDA542A5281;
+			buildConfigurationList = 3BACDF72E99F828F9585C00B;
 			buildPhases = (
-				7D689AA672B88AB515519FF4,
-				4582ADD2C129D7B31B0D1C7C,
-				6AE7E962F4B64747E84FE84E,
+				818F9D5A74B2B662E8D67F8B,
+				3494A36E8F3A0A7CA7D7AA96,
+				47C735F1492652B14D962400,
 			);
 			buildRules = ( );
 			dependencies = ( );
-			name = "OctopushOS - App";
+			name = "OctopushOS - ConsoleApp";
 			productName = OctopushOS;
-			productReference = 604C35CDD5BE95C319EF869E;
-			productType = "com.apple.product-type.application";
+			productReference = 43486AE6174D9B20120266E0;
+			productType = "com.apple.product-type.tool";
 		};
 		8F148F388DF6124E122E3D77 = {
 			isa = PBXProject;
 			buildConfigurationList = 1D392170BA8A67F868FFC664;
-			attributes = { LastUpgradeCheck = 1100; ORGANIZATIONNAME = "Rita & Aurora"; TargetAttributes = { 8B78753847F3BEF3D6C5FD87 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; com.apple.HardenedRuntime = { enabled = 0; }; }; }; }; };
+			attributes = { LastUpgradeCheck = 1100; ORGANIZATIONNAME = "Rita & Aurora"; };
 			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 0;
 			mainGroup = B212BFF373869C51B2266D2A;
 			projectDirPath = "";
 			projectRoot = "";
-			targets = (8B78753847F3BEF3D6C5FD87);
+			targets = (67EF4526B513B98F0B56FE37);
 			knownRegions = (en, Base);
 		};
 	};

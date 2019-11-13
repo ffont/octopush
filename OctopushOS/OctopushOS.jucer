@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5"
+<JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="consoleapp" jucerVersion="5.4.5"
               headerPath="../../Source/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/push2/"
               version="0.0.1" companyName="Rita &amp; Aurora" projectLineFeed="&#10;"
               companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com"
@@ -21,10 +21,6 @@
             file="Source/Push2Interface.h"/>
       <FILE id="fqV828" name="Push2Interface.cpp" compile="1" resource="0"
             file="Source/Push2Interface.cpp"/>
-      <FILE id="VZp0WF" name="Push2Simulator.h" compile="0" resource="0"
-            file="Source/Push2Simulator.h"/>
-      <FILE id="X2ACdV" name="Push2Simulator.cpp" compile="1" resource="0"
-            file="Source/Push2Simulator.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
       <FILE id="F5k4m7" name="startup_img.png" compile="0" resource="1" file="Resources/startup_img.png"/>
@@ -73,11 +69,11 @@
         <MODULEPATH id="juce_data_structures" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_events" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_graphics" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
         <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
         <MODULEPATH id="juce_dsp" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_osc" path="3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraLinkerFlags="-lusb-1.0">
@@ -96,11 +92,11 @@
         <MODULEPATH id="juce_data_structures" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_events" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_graphics" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
         <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
         <MODULEPATH id="juce_dsp" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_osc" path="3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
