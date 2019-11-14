@@ -18,7 +18,7 @@ OcotpushOS is a standard JUCE app and can be edited and built using standard JUC
 You need to checkout the code including submodules. This will download source code for all required 3rd party libraries (JUCE, etc.)
 
 ```
-git clone --recurse-submodules https://github.com/ffont/octopush.git
+git clone https://github.com/ffont/octopush.git && cd octopush && git submodule update --init
 ```
 
 #### Building Projucer
