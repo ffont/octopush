@@ -10,3 +10,7 @@
 [submodule "OctopushOS/3rdParty/juce"]
 	path = OctopushOS/3rdParty/juce
 	url = https://github.com/WeAreROLI/JUCE
+[submodule "OctopushOS/3rdParty/juce_headless"]
+	path = OctopushOS/3rdParty/juce_headless
+	url = https://github.com/stez-mind/JUCE/
+	branch = mind/headless_plugin_client_next
