@@ -33,6 +33,7 @@ public:
         int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
         String showSimulatorValue = "";  // Anything different than "show" or "hide" will mean "default"
         bool playOnStart = DEFAULT_PLAY_ON_START;
+        bool minimalEngine = false;
         
         StringArray arguments = getCommandLineParameterArray();
         for (int i=0; i<arguments.size(); i++){
@@ -55,10 +56,13 @@ public:
             else if (argument == "-pos"){
                 playOnStart = true;
             }
+            else if (argument == "-minimal"){
+                minimalEngine = true;  // This will set up the audio engine with only one channel and one file
+            }
         }
         
         // Initialize application engine and Push2 interface
-        engine.initialize(playOnStart, stateUpdateFrameRate);
+        engine.initialize(playOnStart, stateUpdateFrameRate, minimalEngine);
         push.initialize(&engine, displayFrameRate, maxEncoderUpdateRate);
         
         // Initialize simulator in main window (if requested)

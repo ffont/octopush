@@ -25,7 +25,7 @@ public:
     Engine();
     ~Engine();
     
-    void initialize(bool playOnStart, int stateUpdateRate);
+    void initialize(bool playOnStart, int stateUpdateRate, bool minimal);
     
     void transportPlay();
     void transportStop();
