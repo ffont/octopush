@@ -6,8 +6,7 @@ echo "Building OctopushOS as plugin..."
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     cd "$ROOT/Builds/LinuxMakefile"
-    make clean
-    make CONFIG=Debug -j2
+    make CONFIG=Debug -j4
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     cd "$ROOT/Builds/MacOSX"

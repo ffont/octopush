@@ -6,9 +6,9 @@ echo "Building OctopushOS..."
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     cd "$ROOT/Builds/LinuxMakefile"
-    make CONFIG=Debug -j4
+    make CONFIG=Release -j4 CFLAGS="-DJUCE_HEADLESS_PLUGIN_CLIENT=1"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     cd "$ROOT/Builds/MacOSX"
-    xcodebuild -configuration Debug GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS JUCER_ENABLE_GPL_MODE=1' LLVM_LTO=NO
+    xcodebuild -configuration Release GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS JUCER_ENABLE_GPL_MODE=1' LLVM_LTO=NO
 fi
