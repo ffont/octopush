@@ -29,22 +29,24 @@ Engine::~Engine()
 void Engine::initialize(bool playOnStart, int stateUpdateRate, bool minimal)
 {
     //------------- Configure input devices
-    auto& dm = engine.getDeviceManager();
-    
-    for (int i = 0; i < dm.getNumWaveInDevices(); i++)
-        if (auto wip = dm.getWaveInDevice (i))
-            wip->setStereoPair (false);  // Don't make input devices stereo
-    
-    for (int i = 0; i < dm.getNumWaveInDevices(); i++)
-    {
-        if (auto wip = dm.getWaveInDevice (i))  // Enable all iputs
+    if (!minimal){
+        auto& dm = engine.getDeviceManager();
+        
+        for (int i = 0; i < dm.getNumWaveInDevices(); i++)
+            if (auto wip = dm.getWaveInDevice (i))
+                wip->setStereoPair (false);  // Don't make input devices stereo
+        
+        for (int i = 0; i < dm.getNumWaveInDevices(); i++)
         {
-            wip->setEndToEnd (true);  // Enable input monitoring
-            wip->setEnabled (true);
+            if (auto wip = dm.getWaveInDevice (i))  // Enable all iputs
+            {
+                wip->setEndToEnd (true);  // Enable input monitoring
+                wip->setEnabled (true);
+            }
         }
+        edit.playInStopEnabled = true; // Needed to make input devices reachable even if not playing
+        edit.restartPlayback();
     }
-    edit.playInStopEnabled = true; // Needed to make input devices reachable even if not playing
-    edit.restartPlayback();
     
     //------------- Create all audio tracks and link level meters
     
