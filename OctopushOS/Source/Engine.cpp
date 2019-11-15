@@ -291,4 +291,19 @@ void Engine::timerCallback()
     for (int index = 0; index<te::getAudioTracks(edit).size(); index++){
         state.audioTrackSettings[index].measuredLevel = trackLevelClients[index].getAndClearAudioLevel(0).dB;
     }
+    
+    // Measure state update rate and save it to state
+    stateUpdateRateCounter += 1;
+    if (stateUpdateRateCurrentSecond == 0){
+        // Init variables
+        stateUpdateRateCurrentSecond = Time::getCurrentTime().toMilliseconds();
+    } else {
+        int64 currentTime = Time::getCurrentTime().toMilliseconds();
+        if (currentTime - stateUpdateRateCurrentSecond > 1000.0){
+            stateUpdateRateCurrentSecond = currentTime;
+            state.stateUpdateFrameRate = stateUpdateRateCounter;
+            stateUpdateRateCounter = 0;
+            std::cout << "State updates per second: " << state.stateUpdateFrameRate << std::endl;
+        }
+    }
 }

@@ -75,6 +75,8 @@ private:
     void sendMidiMessage(MidiMessage msg) override;
 
     void timerCallback() override;
+    int displayFrameRateCounter = 0;
+    int64 displayFrameCurrentSecond = 0;
     
     // Properties
     int displayFrameRate;

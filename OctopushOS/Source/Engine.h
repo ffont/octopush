@@ -46,6 +46,9 @@ private:
     // Methods
     void changeListenerCallback (ChangeBroadcaster*) override;
     void timerCallback() override;
+    
+    int stateUpdateRateCounter = 0;
+    int64 stateUpdateRateCurrentSecond = 0;
    
     // Properties
     te::Edit edit { engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0 };

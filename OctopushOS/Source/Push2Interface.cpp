@@ -202,6 +202,21 @@ void Push2Interface::timerCallback()
 {
     state->animationElapsedTime += 1.0 / displayFrameRate;
     updateUI();
+    
+    // Measure frame rate and save it to state
+    displayFrameRateCounter += 1;
+    if (displayFrameCurrentSecond == 0){
+        // Init variables
+        displayFrameCurrentSecond = Time::getCurrentTime().toMilliseconds();
+    } else {
+        int64 currentTime = Time::getCurrentTime().toMilliseconds();
+        if (currentTime - displayFrameCurrentSecond > 1000.0){
+            displayFrameCurrentSecond = currentTime;
+            state->displayFrameRate = displayFrameRateCounter;
+            displayFrameRateCounter = 0;
+            std::cout << "Display frames per second: " << state->displayFrameRate << std::endl;
+        }
+    }
 }
 
 
