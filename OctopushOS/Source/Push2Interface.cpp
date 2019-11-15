@@ -265,9 +265,10 @@ Image Push2Interface::computeDisplayFrameFromState()
     
     // Draw audio tracks level meter and volume
     int trackNum = 0;
+    int numTracks = state->audioTrackSettings.size();
     for (auto settings : state->audioTrackSettings) {
         float trackWidth = width / 8;
-        float trackX = (trackNum * trackWidth) + (width - (N_AUDIO_TRACKS * trackWidth)); // Align right of display
+        float trackX = (trackNum * trackWidth) + (width - (numTracks * trackWidth)); // Align right of display
         
         // Draw meter
         g.setColour(Colours::green);
@@ -277,7 +278,7 @@ Image Push2Interface::computeDisplayFrameFromState()
             clippedLevel = minDbValueShown;
         }
         double barHeight = jmap(clippedLevel, minDbValueShown, 0.0, 0.0, 1.0) * height;
-        g.fillRect((int)trackX, height - barHeight, 20, barHeight);
+        g.fillRect((int)(trackX + (trackWidth / 2 - 6)), height - barHeight, 20, barHeight);
         
         // Draw volume indicator
         g.setColour(Colours::white);
@@ -425,38 +426,57 @@ void Push2Interface::e1Rotated(int increment){
     state->demoWaveAmplitude = jlimit(0.0, 1.0, (double)state->demoWaveAmplitude);
 }
 
-void Push2Interface::e4Rotated(int increment){
-    state->reverberationRoomSize += 0.04 * increment;
-    state->reverberationRoomSize = jlimit(0.0, 1.0, (double)state->reverberationRoomSize);
-    engine->setReverberationRoomSize(state->reverberationRoomSize);
-}
-
-void Push2Interface::e5Rotated(int increment){
+void Push2Interface::e2Rotated(int increment){
     int trackNum = 0;  // Track #0
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
 
-void Push2Interface::e6Rotated(int increment){
+void Push2Interface::e3Rotated(int increment){
     int trackNum = 1;  // Track #1
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
 
-void Push2Interface::e7Rotated(int increment){
+void Push2Interface::e4Rotated(int increment){
     int trackNum = 2;  // Track #2
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
 }
 
-void Push2Interface::e8Rotated(int increment){
+void Push2Interface::e5Rotated(int increment){
     int trackNum = 3;  // Track #3
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
     engine->setTrackVolume(trackNum, newVolume);
+}
+
+void Push2Interface::e6Rotated(int increment){
+    int trackNum = 4;  // Track #4
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+}
+
+void Push2Interface::e7Rotated(int increment){
+    int trackNum = 5;  // Track #5
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+}
+
+void Push2Interface::e8Rotated(int increment){
+    int trackNum = 6;  // Track #6
+    float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
+    newVolume = jlimit(-100.0, 6.0, (double)newVolume);
+    engine->setTrackVolume(trackNum, newVolume);
+    /*
+     state->reverberationRoomSize += 0.04 * increment;
+     state->reverberationRoomSize = jlimit(0.0, 1.0, (double)state->reverberationRoomSize);
+     engine->setReverberationRoomSize(state->reverberationRoomSize);*/
 }
 
 //------------------------------------------------------------------------------
@@ -469,20 +489,32 @@ void Push2Interface::ba1Pressed(){
     state->demoWaveColor = randomColour;
 }
 
-void Push2Interface::ba5Pressed(){
+void Push2Interface::ba2Pressed(){
     engine->toggleMuteTrack(0);
 }
 
-void Push2Interface::ba6Pressed(){
+void Push2Interface::ba3Pressed(){
     engine->toggleMuteTrack(1);
 }
 
-void Push2Interface::ba7Pressed(){
+void Push2Interface::ba4Pressed(){
     engine->toggleMuteTrack(2);
 }
 
-void Push2Interface::ba8Pressed(){
+void Push2Interface::ba5Pressed(){
     engine->toggleMuteTrack(3);
+}
+
+void Push2Interface::ba6Pressed(){
+    engine->toggleMuteTrack(4);
+}
+
+void Push2Interface::ba7Pressed(){
+    engine->toggleMuteTrack(5);
+}
+
+void Push2Interface::ba8Pressed(){
+    engine->toggleMuteTrack(6);
 }
 
 void Push2Interface::playPressed(){

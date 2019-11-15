@@ -103,6 +103,8 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate, bool minimal)
             stepClip->removeChannel(4);
             stepClip->removeChannel(4);
             stepClip->removeChannel(4);
+            
+            setTrackVolume(1, -8.0); // Set volume to -8 db
         }
         
         // Load audio files that will be used by a sampler plugin receiving notes from the step sequencer
@@ -171,6 +173,55 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate, bool minimal)
         // Mute tracks 2-3 to avoid feedback loop if input is microphone and output are speakers
         toggleMuteTrack(2);
         toggleMuteTrack(3);
+        
+        // Tracks 4, 5 and 6 with audio files
+        if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum)){
+            auto f = File::createTempFile ("loop1.wav");
+            f.replaceWithData (BinaryData::_262218__jputman__simpleloop_wav, BinaryData::_262218__jputman__simpleloop_wavSize);
+            te::AudioFile audioFile (f);
+            auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+            
+            // Add plugins
+            if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit.getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+            {
+                track->pluginList.insertPlugin (*reverb, 0, nullptr);
+                reverb->setRoomSize(state.reverberationRoomSize);
+            }
+            
+            currentTrackNum++;
+        }
+        
+        if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum)){
+            auto f = File::createTempFile ("loop2.wav");
+            f.replaceWithData (BinaryData::_418621__realdavidfloat__basslinec120bpm_wav, BinaryData::_418621__realdavidfloat__basslinec120bpm_wavSize);
+            te::AudioFile audioFile (f);
+            auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+            
+            // Add plugins
+            if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit.getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+            {
+                track->pluginList.insertPlugin (*reverb, 0, nullptr);
+                reverb->setRoomSize(state.reverberationRoomSize);
+            }
+            
+            currentTrackNum++;
+        }
+        
+        if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum)){
+            auto f = File::createTempFile ("loop3.wav");
+            f.replaceWithData (BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wav, BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wavSize);
+            te::AudioFile audioFile (f);
+            auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+            
+            // Add plugins
+            if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit.getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+            {
+                track->pluginList.insertPlugin (*reverb, 0, nullptr);
+                reverb->setRoomSize(state.reverberationRoomSize);
+            }
+            
+            currentTrackNum++;
+        }
     }
     
     //------------- Print info about created tracks

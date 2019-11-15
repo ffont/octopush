@@ -93,6 +93,10 @@
 			isa = PBXBuildFile;
 			fileRef = 5C05A34F1B5D80C34CB596DB;
 		};
+		AA28ED5A9720ABFE0B90E4C2 = {
+			isa = PBXBuildFile;
+			fileRef = 5CF4E02AAC08AA9C6BE5EC5F;
+		};
 		1ADAA6511DD2704F752563D3 = {
 			isa = PBXBuildFile;
 			fileRef = CB68008FD522F5D90302F469;
@@ -265,6 +269,13 @@
 			path = "../../3rdParty/tracktion_engine/modules/tracktion_engine";
 			sourceTree = "SOURCE_ROOT";
 		};
+		2002679AD68438AAF7690C00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = "418621__realdavidfloat__bassline-c-120bpm.wav";
+			path = "../../Resources/418621__realdavidfloat__bassline-c-120bpm.wav";
+			sourceTree = "SOURCE_ROOT";
+		};
 		22A6621BAEA8DAD822E9E811 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -335,6 +346,13 @@
 			path = ../../Resources/tambourine.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
+		3E9F12B61B8BA82F22CCB937 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = "418743__realdavidfloat__hihat-loop-120bpm01-02.wav";
+			path = "../../Resources/418743__realdavidfloat__hihat-loop-120bpm01-02.wav";
+			sourceTree = "SOURCE_ROOT";
+		};
 		441CC6CF7D12AAFDD205B557 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -389,6 +407,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = BinaryData.cpp;
 			path = ../../JuceLibraryCode/BinaryData.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		5CF4E02AAC08AA9C6BE5EC5F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BinaryData2.cpp;
+			path = ../../JuceLibraryCode/BinaryData2.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		5D9BEAFB2C1754292D0503B3 = {
@@ -636,6 +661,13 @@
 			path = "../../3rdParty/push2-display-with-juce/Source/push2/Push2-Bitmap.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		D67177FECC2CED4844CBD4D6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.wav;
+			name = "262218__jputman__simple-loop.wav";
+			path = "../../Resources/262218__jputman__simple-loop.wav";
+			sourceTree = "SOURCE_ROOT";
+		};
 		D82EA6257B591ADA4F40A46B = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -797,6 +829,9 @@
 				BBA3BF2BD0E65253B3DFC068,
 				DCE34AFF348E98973FA76D57,
 				3E6105DA66C34D02BE809DA7,
+				D67177FECC2CED4844CBD4D6,
+				2002679AD68438AAF7690C00,
+				3E9F12B61B8BA82F22CCB937,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -872,6 +907,7 @@
 				FD4E377321AA004DE9B09DA7,
 				5C05A34F1B5D80C34CB596DB,
 				0551B0517F0A92C3FD69A286,
+				5CF4E02AAC08AA9C6BE5EC5F,
 				CB68008FD522F5D90302F469,
 				3C3EC6D2909619FB15C522B7,
 				053746FA77403F284B065616,
@@ -1182,6 +1218,7 @@
 				98180EFBCD1611119CEF0935,
 				7C547C5E8DA8EF42D58FA92C,
 				4EA9A2AEBD884138481CE57F,
+				AA28ED5A9720ABFE0B90E4C2,
 				1ADAA6511DD2704F752563D3,
 				AAC5825820DDCE4F5FDF09F6,
 				DC17007E02F27DF1F1BC05F8,

@@ -16,6 +16,4 @@
 
 #define DEFAULT_PLAY_ON_START false
 
-#define N_AUDIO_TRACKS 4
-
-
+#define N_AUDIO_TRACKS 7

@@ -33,6 +33,12 @@
       <FILE id="MdIBDY" name="kick.wav" compile="0" resource="1" file="Resources/kick.wav"/>
       <FILE id="WZv8ef" name="snare.aiff" compile="0" resource="1" file="Resources/snare.aiff"/>
       <FILE id="PPNJBl" name="tambourine.wav" compile="0" resource="1" file="Resources/tambourine.wav"/>
+      <FILE id="KnDySI" name="262218__jputman__simple-loop.wav" compile="0"
+            resource="1" file="Resources/262218__jputman__simple-loop.wav"/>
+      <FILE id="rubzBN" name="418621__realdavidfloat__bassline-c-120bpm.wav"
+            compile="0" resource="1" file="Resources/418621__realdavidfloat__bassline-c-120bpm.wav"/>
+      <FILE id="b42RFv" name="418743__realdavidfloat__hihat-loop-120bpm01-02.wav"
+            compile="0" resource="1" file="Resources/418743__realdavidfloat__hihat-loop-120bpm01-02.wav"/>
     </GROUP>
     <GROUP id="{A296B546-124C-3A26-64F6-4AA92E2A209B}" name="3rdParty">
       <GROUP id="{163ABAD6-A045-28D5-0760-DB5089BBCF5C}" name="libusb">
