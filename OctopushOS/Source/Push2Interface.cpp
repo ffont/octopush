@@ -37,6 +37,8 @@ Push2Interface::Push2Interface()
 
 Push2Interface::~Push2Interface()
 {
+    // Stop timer
+    stopTimer();
 }
 
 //------------------------------------------------------------------------------
@@ -72,7 +74,11 @@ void Push2Interface::initialize(Engine* engine_, int displayFrameRate_, int maxE
     
     // Start the timer to draw the animation
     displayFrameRate = displayFrameRate_;
-    startTimerHz(displayFrameRate);
+    if (displayFrameRate > 0){
+        startTimerHz(displayFrameRate);
+    } else {
+        std::cout << "WARNING: display frame timer is disabled" << std::endl;
+    }
 }
 
 

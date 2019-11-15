@@ -71,8 +71,8 @@ The generated executable will be placed in `OctopushOS/Builds/MacOSX/build/Relea
 
 When running OctopushOS executable the following command line arguments can be used:
 
- * `-dfr #`: set the display frame rate in Hz (e.g. `-dfr 30`). Defaults to `60`.
- * `-sur #`: set the rate in Hz at which state object is updated (e.g. `-sur 5`). Defaults to `15`.
+ * `-dfr #`: set the display frame rate in Hz (e.g. `-dfr 30`). Defaults to `60`. Setting this parameter to `0` will disable the timer.
+ * `-sur #`: set the rate in Hz at which state object is updated (e.g. `-sur 5`). Defaults to `15`. Setting this parameter to `0` will disable the timer.
  * `-eur #`: set the maximum rate in Hz at which Push2 encoder recevied messages are processed (e.g. `-eur 10`). Messages received exceeding this rate are discared. This is because Push2 sends many messages when rotating encoders and it can collapse the app. Defaults to `15`.
  * `-sim show/hide`: set whether the Push2 simulator should be shown or not (e.g. `-sim show`). By default, the simulator will only be shown if app can't connect to Push2 and app is compiled in Debug mode.
  * `-pos`: sets whether OcotpushOS should autoplay right after the engine is loaded. By default this option is not set.

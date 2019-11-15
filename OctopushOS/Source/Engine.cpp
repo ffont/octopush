@@ -18,6 +18,9 @@ Engine::Engine()
    
 Engine::~Engine()
 {
+    // Stop timer
+    stopTimer();
+    
     // Shot down tracktion engine stuf
     engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();    
     
@@ -191,7 +194,11 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate, bool minimal)
     }
 
     // Start the timer to update state
-    startTimerHz(stateUpdateRate);
+    if (stateUpdateRate > 0){
+        startTimerHz(stateUpdateRate);
+    } else {
+        std::cout << "WARNING: state update timer is disabled" << std::endl;
+    }
 }
 
 void Engine::changeListenerCallback (ChangeBroadcaster*)
