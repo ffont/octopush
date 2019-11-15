@@ -268,7 +268,6 @@ void Engine::setReverberationRoomSize(float roomSize)
     // specify tracks and also save their values in the state
     auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 0);  // 0 = sample + plugin
     auto reverb = dynamic_cast<te::ReverbPlugin*> (track->pluginList.getPluginsOfType<te::ReverbPlugin>().getLast());
-    std::cout << roomSize << std::endl;
     reverb->setRoomSize(roomSize);
 }
 
