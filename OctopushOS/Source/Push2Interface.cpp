@@ -286,6 +286,10 @@ Image Push2Interface::computeDisplayFrameFromState()
         trackNum++;
     }
     
+    // Draw display frame rate and update rate stats
+    g.drawSingleLineText(String::formatted("display frames/second: %i", state->displayFrameRate), 5, height - (5 + 14));
+    g.drawSingleLineText(String::formatted("state updates/second:%i", state->stateUpdateFrameRate), 5, height - 5);
+    
     return frame;
 }
 
