@@ -265,7 +265,7 @@ Image Push2Interface::computeDisplayFrameFromState()
     
     // Draw audio tracks level meter and volume
     int trackNum = 0;
-    int numTracks = state->audioTrackSettings.size();
+    int numTracks = (int)state->audioTrackSettings.size();
     for (auto settings : state->audioTrackSettings) {
         float trackWidth = width / 8;
         float trackX = (trackNum * trackWidth) + (width - (numTracks * trackWidth)); // Align right of display
@@ -330,12 +330,18 @@ void Push2Interface::updatePush2ButtonsFromState(){
     for (auto settings : state->audioTrackSettings) {
         int buttonNumber = 0;
         if (trackNum == 0){
-            buttonNumber = BUTTON_A5_CC_NUMBER;
+            buttonNumber = BUTTON_A2_CC_NUMBER;
         } else if (trackNum == 1){
-            buttonNumber = BUTTON_A6_CC_NUMBER;
+            buttonNumber = BUTTON_A3_CC_NUMBER;
         } else if (trackNum == 2){
-            buttonNumber = BUTTON_A7_CC_NUMBER;
+            buttonNumber = BUTTON_A4_CC_NUMBER;
         } else if (trackNum == 3){
+            buttonNumber = BUTTON_A5_CC_NUMBER;
+        } else if (trackNum == 4){
+            buttonNumber = BUTTON_A6_CC_NUMBER;
+        } else if (trackNum == 5){
+            buttonNumber = BUTTON_A7_CC_NUMBER;
+        } else if (trackNum == 6){
             buttonNumber = BUTTON_A8_CC_NUMBER;
         }
         
