@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.5"
+<JUCERPROJECT id="ZGuqmK" name="OctopushOS" projectType="guiapp" jucerVersion="5.4.7"
               headerPath="../../Source/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/push2/"
               version="0.0.1" companyName="Rita &amp; Aurora" projectLineFeed="&#10;"
               companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com"

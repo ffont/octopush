@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="blrhxW" name="OctopushOSPlugin" projectType="audioplug" jucerVersion="5.4.5"
+<JUCERPROJECT id="blrhxW" name="OctopushOSPlugin" projectType="audioplug" jucerVersion="5.4.7"
               pluginFormats="buildStandalone,buildVST3" version="0.0.1" projectLineFeed="&#10;"
               companyName="Rita &amp; Aurora" companyWebsite="https://ritaandaurora.github.io"
               companyEmail="frederic.font@gmail.com" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn"

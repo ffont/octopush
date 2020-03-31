@@ -427,32 +427,11 @@
 			path = "../../../3rdParty/push2-display-with-juce/Source/Result.h";
 			sourceTree = "SOURCE_ROOT";
 		};
-		673549B55C364A086335EFDD = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = "include_juce_audio_basics.mm";
-			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
 		693134EBE657A5EAA1976DB1 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = "tracktion_engine.h";
 			path = "../../../Source/helpers/tracktion_engine.h";
-			sourceTree = "SOURCE_ROOT";
-		};
-		6C19A5FF95C312D112EEC82F = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "juce_cryptography";
-			path = "../../../3rdParty/juce/modules/juce_cryptography";
-			sourceTree = "SOURCE_ROOT";
-		};
-		889A7036914D6937AB4E4761 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = "include_tracktion_engine_model_1.cpp";
-			path = "../../JuceLibraryCode/include_tracktion_engine_model_1.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		F9854A0E8F108866E58825E7 = {
@@ -468,6 +447,20 @@
 			includeInIndex = 0;
 			path = OctopushOSPlugin.app;
 			sourceTree = "BUILT_PRODUCTS_DIR";
+		};
+		673549B55C364A086335EFDD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = "include_juce_audio_basics.mm";
+			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		6C19A5FF95C312D112EEC82F = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_cryptography";
+			path = "../../../3rdParty/juce/modules/juce_cryptography";
+			sourceTree = "SOURCE_ROOT";
 		};
 		7052C1603161F87944794DAD = {
 			isa = PBXFileReference;
@@ -504,13 +497,6 @@
 			path = "../../JuceLibraryCode/include_juce_audio_devices.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
-		79A0A3CECEF21FC9271824D2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			name = OctopushOSPlugin.entitlements;
-			path = OctopushOSPlugin.entitlements;
-			sourceTree = "SOURCE_ROOT";
-		};
 		7DEDB881543A1EAF3F59C16B = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.c;
@@ -530,6 +516,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = PluginProcessor.cpp;
 			path = ../../Source/PluginProcessor.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		889A7036914D6937AB4E4761 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "include_tracktion_engine_model_1.cpp";
+			path = "../../JuceLibraryCode/include_tracktion_engine_model_1.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		8DDD17FF018478E21850C50F = {
@@ -1059,6 +1052,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1066,6 +1060,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1150,7 +1145,6 @@
 					"JucePlugin_Build_Standalone=0",
 					"JucePlugin_Build_Unity=0",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1257,7 +1251,6 @@
 					"JucePlugin_Build_Standalone=1",
 					"JucePlugin_Build_Unity=0",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"../../../3rdParty/juce/modules/juce_audio_processors/format_types/VST3_SDK",
@@ -1362,7 +1355,6 @@
 					"JucePlugin_Build_Unity=0",
 					"JUCE_SHARED_CODE=1",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"../../../3rdParty/juce/modules/juce_audio_processors/format_types/VST3_SDK",
@@ -1412,11 +1404,12 @@
 				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -1429,6 +1422,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "OctopushOSPlugin";
+				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wreorder";
 				ZERO_LINK = NO;
 			};
@@ -1459,10 +1453,12 @@
 				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -1474,6 +1470,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = "OctopushOSPlugin";
+				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wreorder";
 				ZERO_LINK = NO;
 			};
