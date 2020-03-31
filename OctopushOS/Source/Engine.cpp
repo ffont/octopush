@@ -50,9 +50,9 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate)
     int currentTrackNum = 0;
     for (int index=0; index<N_AUDIO_TRACKS; index++){
         auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, index);
-        trackLevelClients[index] = te::LevelMeasurer::Client();
+        trackLevelClients[index] = new te::LevelMeasurer::Client();
         track->getLevelMeterPlugin()->measurer.setMode(te::LevelMeasurer::Mode::RMSMode);
-        track->getLevelMeterPlugin()->measurer.addClient(trackLevelClients[index]);
+        track->getLevelMeterPlugin()->measurer.addClient(*trackLevelClients[index]);
     }
     
     //------------- Now add content to every track
@@ -61,7 +61,7 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate)
     if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum)){
         auto f = File::createTempFile ("tambourine.wav");
         f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
-        te::AudioFile audioFile (f);
+        te::AudioFile audioFile (engine, f);
         auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
         
         // Add reverb plugin to track
@@ -144,8 +144,8 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate)
         {
             if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, currentTrackNum))
             {
-                instance->setTargetTrack (t, 0);
-                instance->setRecordingEnabled (true);
+                instance->setTargetTrack (*t, 0, false);
+                instance->setRecordingEnabled (*t, true);
                 currentTrackNum++;
                 nInputTracks++;
             }
@@ -270,6 +270,6 @@ void Engine::timerCallback()
     
     // Save measured track levels to state
     for (int index = 0; index<te::getAudioTracks(edit).size(); index++){
-        state.audioTrackSettings[index].measuredLevel = trackLevelClients[index].getAndClearAudioLevel(0).dB;
+        state.audioTrackSettings[index].measuredLevel = trackLevelClients[index]->getAndClearAudioLevel(0).dB;
     }
 }

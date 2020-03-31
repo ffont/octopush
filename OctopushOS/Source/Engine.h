@@ -48,8 +48,8 @@ private:
     void timerCallback() override;
    
     // Properties
-    te::Edit edit { engine, te::createEmptyEdit(), te::Edit::forEditing, nullptr, 0 };
+    te::Edit edit { engine, te::createEmptyEdit(engine), te::Edit::forEditing, nullptr, 0 };
     te::TransportControl& transport { edit.getTransport() };
     
-    std::array<te::LevelMeasurer::Client, N_AUDIO_TRACKS> trackLevelClients;
+    std::array<te::LevelMeasurer::Client*, N_AUDIO_TRACKS> trackLevelClients;
 };
