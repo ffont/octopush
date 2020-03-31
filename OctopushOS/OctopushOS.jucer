@@ -27,6 +27,12 @@
             file="Source/Push2Simulator.cpp"/>
     </GROUP>
     <GROUP id="{B234EAAC-942B-69C3-0EE6-B80211C5ACD2}" name="Resources">
+      <FILE id="VOI9fE" name="262218__jputman__simple-loop.wav" compile="0"
+            resource="1" file="Resources/262218__jputman__simple-loop.wav"/>
+      <FILE id="tgRwYU" name="418621__realdavidfloat__bassline-c-120bpm.wav"
+            compile="0" resource="1" file="Resources/418621__realdavidfloat__bassline-c-120bpm.wav"/>
+      <FILE id="gnlvIR" name="418743__realdavidfloat__hihat-loop-120bpm01-02.wav"
+            compile="0" resource="1" file="Resources/418743__realdavidfloat__hihat-loop-120bpm01-02.wav"/>
       <FILE id="F5k4m7" name="startup_img.png" compile="0" resource="1" file="Resources/startup_img.png"/>
       <FILE id="cZMCXb" name="clap.wav" compile="0" resource="1" file="Resources/clap.wav"/>
       <FILE id="cCfAvg" name="hihat.wav" compile="0" resource="1" file="Resources/hihat.wav"/>

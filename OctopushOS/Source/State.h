@@ -73,6 +73,9 @@ public:
     
     float reverberationRoomSize = 0.5;
     
+    int stateUpdateFrameRate = 0;
+    int displayFrameRate = 0;
+    
 private:
     
   

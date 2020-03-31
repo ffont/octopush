@@ -1,10 +1,8 @@
 /*
   ==============================================================================
-
     Engine.h
     Created: 25 Oct 2019 4:14:04pm
     Author:  Frederic Font Corbera
-
   ==============================================================================
 */
 
@@ -25,7 +23,7 @@ public:
     Engine();
     ~Engine();
     
-    void initialize(bool playOnStart, int stateUpdateRate);
+    void initialize(bool playOnStart, int stateUpdateRate, bool minimal);
     
     void transportPlay();
     void transportStop();
@@ -46,6 +44,9 @@ private:
     // Methods
     void changeListenerCallback (ChangeBroadcaster*) override;
     void timerCallback() override;
+    
+    int stateUpdateRateCounter = 0;
+    int64 stateUpdateRateCurrentSecond = 0;
    
     // Properties
     te::Edit edit { engine, te::createEmptyEdit(engine), te::Edit::forEditing, nullptr, 0 };

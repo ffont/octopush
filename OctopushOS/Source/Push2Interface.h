@@ -1,10 +1,8 @@
 /*
   ==============================================================================
-
     Push2Interface.h
     Created: 24 Oct 2019 6:26:33pm
     Author:  Frederic Font Corbera
-
   ==============================================================================
 */
 
@@ -41,6 +39,8 @@ public:
     
     // Encoder action handlers
     void e1Rotated(int increment) override;
+    void e2Rotated(int increment) override;
+    void e3Rotated(int increment) override;
     void e4Rotated(int increment) override;
     void e5Rotated(int increment) override;
     void e6Rotated(int increment) override;
@@ -49,6 +49,9 @@ public:
     
     // Button action handlers
     void ba1Pressed() override;
+    void ba2Pressed() override;
+    void ba3Pressed() override;
+    void ba4Pressed() override;
     void ba5Pressed() override;
     void ba6Pressed() override;
     void ba7Pressed() override;
@@ -75,6 +78,8 @@ private:
     void sendMidiMessage(MidiMessage msg) override;
 
     void timerCallback() override;
+    int displayFrameRateCounter = 0;
+    int64 displayFrameCurrentSecond = 0;
     
     // Properties
     int displayFrameRate;

@@ -301,6 +301,10 @@
 //==============================================================================
 // tracktion_engine flags:
 
+#ifndef    TRACKTION_ENABLE_SINGLETONS
+ //#define TRACKTION_ENABLE_SINGLETONS 0
+#endif
+
 #ifndef    TRACKTION_ENABLE_ARA
  //#define TRACKTION_ENABLE_ARA 0
 #endif
