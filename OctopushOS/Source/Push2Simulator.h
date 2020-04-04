@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.5
+  Created with Projucer version: 5.4.7
 
   ------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ class Push2Simulator  : public Component,
 public:
     //==============================================================================
     Push2Simulator ();
-    ~Push2Simulator();
+    ~Push2Simulator() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.

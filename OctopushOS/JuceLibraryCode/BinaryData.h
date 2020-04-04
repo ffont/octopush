@@ -17,9 +17,6 @@ namespace BinaryData
     extern const char*   _418743__realdavidfloat__hihatloop120bpm0102_wav;
     const int            _418743__realdavidfloat__hihatloop120bpm0102_wavSize = 1412824;
 
-    extern const char*   startup_img_png;
-    const int            startup_img_pngSize = 11969;
-
     extern const char*   clap_wav;
     const int            clap_wavSize = 57452;
 
@@ -31,6 +28,9 @@ namespace BinaryData
 
     extern const char*   snare_aiff;
     const int            snare_aiffSize = 30888;
+
+    extern const char*   startup_img_png;
+    const int            startup_img_pngSize = 11969;
 
     extern const char*   tambourine_wav;
     const int            tambourine_wavSize = 1058444;

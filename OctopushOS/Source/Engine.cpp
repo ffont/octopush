@@ -238,6 +238,7 @@ void Engine::initialize(bool playOnStart, int stateUpdateRate, bool minimal)
     transport.addChangeListener (this);
     
     // If play, start playing
+    std::cout << "PLAY on starty? " << playOnStart <<std::endl;
     if (playOnStart){
         transportPlay();
     }
