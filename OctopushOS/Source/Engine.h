@@ -23,7 +23,7 @@ public:
     Engine();
     ~Engine();
     
-    void initialize(bool playOnStart, int stateUpdateRate, bool minimal);
+    void initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal);
     
     void transportPlay();
     void transportStop();
@@ -38,7 +38,7 @@ public:
     
     State state;  // Make state public so it can be accessed and modified by others
     
-    te::Engine engine { ProjectInfo::projectName };
+    std::unique_ptr<te::Engine> engine;
 
 private:
     // Methods
@@ -49,8 +49,8 @@ private:
     int64 stateUpdateRateCurrentSecond = 0;
    
     // Properties
-    te::Edit edit { engine, te::createEmptyEdit(engine), te::Edit::forEditing, nullptr, 0 };
-    te::TransportControl& transport { edit.getTransport() };
+    std::unique_ptr<te::Edit> edit;
+    std::unique_ptr<te::TransportControl> transport;
     
     std::array<te::LevelMeasurer::Client*, N_AUDIO_TRACKS> trackLevelClients;
 };

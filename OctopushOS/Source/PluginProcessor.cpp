@@ -21,20 +21,9 @@ OctopushOsAudioProcessor::OctopushOsAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       ),
-    audioInterface (engine.engine.getDeviceManager().getHostedAudioDeviceInterface())
+                       )
 #endif
 {
-    audioInterface.initialise ({});
-    
-    // Octopush app initialize
-    bool playOnStart = true; //DEFAULT_PLAY_ON_START;
-    int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
-    int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
-    int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
-    bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
-    engine.initialize(playOnStart, stateUpdateFrameRate, minimalEngine);
-    push.initialize(&engine, displayFrameRate, maxEncoderUpdateRate);
 }
 
 OctopushOsAudioProcessor::~OctopushOsAudioProcessor()
@@ -104,13 +93,14 @@ void OctopushOsAudioProcessor::changeProgramName (int index, const String& newNa
 }
 
 //==============================================================================
-void OctopushOsAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void OctopushOsAudioProcessor::prepareToPlay (double sampleRate, int expectedBlockSize)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    // On Linux the plugin and prepareToPlay may not be called on the message thread.
+    // Engine needs to be created on the message thread so we'll do that now
+    ensureEngineCreatedOnMessageThread();
     
-    setLatencySamples (samplesPerBlock);
-    audioInterface.prepareToPlay (sampleRate, samplesPerBlock);
+    setLatencySamples (expectedBlockSize);
+    ensurePrepareToPlayCalledOnMessageThread (sampleRate, expectedBlockSize);
 }
 
 void OctopushOsAudioProcessor::releaseResources()
@@ -145,15 +135,18 @@ bool OctopushOsAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void OctopushOsAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+    // Update position info first
+    engineWrapper->playheadSynchroniser.synchronise (*this);
+
     ScopedNoDenormals noDenormals;
     
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-    
+
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-    
-    audioInterface.processBlock (buffer, midiMessages);
+
+    engineWrapper->audioInterface.processBlock (buffer, midiMessages);
 }
 
 //==============================================================================

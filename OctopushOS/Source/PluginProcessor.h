@@ -25,7 +25,7 @@ public:
     ~OctopushOsAudioProcessor();
 
     //==============================================================================
-    void prepareToPlay (double sampleRate, int samplesPerBlock) override;
+    void prepareToPlay (double sampleRate, int expectedBlockSize) override;
     void releaseResources() override;
 
    #ifndef JucePlugin_PreferredChannelConfigurations
@@ -57,10 +57,38 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-    // Ocotpush app engine and push2 interface
-    Engine engine;
-    Push2Interface push;
+    //==============================================================================
+    
+    struct EngineWrapper
+    {
+        EngineWrapper()
+            : audioInterface (engine.getDeviceManager().getHostedAudioDeviceInterface())
+        {
+            JUCE_ASSERT_MESSAGE_THREAD
+            audioInterface.initialise ({});
+            
+            // Octopush app initialize
+            bool playOnStart = DEFAULT_PLAY_ON_START;
+            int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
+            int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
+            int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
+            bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
+                       
+            octopush_engine.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+            push.initialize(&octopush_engine, displayFrameRate, maxEncoderUpdateRate);
+        }
 
+        te::Engine engine { ProjectInfo::projectName, nullptr, std::make_unique<PluginEngineBehaviour>() };
+        te::Edit edit { engine, te::createEmptyEdit (engine), te::Edit::forEditing, nullptr, 0 };
+        te::HostedAudioDeviceInterface& audioInterface;
+        te::ExternalPlayheadSynchroniser playheadSynchroniser { edit };
+        
+        // Ocotpush app engine and push2 interface
+        Engine octopush_engine;
+        Push2Interface push;
+    };
+    std::unique_ptr<EngineWrapper> engineWrapper;  // Should this be private??
+    
 private:
     
     class PluginEngineBehaviour : public te::EngineBehaviour
@@ -68,9 +96,40 @@ private:
     public:
         bool autoInitialiseDeviceManager() override { return false; }
     };
-    //==============================================================================
-    te::HostedAudioDeviceInterface& audioInterface;
     
+    //==============================================================================
+    
+    template<typename Function>
+    void callFunctionOnMessageThread (Function&& func)
+    {
+        if (MessageManager::getInstance()->isThisTheMessageThread())
+        {
+            func();
+        }
+        else
+        {
+            jassert (! MessageManager::getInstance()->currentThreadHasLockedMessageManager());
+            WaitableEvent finishedSignal;
+            MessageManager::callAsync ([&]
+                                       {
+                                           func();
+                                           finishedSignal.signal();
+                                       });
+            finishedSignal.wait (-1);
+        }
+    }
+    
+    void ensureEngineCreatedOnMessageThread()
+    {
+        if (! engineWrapper)
+            callFunctionOnMessageThread ([&] { engineWrapper = std::make_unique<EngineWrapper>(); });
+    }
+    
+    void ensurePrepareToPlayCalledOnMessageThread (double sampleRate, int expectedBlockSize)
+    {
+        jassert (engineWrapper);
+        callFunctionOnMessageThread ([&] { engineWrapper->audioInterface.prepareToPlay (sampleRate, expectedBlockSize); });
+    }
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OctopushOsAudioProcessor)

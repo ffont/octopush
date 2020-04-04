@@ -33,14 +33,14 @@ OctopushOsAudioProcessorEditor::OctopushOsAudioProcessorEditor (OctopushOsAudioP
         showSimulator = false;
     } else {
         // If not force/hide show simulator we'll only show it if push was not initialized properly and we're in debug mode
-        if (!processor.push.pushInitializedSuccessfully && debug){
+        if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
             showSimulator = true;
         }
     }
     
     if (showSimulator) {
         setSize (900, 726);
-        push2SimulatorComponent.setPush2Interface(&processor.push);
+        push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
         addAndMakeVisible(push2SimulatorComponent);
     }
 }
@@ -61,7 +61,7 @@ void OctopushOsAudioProcessorEditor::paint (Graphics& g)
 void OctopushOsAudioProcessorEditor::resized()
 {
     #if JUCE_DEBUG
-    if (!processor.push.pushInitializedSuccessfully) {
+    if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
         push2SimulatorComponent.setBounds(getBounds());
     }
     #endif
