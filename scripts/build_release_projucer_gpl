@@ -9,7 +9,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     PROJUCER_EXE=$PROJUCER_ROOT/build/Release/Projucer
     cd "$PROJUCER_ROOT"
     make clean
-    make CONFIG=Release -j4
+    make CONFIG=Release -j2
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     PROJUCER_ROOT=$ROOT/3rdParty/juce/extras/Projucer/Builds/MacOSX

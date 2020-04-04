@@ -7,7 +7,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
     cd "$ROOT/Builds/LinuxMakefile"
     make clean
-    make CONFIG=Release -j4
+    make CONFIG=Release -j2
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     cd "$ROOT/Builds/MacOSX"
