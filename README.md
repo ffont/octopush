@@ -11,7 +11,7 @@ Well, this is just work in progress, don't ask too many quesitons ;) I'm current
 
 ### OctopushOS
 
-OcotpushOS is a standard JUCE app and can be edited and built using standard JUCE workflows. For development, you'll also want to build Projucer so you can edit `OctopushOS.jucer` file. Even though you can use pre-built Projucer downloaded from JUCE website, here we provide a script to build a GPL-enabled version of Projucer.
+OcotpushOS is implemented as a JUCE audio plug-in and can be edited and built using standard JUCE workflows. For development, you'll want to build Projucer so you can edit `OctopushOS.jucer` file. Even though you can use pre-built Projucer downloaded from JUCE website, here we provide a script to build a GPL-enabled version of Projucer.
 
 #### Repository checkout
 
@@ -30,7 +30,7 @@ cd scripts
 ./build_release_projucer_gpl
 ```
 
-The generated executable will be placed in `OctopushOS/3rdParty/juce/extras/Projucer/Builds/MacOSX/build/Release/Projucer` (MacOSX) or `OctopushOS/3rdParty/juce/extras/Projucer/Builds/LinuxMakefile/build/Release/Projucer` (Linux) depending on the platform you're running it from.
+This builds the audio plugin in several formats as well as astandalone executable. which will be placed in `OctopushOS/3rdParty/juce/extras/Projucer/Builds/MacOSX/build/Release/Projucer` (MacOSX) or `OctopushOS/3rdParty/juce/extras/Projucer/Builds/LinuxMakefile/build/Release/Projucer` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
 
 If building from Linux, the following dependencies need to be installed:
 ```
@@ -43,6 +43,9 @@ apt-get install libusb-1.0-0-dev
 This list of dependencies was taken from [this forum thread](https://forum.juce.com/t/list-of-juce-dependencies-under-linux/15121/31). It could be the case that some of these are actually not needed, I have not tested them individually.
 
 
+**NOTE**: OctopushOS is configured to be built in different plugin formats including legacy VST2. To do that you'll need to place the legacy VST2 framework files. If you don't want to build VST2, just untick the VST2 option from the jucer file using Projucer.
+
+
 #### Development build
 
 To build OctopushOS during development you can use project files for Xcode (MacOSX) or the Makefile (Linux). You'll find these in the `OctopushOS/Builds/` folder. Alternatively you can use the provided utility script. `cd` into the cloned repository and run the following:
@@ -52,7 +55,7 @@ cd scripts
 ./build_debug_octopushOS
 ```
 
-The generated executable will be placed in `OctopushOS/Builds/MacOSX/build/Debug/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Debug/OctopushOS ` (Linux) depending on the platform you're running it from.
+The generated executable (for the santadalone version) will be placed in `OctopushOS/Builds/MacOSX/build/Debug/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Debug/OctopushOS ` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
 
 
 #### Release build
@@ -64,19 +67,7 @@ cd scripts
 ./build_release_octopushOS
 ```
 
-The generated executable will be placed in `OctopushOS/Builds/MacOSX/build/Release/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Release/OctopushOS ` (Linux) depending on the platform you're running it from.
-
-
-### Command line arguments
-
-When running OctopushOS executable the following command line arguments can be used:
-
- * `-dfr #`: set the display frame rate in Hz (e.g. `-dfr 30`). Defaults to `60`. Setting this parameter to `0` will disable the timer.
- * `-sur #`: set the rate in Hz at which state object is updated (e.g. `-sur 5`). Defaults to `15`. Setting this parameter to `0` will disable the timer.
- * `-eur #`: set the maximum rate in Hz at which Push2 encoder recevied messages are processed (e.g. `-eur 10`). Messages received exceeding this rate are discared. This is because Push2 sends many messages when rotating encoders and it can collapse the app. Defaults to `15`.
- * `-sim show/hide`: set whether the Push2 simulator should be shown or not (e.g. `-sim show`). By default, the simulator will only be shown if app can't connect to Push2 and app is compiled in Debug mode.
- * `-pos`: sets whether OcotpushOS should autoplay right after the engine is loaded. By default this option is not set.
- * `-minimal`: will create an audio engine with only 1 track and no effects.
+The generated executable (for the santadalone version) will be placed in `OctopushOS/Builds/MacOSX/build/Release/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Release/OctopushOS ` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
 
 
 ## Licenses
