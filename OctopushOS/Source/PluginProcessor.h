@@ -12,7 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Push2Interface.h"
-#include "Engine.h"
+#include "OctopushAudioEngine.h"
 
 //==============================================================================
 /**
@@ -74,8 +74,8 @@ public:
             int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
             bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
                        
-            octopush_engine.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
-            push.initialize(&octopush_engine, displayFrameRate, maxEncoderUpdateRate);
+            octopush_audio_engine.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+            push.initialize(&octopush_audio_engine, displayFrameRate, maxEncoderUpdateRate);
         }
 
         te::Engine engine { ProjectInfo::projectName, nullptr, std::make_unique<PluginEngineBehaviour>() };
@@ -84,7 +84,7 @@ public:
         te::ExternalPlayheadSynchroniser playheadSynchroniser { edit };
         
         // Ocotpush app engine and push2 interface
-        Engine octopush_engine;
+        OctopushAudioEngine octopush_audio_engine;
         Push2Interface push;
     };
     std::unique_ptr<EngineWrapper> engineWrapper;  // Should this be private??

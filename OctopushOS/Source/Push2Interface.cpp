@@ -41,7 +41,7 @@ Push2Interface::~Push2Interface()
 
 //------------------------------------------------------------------------------
 
-void Push2Interface::initialize(Engine* engine_, int displayFrameRate_, int maxEncoderUpdateRate_)
+void Push2Interface::initialize(OctopushAudioEngine* engine_, int displayFrameRate_, int maxEncoderUpdateRate_)
 {
     // Assign reference to application engine
     engine = engine_;

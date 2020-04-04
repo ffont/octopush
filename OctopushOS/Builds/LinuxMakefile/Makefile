@@ -96,7 +96,7 @@ OBJECTS_STANDALONE_PLUGIN := \
 OBJECTS_SHARED_CODE := \
   $(JUCE_OBJDIR)/PluginProcessor_a059e380.o \
   $(JUCE_OBJDIR)/PluginEditor_94d4fb09.o \
-  $(JUCE_OBJDIR)/Engine_7f3228cb.o \
+  $(JUCE_OBJDIR)/OctopushAudioEngine_d719ddf0.o \
   $(JUCE_OBJDIR)/Push2Interface_e0e6feca.o \
   $(JUCE_OBJDIR)/Push2Simulator_bf2a7815.o \
   $(JUCE_OBJDIR)/libusb_platform_wrapper_f0db8557.o \
@@ -184,9 +184,9 @@ $(JUCE_OBJDIR)/PluginEditor_94d4fb09.o: ../../Source/PluginEditor.cpp
 	@echo "Compiling PluginEditor.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
-$(JUCE_OBJDIR)/Engine_7f3228cb.o: ../../Source/Engine.cpp
+$(JUCE_OBJDIR)/OctopushAudioEngine_d719ddf0.o: ../../Source/OctopushAudioEngine.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
-	@echo "Compiling Engine.cpp"
+	@echo "Compiling OctopushAudioEngine.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/Push2Interface_e0e6feca.o: ../../Source/Push2Interface.cpp

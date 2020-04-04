@@ -22,8 +22,10 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="hL3Pno" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <FILE id="Lzv91p" name="definitions.h" compile="0" resource="0" file="Source/definitions.h"/>
-      <FILE id="c1pzPm" name="Engine.h" compile="0" resource="0" file="Source/Engine.h"/>
-      <FILE id="KEAS7o" name="Engine.cpp" compile="1" resource="0" file="Source/Engine.cpp"/>
+      <FILE id="c1pzPm" name="OctopushAudioEngine.h" compile="0" resource="0"
+            file="Source/OctopushAudioEngine.h"/>
+      <FILE id="KEAS7o" name="OctopushAudioEngine.cpp" compile="1" resource="0"
+            file="Source/OctopushAudioEngine.cpp"/>
       <FILE id="OhdKOE" name="Push2Interface.h" compile="0" resource="0"
             file="Source/Push2Interface.h"/>
       <FILE id="dmZl78" name="Push2Interface.cpp" compile="1" resource="0"

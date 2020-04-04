@@ -85,9 +85,9 @@
 			isa = PBXBuildFile;
 			fileRef = 68AEED59825FE2D76C4161CF;
 		};
-		6D91A716719CCE58BAC68E26 = {
+		346D74147E11297A22545709 = {
 			isa = PBXBuildFile;
-			fileRef = 94DA12FD595CE6CA9537BC2A;
+			fileRef = 5E5AE22B2DFE74021D8E0F0C;
 		};
 		972AEBB7ECEB2A428612111B = {
 			isa = PBXBuildFile;
@@ -500,6 +500,13 @@
 			path = ../../Resources/hihat.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
+		5E5AE22B2DFE74021D8E0F0C = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = OctopushAudioEngine.cpp;
+			path = ../../Source/OctopushAudioEngine.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5F3C844488DF389EAF994A8A = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -625,13 +632,6 @@
 			name = AudioUnit.framework;
 			path = System/Library/Frameworks/AudioUnit.framework;
 			sourceTree = SDKROOT;
-		};
-		94DA12FD595CE6CA9537BC2A = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Engine.cpp;
-			path = ../../Source/Engine.cpp;
-			sourceTree = "SOURCE_ROOT";
 		};
 		95A8C03868A17C5C944D37DF = {
 			isa = PBXFileReference;
@@ -878,6 +878,13 @@
 			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_utils.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		E83F42471B60F18F3A91832D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = OctopushAudioEngine.h;
+			path = ../../Source/OctopushAudioEngine.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		E960FB548C744BD4643FA39D = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -904,13 +911,6 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_data_structures.mm";
 			path = "../../JuceLibraryCode/include_juce_data_structures.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
-		ED61A4E5F35B976566460759 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Engine.h;
-			path = ../../Source/Engine.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		EE5BB3DD94A179279EC1D8B4 = {
@@ -1001,8 +1001,8 @@
 				68AEED59825FE2D76C4161CF,
 				4873EED312E7CB4B2CD853FD,
 				6FFE4087E927E888038E6B2A,
-				ED61A4E5F35B976566460759,
-				94DA12FD595CE6CA9537BC2A,
+				E83F42471B60F18F3A91832D,
+				5E5AE22B2DFE74021D8E0F0C,
 				6B9FA43771BF6FB6ADA59334,
 				403350D13025D07C0F72FDFE,
 				B90C7EEC036037DD8322DCA3,
@@ -2169,7 +2169,7 @@
 			files = (
 				9CF69058FF9BAF0D55EF4783,
 				D46AE73D0F442AFC8F0FB722,
-				6D91A716719CCE58BAC68E26,
+				346D74147E11297A22545709,
 				972AEBB7ECEB2A428612111B,
 				777AF6D8402D5D76B3C0C76C,
 				A66E04059EF2D54D2E53239F,

@@ -1,20 +1,20 @@
 /*
   ==============================================================================
-    Engine.cpp
+    OctopushAudioEngine.cpp
     Created: 25 Oct 2019 4:14:04pm
     Author:  Frederic Font Corbera
   ==============================================================================
 */
 
-#include "Engine.h"
+#include "OctopushAudioEngine.h"
 #include "../JuceLibraryCode/BinaryData.h"
 #include "helpers/tracktion_engine.h"
 
-Engine::Engine()
+OctopushAudioEngine::OctopushAudioEngine()
 {
 }
    
-Engine::~Engine()
+OctopushAudioEngine::~OctopushAudioEngine()
 {
     // Stop timer
     stopTimer();
@@ -22,12 +22,12 @@ Engine::~Engine()
     // Shot down tracktion engine stuf
     engine->getTemporaryFileManager().getTempDirectory().deleteRecursively();
     
-    // Remove action listeners of Engine
+    // Remove action listeners of OctopushAudioEngine
     removeAllActionListeners();
 
 }
 
-void Engine::initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal)
+void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal)
 {
     // Init tracktion engine vatiables
     engine.reset(_engine);
@@ -256,22 +256,22 @@ void Engine::initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, 
     }
 }
 
-void Engine::changeListenerCallback (ChangeBroadcaster*)
+void OctopushAudioEngine::changeListenerCallback (ChangeBroadcaster*)
 {
     // Do nothing, this is here to comply with ChangeListener protocol
 }
 
-void Engine::transportPlay(){
+void OctopushAudioEngine::transportPlay(){
     transport->play(false);
     state.isPlaying = true;
 }
 
-void Engine::transportStop(){
+void OctopushAudioEngine::transportStop(){
     transport->stop(false, false);
     state.isPlaying = false;
 }
 
-void Engine::transportTogglePlayStop(){
+void OctopushAudioEngine::transportTogglePlayStop(){
     if (transport->isPlaying()){
         transportStop();
     } else {
@@ -279,14 +279,14 @@ void Engine::transportTogglePlayStop(){
     }
 }
 
-void Engine::setTrackVolume(int trackNum, float volume){
+void OctopushAudioEngine::setTrackVolume(int trackNum, float volume){
     const MessageManagerLock mmLock;  // Not sure why this is needed here but otherwise it would throw exceptions when called from rating an encoder from real Push (not from simulator)
     state.audioTrackSettings[trackNum].volume = volume;
     auto track = te::getAudioTracks(*edit.get())[trackNum];
     track->getVolumePlugin()->setVolumeDb(volume);
 }
 
-void Engine::toggleMuteTrack(int trackNum){
+void OctopushAudioEngine::toggleMuteTrack(int trackNum){
     auto track = te::getAudioTracks(*edit.get())[trackNum];
     if (track->isMuted(false)){
         track->setMute(false);
@@ -296,7 +296,7 @@ void Engine::toggleMuteTrack(int trackNum){
     state.audioTrackSettings[trackNum].mute = track->isMuted(false);
 }
 
-void Engine::updateStepSequencerPattern(int samplerChannel, int stepN){
+void OctopushAudioEngine::updateStepSequencerPattern(int samplerChannel, int stepN){
     // Toggle on/off for the selected channel/step
     state.stepSequencerPattern[samplerChannel][stepN] = !state.stepSequencerPattern[samplerChannel][stepN];
     
@@ -316,7 +316,7 @@ void Engine::updateStepSequencerPattern(int samplerChannel, int stepN){
     }
 }
 
-void Engine::setReverberationRoomSize(float roomSize)
+void OctopushAudioEngine::setReverberationRoomSize(float roomSize)
 {
     // Get track 0 which has a reverberation plugin and update it's room size parameter
     // NOTE: in the future there should be a more generic way to set plugin parameters,
@@ -326,7 +326,7 @@ void Engine::setReverberationRoomSize(float roomSize)
     reverb->setRoomSize(roomSize);
 }
 
-void Engine::timerCallback()
+void OctopushAudioEngine::timerCallback()
 {
     // Update state variables that change over time like transport position
     

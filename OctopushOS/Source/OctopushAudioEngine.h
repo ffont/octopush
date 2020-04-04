@@ -1,6 +1,6 @@
 /*
   ==============================================================================
-    Engine.h
+    OctopushAudioEngine.h
     Created: 25 Oct 2019 4:14:04pm
     Author:  Frederic Font Corbera
   ==============================================================================
@@ -15,13 +15,13 @@
 namespace te = tracktion_engine;
 
 
-class Engine: private ChangeListener,
+class OctopushAudioEngine: private ChangeListener,
               public Timer,
               public ActionBroadcaster
 {
 public:
-    Engine();
-    ~Engine();
+    OctopushAudioEngine();
+    ~OctopushAudioEngine();
     
     void initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal);
     
