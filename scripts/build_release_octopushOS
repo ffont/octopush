@@ -4,9 +4,9 @@ ROOT=$(cd "$(dirname "$0")/../OctopushOS/"; pwd)
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [[ "$(uname -m)" == "armv"* ]]; then
-      # Raspbain
-      echo "BUILDING RELEASE OCTOPUSH FOR RASPBAIN"
-      cd "$ROOT/Builds/Raspbain"
+      # Raspbian
+      echo "BUILDING RELEASE OCTOPUSH FOR RASPBIAN"
+      cd "$ROOT/Builds/Raspbian"
     else
       # Linux
       echo "BUILDING RELEASE OCTOPUSH FOR LINUX"
