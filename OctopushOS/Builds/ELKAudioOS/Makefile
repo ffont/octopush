@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := 
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJUCER_LINUX_MAKE_84E12380=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I/code/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I/workdir/sysroots/aarch64-elk-linux/usr/include/freetype2/ -I../../Source/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/libusb/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJUCER_LINUX_MAKE_84E12380=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I/code/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I/workdir/sysroots/aarch64-elk-linux/usr/include/freetype2/ -I../../Source/ -I../../Source/libusb/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
 
   JUCE_CPPFLAGS_VST := -DJucePlugin_Build_VST=1 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_CFLAGS_VST := -fPIC -fvisibility=hidden
@@ -50,7 +50,7 @@ ifeq ($(CONFIG),Debug)
 
   JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -fPIC -g -ggdb -O0 $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++14 $(CXXFLAGS)
-  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/workdir/sysroots/aarch64-elk-linux/usr/lib/ $(shell pkg-config --libs alsa x11 xinerama xext freetype2 libcurl) -fvisibility=hidden -lfreetype -lcurl -lasound -lrt -ldl -lpthread $(LDFLAGS)
+  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/workdir/sysroots/aarch64-elk-linux/usr/lib/ $(shell pkg-config --libs alsa x11 xinerama xext freetype2 libcurl) -fvisibility=hidden -lfreetype -lcurl -lasound -ludev -lrt -ldl -lpthread $(LDFLAGS)
 
   CLEANCMD = rm -rf $(JUCE_OUTDIR)/$(TARGET) $(JUCE_OBJDIR)
 endif
@@ -65,7 +65,7 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := 
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJUCER_LINUX_MAKE_84E12380=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I/code/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I/workdir/sysroots/aarch64-elk-linux/usr/include/freetype2/ -I../../Source/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/libusb/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJUCER_LINUX_MAKE_84E12380=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa x11 xinerama xext freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I/code/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I/workdir/sysroots/aarch64-elk-linux/usr/include/freetype2/ -I../../Source/ -I../../Source/libusb/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
 
   JUCE_CPPFLAGS_VST := -DJucePlugin_Build_VST=1 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_CFLAGS_VST := -fPIC -fvisibility=hidden
@@ -80,7 +80,7 @@ ifeq ($(CONFIG),Release)
 
   JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++14 $(CXXFLAGS)
-  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/workdir/sysroots/aarch64-elk-linux/usr/lib/ $(shell pkg-config --libs alsa x11 xinerama xext freetype2 libcurl) -fvisibility=hidden -lfreetype -lcurl -lasound -lrt -ldl -lpthread $(LDFLAGS)
+  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/workdir/sysroots/aarch64-elk-linux/usr/lib/ $(shell pkg-config --libs alsa x11 xinerama xext freetype2 libcurl) -fvisibility=hidden -lfreetype -lcurl -lasound -ludev -lrt -ldl -lpthread $(LDFLAGS)
 
   CLEANCMD = rm -rf $(JUCE_OUTDIR)/$(TARGET) $(JUCE_OBJDIR)
 endif
@@ -99,7 +99,7 @@ OBJECTS_SHARED_CODE := \
   $(JUCE_OBJDIR)/OctopushAudioEngine_d719ddf0.o \
   $(JUCE_OBJDIR)/Push2Interface_e0e6feca.o \
   $(JUCE_OBJDIR)/Push2Simulator_bf2a7815.o \
-  $(JUCE_OBJDIR)/libusb_platform_wrapper_f0db8557.o \
+  $(JUCE_OBJDIR)/libusb_platform_wrapper_fdf8d8e0.o \
   $(JUCE_OBJDIR)/Result_1e16f0dd.o \
   $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_159ec8f2.o \
   $(JUCE_OBJDIR)/Push2-Usb-Communicator_babb32aa.o \
@@ -199,7 +199,7 @@ $(JUCE_OBJDIR)/Push2Simulator_bf2a7815.o: ../../Source/Push2Simulator.cpp
 	@echo "Compiling Push2Simulator.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
-$(JUCE_OBJDIR)/libusb_platform_wrapper_f0db8557.o: ../../3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c
+$(JUCE_OBJDIR)/libusb_platform_wrapper_fdf8d8e0.o: ../../Source/libusb/libusb_platform_wrapper.c
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling libusb_platform_wrapper.c"
 	$(V_AT)$(CC) $(JUCE_CFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"

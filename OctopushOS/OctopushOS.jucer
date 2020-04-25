@@ -6,7 +6,7 @@
               reportAppUsage="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
               pluginManufacturerCode="RaAu" pluginCode="OcPu" includeBinaryInJuceHeader="0"
-              headerPath="../../Source/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/push2/">
+              headerPath="../../Source/&#10;../../Source/libusb/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/push2/">
   <MAINGROUP id="jFxjXg" name="OctopushOS">
     <GROUP id="{11575555-DA62-07AA-B99B-A1FEC4250DDD}" name="Source">
       <GROUP id="{21024733-7F91-9658-26B8-5E28CC083066}" name="helpers">
@@ -52,8 +52,8 @@
     </GROUP>
     <GROUP id="{8C9032BF-905C-5228-3D01-D58BA27710D0}" name="3rdParty">
       <GROUP id="{13284C95-CADF-0AD9-10B2-1ED575612476}" name="libusb">
-        <FILE id="rkEgea" name="libusb_platform_wrapper.c" compile="1" resource="0"
-              file="3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c"/>
+        <FILE id="wEbBGW" name="libusb_platform_wrapper.c" compile="1" resource="0"
+              file="Source/libusb/libusb_platform_wrapper.c"/>
       </GROUP>
       <GROUP id="{5E7C64BB-0BFB-9251-F676-011CDEF5AB96}" name="push2">
         <FILE id="GyyDBq" name="Macros.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/Macros.h"/>
@@ -123,7 +123,7 @@
       </MODULEPATHS>
     </LINUX_MAKE>
     <LINUX_MAKE targetFolder="Builds/ELKAudioOS" vstLegacyFolder="/code/VST2_SDK"
-                extraLinkerFlags="-lfreetype&#10;-lcurl&#10;-lasound">
+                extraLinkerFlags="-lfreetype&#10;-lcurl&#10;-lasound&#10;-ludev">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" headerPath="/workdir/sysroots/aarch64-elk-linux/usr/include/freetype2/"
                        libraryPath="/workdir/sysroots/aarch64-elk-linux/usr/lib/"/>

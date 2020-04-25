@@ -15,12 +15,21 @@
             ],
             "plugins" : [
                 {
-                    "path" : "/home/pi/octopush/OctopushOS/Builds/Raspbian/build/OctopushOS.so",
-                    "name" : "octo",
-                    "type" : "vst2x"
+                    "path" : "/home/mind/OctopushOS.so",
+                    "name" : "octopushos",
+                    "type"   : "vst2x"
                 }
             ]
         }
-    ]
-
+    ],
+    "midi" : {
+        "track_connections": [
+            {
+                "port": 0,
+                "channel": "all",
+                "track": "main",
+                "raw_midi": true
+            }
+        ]
+    }
 }

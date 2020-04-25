@@ -243,7 +243,7 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     transport->addChangeListener (this);
     
     // If play, start playing
-    std::cout << "PLAY on starty? " << playOnStart <<std::endl;
+    std::cout << "PLAY on start? " << playOnStart <<std::endl;
     if (playOnStart){
         transportPlay();
     }

@@ -97,9 +97,9 @@
 			isa = PBXBuildFile;
 			fileRef = 2CB2508E2AF5EFF921CB6D02;
 		};
-		A66E04059EF2D54D2E53239F = {
+		154D633919C859F0984C1465 = {
 			isa = PBXBuildFile;
-			fileRef = 79F743C45567B28E8F003F63;
+			fileRef = 2DE8C8B489171C980D7D2321;
 		};
 		5B15A134ED63765B7F5138B3 = {
 			isa = PBXBuildFile;
@@ -388,6 +388,13 @@
 			path = System/Library/Frameworks/QuartzCore.framework;
 			sourceTree = SDKROOT;
 		};
+		2DE8C8B489171C980D7D2321 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.c;
+			name = "libusb_platform_wrapper.c";
+			path = "../../Source/libusb/libusb_platform_wrapper.c";
+			sourceTree = "SOURCE_ROOT";
+		};
 		2F4B425858AAFB02991C2E49 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -603,13 +610,6 @@
 			lastKnownFileType = file;
 			name = "tracktion_engine";
 			path = "../../3rdParty/tracktion_engine/modules/tracktion_engine";
-			sourceTree = "SOURCE_ROOT";
-		};
-		79F743C45567B28E8F003F63 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.c;
-			name = "libusb_platform_wrapper.c";
-			path = "../../3rdParty/push2-display-with-juce/Source/libusb/libusb_platform_wrapper.c";
 			sourceTree = "SOURCE_ROOT";
 		};
 		7C41F31D96E501680C51E12C = {
@@ -1031,7 +1031,7 @@
 		6C63F1E3A2A9E916259A2B76 = {
 			isa = PBXGroup;
 			children = (
-				79F743C45567B28E8F003F63,
+				2DE8C8B489171C980D7D2321,
 			);
 			name = libusb;
 			sourceTree = "<group>";
@@ -1244,9 +1244,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1299,9 +1299,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1355,9 +1355,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1410,9 +1410,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1466,9 +1466,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1522,9 +1522,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1578,9 +1578,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1630,9 +1630,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1684,9 +1684,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1736,9 +1736,9 @@
 					"../../3rdParty/juce/modules",
 					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
+					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/",
-					"../../3rdParty/push2-display-with-juce/Source/libusb/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
 					"../../3rdParty/juce/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -2172,7 +2172,7 @@
 				346D74147E11297A22545709,
 				972AEBB7ECEB2A428612111B,
 				777AF6D8402D5D76B3C0C76C,
-				A66E04059EF2D54D2E53239F,
+				154D633919C859F0984C1465,
 				5B15A134ED63765B7F5138B3,
 				EEE41D9422D7F91972BC8D50,
 				E084465E96B5FAD5E5D90A17,
