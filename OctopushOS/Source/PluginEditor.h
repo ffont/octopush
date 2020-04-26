@@ -12,9 +12,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
-#if !ELK_BUILD
 #include "Push2Simulator.h"
-#endif
+
 
 //==============================================================================
 /**
@@ -33,10 +32,7 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     OctopushOsAudioProcessor& processor;
-    
-    #if !ELK_BUILD
     Push2Simulator push2SimulatorComponent;
-    #endif
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OctopushOsAudioProcessorEditor)
 };

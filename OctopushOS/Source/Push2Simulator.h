@@ -59,7 +59,8 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    Push2Interface* push;
+    std::unique_ptr<Push2Interface> push;
+    
     double tempoSliderLastValue = 0.0;
     double swingSliderLastValue = 0.0;
     double e1SliderLastValue = 0.0;

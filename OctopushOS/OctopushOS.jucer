@@ -6,7 +6,8 @@
               reportAppUsage="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
               pluginManufacturerCode="RaAu" pluginCode="OcPu" includeBinaryInJuceHeader="0"
-              headerPath="../../Source/&#10;../../Source/libusb/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/push2/">
+              headerPath="../../Source/&#10;../../Source/libusb/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/push2/"
+              defines="JucePlugin_IsSynth=1, JucePlugin_WantsMidiInput=1, JucePlugin_ProducesMidiOutput=1 JucePlugin_Vst3Category=&quot;Instrument&quot;, JucePlugin_AUMainType='aumu', JucePlugin_VSTCategory=kPlugCategSynth">
   <MAINGROUP id="jFxjXg" name="OctopushOS">
     <GROUP id="{11575555-DA62-07AA-B99B-A1FEC4250DDD}" name="Source">
       <GROUP id="{21024733-7F91-9658-26B8-5E28CC083066}" name="helpers">

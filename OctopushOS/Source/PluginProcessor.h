@@ -11,10 +11,9 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#if !ELK_BUILD
 #include "Push2Interface.h"
-#endif
 #include "OctopushAudioEngine.h"
+
 
 //==============================================================================
 /**
@@ -22,39 +21,34 @@
 class OctopushOsAudioProcessor  : public AudioProcessor
 {
 public:
-    //==============================================================================
+    //==============================================================================  
     OctopushOsAudioProcessor();
     ~OctopushOsAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int expectedBlockSize) override;
     void releaseResources() override;
-
-   #ifndef JucePlugin_PreferredChannelConfigurations
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
-   #endif
-
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
 
     //==============================================================================
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
+    
+    //==============================================================================
+    const String getName() const override                  { return JucePlugin_Name;}
+    bool acceptsMidi() const override                      { return true; }
+    bool producesMidi() const override                     { return true; }
+    bool isMidiEffect() const override                     { return false; }
+    double getTailLengthSeconds() const override           { return 0; }
 
     //==============================================================================
-    const String getName() const override;
-
-    bool acceptsMidi() const override;
-    bool producesMidi() const override;
-    bool isMidiEffect() const override;
-    double getTailLengthSeconds() const override;
-
-    //==============================================================================
-    int getNumPrograms() override;
-    int getCurrentProgram() override;
-    void setCurrentProgram (int index) override;
-    const String getProgramName (int index) override;
-    void changeProgramName (int index, const String& newName) override;
-
+    int getNumPrograms() override                          { return 1; }
+    int getCurrentProgram() override                       { return 0; }
+    void setCurrentProgram (int) override                  {}
+    const String getProgramName (int) override             { return {}; }
+    void changeProgramName (int, const String&) override   {}
+    
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
@@ -80,6 +74,7 @@ public:
             std::cout << "Configuring Octopush for ELK build" << std::endl;
             minimalEngine = true;
             stateUpdateFrameRate = 0;
+            displayFrameRate = 0;
             #endif
                        
             octopush_audio_engine.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
@@ -95,9 +90,7 @@ public:
         
         // Ocotpush app engine and push2 interface
         OctopushAudioEngine octopush_audio_engine;
-        #if !ELK_BUILD
         Push2Interface push;
-        #endif
     };
     std::unique_ptr<EngineWrapper> engineWrapper;  // Should this be private??
     

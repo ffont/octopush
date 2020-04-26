@@ -11,18 +11,11 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-//==============================================================================
+
+
 OctopushOsAudioProcessor::OctopushOsAudioProcessor()
-#ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", AudioChannelSet::stereo(), true)
-                     #endif
-                       )
-#endif
+    : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::stereo())
+                                       .withOutput ("Output", AudioChannelSet::stereo()))
 {
 }
 
@@ -31,68 +24,22 @@ OctopushOsAudioProcessor::~OctopushOsAudioProcessor()
 }
 
 //==============================================================================
-const String OctopushOsAudioProcessor::getName() const
+bool OctopushOsAudioProcessor::hasEditor() const
 {
-    return JucePlugin_Name;
+    #if !ELK_BUILD
+        return true; // (change this to false if you choose to not supply an editor)
+    #else
+        return false;
+    #endif
 }
 
-bool OctopushOsAudioProcessor::acceptsMidi() const
+AudioProcessorEditor* OctopushOsAudioProcessor::createEditor()
 {
-   #if JucePlugin_WantsMidiInput
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-bool OctopushOsAudioProcessor::producesMidi() const
-{
-   #if JucePlugin_ProducesMidiOutput
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-bool OctopushOsAudioProcessor::isMidiEffect() const
-{
-   #if JucePlugin_IsMidiEffect
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-double OctopushOsAudioProcessor::getTailLengthSeconds() const
-{
-    return 0.0;
-}
-
-int OctopushOsAudioProcessor::getNumPrograms()
-{
-    return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
-                // so this should be at least 1, even if you're not really implementing programs.
-}
-
-int OctopushOsAudioProcessor::getCurrentProgram()
-{
-    return 0;
-}
-
-void OctopushOsAudioProcessor::setCurrentProgram (int index)
-{
-}
-
-const String OctopushOsAudioProcessor::getProgramName (int index)
-{
-    return {};
-}
-
-void OctopushOsAudioProcessor::changeProgramName (int index, const String& newName)
-{
+    return new OctopushOsAudioProcessorEditor (*this);
 }
 
 //==============================================================================
+
 void OctopushOsAudioProcessor::prepareToPlay (double sampleRate, int expectedBlockSize)
 {
     // On Linux the plugin and prepareToPlay may not be called on the message thread.
@@ -109,29 +56,16 @@ void OctopushOsAudioProcessor::releaseResources()
     // spare memory, etc.
 }
 
-#ifndef JucePlugin_PreferredChannelConfigurations
 bool OctopushOsAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
-  #if JucePlugin_IsMidiEffect
-    ignoreUnused (layouts);
-    return true;
-  #else
-    // This is the place where you check if the layout is supported.
-    // In this template code we only support mono or stereo.
-    if (layouts.getMainOutputChannelSet() != AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
+    if (layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
         return false;
 
-    // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
-   #endif
 
     return true;
-  #endif
 }
-#endif
 
 void OctopushOsAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
@@ -147,17 +81,6 @@ void OctopushOsAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
         buffer.clear (i, 0, buffer.getNumSamples());
 
     engineWrapper->audioInterface.processBlock (buffer, midiMessages);
-}
-
-//==============================================================================
-bool OctopushOsAudioProcessor::hasEditor() const
-{
-    return true; // (change this to false if you choose to not supply an editor)
-}
-
-AudioProcessorEditor* OctopushOsAudioProcessor::createEditor()
-{
-    return new OctopushOsAudioProcessorEditor (*this);
 }
 
 //==============================================================================

@@ -30,6 +30,7 @@
 Push2Simulator::Push2Simulator ()
 {
     //[Constructor_pre] You can add your own custom stuff here..
+    std::cout << "* Initializing Push2Simulator" << std::endl;
     setLookAndFeel(&customLookAndFeel);
     //[/Constructor_pre]
 
@@ -1013,6 +1014,7 @@ Push2Simulator::Push2Simulator ()
 Push2Simulator::~Push2Simulator()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
+    push.release();
     setLookAndFeel (nullptr);
     //[/Destructor_pre]
 
@@ -1173,7 +1175,9 @@ void Push2Simulator::paint (Graphics& g)
     g.fillAll (Colour (0xff151515));
 
     //[UserPaint] Add your own custom painting code here..
-    g.drawImage(push->lastFrame, displayPlaceholder.get()->getBounds().toFloat());
+    if (push){
+        g.drawImage(push->lastFrame, displayPlaceholder.get()->getBounds().toFloat());
+    }
     //[/UserPaint]
 }
 
@@ -1189,6 +1193,10 @@ void Push2Simulator::resized()
 void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
+    if (!push){
+        // If push object has not been set, do nothing for this function
+        return;
+    }
     //[/UserbuttonClicked_Pre]
 
     if (buttonThatWasClicked == tapTempoButton.get())
@@ -1861,6 +1869,10 @@ void Push2Simulator::buttonClicked (Button* buttonThatWasClicked)
 void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
+    if (!push){
+        // If push object has not been set, do nothing for this function
+        return;
+    }
     //[/UsersliderValueChanged_Pre]
 
     if (sliderThatWasMoved == touchstripSider.get())
@@ -2011,7 +2023,7 @@ void Push2Simulator::sliderValueChanged (Slider* sliderThatWasMoved)
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void Push2Simulator::setPush2Interface(Push2Interface* push_)
 {
-    push = push_;
+    push.reset(push_);
     push->addActionListener(this);  // Make MainComponent receive notifications from Push2 so it can update replicated display (for debug only)
 }
 

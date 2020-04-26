@@ -24,35 +24,69 @@ OctopushAudioEngine::~OctopushAudioEngine()
     
     // Remove action listeners of OctopushAudioEngine
     removeAllActionListeners();
+    
+    // Release pointers
+    transport.release();
+    edit.release();
+    engine.release();
+}
 
+void OctopushAudioEngine::setupInputs (te::Edit& edit)
+{
+    auto& dm = edit.engine.getDeviceManager();
+    
+    // Configure MIDI devices
+    for (int i = 0; i < dm.getNumMidiInDevices(); i++)
+    {
+        auto dev = dm.getMidiInDevice (i);
+        dev->setEnabled (true);
+        dev->setEndToEndEnabled (true);
+    }
+
+    // TODO: map midi inputs?
+    
+    // Configure audio devices
+    #if !ELK_BUILD
+    for (int i = 0; i < dm.getNumWaveInDevices(); i++)
+        if (auto wip = dm.getWaveInDevice (i))
+            wip->setStereoPair (false);  // Don't make input devices stereo
+    
+    for (int i = 0; i < dm.getNumWaveInDevices(); i++)
+    {
+        if (auto wip = dm.getWaveInDevice (i))  // Enable all iputs
+        {
+            wip->setEndToEnd (true);  // Enable input monitoring
+            wip->setEnabled (true);
+        }
+    }
+    #endif
+}
+
+void OctopushAudioEngine::setupOutputs (te::Edit& edit)
+{
+    auto& dm = edit.engine.getDeviceManager();
+
+    // Configure midi devices
+    for (int i = 0; i < dm.getNumMidiOutDevices(); i++)
+    {
+        auto dev = dm.getMidiOutDevice (i);
+        dev->setEnabled (true);
+    }
 }
 
 void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal)
 {
-    // Init tracktion engine vatiables
+    std::cout << "* Initializing OctopushAudioEngine" << std::endl;
+    
+    // Init tracktion engine variables
     engine.reset(_engine);
     edit.reset(_edit);
     transport.reset(&edit->getTransport());
     
-    // Configure input devices
-    if (!minimal){
-        auto& dm = engine->getDeviceManager();
-        
-        for (int i = 0; i < dm.getNumWaveInDevices(); i++)
-            if (auto wip = dm.getWaveInDevice (i))
-                wip->setStereoPair (false);  // Don't make input devices stereo
-        
-        for (int i = 0; i < dm.getNumWaveInDevices(); i++)
-        {
-            if (auto wip = dm.getWaveInDevice (i))  // Enable all iputs
-            {
-                wip->setEndToEnd (true);  // Enable input monitoring
-                wip->setEnabled (true);
-            }
-        }
-        edit->playInStopEnabled = true; // Needed to make input devices reachable even if not playing
-        edit->restartPlayback();
-    }
+    // Not sure why I'm doing this stuff here...
+    edit->playInStopEnabled = true;
+    transport->ensureContextAllocated (true);
+    edit->restartPlayback();
     
     // Create all audio tracks and link level meters
     
@@ -233,7 +267,10 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
         std::cout << "- " << track->getName() << std::endl;
     }
     
-    // Other init stuff
+    // Further audio/MIDI input/output config
+    setupInputs(*edit.get());
+    setupOutputs(*edit.get());
+    edit->restartPlayback();
     
     // Initialize other transport and related properties
     edit->tempoSequence.getTempos()[0]->setBpm (state.tempo);

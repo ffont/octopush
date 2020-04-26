@@ -29,9 +29,12 @@ public:
     Push2Interface();
     ~Push2Interface();
 
-    void initialize(OctopushAudioEngine* engine_, int displayFrameRate_, int maxEncoderUpdateRate_);
-    NBase::Result connectToPush();
+    void initialize(OctopushAudioEngine* oae_, int displayFrameRate_, int maxEncoderUpdateRate_);
+    NBase::Result connectToPushDisplay();
+    NBase::Result connectToPushMIDI();
     bool pushInitializedSuccessfully;
+    bool pushDisplayInitializedSuccessfully;
+    bool pushMIDIInitializedSuccessfully;
     
     void actionListenerCallback (const String &message) override;
     
@@ -87,7 +90,6 @@ private:
     ableton::Push2Display push2Display;
     std::unique_ptr<MidiInput> midiInput;
     std::unique_ptr<MidiOutput> midiOutput;
-    OctopushAudioEngine* engine;
-    State* state;
-
+    std::unique_ptr<OctopushAudioEngine> oae;
+    std::unique_ptr<State> state;
 };
