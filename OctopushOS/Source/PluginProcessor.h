@@ -11,7 +11,9 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#if !ELK_BUILD
 #include "Push2Interface.h"
+#endif
 #include "OctopushAudioEngine.h"
 
 //==============================================================================
@@ -73,9 +75,17 @@ public:
             int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
             int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
             bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
+            
+            #if ELK_BUILD
+            std::cout << "Configuring Octopush for ELK build" << std::endl;
+            minimalEngine = true;
+            stateUpdateFrameRate = 0;
+            #endif
                        
             octopush_audio_engine.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+            #if !ELK_BUILD
             push.initialize(&octopush_audio_engine, displayFrameRate, maxEncoderUpdateRate);
+            #endif
         }
 
         te::Engine engine { ProjectInfo::projectName, nullptr, std::make_unique<PluginEngineBehaviour>() };
@@ -85,7 +95,9 @@ public:
         
         // Ocotpush app engine and push2 interface
         OctopushAudioEngine octopush_audio_engine;
+        #if !ELK_BUILD
         Push2Interface push;
+        #endif
     };
     std::unique_ptr<EngineWrapper> engineWrapper;  // Should this be private??
     
