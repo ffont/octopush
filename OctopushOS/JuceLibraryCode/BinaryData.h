@@ -8,6 +8,9 @@
 
 namespace BinaryData
 {
+    extern const char*   _31655_wav;
+    const int            _31655_wavSize = 163022;
+
     extern const char*   _262218__jputman__simpleloop_wav;
     const int            _262218__jputman__simpleloop_wavSize = 2120698;
 
@@ -36,7 +39,7 @@ namespace BinaryData
     const int            tambourine_wavSize = 1058444;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 9;
+    const int namedResourceListSize = 10;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

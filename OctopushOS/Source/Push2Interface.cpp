@@ -7,7 +7,6 @@
 */
 
 #include "Push2Interface.h"
-#include "../JuceLibraryCode/BinaryData.h"
 
 
 //------------------------------------------------------------------------------

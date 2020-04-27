@@ -10,11 +10,9 @@
 
 #pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
 //#include "Push2Interface.h"
 //#include "OctopushAudioEngine.h"
-#include "helpers/tracktion_engine.h"
-#include "../JuceLibraryCode/BinaryData.h"
+#include "Utilities.h"  // Tracktion engine utilities
 
 
 static String organPatch = "<PLUGIN type=\"4osc\" windowLocked=\"1\" id=\"1069\" enabled=\"1\" filterType=\"1\" presetDirty=\"0\" presetName=\"4OSC: Organ\" filterFreq=\"127.00000000000000000000\" ampAttack=\"0.60000002384185791016\" ampDecay=\"10.00000000000000000000\" ampSustain=\"100.00000000000000000000\" ampRelease=\"0.40000000596046447754\" waveShape1=\"4\" tune2=\"-24.00000000000000000000\" waveShape2=\"4\"> <MACROPARAMETERS id=\"1069\"/> <MODIFIERASSIGNMENTS/> <MODMATRIX/> </PLUGIN>";
@@ -33,10 +31,6 @@ public:
     {
     }
     
-    ~OctopushOsAudioProcessor()
-    {
-    }
-
     //==============================================================================
     void prepareToPlay (double sampleRate, int expectedBlockSize) override
     {
@@ -52,17 +46,6 @@ public:
     {
         // When playback stops, you can use this as an opportunity to free up any
         // spare memory, etc.
-    }
-    
-    bool isBusesLayoutSupported (const BusesLayout& layouts) const override
-    {
-        if (layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
-            return false;
-
-        if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
-            return false;
-
-        return true;
     }
     
     void processBlock (AudioBuffer<float>& buffer, MidiBuffer& midi) override
@@ -82,25 +65,13 @@ public:
     }
 
     //==============================================================================
-    AudioProcessorEditor* createEditor() override
-    {
-        return new OctopushOsAudioProcessorEditor (*this);
-    }
-    
-    bool hasEditor() const override
-    {
-        #if !ELK_BUILD
-            return true; // (change this to false if you choose to not supply an editor)
-        #else
-            return false;
-        #endif
-    }
+    AudioProcessorEditor* createEditor() override          { return new OctopushOsAudioProcessorEditor (*this); }
+    bool hasEditor() const override                        { return true;   }
  
     //==============================================================================
     const String getName() const override                  { return JucePlugin_Name;}
     bool acceptsMidi() const override                      { return true; }
     bool producesMidi() const override                     { return true; }
-    bool isMidiEffect() const override                     { return false; }
     double getTailLengthSeconds() const override           { return 0; }
 
     //==============================================================================
@@ -123,10 +94,22 @@ public:
         // You should use this method to restore your parameters from this memory block,
         // whose contents will have been created by the getStateInformation() call.
     }
-
-    
     //==============================================================================
     
+    bool isBusesLayoutSupported (const BusesLayout& layouts) const override
+    {
+        if (layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
+            return false;
+
+        if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
+            return false;
+
+        return true;
+    }
+
+
+private:
+    //==============================================================================    
     static void setupInputs (te::Edit& edit)
     {
         auto& dm = edit.engine.getDeviceManager();
@@ -196,6 +179,16 @@ public:
         }
     }
     
+    //==============================================================================
+    
+    class PluginEngineBehaviour : public te::EngineBehaviour
+    {
+    public:
+        bool autoInitialiseDeviceManager() override { return false; }
+    };
+    
+    //==============================================================================
+    
     struct EngineWrapper
     {
         EngineWrapper()
@@ -231,7 +224,7 @@ public:
             // Add background playing file in loop
             if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 2)){
                 auto f = File::createTempFile ("test_file.wav");
-                f.replaceWithData (BinaryData::_262218__jputman__simpleloop_wav, BinaryData::_262218__jputman__simpleloop_wavSize);
+                f.replaceWithData (BinaryData::_31655_wav, BinaryData::_31655_wavSize);
                 te::AudioFile audioFile (engine, f);
                 auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
             }
@@ -255,15 +248,7 @@ public:
         //OctopushAudioEngine octopush_audio_engine;
         //Push2Interface push;
     };
-    std::unique_ptr<EngineWrapper> engineWrapper;  // Should this be private??
-    
-private:
-    
-    class PluginEngineBehaviour : public te::EngineBehaviour
-    {
-    public:
-        bool autoInitialiseDeviceManager() override { return false; }
-    };
+
     
     //==============================================================================
     
@@ -301,6 +286,10 @@ private:
     
     //==============================================================================
     
+    std::unique_ptr<EngineWrapper> engineWrapper;
+    
+    //==============================================================================
+    
     class OctopushOsAudioProcessorEditor : public AudioProcessorEditor
     {
     public:
@@ -312,6 +301,7 @@ private:
             // editor's size to whatever you need it to be.
             setSize (400, 300);
             
+            /*
             
             #if ELK_BUILD
                 // If no ELK build, don't load Push2 simulator
@@ -345,11 +335,9 @@ private:
                     //addAndMakeVisible(push2SimulatorComponent);
                 }
             #endif
+            */
         }
         
-        ~OctopushOsAudioProcessorEditor()
-        {
-        }
 
         //==============================================================================
         void paint (Graphics& g) override

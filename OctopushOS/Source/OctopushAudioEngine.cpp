@@ -7,8 +7,7 @@
 */
 
 #include "OctopushAudioEngine.h"
-#include "../JuceLibraryCode/BinaryData.h"
-#include "helpers/tracktion_engine.h"
+#include "Utilities.h"  // Tracktion engine utilities
 
 OctopushAudioEngine::OctopushAudioEngine()
 {
