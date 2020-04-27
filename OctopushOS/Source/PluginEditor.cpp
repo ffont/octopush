@@ -41,15 +41,15 @@ OctopushOsAudioProcessorEditor::OctopushOsAudioProcessorEditor (OctopushOsAudioP
             showSimulator = false;
         } else {
             // If not force/hide show simulator we'll only show it if push was not initialized properly and we're in debug mode
-            if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
-                showSimulator = true;
-            }
+            //if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
+            //    showSimulator = true;
+            //}
         }
         
         if (showSimulator) {
             setSize (900, 726);
-            push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
-            addAndMakeVisible(push2SimulatorComponent);
+            //push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
+            //addAndMakeVisible(push2SimulatorComponent);
         }
     #endif
 }
@@ -71,9 +71,9 @@ void OctopushOsAudioProcessorEditor::resized()
 {
     #if !ELK_BUILD
         #if JUCE_DEBUG
-        if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
-            push2SimulatorComponent.setBounds(getBounds());
-        }
+        //if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
+        //    push2SimulatorComponent.setBounds(getBounds());
+        //}
         #endif
     #endif
 }

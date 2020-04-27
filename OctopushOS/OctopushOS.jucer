@@ -15,14 +15,11 @@
         <FILE id="ypmrAt" name="tracktion_engine.h" compile="0" resource="0"
               file="Source/helpers/tracktion_engine.h"/>
       </GROUP>
-      <FILE id="K4WR2T" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="Source/PluginProcessor.cpp"/>
+      <FILE id="Lzv91p" name="definitions.h" compile="0" resource="0" file="Source/definitions.h"/>
       <FILE id="WYzimK" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
-      <FILE id="rOkAa6" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="hL3Pno" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="Lzv91p" name="definitions.h" compile="0" resource="0" file="Source/definitions.h"/>
+      <FILE id="QtiACr" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
       <FILE id="c1pzPm" name="OctopushAudioEngine.h" compile="0" resource="0"
             file="Source/OctopushAudioEngine.h"/>
       <FILE id="KEAS7o" name="OctopushAudioEngine.cpp" compile="1" resource="0"

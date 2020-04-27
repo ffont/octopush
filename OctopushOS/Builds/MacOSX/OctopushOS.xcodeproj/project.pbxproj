@@ -81,10 +81,6 @@
 			isa = PBXBuildFile;
 			fileRef = 49DC07CAB14C8A02C5CDCE88;
 		};
-		D46AE73D0F442AFC8F0FB722 = {
-			isa = PBXBuildFile;
-			fileRef = 68AEED59825FE2D76C4161CF;
-		};
 		346D74147E11297A22545709 = {
 			isa = PBXBuildFile;
 			fileRef = 5E5AE22B2DFE74021D8E0F0C;
@@ -465,13 +461,6 @@
 			path = "../../3rdParty/juce/modules/juce_graphics";
 			sourceTree = "SOURCE_ROOT";
 		};
-		4873EED312E7CB4B2CD853FD = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = PluginEditor.h;
-			path = ../../Source/PluginEditor.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		49DC07CAB14C8A02C5CDCE88 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -547,13 +536,6 @@
 			lastKnownFileType = file;
 			name = "juce_osc";
 			path = "../../3rdParty/juce/modules/juce_osc";
-			sourceTree = "SOURCE_ROOT";
-		};
-		68AEED59825FE2D76C4161CF = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = PluginEditor.cpp;
-			path = ../../Source/PluginEditor.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		6B9FA43771BF6FB6ADA59334 = {
@@ -996,11 +978,9 @@
 			isa = PBXGroup;
 			children = (
 				6A665E12037FFF4B55FA0852,
-				49DC07CAB14C8A02C5CDCE88,
-				F32266B1AB11CC4D3BB61413,
-				68AEED59825FE2D76C4161CF,
-				4873EED312E7CB4B2CD853FD,
 				6FFE4087E927E888038E6B2A,
+				F32266B1AB11CC4D3BB61413,
+				49DC07CAB14C8A02C5CDCE88,
 				E83F42471B60F18F3A91832D,
 				5E5AE22B2DFE74021D8E0F0C,
 				6B9FA43771BF6FB6ADA59334,
@@ -2228,7 +2208,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CF69058FF9BAF0D55EF4783,
-				D46AE73D0F442AFC8F0FB722,
 				346D74147E11297A22545709,
 				972AEBB7ECEB2A428612111B,
 				777AF6D8402D5D76B3C0C76C,
