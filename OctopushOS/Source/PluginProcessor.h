@@ -11,11 +11,8 @@
 #pragma once
 
 //#include "Push2Interface.h"
-//#include "OctopushAudioEngine.h"
-#include "Utilities.h"  // Tracktion engine utilities
-
-
-static String organPatch = "<PLUGIN type=\"4osc\" windowLocked=\"1\" id=\"1069\" enabled=\"1\" filterType=\"1\" presetDirty=\"0\" presetName=\"4OSC: Organ\" filterFreq=\"127.00000000000000000000\" ampAttack=\"0.60000002384185791016\" ampDecay=\"10.00000000000000000000\" ampSustain=\"100.00000000000000000000\" ampRelease=\"0.40000000596046447754\" waveShape1=\"4\" tune2=\"-24.00000000000000000000\" waveShape2=\"4\"> <MACROPARAMETERS id=\"1069\"/> <MODIFIERASSIGNMENTS/> <MODMATRIX/> </PLUGIN>";
+#include "OctopushAudioEngine.h"
+//#include "Utilities.h"  // Tracktion engine utilities
 
 
 //==============================================================================
@@ -29,6 +26,11 @@ public:
         : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::stereo())
                                            .withOutput ("Output", AudioChannelSet::stereo()))
     {
+    }
+    
+    ~OctopushOsAudioProcessor()
+    {
+        std::cout << "OctopushOsAudioProcessor destructor called..." << std::endl;
     }
     
     //==============================================================================
@@ -109,75 +111,6 @@ public:
 
 
 private:
-    //==============================================================================    
-    static void setupInputs (te::Edit& edit)
-    {
-        auto& dm = edit.engine.getDeviceManager();
-        
-        for (int i = 0; i < dm.getNumMidiInDevices(); i++)
-        {
-            auto dev = dm.getMidiInDevice (i);
-            dev->setEnabled (true);
-            dev->setEndToEndEnabled (true);
-        }
-        
-        edit.playInStopEnabled = true;
-        edit.getTransport().ensureContextAllocated (true);
-
-        // Add the midi input to track 1
-        if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, 0))
-            if (auto dev = dm.getMidiInDevice (0))
-                for (auto instance : edit.getAllInputDevices())
-                    if (&instance->getInputDevice() == dev)
-                        instance->setTargetTrack (*t, 0, true);
-
-        // Also add the same midi input to track 2
-        if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, 1))
-            if (auto dev = dm.getMidiInDevice (0))
-                for (auto instance : edit.getAllInputDevices())
-                    if (&instance->getInputDevice() == dev)
-                        instance->setTargetTrack (*t, 0, false);
-
-
-        edit.restartPlayback();
-    }
-
-    static void setupOutputs (te::Edit& edit)
-    {
-        auto& dm = edit.engine.getDeviceManager();
-
-        for (int i = 0; i < dm.getNumMidiOutDevices(); i++)
-        {
-            auto dev = dm.getMidiOutDevice (i);
-            dev->setEnabled (true);
-        }
-
-        edit.playInStopEnabled = true;
-        edit.getTransport().ensureContextAllocated (true);
-
-        // Set track 2 to send to midi output
-        if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, 1))
-        {
-            auto& output = t->getOutput();
-            output.setOutputToDefaultDevice (true);
-        }
-
-        edit.restartPlayback();
-    }
-
-    static void create4OSCPlugin (te::Edit& edit)
-    {
-        if (auto synth = dynamic_cast<te::FourOscPlugin*> (edit.getPluginCache().createNewPlugin (te::FourOscPlugin::xmlTypeName, {}).get()))
-        {
-            auto vt = ValueTree::fromXml (organPatch);
-            
-            if (vt.isValid())
-                synth->restorePluginStateFromValueTree (vt);
-            
-            if (auto t = EngineHelpers::getOrInsertAudioTrackAt (edit, 0))
-                t->pluginList.insertPlugin (*synth, 0, nullptr);
-        }
-    }
     
     //==============================================================================
     
@@ -185,6 +118,7 @@ private:
     {
     public:
         bool autoInitialiseDeviceManager() override { return false; }
+        int getNumberOfCPUsToUseForAudio() override { return 1; }
     };
     
     //==============================================================================
@@ -197,7 +131,6 @@ private:
             JUCE_ASSERT_MESSAGE_THREAD
             audioInterface.initialise ({});
             
-            /*
             // Octopush app initialize
             bool playOnStart = DEFAULT_PLAY_ON_START;
             int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
@@ -212,40 +145,21 @@ private:
             displayFrameRate = 0;
             #endif
                        
-            octopush_audio_engine.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+            oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
             #if !ELK_BUILD
-            push.initialize(&octopush_audio_engine, displayFrameRate, maxEncoderUpdateRate);
-            #endif*/
-            
-            setupInputs (edit);
-            setupOutputs (edit);
-            create4OSCPlugin (edit);
-            
-            // Add background playing file in loop
-            if (auto track = EngineHelpers::getOrInsertAudioTrackAt (edit, 2)){
-                auto f = File::createTempFile ("test_file.wav");
-                f.replaceWithData (BinaryData::_31655_wav, BinaryData::_31655_wavSize);
-                te::AudioFile audioFile (engine, f);
-                auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
-            }
-            
-            // Configure transport and start playing
-            edit.tempoSequence.getTempos()[0]->setBpm (130);
-            transport.setLoopRange (te::EditTimeRange(0.0, 60.0 / 130.0 * 4.0)); // Will this be 1 bar (?)
-            transport.looping = true;
-            transport.position = 0.0;
-            transport.play(false);
-            edit.clickTrackEnabled = true;
+            //push.initialize(&oae, displayFrameRate, maxEncoderUpdateRate);
+            #endif
+
         }
 
         te::Engine engine { ProjectInfo::projectName, nullptr, std::make_unique<PluginEngineBehaviour>() };
         te::Edit edit { engine, te::createEmptyEdit (engine), te::Edit::forEditing, nullptr, 0 };
-        te::TransportControl& transport { edit.getTransport() };
+        //te::TransportControl& transport { edit.getTransport() };
         te::HostedAudioDeviceInterface& audioInterface;
         te::ExternalPlayheadSynchroniser playheadSynchroniser { edit };
         
         // Ocotpush app engine and push2 interface
-        //OctopushAudioEngine octopush_audio_engine;
+        OctopushAudioEngine oae;
         //Push2Interface push;
     };
 

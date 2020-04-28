@@ -81,6 +81,34 @@
 			isa = PBXBuildFile;
 			fileRef = AA8A5BE009A96F1FF98B8216;
 		};
+		346D74147E11297A22545709 = {
+			isa = PBXBuildFile;
+			fileRef = 5E5AE22B2DFE74021D8E0F0C;
+		};
+		972AEBB7ECEB2A428612111B = {
+			isa = PBXBuildFile;
+			fileRef = 403350D13025D07C0F72FDFE;
+		};
+		777AF6D8402D5D76B3C0C76C = {
+			isa = PBXBuildFile;
+			fileRef = 2CB2508E2AF5EFF921CB6D02;
+		};
+		154D633919C859F0984C1465 = {
+			isa = PBXBuildFile;
+			fileRef = 2DE8C8B489171C980D7D2321;
+		};
+		5B15A134ED63765B7F5138B3 = {
+			isa = PBXBuildFile;
+			fileRef = 332ABC82E2A549326EE52ECD;
+		};
+		EEE41D9422D7F91972BC8D50 = {
+			isa = PBXBuildFile;
+			fileRef = E960FB548C744BD4643FA39D;
+		};
+		E084465E96B5FAD5E5D90A17 = {
+			isa = PBXBuildFile;
+			fileRef = 6D5AD704D2EB3FF84CC624D2;
+		};
 		85E61DC43023B214BDA9446C = {
 			isa = PBXBuildFile;
 			fileRef = 2F4B425858AAFB02991C2E49;
@@ -562,6 +590,13 @@
 			path = ../../Resources/tambourine.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
+		7914CBA5A9F1BEC852FACEDE = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "tracktion_engine";
+			path = "../../3rdParty/tracktion_engine/modules/tracktion_engine";
+			sourceTree = "SOURCE_ROOT";
+		};
 		8DF9BA4EAE4BD992B69AC99E = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -919,13 +954,6 @@
 			path = "Info-VST.plist";
 			sourceTree = "SOURCE_ROOT";
 		};
-		FD575A05BC32C8E6094B2D2F = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "tracktion_engine";
-			path = "../../JuceLibraryCode/modules/tracktion_engine";
-			sourceTree = "SOURCE_ROOT";
-		};
 		6A665E12037FFF4B55FA0852 = {
 			isa = PBXGroup;
 			children = (
@@ -1030,7 +1058,7 @@
 				53D730E50F1631111B018F5B,
 				565772D71D1CA4B76E6F415D,
 				244804539BEBC5AED26F9B75,
-				FD575A05BC32C8E6094B2D2F,
+				7914CBA5A9F1BEC852FACEDE,
 			);
 			name = "JUCE Modules";
 			sourceTree = "<group>";
@@ -1188,7 +1216,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1250,7 +1278,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1313,7 +1341,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1375,7 +1403,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1438,7 +1466,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1501,7 +1529,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1564,7 +1592,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1623,7 +1651,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1684,7 +1712,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -1743,7 +1771,7 @@
 					"../../../../VST_SDK/VST2_SDK",
 					"../../JuceLibraryCode",
 					"/Users/ffont/Developer/ELK/JUCE/modules",
-					"../../JuceLibraryCode/modules",
+					"../../3rdParty/tracktion_engine/modules",
 					"../../Source/",
 					"../../Source/libusb/",
 					"../../3rdParty/libusb/libusb/",
@@ -2178,6 +2206,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A421B501BA6F09491404237,
+				346D74147E11297A22545709,
+				972AEBB7ECEB2A428612111B,
+				777AF6D8402D5D76B3C0C76C,
+				154D633919C859F0984C1465,
+				5B15A134ED63765B7F5138B3,
+				EEE41D9422D7F91972BC8D50,
+				E084465E96B5FAD5E5D90A17,
 				85E61DC43023B214BDA9446C,
 				BAA01D1EFAC0C57AB347403C,
 				FE15994AEF74D30837069BF1,

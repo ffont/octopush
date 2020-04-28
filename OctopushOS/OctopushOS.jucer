@@ -19,15 +19,15 @@
             file="Source/PluginProcessor.h"/>
       <FILE id="c1pzPm" name="OctopushAudioEngine.h" compile="0" resource="0"
             file="Source/OctopushAudioEngine.h"/>
-      <FILE id="KEAS7o" name="OctopushAudioEngine.cpp" compile="0" resource="0"
+      <FILE id="KEAS7o" name="OctopushAudioEngine.cpp" compile="1" resource="0"
             file="Source/OctopushAudioEngine.cpp"/>
       <FILE id="OhdKOE" name="Push2Interface.h" compile="0" resource="0"
             file="Source/Push2Interface.h"/>
-      <FILE id="dmZl78" name="Push2Interface.cpp" compile="0" resource="0"
+      <FILE id="dmZl78" name="Push2Interface.cpp" compile="1" resource="0"
             file="Source/Push2Interface.cpp"/>
       <FILE id="pkFiM7" name="Push2Simulator.h" compile="0" resource="0"
             file="Source/Push2Simulator.h"/>
-      <FILE id="SeoTHH" name="Push2Simulator.cpp" compile="0" resource="0"
+      <FILE id="SeoTHH" name="Push2Simulator.cpp" compile="1" resource="0"
             file="Source/Push2Simulator.cpp"/>
       <FILE id="Pp8PD2" name="State.h" compile="0" resource="0" file="Source/State.h"/>
     </GROUP>
@@ -48,20 +48,20 @@
     </GROUP>
     <GROUP id="{8C9032BF-905C-5228-3D01-D58BA27710D0}" name="3rdParty">
       <GROUP id="{13284C95-CADF-0AD9-10B2-1ED575612476}" name="libusb">
-        <FILE id="wEbBGW" name="libusb_platform_wrapper.c" compile="0" resource="0"
+        <FILE id="wEbBGW" name="libusb_platform_wrapper.c" compile="1" resource="0"
               file="Source/libusb/libusb_platform_wrapper.c"/>
       </GROUP>
       <GROUP id="{5E7C64BB-0BFB-9251-F676-011CDEF5AB96}" name="push2">
         <FILE id="GyyDBq" name="Macros.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/Macros.h"/>
-        <FILE id="FZpN0V" name="Result.cpp" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/Result.cpp"/>
+        <FILE id="FZpN0V" name="Result.cpp" compile="1" resource="0" file="3rdParty/push2-display-with-juce/Source/Result.cpp"/>
         <FILE id="Z51c7N" name="Result.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/Result.h"/>
-        <FILE id="Bw0YEU" name="JuceToPush2DisplayBridge.cpp" compile="0" resource="0"
+        <FILE id="Bw0YEU" name="JuceToPush2DisplayBridge.cpp" compile="1" resource="0"
               file="3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.cpp"/>
         <FILE id="Hu7TPo" name="JuceToPush2DisplayBridge.h" compile="0" resource="0"
               file="3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.h"/>
         <FILE id="ZVGEQY" name="Push2-Bitmap.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/push2/Push2-Bitmap.h"/>
         <FILE id="T1fAYR" name="Push2-Display.h" compile="0" resource="0" file="3rdParty/push2-display-with-juce/Source/push2/Push2-Display.h"/>
-        <FILE id="WzIM3U" name="Push2-Usb-Communicator.cpp" compile="0" resource="0"
+        <FILE id="WzIM3U" name="Push2-Usb-Communicator.cpp" compile="1" resource="0"
               file="3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp"/>
         <FILE id="K0gw4M" name="Push2-UsbCommunicator.h" compile="0" resource="0"
               file="3rdParty/push2-display-with-juce/Source/push2/Push2-UsbCommunicator.h"/>
@@ -87,9 +87,9 @@
         <MODULEPATH id="juce_graphics" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_gui_basics" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_gui_extra" path="3rdParty/juce/modules"/>
-        <MODULEPATH id="tracktion_engine" path="JuceLibraryCode/modules/tracktion_engine"/>
         <MODULEPATH id="juce_dsp" path="3rdParty/juce/modules"/>
         <MODULEPATH id="juce_osc" path="3rdParty/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Raspbian" vstLegacyFolder="../../VST_SDK/VST2_SDK"
@@ -99,7 +99,6 @@
         <CONFIGURATION isDebug="0" name="Release"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="tracktion_engine" path="JuceLibraryCode/modules/tracktion_engine"/>
         <MODULEPATH id="juce_osc"/>
         <MODULEPATH id="juce_gui_extra"/>
         <MODULEPATH id="juce_gui_basics"/>
@@ -114,6 +113,7 @@
         <MODULEPATH id="juce_audio_formats"/>
         <MODULEPATH id="juce_audio_devices"/>
         <MODULEPATH id="juce_audio_basics"/>
+        <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
     <LINUX_MAKE targetFolder="Builds/ELKAudioOS" vstLegacyFolder="/code/VST2_SDK"
@@ -125,7 +125,6 @@
                        headerPath="/workdir/sysroots/aarch64-elk-linux/usr/include/freetype2/"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="tracktion_engine" path="JuceLibraryCode/modules/tracktion_engine"/>
         <MODULEPATH id="juce_osc"/>
         <MODULEPATH id="juce_gui_extra"/>
         <MODULEPATH id="juce_gui_basics"/>
@@ -140,6 +139,7 @@
         <MODULEPATH id="juce_audio_formats"/>
         <MODULEPATH id="juce_audio_devices"/>
         <MODULEPATH id="juce_audio_basics"/>
+        <MODULEPATH id="tracktion_engine" path="3rdParty/tracktion_engine/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
@@ -159,7 +159,7 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="1" useGlobalPath="0"/>
+    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
   <LIVE_SETTINGS>
     <OSX/>
