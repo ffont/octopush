@@ -18,10 +18,7 @@ OctopushAudioEngine::~OctopushAudioEngine()
     std::cout << "OctopushAudioEngine destructor called..." << std::endl;
     
     // Stop timer
-    //stopTimer();
-    
-    // Shot down tracktion engine stuf
-    engine->getTemporaryFileManager().getTempDirectory().deleteRecursively();
+    stopTimer();
     
     // Remove action listeners of OctopushAudioEngine
     std::cout << "Removing OctopushAudioEngine action listeners..." << std::endl;
@@ -119,10 +116,7 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     edit.reset(_edit);
     transport.reset(&edit->getTransport());
     
-    // Not sure why I'm doing this stuff here...
-    //edit->playInStopEnabled = true;
-    //transport->ensureContextAllocated (true);
-    //edit->restartPlayback();
+    // I/O setup
     setupInputs(*edit.get());
     setupOutputs(*edit.get());
     
@@ -131,15 +125,15 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     int currentTrackNum = 0;
     int nAudioTracks = N_AUDIO_TRACKS;
     if (minimal){
-        nAudioTracks = 1;
+        nAudioTracks = 4;
     }
     
-    /*for (int index=0; index<nAudioTracks; index++){
+    for (int index=0; index<nAudioTracks; index++){
         auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), index);
         trackLevelClients[index] = new te::LevelMeasurer::Client();
         track->getLevelMeterPlugin()->measurer.setMode(te::LevelMeasurer::Mode::RMSMode);
         track->getLevelMeterPlugin()->measurer.addClient(*trackLevelClients[index]);
-    }*/
+    }
     
     // Now add content to every track
     
@@ -322,7 +316,7 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
 
     // Start the timer to update state
     if (stateUpdateRate > 0){
-        //startTimerHz(stateUpdateRate);
+        startTimerHz(stateUpdateRate);
     } else {
         std::cout << "WARNING: state update timer is disabled" << std::endl;
     }
@@ -398,10 +392,11 @@ void OctopushAudioEngine::setReverberationRoomSize(float roomSize)
     reverb->setRoomSize(roomSize);
 }
 
-/*void OctopushAudioEngine::timerCallback()
+void OctopushAudioEngine::timerCallback()
 {
     // Update state variables that change over time like transport position
-    
+
+    /*
     // Set current step position and proportion
     auto loopRange = transport->getLoopRange();
     if (loopRange.isEmpty()) {
@@ -418,6 +413,7 @@ void OctopushAudioEngine::setReverberationRoomSize(float roomSize)
     for (int index = 0; index<te::getAudioTracks(*edit.get()).size(); index++){
         state.audioTrackSettings[index].measuredLevel = trackLevelClients[index]->getAndClearAudioLevel(0).dB;
     }
+     */
     
     // Measure state update rate and save it to state
     stateUpdateRateCounter += 1;
@@ -433,4 +429,4 @@ void OctopushAudioEngine::setReverberationRoomSize(float roomSize)
             std::cout << "State updates per second: " << state.stateUpdateFrameRate << std::endl;
         }
     }
-}*/
+}

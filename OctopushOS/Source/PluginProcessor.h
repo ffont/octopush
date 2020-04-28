@@ -40,6 +40,13 @@ public:
         // Engine needs to be created on the message thread so we'll do that now
         ensureEngineCreatedOnMessageThread();
         
+        std::cout << "Calling prepareToPlay" << std::endl;
+        
+        #if ELK_BUILD
+        sampleRate = 48000;
+        expectedBlockSize = 64;
+        #endif
+        
         setLatencySamples (expectedBlockSize);
         ensurePrepareToPlayCalledOnMessageThread (sampleRate, expectedBlockSize);
     }
@@ -118,7 +125,9 @@ private:
     {
     public:
         bool autoInitialiseDeviceManager() override { return false; }
+        #if ELK_BUILD  // In ELK build, use only one thread to partially reduce kernel mode switches (MSW)
         int getNumberOfCPUsToUseForAudio() override { return 1; }
+        #endif
     };
     
     //==============================================================================
@@ -141,7 +150,7 @@ private:
             #if ELK_BUILD
             std::cout << "Configuring Octopush for ELK build" << std::endl;
             minimalEngine = true;
-            stateUpdateFrameRate = 0;
+            stateUpdateFrameRate = 2;
             displayFrameRate = 0;
             #endif
                        

@@ -1,6 +1,6 @@
 {
     "host_config" : {
-        "samplerate" : 44100
+        "samplerate" : 48000
     },
     "tracks" : [
         {

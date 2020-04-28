@@ -16,7 +16,7 @@ namespace te = tracktion_engine;
 
 
 class OctopushAudioEngine: private ChangeListener,
-              //public Timer,
+              public Timer,
               public ActionBroadcaster
 {
 public:
@@ -46,7 +46,7 @@ public:
 private:
     // Methods
     void changeListenerCallback (ChangeBroadcaster*) override;
-    //void timerCallback() override;
+    void timerCallback() override;
     
     int stateUpdateRateCounter = 0;
     int64 stateUpdateRateCurrentSecond = 0;
