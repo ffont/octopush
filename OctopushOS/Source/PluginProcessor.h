@@ -147,15 +147,19 @@ private:
             int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
             bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
             bool initializePush = DEFAULT_INITIALIZE_PUSH;
+            bool initializeAudioEngine = DEFAULT_INITIALIZE_AUDIO_ENGINE;
             
             #if ELK_BUILD
             std::cout << "Configuring Octopush for ELK build" << std::endl;
+            initializeAudioEngine = false;
             minimalEngine = true;
-            stateUpdateFrameRate = 2;
-            displayFrameRate = 0;
+            stateUpdateFrameRate = 0;
+            displayFrameRate = 60;
             #endif
-                       
-            oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+                    
+            if (initializeAudioEngine){
+                oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+            }
             
             if (initializePush){
                 push.initialize(&oae, displayFrameRate, maxEncoderUpdateRate);

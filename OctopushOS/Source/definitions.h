@@ -22,4 +22,6 @@
 
 #define DEFAULT_INITIALIZE_PUSH true
 
+#define DEFAULT_INITIALIZE_AUDIO_ENGINE true
+
 

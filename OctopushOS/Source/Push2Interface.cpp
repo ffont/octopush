@@ -71,6 +71,7 @@ void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_
         pushDisplayInitializedSuccessfully = false;
     }
     
+    #if !ELK_BUILD
     // Initialize Push2 MIDI connection
     NBase::Result result_midi = connectToPushMIDI();
     if (result_midi.Succeeded())
@@ -84,6 +85,7 @@ void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_
         std::cout << "ERROR connecting to Push 2 MIDI: " << result_midi.GetDescription() << std::endl;
         pushMIDIInitializedSuccessfully = false;
     }
+    #endif
     
     // Set global push intitialized successfully variable
     pushInitializedSuccessfully = pushMIDIInitializedSuccessfully && pushDisplayInitializedSuccessfully;
@@ -267,12 +269,14 @@ Image Push2Interface::computeDisplayFrameFromState()
     // Clear previous frame
     g.fillAll(juce::Colour(0xff000000));
     
+    #if !ELK_BUILD
     // Draw logo (only during first second(s) at startup)
     if (state->animationElapsedTime < 1.0){
         auto logo = ImageCache::getFromMemory(BinaryData::startup_img_png, BinaryData::startup_img_pngSize);
         g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
         return frame;
     }
+    #endif
     
     // Draw demo waveform
     Path wavePath;
@@ -280,11 +284,13 @@ Image Push2Interface::computeDisplayFrameFromState()
     const float waveStep = 10.0f;
     const float waveY = height * 0.44f;
     int i = 0;
+    float amplitude = state->demoWaveAmplitude;
+    float elapsedTime = state->animationElapsedTime;
     
     for (float x = waveStep * 0.5f; x < width; x += waveStep)
     {
-        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + state->animationElapsedTime) * state->demoWaveAmplitude;
-        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + state->animationElapsedTime * 2.0f) * state->demoWaveAmplitude;
+        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsedTime) * amplitude;
+        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsedTime * 2.0f) * amplitude;
         
         wavePath.addLineSegment(Line<float>(x, y1, x, y2), 2.0f);
         wavePath.addEllipse(x - waveStep * 0.3f, y1 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
@@ -296,6 +302,7 @@ Image Push2Interface::computeDisplayFrameFromState()
     g.setColour(state->demoWaveColor);
     g.fillPath(wavePath);
     
+    #if !ELK_BUILD
     // Draw audio tracks level meter and volume
     int trackNum = 0;
     int numTracks = (int)state->audioTrackSettings.size();
@@ -323,6 +330,7 @@ Image Push2Interface::computeDisplayFrameFromState()
     // Draw display frame rate and update rate stats
     g.drawSingleLineText(String::formatted("display frames/second: %i", state->displayFrameRate), 5, height - (5 + 14));
     g.drawSingleLineText(String::formatted("state updates/second:%i", state->stateUpdateFrameRate), 5, height - 5);
+    #endif
     
     return frame;
 }
