@@ -10,9 +10,9 @@
 
 #pragma once
 
-//#include "Push2Interface.h"
+#include "Push2Interface.h"
+#include "Push2Simulator.h"
 #include "OctopushAudioEngine.h"
-//#include "Utilities.h"  // Tracktion engine utilities
 
 
 //==============================================================================
@@ -146,6 +146,7 @@ private:
             int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
             int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
             bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
+            bool initializePush = DEFAULT_INITIALIZE_PUSH;
             
             #if ELK_BUILD
             std::cout << "Configuring Octopush for ELK build" << std::endl;
@@ -155,23 +156,21 @@ private:
             #endif
                        
             oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
-            #if !ELK_BUILD
-            //push.initialize(&oae, displayFrameRate, maxEncoderUpdateRate);
-            #endif
-
+            
+            if (initializePush){
+                push.initialize(&oae, displayFrameRate, maxEncoderUpdateRate);
+            }
         }
 
         te::Engine engine { ProjectInfo::projectName, nullptr, std::make_unique<PluginEngineBehaviour>() };
         te::Edit edit { engine, te::createEmptyEdit (engine), te::Edit::forEditing, nullptr, 0 };
-        //te::TransportControl& transport { edit.getTransport() };
         te::HostedAudioDeviceInterface& audioInterface;
         te::ExternalPlayheadSynchroniser playheadSynchroniser { edit };
         
         // Ocotpush app engine and push2 interface
         OctopushAudioEngine oae;
-        //Push2Interface push;
+        Push2Interface push;
     };
-
     
     //==============================================================================
     
@@ -223,15 +222,12 @@ private:
             // Make sure that before the constructor has finished, you've set the
             // editor's size to whatever you need it to be.
             setSize (400, 300);
-            
-            /*
-            
+
             #if ELK_BUILD
-                // If no ELK build, don't load Push2 simulator
+                // If on ELK build, don't load Push2 simulator
             
             #else
-                // If on a normal build, follow some heuristics to decide if the Push2 simulator should be shown
-                // (if on debug build and push is not connected)
+                // If not on ELK build, show Push2 simulator only if in debug mode and hardware push not reachable
             
                 #if JUCE_DEBUG
                 bool debug = true;
@@ -247,18 +243,17 @@ private:
                     showSimulator = false;
                 } else {
                     // If not force/hide show simulator we'll only show it if push was not initialized properly and we're in debug mode
-                    //if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
-                    //    showSimulator = true;
-                    //}
+                    if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
+                        showSimulator = true;
+                    }
                 }
                 
                 if (showSimulator) {
                     setSize (900, 726);
-                    //push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
-                    //addAndMakeVisible(push2SimulatorComponent);
+                    push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
+                    addAndMakeVisible(push2SimulatorComponent);
                 }
             #endif
-            */
         }
         
 
@@ -275,16 +270,16 @@ private:
         {
             #if !ELK_BUILD
                 #if JUCE_DEBUG
-                //if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
-                //    push2SimulatorComponent.setBounds(getBounds());
-                //}
+                if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
+                    push2SimulatorComponent.setBounds(getBounds());
+                }
                 #endif
             #endif
         }
         
     private:
         OctopushOsAudioProcessor& processor;
-        //Push2Simulator push2SimulatorComponent;
+        Push2Simulator push2SimulatorComponent;
         
     };
     

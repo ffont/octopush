@@ -396,7 +396,7 @@ void OctopushAudioEngine::timerCallback()
 {
     // Update state variables that change over time like transport position
 
-    /*
+
     // Set current step position and proportion
     auto loopRange = transport->getLoopRange();
     if (loopRange.isEmpty()) {
@@ -413,7 +413,6 @@ void OctopushAudioEngine::timerCallback()
     for (int index = 0; index<te::getAudioTracks(*edit.get()).size(); index++){
         state.audioTrackSettings[index].measuredLevel = trackLevelClients[index]->getAndClearAudioLevel(0).dB;
     }
-     */
     
     // Measure state update rate and save it to state
     stateUpdateRateCounter += 1;

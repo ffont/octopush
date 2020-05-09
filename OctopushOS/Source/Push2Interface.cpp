@@ -37,11 +37,13 @@ Push2Interface::~Push2Interface()
     // Stop timer
     stopTimer();
     
-    // Release unique ptr
+    // Release pointers to state and audio engine
     oae.release();
     state.release();
-    midiInput.release();
-    midiOutput.release();
+    
+    // Reset pointer to midi in/out (to delete objects)
+    midiInput.reset();
+    midiOutput.reset();
 }
 
 //------------------------------------------------------------------------------

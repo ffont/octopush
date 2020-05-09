@@ -16,6 +16,7 @@ def deploy(ctx):
     os.system('docker run --rm -it -v elkvolume:/workdir -v ${PWD}/../:/code/octopush -v ${PWD}/../../ELK/JUCE:/home/sdkuser/JUCE -v ${PWD}/../../VST_SDK/VST2_SDK:/code/VST2_SDK -v ${PWD}/custom-esdk-launch.py:/usr/bin/esdk-launch.py crops/extsdk-container')
 
     # Copy compiled file and sushi configuration to board
+    '''
     print('\nSending compiled OctopushOS and config files to board...')
     print('********************************************************\n')
     with Connection(host=host, connect_kwargs={'password': 'elk'}) as c:
@@ -26,7 +27,7 @@ def deploy(ctx):
             print('- Copying {0} to {1}'.format(local_file, destination_dir))
             c.put(local_file, destination_dir)
 
-
+    '''
     print('\nAll done!')
     print('You can now run OctopushELK on the ELK board with the command:')
     print('sushi -r -c /home/mind/octopush_sushi_config.json')
