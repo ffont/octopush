@@ -151,7 +151,6 @@ private:
             
             #if ELK_BUILD
             std::cout << "Configuring Octopush for ELK build" << std::endl;
-            initializeAudioEngine = false;
             minimalEngine = true;
             stateUpdateFrameRate = 0;
             displayFrameRate = 60;
