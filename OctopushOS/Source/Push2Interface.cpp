@@ -269,14 +269,12 @@ Image Push2Interface::computeDisplayFrameFromState()
     // Clear previous frame
     g.fillAll(juce::Colour(0xff000000));
     
-    #if !ELK_BUILD
     // Draw logo (only during first second(s) at startup)
     if (state->animationElapsedTime < 1.0){
         auto logo = ImageCache::getFromMemory(BinaryData::startup_img_png, BinaryData::startup_img_pngSize);
         g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
         return frame;
     }
-    #endif
     
     // Draw demo waveform
     Path wavePath;
@@ -302,7 +300,6 @@ Image Push2Interface::computeDisplayFrameFromState()
     g.setColour(state->demoWaveColor);
     g.fillPath(wavePath);
     
-    #if !ELK_BUILD
     // Draw audio tracks level meter and volume
     int trackNum = 0;
     int numTracks = (int)state->audioTrackSettings.size();
@@ -330,7 +327,6 @@ Image Push2Interface::computeDisplayFrameFromState()
     // Draw display frame rate and update rate stats
     g.drawSingleLineText(String::formatted("display frames/second: %i", state->displayFrameRate), 5, height - (5 + 14));
     g.drawSingleLineText(String::formatted("state updates/second:%i", state->stateUpdateFrameRate), 5, height - 5);
-    #endif
     
     return frame;
 }

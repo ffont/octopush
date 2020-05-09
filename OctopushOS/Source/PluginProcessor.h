@@ -152,7 +152,7 @@ private:
             #if ELK_BUILD
             std::cout << "Configuring Octopush for ELK build" << std::endl;
             minimalEngine = true;
-            stateUpdateFrameRate = 0;
+            stateUpdateFrameRate = 10;
             displayFrameRate = 60;
             #endif
                     
