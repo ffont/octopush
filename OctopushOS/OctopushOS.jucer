@@ -5,7 +5,7 @@
               companyWebsite="https://ritaandaurora.github.io" companyEmail="frederic.font@gmail.com"
               reportAppUsage="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
-              pluginManufacturerCode="RaAu" pluginCode="OcPu" headerPath="../../Source/&#10;../../Source/libusb/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/tracktion_engine/examples/common/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/push2/"
+              pluginManufacturerCode="RaAu" pluginCode="OcPu" headerPath="../../Source/&#10;../../Source/libusb/&#10;../../3rdParty/libusb/libusb/&#10;../../3rdParty/tracktion_engine/examples/common/&#10;../../3rdParty/push2-display-with-juce/Source/&#10;../../3rdParty/push2-display-with-juce/Source/push2/&#10;../../3rdParty/twine/include/"
               defines="JucePlugin_IsSynth=1, JucePlugin_WantsMidiInput=1, JucePlugin_ProducesMidiOutput=1 JucePlugin_Vst3Category=&quot;Instrument&quot;, JucePlugin_AUMainType='aumu', JucePlugin_VSTCategory=kPlugCategSynth">
   <MAINGROUP id="jFxjXg" name="OctopushOS">
     <GROUP id="{11575555-DA62-07AA-B99B-A1FEC4250DDD}" name="Source">
@@ -65,6 +65,25 @@
               file="3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp"/>
         <FILE id="K0gw4M" name="Push2-UsbCommunicator.h" compile="0" resource="0"
               file="3rdParty/push2-display-with-juce/Source/push2/Push2-UsbCommunicator.h"/>
+      </GROUP>
+      <GROUP id="{1CE7D95D-F3E1-C3BA-0C69-30D579B5DFF3}" name="twine">
+        <GROUP id="{D0382BDD-4ABA-3C53-9684-BBA48143D972}" name="include">
+          <GROUP id="{01D7FED4-1128-8A49-98F0-581E9B5C59E8}" name="twine">
+            <FILE id="aSC1Ck" name="twine.h" compile="0" resource="0" file="3rdParty/twine/include/twine/twine.h"/>
+          </GROUP>
+        </GROUP>
+        <GROUP id="{D36113CE-B808-C185-CF1B-E41A68A16403}" name="src">
+          <FILE id="IJ7S7o" name="thread_helpers.h" compile="0" resource="0"
+                file="3rdParty/twine/src/thread_helpers.h"/>
+          <FILE id="iq1gfG" name="twine.cpp" compile="1" resource="0" file="3rdParty/twine/src/twine.cpp"/>
+          <FILE id="hY8CRs" name="twine_internal.h" compile="0" resource="0"
+                file="3rdParty/twine/src/twine_internal.h"/>
+          <FILE id="ihEryg" name="worker_pool_common.h" compile="0" resource="0"
+                file="3rdParty/twine/src/worker_pool_common.h"/>
+          <FILE id="L5e8NX" name="worker_pool_implementation.h" compile="0" resource="0"
+                file="3rdParty/twine/src/worker_pool_implementation.h"/>
+          <FILE id="XNAh8N" name="xenomai_stubs.h" compile="0" resource="0" file="3rdParty/twine/src/xenomai_stubs.h"/>
+        </GROUP>
       </GROUP>
     </GROUP>
   </MAINGROUP>

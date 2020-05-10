@@ -109,6 +109,10 @@
 			isa = PBXBuildFile;
 			fileRef = 6D5AD704D2EB3FF84CC624D2;
 		};
+		37F4839CF4ABCB7AF8052F1C = {
+			isa = PBXBuildFile;
+			fileRef = E3D5FC44FCC733A16225B12B;
+		};
 		85E61DC43023B214BDA9446C = {
 			isa = PBXBuildFile;
 			fileRef = 2F4B425858AAFB02991C2E49;
@@ -261,6 +265,13 @@
 			path = "../../JuceLibraryCode/include_tracktion_engine_plugins.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
+		10749EB155050B3451AAE8C2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_audio_basics";
+			path = "/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_basics";
+			sourceTree = "<absolute>";
+		};
 		1098F3035FF3854739885B51 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -310,13 +321,6 @@
 			path = ../../Source/helpers/push2.h;
 			sourceTree = "SOURCE_ROOT";
 		};
-		10749EB155050B3451AAE8C2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "juce_audio_basics";
-			path = "/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_basics";
-			sourceTree = "<absolute>";
-		};
 		1AABFF1D62564DAD31D51EC9 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.nib;
@@ -359,12 +363,26 @@
 			path = "/Users/ffont/Developer/ELK/JUCE/modules/juce_osc";
 			sourceTree = "<absolute>";
 		};
+		279AC3C7364F50CFF89415DD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "xenomai_stubs.h";
+			path = "../../3rdParty/twine/src/xenomai_stubs.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		29E48E048E72D6D1BD400A2A = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = CoreMIDI.framework;
 			path = System/Library/Frameworks/CoreMIDI.framework;
 			sourceTree = SDKROOT;
+		};
+		2A0FE805DA627E942299294C = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = twine.h;
+			path = ../../3rdParty/twine/include/twine/twine.h;
+			sourceTree = "SOURCE_ROOT";
 		};
 		2CB2508E2AF5EFF921CB6D02 = {
 			isa = PBXFileReference;
@@ -457,6 +475,20 @@
 			path = "../../3rdParty/push2-display-with-juce/Source/push2/JuceToPush2DisplayBridge.h";
 			sourceTree = "SOURCE_ROOT";
 		};
+		4A1FBB45CBEBF7EBE9E895AA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "worker_pool_common.h";
+			path = "../../3rdParty/twine/src/worker_pool_common.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4A20666B6BA22A352F15DF68 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "thread_helpers.h";
+			path = "../../3rdParty/twine/src/thread_helpers.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		4FAC9427C9A97887093BB66E = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
@@ -547,6 +579,13 @@
 			name = "juce_audio_devices";
 			path = "/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_devices";
 			sourceTree = "<absolute>";
+		};
+		6AD7BC1A2FA118BB3A03FB1D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "twine_internal.h";
+			path = "../../3rdParty/twine/src/twine_internal.h";
+			sourceTree = "SOURCE_ROOT";
 		};
 		6B9FA43771BF6FB6ADA59334 = {
 			isa = PBXFileReference;
@@ -814,6 +853,13 @@
 			path = ../../Resources/kick.wav;
 			sourceTree = "SOURCE_ROOT";
 		};
+		E3D5FC44FCC733A16225B12B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = twine.cpp;
+			path = ../../3rdParty/twine/src/twine.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		E3E143AAE0302034858D4846 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -947,6 +993,13 @@
 			path = ../../Resources/snare.aiff;
 			sourceTree = "SOURCE_ROOT";
 		};
+		FB99551C88A7B433D58FBB3A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "worker_pool_implementation.h";
+			path = "../../3rdParty/twine/src/worker_pool_implementation.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		FD055118861E5CCA20E0D600 = {
 			isa = PBXFileReference;
 			lastKnownFileType = text.plist.xml;
@@ -1022,11 +1075,50 @@
 			name = push2;
 			sourceTree = "<group>";
 		};
+		7B5333677C4EBF3984DF3088 = {
+			isa = PBXGroup;
+			children = (
+				2A0FE805DA627E942299294C,
+			);
+			name = twine;
+			sourceTree = "<group>";
+		};
+		D54E2BA0C071F46BC60C4C1A = {
+			isa = PBXGroup;
+			children = (
+				7B5333677C4EBF3984DF3088,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		65D57E54748AAA7DC1C9E5ED = {
+			isa = PBXGroup;
+			children = (
+				4A20666B6BA22A352F15DF68,
+				E3D5FC44FCC733A16225B12B,
+				6AD7BC1A2FA118BB3A03FB1D,
+				4A1FBB45CBEBF7EBE9E895AA,
+				FB99551C88A7B433D58FBB3A,
+				279AC3C7364F50CFF89415DD,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		670E6D31AD2E1B9B839059A8 = {
+			isa = PBXGroup;
+			children = (
+				D54E2BA0C071F46BC60C4C1A,
+				65D57E54748AAA7DC1C9E5ED,
+			);
+			name = twine;
+			sourceTree = "<group>";
+		};
 		5654960340F3F96C2296363C = {
 			isa = PBXGroup;
 			children = (
 				6C63F1E3A2A9E916259A2B76,
 				75E0B67E843E9E7CBF4F9CA6,
+				670E6D31AD2E1B9B839059A8,
 			);
 			name = 3rdParty;
 			sourceTree = "<group>";
@@ -1223,6 +1315,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1285,6 +1378,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1348,6 +1442,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1410,6 +1505,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1473,6 +1569,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1536,6 +1633,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1599,6 +1697,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1658,6 +1757,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1719,6 +1819,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -1778,6 +1879,7 @@
 					"../../3rdParty/tracktion_engine/examples/common/",
 					"../../3rdParty/push2-display-with-juce/Source/",
 					"../../3rdParty/push2-display-with-juce/Source/push2/",
+					"../../3rdParty/twine/include/",
 					"/Users/ffont/Developer/ELK/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
 				);
@@ -2213,6 +2315,7 @@
 				5B15A134ED63765B7F5138B3,
 				EEE41D9422D7F91972BC8D50,
 				E084465E96B5FAD5E5D90A17,
+				37F4839CF4ABCB7AF8052F1C,
 				85E61DC43023B214BDA9446C,
 				BAA01D1EFAC0C57AB347403C,
 				FE15994AEF74D30837069BF1,

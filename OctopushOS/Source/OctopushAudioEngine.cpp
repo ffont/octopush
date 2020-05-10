@@ -396,7 +396,6 @@ void OctopushAudioEngine::timerCallback()
 {
     // Update state variables that change over time like transport position
 
-
     // Set current step position and proportion
     auto loopRange = transport->getLoopRange();
     if (loopRange.isEmpty()) {
@@ -425,7 +424,14 @@ void OctopushAudioEngine::timerCallback()
             stateUpdateRateCurrentSecond = currentTime;
             state.stateUpdateFrameRate = stateUpdateRateCounter;
             stateUpdateRateCounter = 0;
+            
+            // Print display/state update measured rates and system stats (if ELK build)
             std::cout << "State updates per second: " << state.stateUpdateFrameRate << std::endl;
+            std::cout << "Display frames per second: " << state.displayFrameRate << std::endl;
+            #if ELK_BUILD
+            // Show some system stats
+            state.collectSystemStats();
+            #endif
         }
     }
 }

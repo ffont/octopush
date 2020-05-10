@@ -249,7 +249,6 @@ void Push2Interface::timerCallback()
             displayFrameCurrentSecond = currentTime;
             state->displayFrameRate = displayFrameRateCounter;
             displayFrameRateCounter = 0;
-            std::cout << "Display frames per second: " << state->displayFrameRate << std::endl;
         }
     }
 }

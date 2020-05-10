@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Debug)
     TARGET_ARCH := 
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJucePlugin_IsSynth=1 -DJucePlugin_WantsMidiInput=1 -DJucePlugin_ProducesMidiOutput=1 -DJucePlugin_Vst3Category="Instrument" -DJucePlugin_AUMainType='aumu' -DJucePlugin_VSTCategory=kPlugCategSynth -DJUCER_LINUX_MAKE_B2748C8A=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I../../../../VST_SDK/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source/ -I../../Source/libusb/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/tracktion_engine/examples/common/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DDEBUG=1 -D_DEBUG=1 -DJucePlugin_IsSynth=1 -DJucePlugin_WantsMidiInput=1 -DJucePlugin_ProducesMidiOutput=1 -DJucePlugin_Vst3Category="Instrument" -DJucePlugin_AUMainType='aumu' -DJucePlugin_VSTCategory=kPlugCategSynth -DJUCER_LINUX_MAKE_B2748C8A=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I../../../../VST_SDK/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source/ -I../../Source/libusb/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/tracktion_engine/examples/common/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/push2/ -I../../3rdParty/twine/include/ $(CPPFLAGS)
 
   JUCE_CPPFLAGS_VST := -DJucePlugin_Build_VST=1 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_CFLAGS_VST := -fPIC -fvisibility=hidden
@@ -65,7 +65,7 @@ ifeq ($(CONFIG),Release)
     TARGET_ARCH := 
   endif
 
-  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJucePlugin_IsSynth=1 -DJucePlugin_WantsMidiInput=1 -DJucePlugin_ProducesMidiOutput=1 -DJucePlugin_Vst3Category="Instrument" -DJucePlugin_AUMainType='aumu' -DJucePlugin_VSTCategory=kPlugCategSynth -DJUCER_LINUX_MAKE_B2748C8A=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I../../../../VST_SDK/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source/ -I../../Source/libusb/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/tracktion_engine/examples/common/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/push2/ $(CPPFLAGS)
+  JUCE_CPPFLAGS := $(DEPFLAGS) -DLINUX=1 -DNDEBUG=1 -DJucePlugin_IsSynth=1 -DJucePlugin_WantsMidiInput=1 -DJucePlugin_ProducesMidiOutput=1 -DJucePlugin_Vst3Category="Instrument" -DJucePlugin_AUMainType='aumu' -DJucePlugin_VSTCategory=kPlugCategSynth -DJUCER_LINUX_MAKE_B2748C8A=1 -DJUCE_APP_VERSION=0.0.1 -DJUCE_APP_VERSION_HEX=0x1 $(shell pkg-config --cflags alsa freetype2 libcurl) -pthread -I$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK -I../../../../VST_SDK/VST2_SDK -I../../JuceLibraryCode -I$(HOME)/JUCE/modules -I../../3rdParty/tracktion_engine/modules -I../../Source/ -I../../Source/libusb/ -I../../3rdParty/libusb/libusb/ -I../../3rdParty/tracktion_engine/examples/common/ -I../../3rdParty/push2-display-with-juce/Source/ -I../../3rdParty/push2-display-with-juce/Source/push2/ -I../../3rdParty/twine/include/ $(CPPFLAGS)
 
   JUCE_CPPFLAGS_VST := -DJucePlugin_Build_VST=1 -DJucePlugin_Build_VST3=0 -DJucePlugin_Build_AU=0 -DJucePlugin_Build_AUv3=0 -DJucePlugin_Build_RTAS=0 -DJucePlugin_Build_AAX=0 -DJucePlugin_Build_Standalone=0 -DJucePlugin_Build_Unity=0
   JUCE_CFLAGS_VST := -fPIC -fvisibility=hidden
@@ -102,6 +102,7 @@ OBJECTS_SHARED_CODE := \
   $(JUCE_OBJDIR)/Result_1e16f0dd.o \
   $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_159ec8f2.o \
   $(JUCE_OBJDIR)/Push2-Usb-Communicator_babb32aa.o \
+  $(JUCE_OBJDIR)/twine_f8dfbf07.o \
   $(JUCE_OBJDIR)/BinaryData_ce4232d4.o \
   $(JUCE_OBJDIR)/BinaryData2_fa243da8.o \
   $(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o \
@@ -210,6 +211,11 @@ $(JUCE_OBJDIR)/JuceToPush2DisplayBridge_159ec8f2.o: ../../3rdParty/push2-display
 $(JUCE_OBJDIR)/Push2-Usb-Communicator_babb32aa.o: ../../3rdParty/push2-display-with-juce/Source/push2/Push2-Usb-Communicator.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling Push2-Usb-Communicator.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/twine_f8dfbf07.o: ../../3rdParty/twine/src/twine.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling twine.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/BinaryData_ce4232d4.o: ../../JuceLibraryCode/BinaryData.cpp

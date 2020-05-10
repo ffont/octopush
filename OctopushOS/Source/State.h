@@ -13,6 +13,15 @@
 #include "JuceHeader.h"
 #include "definitions.h"
 
+// -- for collect system stats
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
+
+
 struct AudioTrackSettings {
     float measuredLevel = -100.0;  // in dB
     float volume = 0.0;  // in dB
@@ -56,6 +65,28 @@ public:
     
     ~State(){
         
+    }
+    
+    std::string exec(const char* cmd) {
+        std::array<char, 128> buffer;
+        std::string result;
+        std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+        if (!pipe) {
+            throw std::runtime_error("popen() failed!");
+        }
+        while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+            result += buffer.data();
+        }
+        return result;
+    }
+    
+    void collectSystemStats() {
+        std::cout << "----------- System stats:" << std::endl;
+        std::cout << "CPU freq: " << exec("cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
+        std::cout << "Memory used (%): " << exec("free | grep Mem | awk '{print $3/$2 * 100.0}'");
+        std::cout << "CPU used (%): " << exec("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage \"%\"}'");
+        std::cout << "MSW:\nCPU  PID    MSW        CSW        XSC        PF    STAT       %CPU  NAME\n" << exec("more /proc/xenomai/sched/stat | grep sushi_b64");
+        std::cout << "-----------" << std::endl;
     }
     
     float animationElapsedTime = 0.0;
