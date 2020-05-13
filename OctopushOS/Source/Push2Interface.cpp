@@ -85,6 +85,16 @@ void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_
         std::cout << "ERROR connecting to Push 2 MIDI: " << result_midi.GetDescription() << std::endl;
         pushMIDIInitializedSuccessfully = false;
     }
+    #else
+    // Initialize Push2 MIDI connection trhough OSC proxy app bridge
+    if (! oscSender.connect ("127.0.0.1", 9001))
+    {
+        std::cout << "ERROR connecting to Push 2 MIDI BRIDGE: could not connect to UDP port 9001." << std::endl;
+        pushMIDIInitializedSuccessfully = false;
+    } else {
+        std::cout << "Push 2 MIDI BRIDGE connected." << std::endl;
+        pushMIDIInitializedSuccessfully = true;
+    }
     #endif
     
     // Set global push intitialized successfully variable

@@ -83,6 +83,7 @@ public:
     void collectSystemStats() {
         std::cout << "----------- System stats:" << std::endl;
         std::cout << "CPU freq: " << exec("cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
+        std::cout << "CPU temp: " << exec("sudo vcgencmd measure_temp");
         std::cout << "Memory used (%): " << exec("free | grep Mem | awk '{print $3/$2 * 100.0}'");
         std::cout << "CPU used (%): " << exec("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage \"%\"}'");
         std::cout << "MSW:\nCPU  PID    MSW        CSW        XSC        PF    STAT       %CPU  NAME\n" << exec("more /proc/xenomai/sched/stat | grep sushi_b64");

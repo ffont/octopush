@@ -92,4 +92,5 @@ private:
     std::unique_ptr<MidiOutput> midiOutput;
     std::unique_ptr<OctopushAudioEngine> oae;
     std::unique_ptr<State> state;
+    OSCSender oscSender;
 };
