@@ -39,9 +39,9 @@ void OctopushAudioEngine::setupInputs (te::Edit& edit)
     // Configure midi inputs
     for (int i = 0; i < dm.getNumMidiInDevices(); i++)
     {
-        auto dev = dm.getMidiInDevice (i);
-        dev->setEnabled (true);
-        dev->setEndToEndEnabled (true);
+        //auto dev = dm.getMidiInDevice (i);
+        //dev->setEnabled (true);
+        //dev->setEndToEndEnabled (true);
     }
     
     edit.playInStopEnabled = true;
@@ -88,8 +88,8 @@ void OctopushAudioEngine::setupOutputs (te::Edit& edit)
     // Configure midi outputs
     for (int i = 0; i < dm.getNumMidiOutDevices(); i++)
     {
-        auto dev = dm.getMidiOutDevice (i);
-        dev->setEnabled (true);
+        //auto dev = dm.getMidiOutDevice (i);
+        //dev->setEnabled (true);
     }
 
     edit.playInStopEnabled = true;
@@ -367,7 +367,7 @@ void OctopushAudioEngine::updateStepSequencerPattern(int samplerChannel, int ste
     state.stepSequencerPattern[samplerChannel][stepN] = !state.stepSequencerPattern[samplerChannel][stepN];
     
     // Reload pattern to step sequencer clip
-    auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), 1);  // 1 = step sequencer track
+    auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), 4);  // 4 = step sequencer track
     
     auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
     int channelCount = 0;
@@ -434,4 +434,12 @@ void OctopushAudioEngine::timerCallback()
             #endif
         }
     }
+    
+    #if ELK_BUILD
+    if (!actionInitPushTriggered){
+        // If action to initialize push has not been triggered, do it now
+        sendActionMessage(ACTION_INIT_PUSH);
+        actionInitPushTriggered = true;
+    }
+    #endif
 }

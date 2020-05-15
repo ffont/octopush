@@ -22,19 +22,26 @@ class Push2Interface: public Timer,
                       public ActionBroadcaster,
                       public Push2ButtonsController,
                       public Push2EncodersController,
-                      public Push2PadsController
+                      public Push2PadsController,
+                      private OSCReceiver,
+                      private OSCReceiver::ListenerWithOSCAddress<OSCReceiver::MessageLoopCallback>
 {
 public:
     
     Push2Interface();
     ~Push2Interface();
 
-    void initialize(OctopushAudioEngine* oae_, int displayFrameRate_, int maxEncoderUpdateRate_);
+    void initialize(OctopushAudioEngine* oae_, int displayFrameRate_, int maxEncoderUpdateRate_, bool useMIDIBridge_);
     NBase::Result connectToPushDisplay();
     NBase::Result connectToPushMIDI();
     bool pushInitializedSuccessfully;
     bool pushDisplayInitializedSuccessfully;
     bool pushMIDIInitializedSuccessfully;
+    bool initializeOSCSender();
+    bool initializeOSCReceiver();
+    void oscMessageReceived (const OSCMessage& message) override;
+    bool oscSenderConnectedToMIDIBridge;
+    bool oscReceivedInitialized;
     
     void actionListenerCallback (const String &message) override;
     
@@ -76,6 +83,7 @@ private:
 
     NBase::Result openMidiInDevice();
     void handleIncomingMidiMessage (MidiInput *source, const MidiMessage &message) override;
+    void routeIncomingMidiMessage (const MidiMessage &message);
     
     NBase::Result openMidiOutDevice();
     void sendMidiMessage(MidiMessage msg) override;
@@ -88,6 +96,8 @@ private:
     int displayFrameRate;
     ableton::Push2DisplayBridge bridge;
     ableton::Push2Display push2Display;
+    
+    bool useMIDIBridge;
     std::unique_ptr<MidiInput> midiInput;
     std::unique_ptr<MidiOutput> midiOutput;
     std::unique_ptr<OctopushAudioEngine> oae;

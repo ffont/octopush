@@ -13,6 +13,7 @@
 #include "Push2Interface.h"
 #include "Push2Simulator.h"
 #include "OctopushAudioEngine.h"
+#include "definitions.h"
 
 
 //==============================================================================
@@ -132,7 +133,7 @@ private:
     
     //==============================================================================
     
-    struct EngineWrapper
+    struct EngineWrapper: public ActionListener
     {
         EngineWrapper()
             : audioInterface (engine.getDeviceManager().getHostedAudioDeviceInterface())
@@ -143,25 +144,59 @@ private:
             // Octopush app initialize
             bool playOnStart = DEFAULT_PLAY_ON_START;
             int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
-            int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
-            int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
             bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
-            bool initializePush = DEFAULT_INITIALIZE_PUSH;
             bool initializeAudioEngine = DEFAULT_INITIALIZE_AUDIO_ENGINE;
+            bool useMIDIBridge = DEFAULT_USE_MIDI_BRIDGE;
             
             #if ELK_BUILD
-            std::cout << "Configuring Octopush for ELK build" << std::endl;
+            std::cout << "Configuring Octopush AudioEngine for ELK build" << std::endl;
             minimalEngine = true;
+            useMIDIBridge = true;
             stateUpdateFrameRate = 10;
-            displayFrameRate = 60;
             #endif
                     
             if (initializeAudioEngine){
                 oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
+                oae.addActionListener(this);  // Action listener is removed on destructor of OctopushAudioEngine
             }
+             
+            #if !ELK_BUILD
+            // In ELK builds we trigger Push initialization when the audio engine has finished initialization and started playing
+            // We do that by triggering an action after a couple of seconds of the audio engine running that EngineWrapper will
+            // catch and call initPush()
+            initPush();
+            #endif
+        }
+        
+        ~EngineWrapper()
+        {
+            push.reset();
+        }
+        
+        void actionListenerCallback (const String &message) override
+        {
+            if (message==ACTION_INIT_PUSH){
+                initPush();
+            }
+        }
+        
+        void initPush(){
+            if ((push != nullptr) && (push->pushInitializedSuccessfully)){ return; }
             
+            bool initializePush = DEFAULT_INITIALIZE_PUSH;
+            int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
+            int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
+            bool useMIDIBridge = DEFAULT_USE_MIDI_BRIDGE;
+            
+            #if ELK_BUILD
+            std::cout << "Configuring Octopush Push for ELK build" << std::endl;
+            useMIDIBridge = true;
+            displayFrameRate = 40;
+            #endif
+            
+            push.reset(new Push2Interface());
             if (initializePush){
-                push.initialize(&oae, displayFrameRate, maxEncoderUpdateRate);
+                push->initialize(&oae, displayFrameRate, maxEncoderUpdateRate, useMIDIBridge);
             }
         }
 
@@ -172,7 +207,7 @@ private:
         
         // Ocotpush app engine and push2 interface
         OctopushAudioEngine oae;
-        Push2Interface push;
+        std::unique_ptr<Push2Interface> push;
     };
     
     //==============================================================================
@@ -246,14 +281,16 @@ private:
                     showSimulator = false;
                 } else {
                     // If not force/hide show simulator we'll only show it if push was not initialized properly and we're in debug mode
-                    if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
-                        showSimulator = true;
+                    if (processor.engineWrapper->push != nullptr){
+                        if (!processor.engineWrapper->push->pushInitializedSuccessfully && debug){
+                            showSimulator = true;
+                        }
                     }
                 }
                 
                 if (showSimulator) {
                     setSize (900, 726);
-                    push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
+                    push2SimulatorComponent.setPush2Interface(&*processor.engineWrapper->push);
                     addAndMakeVisible(push2SimulatorComponent);
                 }
             #endif
@@ -273,8 +310,10 @@ private:
         {
             #if !ELK_BUILD
                 #if JUCE_DEBUG
-                if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
-                    push2SimulatorComponent.setBounds(getBounds());
+                if (processor.engineWrapper->push != nullptr){
+                    if (!processor.engineWrapper->push->pushInitializedSuccessfully) {
+                        push2SimulatorComponent.setBounds(getBounds());
+                    }
                 }
                 #endif
             #endif

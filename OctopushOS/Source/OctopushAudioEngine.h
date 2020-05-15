@@ -16,8 +16,8 @@ namespace te = tracktion_engine;
 
 
 class OctopushAudioEngine: private ChangeListener,
-              public Timer,
-              public ActionBroadcaster
+                           public Timer,
+                           public ActionBroadcaster
 {
 public:
     OctopushAudioEngine();
@@ -50,10 +50,10 @@ private:
     
     int stateUpdateRateCounter = 0;
     int64 stateUpdateRateCurrentSecond = 0;
+    bool actionInitPushTriggered = false;
    
     // Properties
     std::unique_ptr<te::Edit> edit;
     std::unique_ptr<te::TransportControl> transport;
-    
     std::array<te::LevelMeasurer::Client*, N_AUDIO_TRACKS> trackLevelClients;
 };

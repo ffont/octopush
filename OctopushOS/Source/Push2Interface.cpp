@@ -48,7 +48,7 @@ Push2Interface::~Push2Interface()
 
 //------------------------------------------------------------------------------
 
-void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_, int maxEncoderUpdateRate_)
+void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_, int maxEncoderUpdateRate_, bool useMIDIBridge_)
 {
     std::cout << "* Initializing Push2Interface" << std::endl;
     
@@ -71,31 +71,32 @@ void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_
         pushDisplayInitializedSuccessfully = false;
     }
     
-    #if !ELK_BUILD
-    // Initialize Push2 MIDI connection
-    NBase::Result result_midi = connectToPushMIDI();
-    if (result_midi.Succeeded())
+    useMIDIBridge = useMIDIBridge_;
+    
+    if (!useMIDIBridge)
     {
-        std::cout << "Push 2 MIDI connected" << std::endl;
-        pushMIDIInitializedSuccessfully = true;
-    }
-    else
-    {
-        // Something went wrong while connecting to Push2
-        std::cout << "ERROR connecting to Push 2 MIDI: " << result_midi.GetDescription() << std::endl;
-        pushMIDIInitializedSuccessfully = false;
-    }
-    #else
-    // Initialize Push2 MIDI connection trhough OSC proxy app bridge
-    if (! oscSender.connect ("127.0.0.1", 9001))
-    {
-        std::cout << "ERROR connecting to Push 2 MIDI BRIDGE: could not connect to UDP port 9001." << std::endl;
-        pushMIDIInitializedSuccessfully = false;
+        // Initialize Push2 MIDI connection
+        NBase::Result result_midi = connectToPushMIDI();
+        if (result_midi.Succeeded())
+        {
+            std::cout << "Push 2 MIDI connected" << std::endl;
+            pushMIDIInitializedSuccessfully = true;
+        }
+        else
+        {
+            // Something went wrong while connecting to Push2
+            std::cout << "ERROR connecting to Push 2 MIDI: " << result_midi.GetDescription() << std::endl;
+            pushMIDIInitializedSuccessfully = false;
+        }
     } else {
-        std::cout << "Push 2 MIDI BRIDGE connected." << std::endl;
-        pushMIDIInitializedSuccessfully = true;
+        pushMIDIInitializedSuccessfully = true;  // We set it to true and will initialize the OSC sender lazily before sending first message
+        oscSenderConnectedToMIDIBridge = false;
+        oscReceivedInitialized = false;
+        // Initialize Push2 MIDI connection trhough OSC proxy app
+        // NOTE: For some reason I can't connect the oscSender here because it crashes my app when running in ELK...
+        //initializeOSCSender();
+        initializeOSCReceiver();
     }
-    #endif
     
     // Set global push intitialized successfully variable
     pushInitializedSuccessfully = pushMIDIInitializedSuccessfully && pushDisplayInitializedSuccessfully;
@@ -108,7 +109,7 @@ void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_
     
     // Set initial UI
     if (pushMIDIInitializedSuccessfully || pushDisplayInitializedSuccessfully){
-        setInitialUI();
+        //setInitialUI();
     }
     
     
@@ -148,6 +149,41 @@ NBase::Result Push2Interface::connectToPushMIDI()
     RETURN_IF_FAILED_MESSAGE(result, "Failed to open MIDI out device");
     
     return NBase::Result::NoError;
+}
+
+
+//------------------------------------------------------------------------------
+
+bool Push2Interface::initializeOSCSender()
+{
+    if (! oscSender.connect (MIDI_BRIDGE_SEND_TO_PUSH_HOST, MIDI_BRIDGE_SEND_TO_PUSH_PORT))
+    {
+        std::cout << "ERROR connecting to Push 2 MIDI BRIDGE: could not connect to UDP port "  + String(MIDI_BRIDGE_SEND_TO_PUSH_PORT) << std::endl;
+        oscSenderConnectedToMIDIBridge = false;
+    } else {
+        std::cout << "Push 2 MIDI BRIDGE connected." << std::endl;
+        oscSenderConnectedToMIDIBridge = true;
+    }
+    return oscSenderConnectedToMIDIBridge;
+}
+
+bool Push2Interface::initializeOSCReceiver()
+{
+    if (! connect (MIDI_BRIDGE_RECEIVE_FROM_PUSH_PORT)){
+        std::cout << "ERROR setting Push 2 MIDI BRIDGE received: could not connect to UDP port " + String(MIDI_BRIDGE_RECEIVE_FROM_PUSH_PORT) << std::endl;
+        oscReceivedInitialized = false;
+    } else {
+        oscReceivedInitialized = true;
+        addListener (this, "/frompush");
+    }
+    return oscReceivedInitialized;
+}
+
+void Push2Interface::oscMessageReceived (const OSCMessage& message)
+{
+    std::cout << "MIDI IN RECEIVED " << std::endl;
+    MidiMessage midi_msg = MidiMessage(message[0].getInt32(), message[1].getInt32(), message[2].getInt32());
+    routeIncomingMidiMessage(midi_msg);
 }
 
 
@@ -229,14 +265,36 @@ NBase::Result Push2Interface::openMidiOutDevice()
 
 void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &message)
 {
+    routeIncomingMidiMessage(message);
+}
+
+void Push2Interface::routeIncomingMidiMessage (const MidiMessage &message)
+{
     if (triggerPadActionsFromIncommingMidi(message)) { return; };
     if (triggerButtonActionsFromIncommingMidi(message)) { return; };
     if (triggerEncoderActionsFromIncommingMidi(message)) { return; };
 }
 
 void Push2Interface::sendMidiMessage(MidiMessage msg){
-    if ((midiOutput.get() != nullptr)) {
-        midiOutput.get()->sendMessageNow(msg);
+    if (pushMIDIInitializedSuccessfully){
+        if (!useMIDIBridge){
+            if ((midiOutput.get() != nullptr)) {
+                midiOutput.get()->sendMessageNow(msg);
+            }
+        } else {
+            if (!oscSenderConnectedToMIDIBridge){
+                // Do some sort of lazy initialization of OSC connection
+                initializeOSCSender();
+            }
+            
+            if (oscSenderConnectedToMIDIBridge) {
+                String serializedBytes = "";
+                for (int i=0; i<msg.getRawDataSize(); i++){
+                    serializedBytes += String(msg.getRawData()[i]) + ",";
+                }
+                oscSender.sendToIPAddress(MIDI_BRIDGE_SEND_TO_PUSH_HOST, MIDI_BRIDGE_SEND_TO_PUSH_PORT, MIDI_BRIDGE_SEND_TO_PUSH_OSC_PATH, serializedBytes);
+            }
+        }
     }
 }
 
@@ -457,7 +515,7 @@ void Push2Interface::updatePush2PadsFromState()
 
 
 void Push2Interface::updateUI()
-{
+{    
     updateDisplayFromState();
     updatePush2ButtonsFromState();
     updatePush2PadsFromState();
