@@ -25,11 +25,11 @@ public:
     //==============================================================================  
     OctopushOsAudioProcessor()
         #if ELK_BUILD
-        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::discreteChannels (2), true)
-                                           .withOutput ("Output", AudioChannelSet::discreteChannels (2), true))
-        #else
-        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::discreteChannels (6), true)  // Expecting 6 input channels and 6 output channels
+        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::discreteChannels (6), true)
                                            .withOutput ("Output", AudioChannelSet::discreteChannels (6), true))
+        #else
+        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::discreteChannels (2), true)  // Expecting 6 input channels and 6 output channels
+                                           .withOutput ("Output", AudioChannelSet::discreteChannels (2), true))
         #endif
     {
     }
@@ -42,15 +42,18 @@ public:
     //==============================================================================
     void prepareToPlay (double sampleRate, int expectedBlockSize) override
     {
+        std::cout << "Ensuring prepare to play called on message thread" << std::endl;
+        
         // On Linux the plugin and prepareToPlay may not be called on the message thread.
         // Engine needs to be created on the message thread so we'll do that now
         ensureEngineCreatedOnMessageThread();
         
-        std::cout << "Calling prepareToPlay" << std::endl;
-        
         #if ELK_BUILD
+        std::cout << "Calling prepareToPlay (ELK build)" << std::endl;
         sampleRate = 48000;
         expectedBlockSize = 64;
+        #else
+        std::cout << "Calling prepareToPlay" << std::endl;
         #endif
         
         setLatencySamples (expectedBlockSize);
@@ -140,49 +143,15 @@ private:
     
     //==============================================================================
     
-    struct EngineWrapper: public ActionListener, public Timer
+    struct EngineWrapper
     {
         EngineWrapper()
             : audioInterface (engine.getDeviceManager().getHostedAudioDeviceInterface())
         {
             JUCE_ASSERT_MESSAGE_THREAD
             audioInterface.initialise ({});
-            
-            //initializationTime = Time::getCurrentTime().toMilliseconds();
             initOctopushAudioEngine();
             initPush();
-            
-            //startTimer(1000); // Run timer
-        }
-        
-        ~EngineWrapper()
-        {
-            push.reset();
-        }
-        
-        void timerCallback() override
-        {
-            if ((Time::getCurrentTime().toMilliseconds() - initializationTime) > 5000)  // Initialize audio engine and push after a delay of 5 seconds. This is to make sure prepareToPlay is called beofre that
-            {
-                stopTimer();
-                
-                
-                 
-                //#if !ELK_BUILD
-                // In ELK builds we trigger Push initialization when the audio engine has finished initialization and started playing
-                // We do that by triggering an action after a couple of seconds of the audio engine running that EngineWrapper will
-                // catch and call initPush()
-                initOctopushAudioEngine();
-                initPush();
-                //#endif
-            }
-        }
-        
-        void actionListenerCallback (const String &message) override
-        {
-            if (message==ACTION_INIT_PUSH){
-                initPush();
-            }
         }
         
         void initOctopushAudioEngine(){
@@ -198,13 +167,10 @@ private:
                     
             if (initializeAudioEngine){
                 oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate);
-                oae.addActionListener(this);  // Action listener is removed on destructor of OctopushAudioEngine
             }
         }
         
         void initPush(){
-            if ((push != nullptr) && (push->pushInitializedSuccessfully)){ return; }
-            
             bool initializePush = DEFAULT_INITIALIZE_PUSH;
             int displayFrameRate = DEFAULT_PUSH_DISPLAY_FRAME_RATE;
             int maxEncoderUpdateRate = DEFAULT_ENCODER_ROTATION_MAX_MESSAGE_RATE_HZ;
@@ -216,9 +182,8 @@ private:
             displayFrameRate = 40;
             #endif
             
-            push.reset(new Push2Interface());
             if (initializePush){
-                push->initialize(&oae, displayFrameRate, maxEncoderUpdateRate, useMIDIBridge);
+                push.initialize(&oae, displayFrameRate, maxEncoderUpdateRate, useMIDIBridge);
             }
         }
 
@@ -227,12 +192,9 @@ private:
         te::HostedAudioDeviceInterface& audioInterface;
         te::ExternalPlayheadSynchroniser playheadSynchroniser { edit };
         
-        
-        int64 initializationTime = 0;
-        
         // Ocotpush app engine and push2 interface
         OctopushAudioEngine oae;
-        std::unique_ptr<Push2Interface> push;
+        Push2Interface push;
     };
     
     //==============================================================================
@@ -306,16 +268,15 @@ private:
                     showSimulator = false;
                 } else {
                     // If not force/hide show simulator we'll only show it if push was not initialized properly and we're in debug mode
-                    if (processor.engineWrapper->push != nullptr){
-                        if (!processor.engineWrapper->push->pushInitializedSuccessfully && debug){
-                            showSimulator = true;
-                        }
+                    if (!processor.engineWrapper->push.pushInitializedSuccessfully && debug){
+                        showSimulator = true;
                     }
+                    
                 }
                 
                 if (showSimulator) {
                     setSize (900, 726);
-                    push2SimulatorComponent.setPush2Interface(&*processor.engineWrapper->push);
+                    push2SimulatorComponent.setPush2Interface(&processor.engineWrapper->push);
                     addAndMakeVisible(push2SimulatorComponent);
                 }
             #endif
@@ -335,10 +296,8 @@ private:
         {
             #if !ELK_BUILD
                 #if JUCE_DEBUG
-                if (processor.engineWrapper->push != nullptr){
-                    if (!processor.engineWrapper->push->pushInitializedSuccessfully) {
-                        push2SimulatorComponent.setBounds(getBounds());
-                    }
+                if (!processor.engineWrapper->push.pushInitializedSuccessfully) {
+                    push2SimulatorComponent.setBounds(getBounds());
                 }
                 #endif
             #endif

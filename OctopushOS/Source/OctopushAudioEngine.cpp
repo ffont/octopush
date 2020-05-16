@@ -427,13 +427,4 @@ void OctopushAudioEngine::timerCallback()
             #endif
         }
     }
-    
-    #if ELK_BUILD
-    /*
-    if (!actionInitPushTriggered){
-        // If action to initialize push has not been triggered, do it now
-        sendActionMessage(ACTION_INIT_PUSH);
-        actionInitPushTriggered = true;
-    }*/
-    #endif
 }
