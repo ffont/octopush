@@ -16,8 +16,6 @@
 
 #define DEFAULT_PLAY_ON_START true
 
-#define DEFAULT_MINIMAL_ENGINE false
-
 #define N_AUDIO_TRACKS 7
 
 #define DEFAULT_INITIALIZE_PUSH true

@@ -26,7 +26,7 @@ public:
     static void setupInputs (te::Edit& edit);
     static void setupOutputs (te::Edit& edit);
     
-    void initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal);
+    void initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate);
     
     void transportPlay();
     void transportStop();

@@ -181,7 +181,6 @@ bool Push2Interface::initializeOSCReceiver()
 
 void Push2Interface::oscMessageReceived (const OSCMessage& message)
 {
-    std::cout << "MIDI IN RECEIVED " << std::endl;
     MidiMessage midi_msg = MidiMessage(message[0].getInt32(), message[1].getInt32(), message[2].getInt32());
     routeIncomingMidiMessage(midi_msg);
 }

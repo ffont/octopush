@@ -20,7 +20,12 @@ def send(ctx):
     print('********************************************************\n')
     with Connection(host=host, connect_kwargs={'password': 'elk'}) as c:
         for local_file, destination_dir in [
+            ("../sandbox/start.sh", remote_dir),
             ("../sandbox/octopush_sushi_config.json", remote_dir),
+            ("../sandbox/python-midi-bridge/OSC.py", remote_dir),
+            ("../sandbox/python-midi-bridge/simpleOSC.py", remote_dir),
+            ("../sandbox/python-midi-bridge/requirements.txt", remote_dir),
+            ("../sandbox/python-midi-bridge/server.py", remote_dir),
             ("../OctopushOS/Builds/ELKAudioOS/build/OctopushOS.so", remote_dir)
         ]:
             print('- Copying {0} to {1}'.format(local_file, destination_dir))

@@ -24,8 +24,13 @@ class OctopushOsAudioProcessor  : public AudioProcessor
 public:
     //==============================================================================  
     OctopushOsAudioProcessor()
-        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::stereo())
-                                           .withOutput ("Output", AudioChannelSet::stereo()))
+        #if ELK_BUILD
+        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::discreteChannels (2), true)
+                                           .withOutput ("Output", AudioChannelSet::discreteChannels (2), true))
+        #else
+        : AudioProcessor (BusesProperties().withInput  ("Input",  AudioChannelSet::discreteChannels (6), true)  // Expecting 6 input channels and 6 output channels
+                                           .withOutput ("Output", AudioChannelSet::discreteChannels (6), true))
+        #endif
     {
     }
     
@@ -108,12 +113,14 @@ public:
     
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override
     {
+        /*
         if (layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
             return false;
 
         if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
             return false;
-
+         */
+        // For now we accept whatever channel set layout we get
         return true;
     }
 
@@ -133,7 +140,7 @@ private:
     
     //==============================================================================
     
-    struct EngineWrapper: public ActionListener
+    struct EngineWrapper: public ActionListener, public Timer
     {
         EngineWrapper()
             : audioInterface (engine.getDeviceManager().getHostedAudioDeviceInterface())
@@ -141,31 +148,11 @@ private:
             JUCE_ASSERT_MESSAGE_THREAD
             audioInterface.initialise ({});
             
-            // Octopush app initialize
-            bool playOnStart = DEFAULT_PLAY_ON_START;
-            int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
-            bool minimalEngine = DEFAULT_MINIMAL_ENGINE;
-            bool initializeAudioEngine = DEFAULT_INITIALIZE_AUDIO_ENGINE;
-            bool useMIDIBridge = DEFAULT_USE_MIDI_BRIDGE;
-            
-            #if ELK_BUILD
-            std::cout << "Configuring Octopush AudioEngine for ELK build" << std::endl;
-            minimalEngine = true;
-            useMIDIBridge = true;
-            stateUpdateFrameRate = 10;
-            #endif
-                    
-            if (initializeAudioEngine){
-                oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate, minimalEngine);
-                oae.addActionListener(this);  // Action listener is removed on destructor of OctopushAudioEngine
-            }
-             
-            #if !ELK_BUILD
-            // In ELK builds we trigger Push initialization when the audio engine has finished initialization and started playing
-            // We do that by triggering an action after a couple of seconds of the audio engine running that EngineWrapper will
-            // catch and call initPush()
+            //initializationTime = Time::getCurrentTime().toMilliseconds();
+            initOctopushAudioEngine();
             initPush();
-            #endif
+            
+            //startTimer(1000); // Run timer
         }
         
         ~EngineWrapper()
@@ -173,10 +160,45 @@ private:
             push.reset();
         }
         
+        void timerCallback() override
+        {
+            if ((Time::getCurrentTime().toMilliseconds() - initializationTime) > 5000)  // Initialize audio engine and push after a delay of 5 seconds. This is to make sure prepareToPlay is called beofre that
+            {
+                stopTimer();
+                
+                
+                 
+                //#if !ELK_BUILD
+                // In ELK builds we trigger Push initialization when the audio engine has finished initialization and started playing
+                // We do that by triggering an action after a couple of seconds of the audio engine running that EngineWrapper will
+                // catch and call initPush()
+                initOctopushAudioEngine();
+                initPush();
+                //#endif
+            }
+        }
+        
         void actionListenerCallback (const String &message) override
         {
             if (message==ACTION_INIT_PUSH){
                 initPush();
+            }
+        }
+        
+        void initOctopushAudioEngine(){
+            // Octopush app initialize
+            bool playOnStart = DEFAULT_PLAY_ON_START;
+            int stateUpdateFrameRate = DEFAULT_STATE_UPDATE_RATE;
+            bool initializeAudioEngine = DEFAULT_INITIALIZE_AUDIO_ENGINE;
+            
+            #if ELK_BUILD
+            std::cout << "Configuring Octopush AudioEngine for ELK build" << std::endl;
+            playOnStart = false;
+            #endif
+                    
+            if (initializeAudioEngine){
+                oae.initialize(&engine, &edit, playOnStart, stateUpdateFrameRate);
+                oae.addActionListener(this);  // Action listener is removed on destructor of OctopushAudioEngine
             }
         }
         
@@ -204,6 +226,9 @@ private:
         te::Edit edit { engine, te::createEmptyEdit (engine), te::Edit::forEditing, nullptr, 0 };
         te::HostedAudioDeviceInterface& audioInterface;
         te::ExternalPlayheadSynchroniser playheadSynchroniser { edit };
+        
+        
+        int64 initializationTime = 0;
         
         // Ocotpush app engine and push2 interface
         OctopushAudioEngine oae;

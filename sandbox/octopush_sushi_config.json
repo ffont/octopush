@@ -1,16 +1,43 @@
 {
     "host_config" : {
-        "samplerate" : 48000
+        "samplerate" : 48000,
+        "midi_inputs": 1,
+        "midi_outputs": 1,
+        "playing_mode": "stopped"
+
     },
     "tracks" : [
         {
             "name" : "main",
-            "mode" : "stereo",
-            "inputs" : [],
+            "mode" : "multibus",
+            "input_busses" : 3,
+            "output_busses" : 3,
+            "inputs" : [
+                {
+                    "engine_bus" : 0,
+                    "track_bus" : 0
+                },
+                {
+                    "engine_bus" : 1,
+                    "track_bus" : 1
+                },
+                {
+                    "engine_bus" : 2,
+                    "track_bus" : 2
+                }
+            ],
             "outputs" : [
                 {
                     "engine_bus" : 0,
                     "track_bus" : 0
+                },
+                {
+                    "engine_bus" : 1,
+                    "track_bus" : 1
+                },
+                {
+                    "engine_bus" : 2,
+                    "track_bus" : 2
                 }
             ],
             "plugins" : [

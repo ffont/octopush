@@ -35,7 +35,6 @@ void OctopushAudioEngine::setupInputs (te::Edit& edit)
 {
     auto& dm = edit.engine.getDeviceManager();
     
-    
     // Configure midi inputs
     for (int i = 0; i < dm.getNumMidiInDevices(); i++)
     {
@@ -107,7 +106,7 @@ void OctopushAudioEngine::setupOutputs (te::Edit& edit)
     edit.restartPlayback();
 }
 
-void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate, bool minimal)
+void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate)
 {
     std::cout << "* Initializing OctopushAudioEngine" << std::endl;
     
@@ -124,9 +123,6 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     
     int currentTrackNum = 0;
     int nAudioTracks = N_AUDIO_TRACKS;
-    if (minimal){
-        nAudioTracks = 4;
-    }
     
     for (int index=0; index<nAudioTracks; index++){
         auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), index);
@@ -151,8 +147,6 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
             track->pluginList.insertPlugin (*reverb, 0, nullptr);
             reverb->setRoomSize(state.reverberationRoomSize);
         }
-    
-        
         currentTrackNum++;
     }
     
@@ -169,7 +163,6 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
             track->pluginList.insertPlugin (*reverb, 0, nullptr);
             reverb->setRoomSize(state.reverberationRoomSize);
         }
-        
         currentTrackNum++;
     }
     
@@ -186,7 +179,6 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
             track->pluginList.insertPlugin (*reverb, 0, nullptr);
             reverb->setRoomSize(state.reverberationRoomSize);
         }
-        
         currentTrackNum++;
     }
     
@@ -203,96 +195,95 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
             track->pluginList.insertPlugin (*reverb, 0, nullptr);
             reverb->setRoomSize(state.reverberationRoomSize);
         }
-        
         currentTrackNum++;
     }
     
-   
-    if (!minimal){
+    // Tracks 4-5 (route audio input)
+    std::cout << "Setting up input tracks..." << std::endl;
+    int nInputTracks = 0;
+    int maxInputTracks = 2;
+    for (auto instance : edit->getAllInputDevices())
+    {
+        std::cout << instance->getInputDevice().getName() << std::endl;
         
-        // Track 4 (step sequencer)
-        if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
-        {
-           // Find length of 1 bar
-           const te::EditTimeRange editTimeRange (0, edit->tempoSequence.barsBeatsToTime ({ 0, 4.0 }));
-           track->insertNewClip (te::TrackItem::Type::step, "Step Clip", editTimeRange, nullptr);
-           auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
-           // Remove channels from step sequencer to reduce it to 4 instead of the default 8
-           stepClip->removeChannel(4);
-           stepClip->removeChannel(4);
-           stepClip->removeChannel(4);
-           stepClip->removeChannel(4);
-           
-           setTrackVolume(4, -8.0); // Set volume to -8 db
+        if (nInputTracks == maxInputTracks){
+            break;
         }
-
-        // Load audio files that will be used by a sampler plugin receiving notes from the step sequencer
-        Array<File> files;
-        auto kickFile = File::createTempFile ("kick.wav");
-        kickFile.replaceWithData (BinaryData::kick_wav, BinaryData::kick_wavSize);
-        files.add (kickFile);
-        auto snareFile = File::createTempFile ("snare.aiff");
-        snareFile.replaceWithData (BinaryData::snare_aiff, BinaryData::snare_aiffSize);
-        files.add (snareFile);
-        auto hihatFile = File::createTempFile ("hihat.wav");
-        hihatFile.replaceWithData (BinaryData::hihat_wav, BinaryData::hihat_wavSize);
-        files.add (hihatFile);
-        auto clapFile = File::createTempFile ("clap.wav");
-        clapFile.replaceWithData (BinaryData::clap_wav, BinaryData::clap_wavSize);
-        files.add (clapFile);
-
-        // Create sampler plugin with the above clips and create patterns for sampler channels
-        if (auto sampler = dynamic_cast<te::SamplerPlugin*> (edit->getPluginCache().createNewPlugin (te::SamplerPlugin::xmlTypeName, {}).get()))
+        
+        if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
         {
-           auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum);
-           auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
-           stepClip->getTrack()->pluginList.insertPlugin (*sampler, 0, nullptr);
-           
-           int channelCount = 0;
-           for (auto channel : stepClip->getChannels())
-           {
-               const auto error = sampler->addSound (files[channelCount].getFullPathName(), channel->name.get(), 0.0, 0.0, 1.0f);
-               sampler->setSoundParams (sampler->getNumSounds() - 1, channel->noteNumber, channel->noteNumber, channel->noteNumber);
-               jassert (error.isEmpty());
-               
-               for (auto& pattern : stepClip->getPatterns()){
-                   for (int step=0; step<pattern.getNumNotes(); step++){
-                       pattern.setNote (channelCount, step, state.stepSequencerPattern[channelCount][step]);
-                   }
-               }
-               channelCount++;
-           }
-           currentTrackNum++;
-        }
-       
-    
-        // Tracks 5-6 (route audio input)
-        int nInputTracks = 0;
-        int maxInputTracks = 2;
-        for (auto instance : edit->getAllInputDevices())
-        {
-            std::cout << instance->getInputDevice().getName() << std::endl;
-            
-            if (nInputTracks == maxInputTracks){
-                break;
-            }
-            
-            if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
+            if (auto t = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
             {
-                if (auto t = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
-                {
-                    instance->setTargetTrack (*t, 0, false);
-                    instance->setRecordingEnabled (*t, true);
-                    currentTrackNum++;
-                    nInputTracks++;
-                }
+                instance->setTargetTrack (*t, 0, false);
+                instance->setRecordingEnabled (*t, true);
+                currentTrackNum++;
+                nInputTracks++;
             }
         }
-        edit->restartPlayback();
-        
-        // Mute tracks 5-6 to avoid feedback loop if input is microphone and output are speakers
-        toggleMuteTrack(5);
-        toggleMuteTrack(6);
+    }
+    edit->restartPlayback();
+    
+    // Mute tracks 4-5 to avoid feedback loop if input is microphone and output are speakers
+    toggleMuteTrack(4);
+    toggleMuteTrack(5);
+    
+
+    // Track 6 (step sequencer)
+    std::cout << "Adding clip and track for step sequencer..." << std::endl;
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
+    {
+       // Find length of 1 bar
+       const te::EditTimeRange editTimeRange (0, edit->tempoSequence.barsBeatsToTime ({ 0, 4.0 }));
+       track->insertNewClip (te::TrackItem::Type::step, "Step Clip", editTimeRange, nullptr);
+       auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
+       // Remove channels from step sequencer to reduce it to 4 instead of the default 8
+       stepClip->removeChannel(4);
+       stepClip->removeChannel(4);
+       stepClip->removeChannel(4);
+       stepClip->removeChannel(4);
+       
+       setTrackVolume(currentTrackNum, -8.0); // Set volume to -8 db
+    }
+
+    std::cout << "Loading files for step sequencer..." << std::endl;
+    // Load audio files that will be used by a sampler plugin receiving notes from the step sequencer
+    Array<File> files;
+    auto kickFile = File::createTempFile ("kick.wav");
+    kickFile.replaceWithData (BinaryData::kick_wav, BinaryData::kick_wavSize);
+    files.add (kickFile);
+    auto snareFile = File::createTempFile ("snare.aiff");
+    snareFile.replaceWithData (BinaryData::snare_aiff, BinaryData::snare_aiffSize);
+    files.add (snareFile);
+    auto hihatFile = File::createTempFile ("hihat.wav");
+    hihatFile.replaceWithData (BinaryData::hihat_wav, BinaryData::hihat_wavSize);
+    files.add (hihatFile);
+    auto clapFile = File::createTempFile ("clap.wav");
+    clapFile.replaceWithData (BinaryData::clap_wav, BinaryData::clap_wavSize);
+    files.add (clapFile);
+
+    std::cout << "Creating step sequencer plugin..." << std::endl;
+    // Create sampler plugin with the above clips and create patterns for sampler channels
+    if (auto sampler = dynamic_cast<te::SamplerPlugin*> (edit->getPluginCache().createNewPlugin (te::SamplerPlugin::xmlTypeName, {}).get()))
+    {
+       auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum);
+       auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
+       stepClip->getTrack()->pluginList.insertPlugin (*sampler, 0, nullptr);
+       
+       int channelCount = 0;
+       for (auto channel : stepClip->getChannels())
+       {
+           const auto error = sampler->addSound (files[channelCount].getFullPathName(), channel->name.get(), 0.0, 0.0, 1.0f);
+           sampler->setSoundParams (sampler->getNumSounds() - 1, channel->noteNumber, channel->noteNumber, channel->noteNumber);
+           jassert (error.isEmpty());
+           
+           for (auto& pattern : stepClip->getPatterns()){
+               for (int step=0; step<pattern.getNumNotes(); step++){
+                   pattern.setNote (channelCount, step, state.stepSequencerPattern[channelCount][step]);
+               }
+           }
+           channelCount++;
+       }
+       currentTrackNum++;
     }
     
     // Print info about created tracks
@@ -315,7 +306,9 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     }
 
     // Start the timer to update state
+    std::cout << "Checking whether state update timer should be started" << std::endl;
     if (stateUpdateRate > 0){
+        std::cout << "Starting update state timer" << std::endl;
         startTimerHz(stateUpdateRate);
     } else {
         std::cout << "WARNING: state update timer is disabled" << std::endl;
@@ -367,7 +360,7 @@ void OctopushAudioEngine::updateStepSequencerPattern(int samplerChannel, int ste
     state.stepSequencerPattern[samplerChannel][stepN] = !state.stepSequencerPattern[samplerChannel][stepN];
     
     // Reload pattern to step sequencer clip
-    auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), 4);  // 4 = step sequencer track
+    auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), 6);  // 4 = step sequencer track
     
     auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
     int channelCount = 0;
@@ -420,9 +413,9 @@ void OctopushAudioEngine::timerCallback()
         stateUpdateRateCurrentSecond = Time::getCurrentTime().toMilliseconds();
     } else {
         int64 currentTime = Time::getCurrentTime().toMilliseconds();
-        if (currentTime - stateUpdateRateCurrentSecond > 1000.0){
+        if (currentTime - stateUpdateRateCurrentSecond > 5000.0){
             stateUpdateRateCurrentSecond = currentTime;
-            state.stateUpdateFrameRate = stateUpdateRateCounter;
+            state.stateUpdateFrameRate = stateUpdateRateCounter / 5;
             stateUpdateRateCounter = 0;
             
             // Print display/state update measured rates and system stats (if ELK build)
@@ -436,10 +429,11 @@ void OctopushAudioEngine::timerCallback()
     }
     
     #if ELK_BUILD
+    /*
     if (!actionInitPushTriggered){
         // If action to initialize push has not been triggered, do it now
         sendActionMessage(ACTION_INIT_PUSH);
         actionInitPushTriggered = true;
-    }
+    }*/
     #endif
 }
