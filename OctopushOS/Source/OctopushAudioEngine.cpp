@@ -185,7 +185,8 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     // Track 3 (loop)
     if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
         auto f = File::createTempFile ("loop3.wav");
-        f.replaceWithData (BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wav, BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wavSize);
+        f.replaceWithData (BinaryData::clap_wav, BinaryData::clap_wavSize);
+        //f.replaceWithData (BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wav, BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wavSize);
         te::AudioFile audioFile (*engine.get(), f);
         auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
         
@@ -221,7 +222,6 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
             }
         }
     }
-    edit->restartPlayback();
     
     // Mute tracks 4-5 to avoid feedback loop if input is microphone and output are speakers
     toggleMuteTrack(4);
@@ -241,8 +241,6 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
        stepClip->removeChannel(4);
        stepClip->removeChannel(4);
        stepClip->removeChannel(4);
-       
-       setTrackVolume(currentTrackNum, -8.0); // Set volume to -8 db
     }
 
     std::cout << "Loading files for step sequencer..." << std::endl;
@@ -272,6 +270,7 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
        int channelCount = 0;
        for (auto channel : stepClip->getChannels())
        {
+           std::cout << "- Adding sound to sampler " << channelCount << std::endl;
            const auto error = sampler->addSound (files[channelCount].getFullPathName(), channel->name.get(), 0.0, 0.0, 1.0f);
            sampler->setSoundParams (sampler->getNumSounds() - 1, channel->noteNumber, channel->noteNumber, channel->noteNumber);
            jassert (error.isEmpty());
@@ -291,6 +290,8 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     for (auto track : te::getAudioTracks(*edit.get())){
         std::cout << "- " << track->getName() << std::endl;
     }
+    
+    edit->restartPlayback(); // is this needed¿¿
     
     // Initialize other transport and related properties
     edit->tempoSequence.getTempos()[0]->setBpm (state.tempo);
