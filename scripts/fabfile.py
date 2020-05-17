@@ -32,8 +32,8 @@ def send(ctx):
             c.put(local_file, destination_dir)
 
     print('\nAll done!')
-    print('You can now run OctopushELK on the ELK board with the command:')
-    print('sushi -r -c /home/mind/octopush_sushi_config.json')
+    print('You can now run OctopushOS on the ELK board with the command:')
+    print('./start.sh')
     print('\n')
 
 
