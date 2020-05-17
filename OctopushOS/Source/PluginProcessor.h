@@ -149,7 +149,19 @@ private:
             : audioInterface (engine.getDeviceManager().getHostedAudioDeviceInterface())
         {
             JUCE_ASSERT_MESSAGE_THREAD
+            
+            // Init hosted audio interface
+            // Octopush wants 6 input and 6 output when running in ELK
+            #if ELK_BUILD
+            te::HostedAudioDeviceInterface::Parameters p;
+            p.inputChannels = 6;
+            p.outputChannels = 6;
+            audioInterface.initialise (p);
+            #else
             audioInterface.initialise ({});
+            #endif
+            
+            // Init audio engine and push UI
             initOctopushAudioEngine();
             initPush();
         }
