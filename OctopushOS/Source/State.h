@@ -37,9 +37,14 @@ public:
         for (int samplerChannel=0; samplerChannel < 4; samplerChannel++){
             if (samplerChannel == 0){ // Kick
                 stepSequencerPattern[samplerChannel][0] = true;
+                stepSequencerPattern[samplerChannel][2] = true;
                 stepSequencerPattern[samplerChannel][4] = true;
+                stepSequencerPattern[samplerChannel][6] = true;
                 stepSequencerPattern[samplerChannel][8] = true;
+                stepSequencerPattern[samplerChannel][10] = true;
                 stepSequencerPattern[samplerChannel][12] = true;
+                stepSequencerPattern[samplerChannel][14] = true;
+                stepSequencerPattern[samplerChannel][15] = true;
             } else if (samplerChannel == 1){ // Hihat
                 stepSequencerPattern[samplerChannel][1] = true;
                 stepSequencerPattern[samplerChannel][3] = true;

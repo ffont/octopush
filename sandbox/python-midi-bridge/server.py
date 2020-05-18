@@ -1,7 +1,7 @@
 import argparse
 import math
 
-from simpleOSC import initOSCClient, initOSCServer, setOSCHandler, startOSCServer, sendOSCMsg
+from simpleOSC import initOSCClient, initOSCServer, setOSCHandler, startOSCServer, sendOSCMsg, closeOSC
 
 import mido
 
@@ -40,6 +40,7 @@ if __name__ == "__main__":
     except OSError:
         print("Could not connect to Push2 MIDI ports")
 
+    # Configure OSC client for sending messages to
     initOSCClient(ip=args.ip, port=args.port_send)
 
     # Configure OSC server to receive messages from OCTOPUSH

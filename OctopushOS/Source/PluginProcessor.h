@@ -48,14 +48,7 @@ public:
         // Engine needs to be created on the message thread so we'll do that now
         ensureEngineCreatedOnMessageThread();
         
-        #if ELK_BUILD
-        std::cout << "Calling prepareToPlay (ELK build)" << std::endl;
-        sampleRate = 48000;
-        expectedBlockSize = 64;
-        #else
-        std::cout << "Calling prepareToPlay" << std::endl;
-        #endif
-        
+        std::cout << ">>>> Calling prepareToPlay with sample rate " << sampleRate << " and block size " << expectedBlockSize << std::endl;
         setLatencySamples (expectedBlockSize);
         ensurePrepareToPlayCalledOnMessageThread (sampleRate, expectedBlockSize);
     }
@@ -136,6 +129,7 @@ private:
     {
     public:
         bool autoInitialiseDeviceManager() override { return false; }
+        
         #if ELK_BUILD  // In ELK build, use only one thread to partially reduce kernel mode switches (MSW)
         int getNumberOfCPUsToUseForAudio() override { return 1; }
         #endif
@@ -156,6 +150,8 @@ private:
             te::HostedAudioDeviceInterface::Parameters p;
             p.inputChannels = 6;
             p.outputChannels = 6;
+            p.sampleRate = 48000;
+            p.blockSize = 64;
             audioInterface.initialise (p);
             #else
             audioInterface.initialise ({});
