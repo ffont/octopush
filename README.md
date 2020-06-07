@@ -81,7 +81,7 @@ cd scripts
 ./build_debug_octopushOS
 ```
 
-The generated executable (for the santadalone version) will be placed in `OctopushOS/Builds/MacOSX/build/Debug/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Debug/OctopushOS ` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
+The generated executable (for the santadalone version) will be placed in `OctopushOS/Builds/MacOSX/build/Debug/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Debug/OctopushOS` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
 
 
 ### 4.4 Release build
@@ -98,7 +98,72 @@ The generated executable (for the santadalone version) will be placed in `Octopu
 
 ## 5. Building Octopush for the ELK platform
 
-TODO
+
+### 5.1 Cross-compilation from macOS
+
+To build OctopushOS for ELK Audio OS you need to cross-compile it from your development computer. I use macOS so these instructions apply to my setup. For Linux it should probably be simpler and you should refer to the ELK docs.
+
+To do the cross compilation (and also deployment to the board) I prepared a Python script using [Fabric 2](http://www.fabfile.org) so I assume you have a Python 3 interpreter installed in your system with the Fabric 2 package installed (`pip install fabric` should do it).
+
+#### 5.1.1 Prepare ELK development SDK
+
+First thing to do is to prepare the ELK development SDK docker image following the [instrucitons here](https://github.com/elk-audio/elkpi-sdk/blob/master/running_docker_container_on_macos.md). You need to run steps 1 to 3, no need to run the toolchain when everything installed.
+
+
+#### 5.1.2 Repository checkout
+
+You need to checkout the code including submodules. This will download source code for all required 3rd party libraries (JUCE, etc.)
+
+```
+git clone https://github.com/ffont/octopush.git && cd octopush && git submodule update --init
+```
+
+#### 5.1.2 Preparing some code dependencies
+
+OctopushOS needs to be built as a VST2 plugin, meaning that you need the VST2 SDK installed in your computer. The Python script used to build OctopushOS will try to mount the VST2 SDK in the Docker container so it can be used for compilation. The script will search for a folder names `VST_SDK` (the SDK) at the same directory level where the `octopush` folder is (if needed, you can edit this in `fabfile.py`).
+
+OctopushOS also needs a custom version of JUCE which is patched to remove some graphical dependencies (as required by the ELK platform), and to patch some JUCE functions so these work in a RT kernel and don't trigger mode switches. The [patched version of JUCE I use is here](https://github.com/ffont/JUCE) (it is an adaptation of the existing JUCE fork by ELK). You need to clone that repository and place it inside a folder named `ELK` at the same level of `octopush` and `VST_SDK` folders. It should look like `ELK/JUCE`.
+
+#### 5.1.3 Building OctopushOS
+
+With all this in place, you should be able to cross-compile OctopushOS for ELK by simply doing:
+
+```
+cd octopush/scripts
+fab compile
+```
+
+This will take a while, specially the first time it runs. When it finished, it should have generated an `OctopushOS.so` file in `OctopushOS/Builds/ELKAudioOS/build/OctopushOS.so` which is the VST2 plugin that you can run in ELK platform.
+
+
+### 5.2 Deploying and runnning OctopushOS in the ELK board
+
+
+#### 5.2.1 Deploying OctopushOS in the ELK board
+
+Once the plugin is built, you can deploy the plugin to the ELK board by running:
+
+```
+fab send
+```
+
+This will copy the built plugin together with the files for the Python MIDI bridge and a start script.
+
+**NOTE**: You can do both `compile` and `send` steps together by running `fab deploy` instead.
+
+
+#### 5.2.2 Running OctopushOS in the ELK board
+
+After plugin is built and coppied, you simply need to login to the Raspberry Pi as `elk` user and run `start.sh` (script will be in home folder). This will spawn the Python MIDI bridge and `sushi` plugin host with a configuration for OctopushOS. 
+
+**NOTE1:** Before doing that you'll need to install the Python dependencies for the Python MIDI bridge in the board. Just run `pip install requirements.txt` in the Raspberry Pi (as user `elk`, in the home folder).
+
+**NOTE2:** For the Push2 display to work properly, you need to give special permissions to the `elk` user (this is a `libusb` thing). You can easily do this by copying the file `octopush/sandbox/50-push2.rules` to `/etc/udev/rules.d/50-push2.rules` in the Raspberry Pi board, and then running (also in the board):
+
+```
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
 
 
 ## 6. Licenses
