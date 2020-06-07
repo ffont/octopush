@@ -132,7 +132,135 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
     }
     
     // Now add content to every track
+    configureStepSequencer(currentTrackNum);
+    currentTrackNum++;
     
+    // Track 1 (loop)
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
+        auto f = File::createTempFile ("tambourine.wav");
+        f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
+        te::AudioFile audioFile (*engine.get(), f);
+        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+        
+        
+        // Add reverb plugin to track
+        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+        {
+            track->pluginList.insertPlugin (*reverb, 0, nullptr);
+            reverb->setRoomSize(state.reverberationRoomSize);
+        }
+        //toggleMuteTrack(currentTrackNum);
+        currentTrackNum++;
+    }
+    
+    // Track 2 (loop)
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
+        auto f = File::createTempFile ("loop1.wav");
+        f.replaceWithData (BinaryData::_262218__jputman__simpleloop_wav, BinaryData::_262218__jputman__simpleloop_wavSize);
+        te::AudioFile audioFile (*engine.get(), f);
+        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+        
+        // Add plugins
+        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+        {
+            track->pluginList.insertPlugin (*reverb, 0, nullptr);
+            reverb->setRoomSize(state.reverberationRoomSize);
+        }
+        //toggleMuteTrack(currentTrackNum);
+        currentTrackNum++;
+    }
+    
+    // Track 3 (loop)
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
+        auto f = File::createTempFile ("loop2.wav");
+        f.replaceWithData (BinaryData::_418621__realdavidfloat__basslinec120bpm_wav, BinaryData::_418621__realdavidfloat__basslinec120bpm_wavSize);
+        te::AudioFile audioFile (*engine.get(), f);
+        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+        
+        // Add plugins
+        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+        {
+            track->pluginList.insertPlugin (*reverb, 0, nullptr);
+            reverb->setRoomSize(state.reverberationRoomSize);
+        }
+        //toggleMuteTrack(currentTrackNum);
+        currentTrackNum++;
+    }
+    
+    // Track 4 (loop)
+    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
+        auto f = File::createTempFile ("loop3.wav");
+        f.replaceWithData (BinaryData::clap_wav, BinaryData::clap_wavSize);
+        //f.replaceWithData (BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wav, BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wavSize);
+        te::AudioFile audioFile (*engine.get(), f);
+        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
+        
+        // Add plugins
+        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
+        {
+            track->pluginList.insertPlugin (*reverb, 0, nullptr);
+            reverb->setRoomSize(state.reverberationRoomSize);
+        }
+        //toggleMuteTrack(currentTrackNum);
+        currentTrackNum++;
+    }
+    
+    // Tracks 5-6 (route audio input)
+    std::cout << "Setting up input tracks..." << std::endl;
+    int nInputTracks = 0;
+    int maxInputTracks = 2;
+    for (auto instance : edit->getAllInputDevices())
+    {
+        std::cout << " - Input " << instance->getInputDevice().getName();
+        if (nInputTracks < maxInputTracks){
+            if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
+            {
+                if (auto t = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
+                {
+                    std::cout << " connected to track " << currentTrackNum << std::endl;
+                    instance->setTargetTrack (*t, 0, false);
+                    instance->setRecordingEnabled (*t, true);
+                    toggleMuteTrack(currentTrackNum);  // Set track mutted by default
+                    currentTrackNum++;
+                    nInputTracks++;
+                }
+            }
+        } else{
+            std::cout << " not connected" << std::endl;
+        }
+    }
+    
+    // Print info about created tracks
+    std::cout << te::getAudioTracks(*edit.get()).size() << " tracks created" << std::endl;
+    for (auto track : te::getAudioTracks(*edit.get())){
+        std::cout << " - " << track->getName() << " connected to " << track->getOutput().getOutputName() << std::endl;
+    }
+    
+    // Initialize other transport and related properties
+    edit->tempoSequence.getTempos()[0]->setBpm (state.tempo);
+    transport->setLoopRange (te::EditTimeRange(0.0, 4.0)); // Will this be 1 bar (?)
+    transport->looping = true;
+    transport->position = 0.0;
+    transport->addChangeListener (this);
+    
+    // If play, start playing
+    std::cout << "Play on start? " << playOnStart <<std::endl;
+    if (playOnStart){
+        shouldPlayOnNextTimer = true;
+    }
+
+    // Start the timer to update state
+    std::cout << "Checking whether state update timer should be started" << std::endl;
+    if (stateUpdateRate > 0){
+        std::cout << "Starting update state timer" << std::endl;
+        startTimerHz(stateUpdateRate);
+    } else {
+        std::cout << "WARNING: state update timer is disabled" << std::endl;
+    }
+}
+
+void OctopushAudioEngine::configureStepSequencer(int currentTrackNum)
+{
     // Track 0 (step sequencer)
     std::cout << "Adding clip and track for step sequencer..." << std::endl;
     if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
@@ -144,13 +272,10 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
        auto stepClip = dynamic_cast<te::StepClip*> (track->getClips()[0]);
        // Remove channels from step sequencer to reduce it to 4 instead of the default 8
        std::cout << "Removing step sequencer channels..." << std::endl;
-       stepClip->removeChannel(1);
-       stepClip->removeChannel(1);
-       stepClip->removeChannel(1);
-       stepClip->removeChannel(1);
-       stepClip->removeChannel(1);
-       stepClip->removeChannel(1);
-       stepClip->removeChannel(1);
+       stepClip->removeChannel(4);
+       stepClip->removeChannel(4);
+       stepClip->removeChannel(4);
+       stepClip->removeChannel(4);
     }
 
     std::cout << "Loading files for step sequencer..." << std::endl;
@@ -184,6 +309,7 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
            const auto error = sampler->addSound (files[channelCount].getFullPathName(), channel->name.get(), 0.0, 0.0, 1.0f);
            sampler->setSoundParams (sampler->getNumSounds() - 1, channel->noteNumber, channel->noteNumber, channel->noteNumber);
            jassert (error.isEmpty());
+           
            for (auto& pattern : stepClip->getPatterns()){
                for (int step=0; step<pattern.getNumNotes(); step++){
                    pattern.setNote (channelCount, step, state.stepSequencerPattern[channelCount][step]);
@@ -192,128 +318,8 @@ void OctopushAudioEngine::initialize(te::Engine* _engine, te::Edit* _edit, bool 
            channelCount++;
        }
     }
-    currentTrackNum++;
     
-    // Track 1 (loop)
-    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
-        auto f = File::createTempFile ("tambourine.wav");
-        f.replaceWithData (BinaryData::tambourine_wav, BinaryData::tambourine_wavSize);
-        te::AudioFile audioFile (*engine.get(), f);
-        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
-        
-        
-        // Add reverb plugin to track
-        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
-        {
-            track->pluginList.insertPlugin (*reverb, 0, nullptr);
-            reverb->setRoomSize(state.reverberationRoomSize);
-        }
-        currentTrackNum++;
-    }
-    
-    // Track 2 (loop)
-    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
-        auto f = File::createTempFile ("loop1.wav");
-        f.replaceWithData (BinaryData::_262218__jputman__simpleloop_wav, BinaryData::_262218__jputman__simpleloop_wavSize);
-        te::AudioFile audioFile (*engine.get(), f);
-        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
-        
-        // Add plugins
-        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
-        {
-            track->pluginList.insertPlugin (*reverb, 0, nullptr);
-            reverb->setRoomSize(state.reverberationRoomSize);
-        }
-        currentTrackNum++;
-    }
-    
-    // Track 3 (loop)
-    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
-        auto f = File::createTempFile ("loop2.wav");
-        f.replaceWithData (BinaryData::_418621__realdavidfloat__basslinec120bpm_wav, BinaryData::_418621__realdavidfloat__basslinec120bpm_wavSize);
-        te::AudioFile audioFile (*engine.get(), f);
-        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
-        
-        // Add plugins
-        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
-        {
-            track->pluginList.insertPlugin (*reverb, 0, nullptr);
-            reverb->setRoomSize(state.reverberationRoomSize);
-        }
-        currentTrackNum++;
-    }
-    
-    // Track 4 (loop)
-    if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum)){
-        auto f = File::createTempFile ("loop3.wav");
-        f.replaceWithData (BinaryData::clap_wav, BinaryData::clap_wavSize);
-        //f.replaceWithData (BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wav, BinaryData::_418743__realdavidfloat__hihatloop120bpm0102_wavSize);
-        te::AudioFile audioFile (*engine.get(), f);
-        auto clip = track->insertWaveClip (f.getFileNameWithoutExtension(), f, { { 0.0, audioFile.getLength() }, 0.0 }, false);
-        
-        // Add plugins
-        if (auto reverb = dynamic_cast<te::ReverbPlugin*> (edit->getPluginCache().createNewPlugin (te::ReverbPlugin::xmlTypeName, {}).get()))
-        {
-            track->pluginList.insertPlugin (*reverb, 0, nullptr);
-            reverb->setRoomSize(state.reverberationRoomSize);
-        }
-        currentTrackNum++;
-    }
-    
-    // Tracks 5-6 (route audio input)
-    std::cout << "Setting up input tracks..." << std::endl;
-    int nInputTracks = 0;
-    int maxInputTracks = 2;
-    for (auto instance : edit->getAllInputDevices())
-    {
-        std::cout << " - Input " << instance->getInputDevice().getName();
-        if (nInputTracks < maxInputTracks){
-            if (instance->getInputDevice().getDeviceType() == te::InputDevice::waveDevice)
-            {
-                if (auto t = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), currentTrackNum))
-                {
-                    std::cout << " connected to track " << currentTrackNum << std::endl;
-                    instance->setTargetTrack (*t, 0, false);
-                    instance->setRecordingEnabled (*t, true);
-                    toggleMuteTrack(currentTrackNum);  // Set track mutted by default
-                    currentTrackNum++;
-                    nInputTracks++;
-                }
-            }
-        } else{
-            std::cout << " not connected" << std::endl;
-        }
-    }
-    
-    // Print info about created tracks
-    std::cout << te::getAudioTracks(*edit.get()).size() << " Tracks created" << std::endl;
-    for (auto track : te::getAudioTracks(*edit.get())){
-        std::cout << "- " << track->getName() << std::endl;
-    }
-    
-    edit->restartPlayback(); // is this needed¿¿
-    
-    // Initialize other transport and related properties
-    edit->tempoSequence.getTempos()[0]->setBpm (state.tempo);
-    transport->setLoopRange (te::EditTimeRange(0.0, 4.0)); // Will this be 1 bar (?)
-    transport->looping = true;
-    transport->position = 0.0;
-    transport->addChangeListener (this);
-    
-    // If play, start playing
-    std::cout << "PLAY on start? " << playOnStart <<std::endl;
-    if (playOnStart){
-        transportPlay();
-    }
-
-    // Start the timer to update state
-    std::cout << "Checking whether state update timer should be started" << std::endl;
-    if (stateUpdateRate > 0){
-        std::cout << "Starting update state timer" << std::endl;
-        startTimerHz(stateUpdateRate);
-    } else {
-        std::cout << "WARNING: state update timer is disabled" << std::endl;
-    }
+    stepSequencerConfigured = true;
 }
 
 void OctopushAudioEngine::changeListenerCallback (ChangeBroadcaster*)
@@ -426,6 +432,45 @@ void OctopushAudioEngine::timerCallback()
             // Show some system stats
             state.collectSystemStats();
             #endif
+            
+            /* DEBUG
+            if (auto track = EngineHelpers::getOrInsertAudioTrackAt (*edit.get(), 0))
+            {
+                for (auto plugin :  track->Track::getAllPlugins())
+                {
+                    if (plugin->getPluginType() == "sampler"){
+                        auto sampler = dynamic_cast<te::SamplerPlugin*> (plugin);
+                        std::cout << "Inspecting sampler plugin..." << std::endl;
+                        std::cout << "- Num sounds: " << sampler->getNumSounds() << std::endl;
+                        
+                        for (int i=0; i<sampler->getNumSounds(); i++)
+                        {
+                            //AudioFile file = sampler->getSoundFile(i);
+                            std::cout << "    * " << sampler->getSoundMedia(i) << std::endl;
+                            std::cout << "    * min key " << sampler->getMinKey(i) << std::endl;
+                            std::cout << "    * max key " << sampler->getMaxKey(i) << std::endl;
+                            std::cout << "    * key note " << sampler->getKeyNote(i) << std::endl;
+                            std::cout << "    * gain " << sampler->getSoundGainDb(i) << std::endl;
+                            std::cout << "    * length " << sampler->getSoundLength(i) << std::endl;
+                            std::cout << "    * open ended " << sampler->isSoundOpenEnded(i) << std::endl;
+                            
+                            BigInteger test;
+                            test.setBit(35);
+                            test.setBit(36);
+                            test.setBit(37);
+                            sampler->allNotesOff();
+                            sampler->playNotes(test);
+                        }
+                    }
+                }
+            }*/
+            
+            // Do the "play on start" thing
+            if (shouldPlayOnNextTimer){
+                transportPlay();
+                shouldPlayOnNextTimer = false;
+            }
+            
         }
     }
     
@@ -447,4 +492,6 @@ void OctopushAudioEngine::timerCallback()
         }
         std::cout << std::endl;
     }*/
+    
+    
 }

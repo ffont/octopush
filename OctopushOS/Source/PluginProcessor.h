@@ -129,7 +129,6 @@ private:
     {
     public:
         bool autoInitialiseDeviceManager() override { return false; }
-        
         #if ELK_BUILD  // In ELK build, use only one thread to partially reduce kernel mode switches (MSW)
         int getNumberOfCPUsToUseForAudio() override { return 1; }
         #endif
@@ -153,6 +152,7 @@ private:
             p.sampleRate = 48000;
             p.blockSize = 64;
             audioInterface.initialise (p);
+            engine.getEngineBehaviour().setProcessPriority(2); // Set realtime priority for engine
             #else
             audioInterface.initialise ({});
             #endif
@@ -170,7 +170,6 @@ private:
             
             #if ELK_BUILD
             std::cout << "Configuring Octopush AudioEngine for ELK build" << std::endl;
-            playOnStart = false;
             #endif
                     
             if (initializeAudioEngine){

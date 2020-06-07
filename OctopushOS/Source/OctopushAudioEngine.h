@@ -27,6 +27,9 @@ public:
     static void setupOutputs (te::Edit& edit);
     
     void initialize(te::Engine* _engine, te::Edit* _edit, bool playOnStart, int stateUpdateRate);
+    void configureStepSequencer(int currentTrackNum);
+    bool stepSequencerConfigured = false;
+    
     
     void transportPlay();
     void transportStop();
@@ -48,6 +51,7 @@ private:
     void changeListenerCallback (ChangeBroadcaster*) override;
     void timerCallback() override;
     
+    int shouldPlayOnNextTimer = false;
     int stateUpdateRateCounter = 0;
     int64 stateUpdateRateCurrentSecond = 0;
     bool actionInitPushTriggered = false;
