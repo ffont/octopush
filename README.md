@@ -2,6 +2,29 @@
 <img src="docs/logo_main_colour.png" width="250" title="Octopush logo" />
 </p>
 
+Table of Contents
+=================
+
+* [1. What is Octopush?](#1-what-is-octopush)
+* [2. How does Octopush work?](#2-how-does-octopush-work)
+* [3. Current status/limitations](#3-current-statuslimitations)
+* [4. Building Octopush for "desktop" computers (macOS and linux)](#4-building-octopush-for-desktop-computers-macos-and-linux)
+   * [4.1 Repository checkout](#41-repository-checkout)
+   * [4.2 Building Projucer](#42-building-projucer)
+   * [4.3 Development build](#43-development-build)
+   * [4.4 Release build](#44-release-build)
+* [5. Building Octopush for the ELK platform](#5-building-octopush-for-the-elk-platform)
+   * [5.1 Cross-compilation from macOS](#51-cross-compilation-from-macos)
+      * [5.1.1 Prepare ELK development SDK](#511-prepare-elk-development-sdk)
+      * [5.1.2 Repository checkout](#512-repository-checkout)
+      * [5.1.2 Preparing some code dependencies](#512-preparing-some-code-dependencies)
+      * [5.1.3 Building OctopushOS](#513-building-octopushos)
+   * [5.2 Deploying and runnning OctopushOS in the ELK board](#52-deploying-and-runnning-octopushos-in-the-elk-board)
+      * [5.2.1 Deploying OctopushOS in the ELK board](#521-deploying-octopushos-in-the-elk-board)
+      * [5.2.2 Running OctopushOS in the ELK board](#522-running-octopushos-in-the-elk-board)
+* [6. Licenses](#6-licenses)
+
+
 ## 1. What is Octopush?
 
 Octopush is a work in progrees project to make an **open source stand alone music sequencer and sampler** based on the low-latency real-time **ELK AudioOS** for **Rapsberry Pi**, and using **Abelton's Push2** as a hardware interface. Basically, I want to build by own hardware sampler+sequencer using a Raspberry Pi, a Push2, and reusing existing nice software.
