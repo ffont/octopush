@@ -20,7 +20,7 @@ OcotpushOS is implemented as a JUCE audio plug-in and can be edited and built us
 Below is a system block diagram of Octopush:
 
 <p align="center">
-<img src="docs/diagram_system.png" width="250" title="Octopush logo" />
+<img src="docs/diagram_system.png" title="Octopush block diagram" />
 </p>
 
 The Python MIDI bridge is necessary because under the ELK platform it is not possible for a plugin to access multiple MIDI devices with separate MIDI connections, therefore there needs to be an intermediary app which talks to Push2 to set button and colors (and others), and receive actions like when a pad is pressed. This intermediary app talks to the OctopushOS plugin via OSC. If running OctopushOS in a desktop computer (with a plugin host different than ELK's Sushi and without running on a RT kernel thread), then the intermediary app is not needed because the plugin can talk directly to Push2 (this is indeed what happens when building Octopush for development in a desktop computer.
