@@ -7,7 +7,6 @@
 */
 
 #include "Push2Interface.h"
-#include "../JuceLibraryCode/BinaryData.h"
 
 
 //------------------------------------------------------------------------------
@@ -37,38 +36,82 @@ Push2Interface::~Push2Interface()
 {
     // Stop timer
     stopTimer();
+    
+    // Release pointers to state and audio engine
+    oae.release();
+    state.release();
+    
+    // Reset pointer to midi in/out (to delete objects)
+    midiInput.reset();
+    midiOutput.reset();
 }
 
 //------------------------------------------------------------------------------
 
-void Push2Interface::initialize(Engine* engine_, int displayFrameRate_, int maxEncoderUpdateRate_)
+void Push2Interface::initialize(OctopushAudioEngine* oae_, int displayFrameRate_, int maxEncoderUpdateRate_, bool useMIDIBridge_)
 {
-    // Assign reference to application engine
-    engine = engine_;
-    engine->addActionListener(this);
-    state = &engine->state; // Shorcut to access application state
+    std::cout << "* Initializing Push2Interface" << std::endl;
     
-    // Initialize Push2 connection
-    NBase::Result result = connectToPush();
-    if (result.Succeeded())
+    // Assign reference to application engine
+    oae.reset(oae_);
+    state.reset(&oae->state); // Shorcut to access application state
+    oae->addActionListener(this);
+    
+    // Initialize Push2 DISPLAY connection
+    NBase::Result result_display = connectToPushDisplay();
+    if (result_display.Succeeded())
     {
-        std::cout << "Push 2 connected" << std::endl;
-        pushInitializedSuccessfully = true;
+        std::cout << "Push 2 DISPLAY connected" << std::endl;
+        pushDisplayInitializedSuccessfully = true;
     }
     else
     {
         // Something went wrong while connecting to Push2
-        std::cout << "ERROR connecting to Push 2: " << result.GetDescription() << std::endl;
-        pushInitializedSuccessfully = false;
+        std::cout << "ERROR connecting to Push 2 DISPLAY: " << result_display.GetDescription() << std::endl;
+        pushDisplayInitializedSuccessfully = false;
     }
     
+    useMIDIBridge = useMIDIBridge_;
+    
+    if (!useMIDIBridge)
+    {
+        // Initialize Push2 MIDI connection
+        NBase::Result result_midi = connectToPushMIDI();
+        if (result_midi.Succeeded())
+        {
+            std::cout << "Push 2 MIDI connected" << std::endl;
+            pushMIDIInitializedSuccessfully = true;
+        }
+        else
+        {
+            // Something went wrong while connecting to Push2
+            std::cout << "ERROR connecting to Push 2 MIDI: " << result_midi.GetDescription() << std::endl;
+            pushMIDIInitializedSuccessfully = false;
+        }
+    } else {
+        pushMIDIInitializedSuccessfully = true;  // We set it to true and will initialize the OSC sender lazily before sending first message
+        oscSenderConnectedToMIDIBridge = false;
+        oscReceivedInitialized = false;
+        // Initialize Push2 MIDI connection trhough OSC proxy app
+        // NOTE: For some reason I can't connect the oscSender here because it crashes my app when running in ELK...
+        //initializeOSCSender();
+        initializeOSCReceiver();
+    }
+    
+    // Set global push intitialized successfully variable
+    pushInitializedSuccessfully = pushMIDIInitializedSuccessfully && pushDisplayInitializedSuccessfully;
+    
+    
     // Configure encoder update rate
-    if (pushInitializedSuccessfully){
+    if (pushMIDIInitializedSuccessfully){
         setMaxEncoderUpdateRate(maxEncoderUpdateRate_);
     }
     
     // Set initial UI
-    setInitialUI();
+    if (pushMIDIInitializedSuccessfully || pushDisplayInitializedSuccessfully){
+        //setInitialUI();
+    }
+    
     
     // Start the timer to draw the animation
     displayFrameRate = displayFrameRate_;
@@ -82,25 +125,64 @@ void Push2Interface::initialize(Engine* engine_, int displayFrameRate_, int maxE
 
 //------------------------------------------------------------------------------
 
-NBase::Result Push2Interface::connectToPush()
+NBase::Result Push2Interface::connectToPushDisplay()
 {
     // First we initialise the low level push2 object
     NBase::Result result = push2Display.Init();
-    RETURN_IF_FAILED_MESSAGE(result, "Failed to init push2");
+    RETURN_IF_FAILED_MESSAGE(result, "Failed to init push2 display");
     
     // Then we initialise the juce to push bridge
     result = bridge.Init(push2Display);
-    RETURN_IF_FAILED_MESSAGE(result, "Failed to init bridge");
+    RETURN_IF_FAILED_MESSAGE(result, "Failed to init display bridge");
     
+    return NBase::Result::NoError;
+}
+
+NBase::Result Push2Interface::connectToPushMIDI()
+{
     // Initialises the midi input
-    result = openMidiInDevice();
-    RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi in device");
+    NBase::Result result = openMidiInDevice();
+    RETURN_IF_FAILED_MESSAGE(result, "Failed to open MIDI in device");
     
     // Initialises the midi output
     result = openMidiOutDevice();
-    RETURN_IF_FAILED_MESSAGE(result, "Failed to open midi out device");
+    RETURN_IF_FAILED_MESSAGE(result, "Failed to open MIDI out device");
     
     return NBase::Result::NoError;
+}
+
+
+//------------------------------------------------------------------------------
+
+bool Push2Interface::initializeOSCSender()
+{
+    if (! oscSender.connect (MIDI_BRIDGE_SEND_TO_PUSH_HOST, MIDI_BRIDGE_SEND_TO_PUSH_PORT))
+    {
+        std::cout << "ERROR connecting to Push 2 MIDI BRIDGE: could not connect to UDP port "  + String(MIDI_BRIDGE_SEND_TO_PUSH_PORT) << std::endl;
+        oscSenderConnectedToMIDIBridge = false;
+    } else {
+        std::cout << "Push 2 MIDI BRIDGE connected." << std::endl;
+        oscSenderConnectedToMIDIBridge = true;
+    }
+    return oscSenderConnectedToMIDIBridge;
+}
+
+bool Push2Interface::initializeOSCReceiver()
+{
+    if (! connect (MIDI_BRIDGE_RECEIVE_FROM_PUSH_PORT)){
+        std::cout << "ERROR setting Push 2 MIDI BRIDGE received: could not connect to UDP port " + String(MIDI_BRIDGE_RECEIVE_FROM_PUSH_PORT) << std::endl;
+        oscReceivedInitialized = false;
+    } else {
+        oscReceivedInitialized = true;
+        addListener (this, "/frompush");
+    }
+    return oscReceivedInitialized;
+}
+
+void Push2Interface::oscMessageReceived (const OSCMessage& message)
+{
+    MidiMessage midi_msg = MidiMessage(message[0].getInt32(), message[1].getInt32(), message[2].getInt32());
+    routeIncomingMidiMessage(midi_msg);
 }
 
 
@@ -182,14 +264,36 @@ NBase::Result Push2Interface::openMidiOutDevice()
 
 void Push2Interface::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &message)
 {
+    routeIncomingMidiMessage(message);
+}
+
+void Push2Interface::routeIncomingMidiMessage (const MidiMessage &message)
+{
     if (triggerPadActionsFromIncommingMidi(message)) { return; };
     if (triggerButtonActionsFromIncommingMidi(message)) { return; };
     if (triggerEncoderActionsFromIncommingMidi(message)) { return; };
 }
 
 void Push2Interface::sendMidiMessage(MidiMessage msg){
-    if ((midiOutput.get() != nullptr)) {
-        midiOutput.get()->sendMessageNow(msg);
+    if (pushMIDIInitializedSuccessfully){
+        if (!useMIDIBridge){
+            if ((midiOutput.get() != nullptr)) {
+                midiOutput.get()->sendMessageNow(msg);
+            }
+        } else {
+            if (!oscSenderConnectedToMIDIBridge){
+                // Do some sort of lazy initialization of OSC connection
+                initializeOSCSender();
+            }
+            
+            if (oscSenderConnectedToMIDIBridge) {
+                String serializedBytes = "";
+                for (int i=0; i<msg.getRawDataSize(); i++){
+                    serializedBytes += String(msg.getRawData()[i]) + ",";
+                }
+                oscSender.sendToIPAddress(MIDI_BRIDGE_SEND_TO_PUSH_HOST, MIDI_BRIDGE_SEND_TO_PUSH_PORT, MIDI_BRIDGE_SEND_TO_PUSH_OSC_PATH, serializedBytes);
+            }
+        }
     }
 }
 
@@ -212,7 +316,6 @@ void Push2Interface::timerCallback()
             displayFrameCurrentSecond = currentTime;
             state->displayFrameRate = displayFrameRateCounter;
             displayFrameRateCounter = 0;
-            std::cout << "Display frames per second: " << state->displayFrameRate << std::endl;
         }
     }
 }
@@ -245,11 +348,13 @@ Image Push2Interface::computeDisplayFrameFromState()
     const float waveStep = 10.0f;
     const float waveY = height * 0.44f;
     int i = 0;
+    float amplitude = state->demoWaveAmplitude;
+    float elapsedTime = state->animationElapsedTime;
     
     for (float x = waveStep * 0.5f; x < width; x += waveStep)
     {
-        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + state->animationElapsedTime) * state->demoWaveAmplitude;
-        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + state->animationElapsedTime * 2.0f) * state->demoWaveAmplitude;
+        const float y1 = waveY + height * 0.10f * std::sin(i * 0.38f + elapsedTime) * amplitude;
+        const float y2 = waveY + height * 0.20f * std::sin(i * 0.20f + elapsedTime * 2.0f) * amplitude;
         
         wavePath.addLineSegment(Line<float>(x, y1, x, y2), 2.0f);
         wavePath.addEllipse(x - waveStep * 0.3f, y1 - waveStep * 0.3f, waveStep * 0.6f, waveStep * 0.6f);
@@ -294,11 +399,17 @@ Image Push2Interface::computeDisplayFrameFromState()
 
 void Push2Interface::updateDisplayFromState()
 {
-    // Update display (compute the frame outside the pushInitializedSuccessfully if because it can be used by the simulator)
+    // Update display (compute the frame outside the pushDisplayInitializedSuccessfully if because it can be used by the simulator)
+    #if !ELK_BUID
     lastFrame = computeDisplayFrameFromState();
+    #endif
     
-    if (pushInitializedSuccessfully)
+    if (pushDisplayInitializedSuccessfully)
     {
+        #if ELK_BUILD
+        lastFrame = computeDisplayFrameFromState();
+        #endif
+        
         // Send last computed frame to dipslay
         auto& g = bridge.GetGraphic();
         g.drawImageAt(lastFrame, 0, 0, false);
@@ -312,7 +423,7 @@ void Push2Interface::updateDisplayFromState()
 }
 
 void Push2Interface::updatePush2ButtonsFromState(){
-    if (!pushInitializedSuccessfully) { return; }
+    if (!pushMIDIInitializedSuccessfully) { return; }
     
     setButtonRGBColour(BUTTON_A1_CC_NUMBER, RGB_COLOUR_WHITE);  // Light button A1
     
@@ -403,7 +514,7 @@ void Push2Interface::updatePush2PadsFromState()
 
 
 void Push2Interface::updateUI()
-{
+{    
     updateDisplayFromState();
     updatePush2ButtonsFromState();
     updatePush2PadsFromState();
@@ -412,6 +523,28 @@ void Push2Interface::updateUI()
 void Push2Interface::setInitialUI()
 {
     // UI stuff to do once at initialization time
+    
+    if (pushDisplayInitializedSuccessfully){
+        // Create a path for the animated wave
+        const auto height = ableton::Push2DisplayBitmap::kHeight;
+        const auto width = ableton::Push2DisplayBitmap::kWidth;
+        
+        Image frame = Image(Image::RGB, width, height, true);
+        Graphics g(frame);
+        
+        // Clear previous frame
+        g.fillAll(juce::Colour(0xff000000));
+        
+        // Draw logo (only during first second(s) at startup)
+       
+        auto logo = ImageCache::getFromMemory(BinaryData::startup_img_png, BinaryData::startup_img_pngSize);
+        g.drawImageAt(logo, (width - logo.getWidth()) / 2 , (height - logo.getHeight()) / 2);
+     
+
+        auto& g2 = bridge.GetGraphic();
+            g2.drawImageAt(frame, 0, 0, false);
+            bridge.Flip();
+    }
 }
 
 
@@ -434,53 +567,53 @@ void Push2Interface::e2Rotated(int increment){
     int trackNum = 0;  // Track #0
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e3Rotated(int increment){
     int trackNum = 1;  // Track #1
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e4Rotated(int increment){
     int trackNum = 2;  // Track #2
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e5Rotated(int increment){
     int trackNum = 3;  // Track #3
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e6Rotated(int increment){
     int trackNum = 4;  // Track #4
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e7Rotated(int increment){
     int trackNum = 5;  // Track #5
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
 }
 
 void Push2Interface::e8Rotated(int increment){
     int trackNum = 6;  // Track #6
     float newVolume = state->audioTrackSettings[trackNum].volume += 0.25 * increment;
     newVolume = jlimit(-100.0, 6.0, (double)newVolume);
-    engine->setTrackVolume(trackNum, newVolume);
+    oae->setTrackVolume(trackNum, newVolume);
     /*
      state->reverberationRoomSize += 0.04 * increment;
      state->reverberationRoomSize = jlimit(0.0, 1.0, (double)state->reverberationRoomSize);
-     engine->setReverberationRoomSize(state->reverberationRoomSize);*/
+     oae->setReverberationRoomSize(state->reverberationRoomSize);*/
 }
 
 //------------------------------------------------------------------------------
@@ -494,35 +627,35 @@ void Push2Interface::ba1Pressed(){
 }
 
 void Push2Interface::ba2Pressed(){
-    engine->toggleMuteTrack(0);
+    oae->toggleMuteTrack(0);
 }
 
 void Push2Interface::ba3Pressed(){
-    engine->toggleMuteTrack(1);
+    oae->toggleMuteTrack(1);
 }
 
 void Push2Interface::ba4Pressed(){
-    engine->toggleMuteTrack(2);
+    oae->toggleMuteTrack(2);
 }
 
 void Push2Interface::ba5Pressed(){
-    engine->toggleMuteTrack(3);
+    oae->toggleMuteTrack(3);
 }
 
 void Push2Interface::ba6Pressed(){
-    engine->toggleMuteTrack(4);
+    oae->toggleMuteTrack(4);
 }
 
 void Push2Interface::ba7Pressed(){
-    engine->toggleMuteTrack(5);
+    oae->toggleMuteTrack(5);
 }
 
 void Push2Interface::ba8Pressed(){
-    engine->toggleMuteTrack(6);
+    oae->toggleMuteTrack(6);
 }
 
 void Push2Interface::playPressed(){
-    engine->transportTogglePlayStop();
+    oae->transportTogglePlayStop();
 }
 
 //------------------------------------------------------------------------------
@@ -531,5 +664,5 @@ void Push2Interface::padPressed(PadIJ padIJ, int velocity){
     // Update step sequencer pattern
     int samplerChannel = padIJ.i % 4;
     int step = padIJ.i < 4 ? padIJ.j : padIJ.j + 8;
-    engine->updateStepSequencerPattern(samplerChannel, step);
+    oae->updateStepSequencerPattern(samplerChannel, step);
 }

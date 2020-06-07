@@ -1,15 +1,22 @@
 #!/bin/bash
 
 ROOT=$(cd "$(dirname "$0")/../OctopushOS/"; pwd)
-echo "Building OctopushOS..."
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Linux
-    cd "$ROOT/Builds/LinuxMakefile"
-    make clean
-    make CONFIG=Release -j4
+    if [[ "$(uname -m)" == "armv"* ]]; then
+      # Raspbian
+      echo "BUILDING RELEASE OCTOPUSH FOR RASPBIAN"
+      cd "$ROOT/Builds/Raspbian"
+    else
+      # Linux
+      echo "BUILDING RELEASE OCTOPUSH FOR LINUX"
+      cd "$ROOT/Builds/LinuxMakefile"
+    fi
+    #make clean
+    make CONFIG=Release -j2
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
+    echo "BUILDING RELEASE OCTOPUSH FOR MACOS"
     cd "$ROOT/Builds/MacOSX"
     xcodebuild -configuration Release GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS JUCER_ENABLE_GPL_MODE=1' LLVM_LTO=NO
 fi
