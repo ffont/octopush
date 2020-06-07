@@ -10,3 +10,6 @@
 [submodule "OctopushOS/3rdParty/juce"]
 	path = OctopushOS/3rdParty/juce
 	url = https://github.com/WeAreROLI/JUCE
+[submodule "OctopushOS/3rdParty/twine"]
+	path = OctopushOS/3rdParty/twine
+	url = git@github.com:ffont/twine.git
