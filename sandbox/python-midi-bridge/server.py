@@ -1,5 +1,6 @@
 import argparse
 import math
+import sys
 
 from simpleOSC import initOSCClient, initOSCServer, setOSCHandler, startOSCServer, sendOSCMsg, closeOSC
 
@@ -39,6 +40,10 @@ if __name__ == "__main__":
         print("Listening for MIDI messages comming from push...")
     except OSError:
         print("Could not connect to Push2 MIDI ports")
+        sys.exit(0)
+    except IOError:
+        print("Could not connect to Push2 MIDI ports")
+        sys.exit(0)
 
     # Configure OSC client for sending messages to
     initOSCClient(ip=args.ip, port=args.port_send)
