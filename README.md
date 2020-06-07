@@ -2,7 +2,7 @@
 <img src="docs/logo_main_colour.png" width="250" title="Octopush logo" />
 </p>
 
-## What is Octopush?
+## 1. What is Octopush?
 
 Octopush is a work in progrees project to make an **open source stand alone music sequencer and sampler** based on the low-latency real-time **ELK AudioOS** for **Rapsberry Pi**, and using **Abelton's Push2** as a hardware interface. Basically, I want to build by own hardware sampler+sequencer using a Raspberry Pi, a Push2, and reusing existing nice software.
 
@@ -13,19 +13,33 @@ The name "Octopush" comes from the inspiration for this project, which was [this
 The current status of the project is that I'm working on a sort of technical solution/proof of concept that connects all the pieces of software and hardware that I want to use. I have made some software that does basic loop playing and step sequencing, and connects to Push2 to use it as the UI nicely. This works fine running on my desktop macOS computer. It also runs fine on the Raspberry Pi. I'm in the process of porting this to the ELK platform to be able to get low-latency multi-channel audio IO when running in the Pi. I almost have it working, but there are still some issues here and there that need fixes. More details below...
 
 
-## How does Octopush work?
+## 2. How does Octopush work?
 
 OcotpushOS is implemented as a JUCE audio plug-in and can be edited and built using standard JUCE workflows. It uses the [Trakction Engine](https://github.com/Tracktion/tracktion_engine) to do all the hard audio processing tasks. The plugin runs on the [ELK Audio Os](https://elk.audio) platform (with a Raspberry Pi and the ELK development board, with 8 audio inputs and 8 audio outptus). Ableton Push2 is connected to the Raspberry Pi via USB, and Octopush connects to it to use it as the hardware interface.
 
+Below is a system block diagram of Octopush:
+
+<p align="center">
+<img src="docs/diagram_system.png" width="250" title="Octopush logo" />
+</p>
+
+The Python MIDI bridge is necessary because under the ELK platform it is not possible for a plugin to access multiple MIDI devices with separate MIDI connections, therefore there needs to be an intermediary app which talks to Push2 to set button and colors (and others), and receive actions like when a pad is pressed. This intermediary app talks to the OctopushOS plugin via OSC. If running OctopushOS in a desktop computer (with a plugin host different than ELK's Sushi and without running on a RT kernel thread), then the intermediary app is not needed because the plugin can talk directly to Push2 (this is indeed what happens when building Octopush for development in a desktop computer.
 
 
-## Building Octopush for desktop computers (macOS and linux)
+## 3. Current status/limitations
+
+ * The current technology demo features a basic Push2 interface and a system with 7 audio tracks which play a number of loops simultaneously and has a step sequencer that can be edited in real time. It only routes 2 audio inputs to 2 other outputs. This works well when running in desktop computers (tested in macOS) and also works well when running in a Rapsberry Pi without ELK AudioOS (hence without low-latency multichannel audio I/O).
+ 
+ * The current technology demo works more or less fine in the ELK platform, but there are a number of issues related to the use of Tracktion Engine in a real-time system like ELK Audio OS (locks, CPU mode switches...) that still need to be fixed. At the current state, everything except the step sequencer seems to be working, and also a few mode switches are still happening which might be reducing performance. Also there are issues printing text in the Push2 display. My few development efforts are currently oriented to fixing these issues...
+
+
+## 4. Building Octopush for "desktop" computers (macOS and linux)
 
 
 **NOTE**: these steps have been recently tested on macOS and should work well. For linux I have not tested them for a while but I also think it should be working fine.
 
 
-### Repository checkout
+### 4.1 Repository checkout
 
 You need to checkout the code including submodules. This will download source code for all required 3rd party libraries (JUCE, etc.)
 
@@ -33,7 +47,7 @@ You need to checkout the code including submodules. This will download source co
 git clone https://github.com/ffont/octopush.git && cd octopush && git submodule update --init
 ```
 
-### Building Projucer
+### 4.2 Building Projucer
 
 For development, you'll want to build Projucer so you can edit `OctopushOS.jucer` file. Even though you can use pre-built Projucer downloaded from JUCE website, here we provide a script to build a GPL-enabled version of Projucer. `cd` into the cloned repository and run the following:
 
@@ -58,7 +72,7 @@ This list of dependencies was taken from [this forum thread](https://forum.juce.
 **NOTE**: OctopushOS is configured to be built in different plugin formats including legacy VST2. To do that you'll need to place the legacy VST2 framework files. VST2 builds require to have the VST2 sdk properly installed in a folder specified i the projucer file. I enable VST2 target because I need to build Octopush as a plugin for linux when running in Raspberry Pi, and the version I use of JUCE does not support VST3 plugin builds for linux. If you don't want to build VST2, just untick the VST2 option from the jucer file using Projucer.
 
 
-### Development build
+### 4.3 Development build
 
 To build OctopushOS during development you can use project files for Xcode (MacOSX) or the Makefile (Linux). You'll find these in the `OctopushOS/Builds/` folder. Alternatively you can use the provided utility script. `cd` into the cloned repository and run the following:
 
@@ -70,7 +84,7 @@ cd scripts
 The generated executable (for the santadalone version) will be placed in `OctopushOS/Builds/MacOSX/build/Debug/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Debug/OctopushOS ` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
 
 
-### Release build
+### 4.4 Release build
 
 A utility script is provided to build OctopushOS in release mode. `cd` into the cloned repository and run the following:
 
@@ -82,12 +96,12 @@ cd scripts
 The generated executable (for the santadalone version) will be placed in `OctopushOS/Builds/MacOSX/build/Release/OctopushOS` (MacOSX) or `OctopushOS/Builds/LinuxMakefile/build/Release/OctopushOS ` (Linux) depending on the platform you're running it from. Plugin version will be palced next to the executables.
 
 
-## Building Octopush for the ELK platform
+## 5. Building Octopush for the ELK platform
 
 TODO
 
 
-## Licenses
+## 6. Licenses
 
 Octopush is released under the **GPLv3** open source software license (see [LICENSE](https://github.com/ffont/octopush/blob/master/LICENSE) file) with the code being available at  [https://github.com/ffont/octopush](https://github.com/ffont/octopush). Octopush uses the following open source software libraries: 
 
